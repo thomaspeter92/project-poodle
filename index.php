@@ -8,6 +8,10 @@ try {
         case "landing":
             landing();
             break;
+        case "petprofile":
+            print_r($_REQUEST);
+            showPetProfile($_REQUEST['petid']);
+            break;
         default:
             landing();
             break;
