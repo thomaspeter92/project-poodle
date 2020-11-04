@@ -16,7 +16,7 @@ $style = NULL;
 </head>
 
 <body>
-    <!-- TODO: Menu Maybe~~~~ -->
+    <!-- TODO: main menu -->
     <!-- maybe include or variable depending on -->
     <!-- TODO: Add Content -->
     <?= $content; ?>
