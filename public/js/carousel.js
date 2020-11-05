@@ -1,27 +1,44 @@
-// This is the javascript file for the image carousel! <3 ***
+// This is the javascript file for the LANDING PAGE! <3 ***
 
-
-// const carouselImages = document.querySelectorAll('.carouselImg');
-
-// const nextImageDelay = 4000;
-
-// let imageCounter = 0;
-
-// carouselImages[imageCounter].style.opacity = 1;
-
-// setInterval(nextImage, nextImageDelay);
-
+//FUNCTIONS AND VARS FOR LANDING PAGE
+const carouselImages = document.querySelectorAll('.carouselImg');
+const nextImageDelay = 4000;
+let imageCounter = 0;
+carouselImages[imageCounter].style.opacity = 1;
 function nextImage() {
     carouselImages[imageCounter].style.opacity = 0;
-    imageCounter == 3 ? imageCounter = -1 : null;
+    imageCounter == 2 ? imageCounter = -1 : null;
     imageCounter += 1;
     carouselImages[imageCounter].style.opacity = 1;
 }
 
-const parallax = document.querySelectorAll ('div');
+function scrollAppear() {
+    let textBox = document.querySelector('.boxAppearBefore');
+    let boxPosition = textBox.getBoundingClientRect().top;
+    let screenPosition = window.innerHeight / 1.5;
+    boxPosition < screenPosition ? textBox.classList.add('boxAppearAfter') : textBox.classList.remove('boxAppearAfter');
+}
 
-window.addEventListener('scroll', function(e) {
-    let offset = window.pageYOffset;
-    parallax[0].style.backgroundPositionY = offset * -0.3 + "px";
+
+
+let sideContent = document.querySelector('.sideContentBefore');
+let click = false;
+
+sideContent.addEventListener('click', function() {
+    let innerContent = document.querySelector('.sideContentBefore > *');
+    if (click == false) {
+        innerContent.style.display = "initial";
+        sideContent.classList.add('sideContentAfter');
+        click = true;
+    } else {
+        sideContent.classList.remove('sideContentAfter');
+        innerContent.style.display = "none";
+        click = false;
+    }
 })
+
+// CALLING FUNCTIONS / ADDING EVENT LISTENERs
+window.addEventListener('scroll', scrollAppear);
+
+setInterval(nextImage, nextImageDelay);
 

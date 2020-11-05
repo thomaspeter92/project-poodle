@@ -1,6 +1,7 @@
 /* Main style.css */
 body {
     margin: auto;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /*FOR THE CAROUSEL */
@@ -10,13 +11,10 @@ body {
     height: 100vh;
     position: relative;
     overflow: hidden;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
-#carousel > img {
-    position: absolute;
+.carouselImg {
+    position: fixed;
     width: 100vw;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
@@ -24,18 +22,180 @@ body {
     z-index: -1;
 }
 
-#box {
-    width: 300px;
-    height: 200px;
-    background-color: lightpink;
-    z-index: 1;
-    opacity: .5;
-    
+#carouselTextBox {
+    width: 350px;
+    height: 250px;
+    color: white;
+    position: absolute;
+    left: 8%;
+    top: 35%;
+    font-size: 3em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#carouselButton {
+    width: 70%;
+    font-size: 0.7em;
+    color: white;
+    background-color: black;
+    border-radius: 100px;
+    text-align: center;
+    margin: 0;
 }
 
 
+/* ******** FOR THE LANDING PAGE CONTENT ******* */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100vw;
+    position: relative;
+}
+
+#content1 {
+    height: 90vh;
+    background-color: white;
+}
+
+#content2 {
+    height: 100vh;
+    background-color: mediumaquamarine;
+    flex-direction: row;
+}
+
+#content3 {
+    height: 90vh;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#contentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.contentBox {
+    width: 350px;
+    height: 350px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contentBox > p, h3 {
+    text-align: center;
+    width: 80%;
+    margin: 0;
+    font-size: 1em;
+}
+
+.contentBox> h3 {
+    font-weight: 600;
+    font-size: 2em;
+    
+}
+
+span {
+    background-color: blue;
+    height: 10px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+.imageBall {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    background-image: url(../images/dogCarousel0.jpg);
+    background-size: cover;
+    clip-path: circle(50% at 50% 50%);
+}
+
+.ball2 {
+    background-image: url(../images/portraitDog4.jpg);
+}
+
+.ball3 {
+    background-image: url(../images/portraitDog5.jpg);
+}
+
+.button2 {
+    width: 300px;
+    height: 50px;
+    background-color: blue;
+    text-align: center;
+    border-radius: 100px;
+    color:white
+}
+
+.boxAppearBefore {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1.5s all ease-in-out;
+}
+
+.boxAppearAfter {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.sideContentBefore {
+    width: 60px;
+    height: 150px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    transition: 1.2s ease-in-out;
+
+}
+.sideContentBefore > * {
+    display: none;
+}
+
+.sideContentAfter {
+    width: 100%;
+    height: 80%;
+    clip-path: polygon(0 1%, 100% 1%, 100% 100%, 0% 100%);
+    display: flex;
+    justify-content: center;
+}
+
+.content3inner {
+    width: 25%;
+    height: 80%;
+    background-color: blue;
+    background-image: url(../images/portraitDog1.jpg);
+    background-size: cover;
+}
+
+.content3inner:nth-child(2){
+    background-image: url(../images/portraitDog2.jpg);
+}
+
+.content3inner:nth-child(3){
+    background-image: url(../images/portraitDog3.jpg);
+}
+
+.content3inner > div {
+    transition: 2s;
+}
+
 /* SECOND OPTION FOR HOMEPAGE */
-div {
+/* div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +224,7 @@ div:nth-child(3) {
     background-image: url(../images/dogCarousel2.jpg);
     background-size: cover;
     background-attachment: fixed;
-}
+} */
 
 
 
@@ -72,8 +232,8 @@ div:nth-child(3) {
 
     #carousel > img {
         position: absolute;
-        width: auto;
-        left: -90%;
+        /* width: 100v; */
+        /* left: -90%; */
         height: 100%;
     }
 
