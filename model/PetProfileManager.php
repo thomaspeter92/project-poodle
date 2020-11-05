@@ -15,7 +15,5 @@ require_once("Manager.php");
             return $profile; 
         }
 
-        public function loadOwnerPets($ownerId){
-
-        }
+        
     }
