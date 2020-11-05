@@ -5,8 +5,6 @@ class RegistrationManager extends Manager{
     public function addNewMember($params){
         //if the user filled in the form...
         // try{
-            //@TODO do i put the if statements in the controller or keep them here? 
-            //i might have to use the manager just to insert into the db and put the conditions in the controller
             // if(isset($username) AND isset($password) AND isset($email)){
                 $db = $this->dbConnect();
         
@@ -27,7 +25,7 @@ class RegistrationManager extends Manager{
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
                 // if($password === $confirmpass AND $emailcheck == 1){ //if the passwords match and email is valid
-                    $newuser = $db->prepare("INSERT INTO membersTest(username, password, email) VALUES(?,?,?)");
+                    $newuser = $db->prepare("INSERT INTO member(name, password, email) VALUES(?,?,?)");
                     $newuser->bindParam(1,$username, PDO::PARAM_STR);
                     $newuser->bindParam(2,$hashedPassword, PDO::PARAM_STR);
                     $newuser->bindParam(3,$email, PDO::PARAM_STR);
