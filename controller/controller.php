@@ -13,9 +13,11 @@ function checkLogin ($params) {
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
     if($status) {
+        session_start();
         header("Location: index.php");
     }else {
         header("Location: index.php?action=login&error=login");
+
     }
 }
 
@@ -27,11 +29,10 @@ function addNewMember($params){
     $registrationManager = new MemberManager();
     $register = $registrationManager->addNewMember($params);
     if($register){
-        echo "test1";  
         header("Location: index.php");
-    }else{
-        echo "test2";    
-        // header("Location: index.php?action=registration&error=registration");
+    }else{ 
+        echo "test";
+        header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
     }
 
 }

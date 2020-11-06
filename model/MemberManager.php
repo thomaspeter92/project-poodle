@@ -16,14 +16,13 @@ class MemberManager extends Manager{
         $passwordLogin = addslashes(htmlspecialchars((htmlentities(trim($params['passwordLogin']))))); 
         setcookie('email',$emailLogin,time()+365*24*3600,null,null,false,true); 
         setcookie('password',$passwordLogin,time()+365*24*3600,null,null,false,true); 
-        //@TODO SESSION OR COOKIE ??
-        $memberlogin = $db->prepare("SELECT email, password FROM member WHERE email=:email");
+        $memberlogin = $db->prepare("SELECT email, name password FROM member WHERE email=:email");
         $memberlogin->bindParam('email', $emailLogin, PDO::PARAM_STR);
         $memberlogin->execute();
+        $_SESSION['name'] = $memberlogin['name'];
         $user = $memberlogin->fetch(PDO::FETCH_ASSOC);
         $hashed_password = $user['password'];
         $memberlogin->closeCursor();
-        
         return password_verify($passwordLogin, $hashed_password);
     }
     
@@ -34,7 +33,7 @@ class MemberManager extends Manager{
         $email = htmlspecialchars($params['email']);
         $password = htmlspecialchars($params['password']);
         $confirmPassword = htmlspecialchars($params['confirmpass']);
-       
+       echo $name;
        
         // if($password != $confirmPassword){
         //     return false;
@@ -59,10 +58,11 @@ class MemberManager extends Manager{
         }
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $newuser = $db->prepare("INSERT INTO member(name, password, email) VALUES(?,?,?)");
-        $newuser->bindParam(1,$username, PDO::PARAM_STR);
+        $newuser->bindParam(1,$name, PDO::PARAM_STR);
         $newuser->bindParam(2,$hashedPassword, PDO::PARAM_STR);
         $newuser->bindParam(3,$email, PDO::PARAM_STR);
         $newuser->execute();
         $newuser->closeCursor();
+        return true;
     }
 }

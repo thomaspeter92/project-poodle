@@ -13,18 +13,17 @@ try {
             login();
             break;
         case "checkLogin" :
-            if(!empty($_REQUEST['usernameLogin']) && !empty($_REQUEST['passwordLogin'])){
+            if(!empty($_REQUEST['emailLogin']) && !empty($_REQUEST['passwordLogin'])){
                 checkLogin($_REQUEST);
             } else {
-               header("Location: index.php?action=login&error=login"); 
+               header("Location: index.php?action=login&error=login");   
             }
             break;
         case "registration":
             registration();
             break;
         case "registrationInput":
-        //!empty($_REQUEST['username']) && !empty($_REQUEST['password']) &&
-            if(!empty($_REQUEST['email'])){
+            if(!empty($_REQUEST['username']) && !empty($_REQUEST['password']) &&!empty($_REQUEST['email'])){
                 addNewMember($_REQUEST);
             }else{
                 header("Location: index.php?action=registration&error=registration"); 
