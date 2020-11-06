@@ -37,7 +37,7 @@ try {
         case "kakao":
             testShowKakaoLogin($action);
             break;
-        case "kakaoResult":
+        case "kakaoSignUp":
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
             // $kakaoid = isset($_REQUEST["kakaoid"]) ? $_REQUEST["kakaoid"] : NULL;

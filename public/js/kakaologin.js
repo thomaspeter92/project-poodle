@@ -74,8 +74,6 @@
         });
     };
 
-    
-
     const logoutWithKakao = () => {
         if (!Kakao.Auth.getAccessToken()) {
             console.log("[logoutWithKakao]");
