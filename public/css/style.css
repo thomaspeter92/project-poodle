@@ -66,11 +66,13 @@ footer>p {
 
 .footer {
     margin-bottom: 0px;
+    padding-left: 0px;
 }
 
 #social-icons-list {
     margin-bottom: 0px;
     margin-top: 0px;
+    padding-left: 0px;
 }
 
 #social-icons-list li span{
@@ -218,12 +220,11 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
 
     #contactLink {
         padding-right: 9px;
-
+        border-right: 1px solid black; 
     }
 
     #desktopLogInLink {
-        padding-left: 10px;
-        border-left: 1px solid black; 
+        padding-left: 5px;
       }
 
     .desktopWrapper>ul>li{

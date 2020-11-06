@@ -3,6 +3,7 @@
     <br>
     <br>
     <br>
+    <br>
     <?php
         if(isset($_GET['error'])){
             echo "please more sure you entered everything correctly";

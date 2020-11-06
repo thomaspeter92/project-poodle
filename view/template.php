@@ -31,8 +31,23 @@ $style = NULL;
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
                         <li id="contactLink"><a href="#">Contact</a></li>
-                        <li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
-                        <li><a href="index.php?action=registration">Sign Up</a></li>
+                        <?php
+                        if (!isset($_SESSION['id'])) {?>
+                            <img src="" alt="default"><li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
+                            <li><a href="index.php?action=registration">Sign Up</a></li>
+                            <?php 
+                        } else {
+                        ?>
+                            <img src="" alt="default">
+                            <li>
+                                <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                                    <?php echo $_SESSION['name'] ?>
+                                </a>
+                            </li>
+                            <li><a href="index.php?action=logout">Sign Out</a></li> 
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>        
                 <div id="mobileLogin">
