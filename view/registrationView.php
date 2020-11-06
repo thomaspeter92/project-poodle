@@ -1,5 +1,8 @@
 <?php $title= "registration"?>
 <?php ob_start(); ?>
+    <br>
+    <br>
+    <br>
     <?php
         if(isset($_GET['error'])){
             echo "please more sure you entered everything correctly";
@@ -15,6 +18,10 @@
         <div id="kakao"></div> <!--kakao login registration here-->
         <input type="submit" name="subscribe" id="subscribe" value="subscribe"><br/><br/>
     </form>
+    <a href="index.php?action=login">    
+        <button name="login" id="login" value="Sign In">Sign In</button>
+    </a>
+
 <?php 
 $content = ob_get_clean();
 require("template.php");

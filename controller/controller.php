@@ -27,16 +27,20 @@ function registration (){
 function addNewMember($params){
     $registrationManager = new MemberManager();
     $register = $registrationManager->addNewMember($params);
+
+    echo $_SESSION["name"];
+
     if($register){
+        $registrationManager->createSession($params);
         header("Location: index.php");
     }else{ 
-        echo "test";
-        header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
+        //header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
     }
 
 }
 
 function logout(){
     session_destroy();
+    header("Location: index.php");
 }
    

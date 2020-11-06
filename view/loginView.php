@@ -1,5 +1,8 @@
 <?php $title= "login"?>
 <?php ob_start();?>
+    <br>
+    <br>
+    <br>
     <?php
         if(isset($_GET['error'])) {
             echo " something went wrong please try to log again";

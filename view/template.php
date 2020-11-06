@@ -1,4 +1,5 @@
 <?php
+
 // TODO: Use $style for additional css
 $style = NULL;
 ?>
@@ -8,7 +9,7 @@ $style = NULL;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="./public/css/style.css">
 
     <?= ($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
@@ -30,15 +31,15 @@ $style = NULL;
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
                         <li id="contactLink"><a href="#">Contact</a></li>
-                        <li id="desktopLogInLink"><a href="#">Log In</a></li>
-                        <li><a href="#">Sign Up</a></li>
+                        <li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
+                        <li><a href="index.php?action=registration">Sign Up</a></li>
                     </ul>
                 </div>        
                 <div id="mobileLogin">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <img src="" alt="default">
-                            <a id="mobileLogin" href="#">Log In</a> 
+                            <a id="mobileLogin" href="index.php?action=login">Sign In</a> 
                         <?php 
                         } else {
                         ?>
@@ -62,12 +63,12 @@ $style = NULL;
                         <li><a href="#">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                        <li><a href="#">Log In</a></li>
-                        <li><a href="#">Create Account</a></li>
+                        <li><a href="index.php?action=login">Sign In</a></li>
+                        <li><a href="index.php?action=registration">Sign Up</a></li>
                         <?php 
                         } else {
                         ?>
-                        <li><a href="index.php?action=logout">Log Out</a></li>
+                        <li><a href="index.php?action=logout">Sign Out</a></li>
                         <?php }
                         ?>
                     </ul>

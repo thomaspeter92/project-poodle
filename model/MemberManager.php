@@ -36,7 +36,7 @@ class MemberManager extends Manager{
         $email = htmlspecialchars($params['email']);
         $password = htmlspecialchars($params['password']);
         $confirmPassword = htmlspecialchars($params['confirmpass']);
-       echo $name;
+       
        
         // if($password != $confirmPassword){
         //     return false;
@@ -66,6 +66,24 @@ class MemberManager extends Manager{
         $newuser->bindParam(3,$email, PDO::PARAM_STR);
         $newuser->execute();
         $newuser->closeCursor();
+        
+
+
         return true;
+    }
+
+    public function createSession($params){
+        $db = $this->dbConnect();
+        $email = htmlspecialchars($params['email']);
+        $memberLogin = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
+        $memberLogin->bindParam(1,$email, PDO::PARAM_STR);
+        $memberLogin->execute();
+        $user = $memberLogin->fetch(PDO::FETCH_ASSOC);
+        $membername = $user['name'];
+        $memberid = $user['id'];
+        $_SESSION['name'] = $membername;
+        $_SESSION['id'] = $memberid;
+        // echo $_SESSION['name'];
+        $memberLogin->closeCursor();
     }
 }
