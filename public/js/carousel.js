@@ -19,8 +19,6 @@ function scrollAppear() {
     boxPosition < screenPosition ? textBox.classList.add('boxAppearAfter') : textBox.classList.remove('boxAppearAfter');
 }
 
-
-
 let sideContent = document.querySelector('.sideContentBefore');
 let click = false;
 
@@ -39,6 +37,5 @@ sideContent.addEventListener('click', function() {
 
 // CALLING FUNCTIONS / ADDING EVENT LISTENERs
 window.addEventListener('scroll', scrollAppear);
-
 setInterval(nextImage, nextImageDelay);
 

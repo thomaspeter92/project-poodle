@@ -12,8 +12,8 @@ ob_start();
     <!-- <img src="./public/images/dogCarousel1.jpg" alt="" class="carouselImg"> -->
 
     <div id="carouselTextBox">
-            <p>I LOVE DOGS! WOO!</p>
-            <p id="carouselButton"> LINK HERE</p>
+            <p>I LOVE DOGS! WOOF!</p>
+            <div id="carouselButton" class="button"><p>LEARN MORE</p></div>
     </div>
 </div>
 
@@ -42,7 +42,7 @@ ob_start();
         </div>
     </div>
 
-    <div class="button2"><p>LEARN MORE</p></div>
+    <div class="button2 button"><p>LEARN MORE</p></div>
 </div>
 
 <div id="content2" class="content">
@@ -50,7 +50,7 @@ ob_start();
         <h3>Awesome Location Features</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam unde, nisi soluta ea quibusdam debitis suscipit, quis nemo mollitia possimus commodi. Laboriosam ab rem eos assumenda, quo molestias quae voluptas.</p>
     </div>
-    <div><img src="./public/images/googleMapPreview.png" alt=""></div>
+    <div id="mapImg"><img src="./public/images/googleMapPreview.png" alt=""></div>
     <div class="sideContentBefore">
         <h2>SIGN UP TO OUR NEWSLETTER</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas magnam expedita voluptatem minima omnis? Ad incidunt minima natus enim quis quasi dolorem vitae sunt rem cumque. Voluptatum cupiditate id atque!</p>
@@ -58,7 +58,7 @@ ob_start();
 </div>
 
 <div id="content3" class="content">
-    <div class="content3inner">
+    <div class="content3inner content3inner1">
         <div id="divdiv"></div>
     </div>
     <div class="content3inner">
@@ -66,6 +66,21 @@ ob_start();
     </div>
     <div class="content3inner">
         <div></div>
+    </div>
+</div>
+
+<div id="content4" class="content">
+    <div>
+        <h5>I LOVE DOGS</h5>
+        <i class="fas fa-arrow-circle-down"></i>
+    </div>
+    <div>
+        <h5>DOGS ARE AMAZING</h5>
+        <i class="fas fa-arrow-circle-down"></i>
+    </div>
+    <div>
+        <h5>I WANT A DOG</h5>
+        <i class="fas fa-arrow-circle-down"></i>
     </div>
 </div>
 
