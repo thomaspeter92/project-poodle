@@ -11,6 +11,7 @@ header {
     width: 100%;
     z-index: 9;
     background-color: white;
+    padding-top: 10px;
 }
 
 .headerWrapper {
@@ -20,31 +21,122 @@ header {
     flex-direction: row;
 }
 
-#middleHeader, #leftHeader, #rightHeader {
-    width: 100%;
+#headerRight {
+    display: flex;
+    padding-right: 20px;
 }
 
 
+footer {
+    padding-bottom: 10px;
+}
 
+.footer {
+display: flex;
+justify-content: center;
+list-style-type: none;
+text-align: center;
+align-items: center;
+padding-bottom: 10px;
+}
+
+footer>ul>li {
+padding-bottom: 10px;
+color: #393c41;
+font-size: 14px;
+font-family: Arial, Helvetica, sans-serif
+}
 
 
 @media screen and (max-width: 1120px) {
-    .nav-icon:after, 
-    .nav-icon:before, 
-    .nav-icon div.line {
-        background-color: rgb(0, 0, 0);
-        border-radius: 3px;
-        display: block;
-        content: '';
-        margin-left: auto;
-        margin-right: auto; 
-        height: 2px;
-        width: 20px;
-        margin: 5px;
-        transition: all .2s ease-in-out;
+    /* Remove DESKTOP ONLY STUFF */
+    .desktopWrapper {
+        display: none;
+    }
+
+    /* Styling the menu button */
+    .menu-btn { 
+        /* position: absolute;  */
+        z-index: 20; 
+        margin-left: 15px;
+        padding-top: 5px; 
+        cursor: pointer; 
+        transition: all 0.5s ease-out; 
+    } 
+  
+    /* Styling the hamburger lines */
+    .menu-btn .btn-line { 
+        width: 28px; 
+        height: 3px; 
+        margin: 0 0 5px 0; 
+        background: black; 
+        transition: all 0.5s ease-out; 
+    } 
+  
+    /* Adding tranform to the X */
+    .menu-btn.close { 
+        transform: rotate(180deg); 
+    } 
+  
+    /* Styling the three lines  
+        to make it an X */
+    .menu-btn.close .btn-line:nth-child(1) { 
+        transform: rotate(45deg) translate(5px, 5px);
+    } 
+  
+    .menu-btn.close .btn-line:nth-child(2) { 
+        opacity: 0; 
+    } 
+  
+    .menu-btn.close .btn-line:nth-child(3) { 
+        transform: rotate(-45deg) translate(7px, -6px); 
+    } 
+
+    .hoverWrapper.show {
+        position: absolute;
+        right: 0px;
+        background-color: white;
+        color: black;
+        font-family: sans-serif;
+        text-align: left;
+        height: 100vw;
+        width: 250px;
+        transition: right 1s;
+        padding-top: 0;
+        z-index: 10;
+    }
+
+    .hoverWrapper {
+        position: absolute;
+        right: -250px;
+        background-color: white;
+        color: black;
+        font-family: sans-serif;
+        text-align: left;
+        height: 100vw;
+        width: 250px;
+        transition: right 1s;
+        padding-top: 0;
+        z-index: 10;
+    }
+    .hoverWrapper>ul {
+        list-style-type: none;
+    }
+    
+    .hoverWrapper>ul>li {
+        font-size: 12px;
+        padding-top: 5%;
+        padding-bottom: 10%;
+        border-bottom: grey 1px solid;
+    }
+
+    #mobileLogin {
+        padding-top: 5px;
     }
 }
 
+
+/* DESKTOP SETTINGS */
 @media screen and (min-width: 1120px) {
     .middleheader {
         display: flex;
@@ -56,133 +148,45 @@ header {
         margin: 0px;
     }
 
-    /* create the paw prints */
-    .pad {
-        width: 25px;
-        height: 27px;
-        background-color: #654321;
-        -webkit-border-radius: 63px 63px 63px 63px / 108px     108px 72px 72px;
-        border-radius: 50%  50%  50%  50%  / 60%   60%         40%  40%;
-        display: block;
-        position: absolute;
-    }       
-    .large {
-    width: 70px;
-    height: 80px;
-    transform: rotate(80deg);
-    left: 100px;
-    top: 50px;
-    } 
-    .small-1 {
-    transform: rotate(50deg);
-    left: 145px;
-    top: 28px;
-    }
-    .small-2 {
-    transform: rotate(65deg);
-    left: 174px;
-    top: 50px;
-    }  
-    .small-3 {
-    transform: rotate(98deg);
-    position: absolute;
-    left: 178px;
-    top: 87px;
-    }
-    .small-4 {
-    transform: rotate(140deg);
-    position: absolute;
-    left: 158px;
-    top: 117px;
-    }
-        
-    /* position and animate */
-        
-    .paw-print-1 {
-    opacity: 0;
-    position: absolute;
-    left: 75px;
-    top: 300px;
-    transform: rotate(-40deg);
-    -webkit-animation: walk 3s linear infinite;
-    animation: /*keyframe*/walk /*duration*/3s /*transition*/linear /*repeat*/infinite;
-    }
-    .paw-print-2 {
-    opacity: 0;
-    position: absolute;
-    left: 275px;
-    top: 280px;
-    transform: rotate(-5deg); 
-    -webkit-animation: walk 3s linear infinite 0.25s;
-    animation: walk 3s linear infinite /*delay*/0.25s;
-    }
-    .paw-print-3 {
-    opacity: 0;
-    position: absolute;
-    left: 375px;
-    top: 130px;
-    transform: rotate(-10deg); 
-    -webkit-animation: walk 3s linear infinite 0.5s;
-    animation: walk 3s linear infinite 0.5s;
-    }     
-    .paw-print-4 {
-    opacity: 0;
-    position: absolute;
-    left: 575px;
-    top: 280px;
-    transform: rotate(-20deg); 
-    -webkit-animation: walk 3s linear infinite 0.75s;
-    animation: walk 3s linear infinite 0.75s;
-    }    
-    .paw-print-5 {
-    opacity: 0;
-    position: absolute;
-    left: 725px;
-    top: 50px;
-    transform: rotate(10deg); 
-    -webkit-animation: walk 3s linear infinite 1s;
-    animation: walk 3s linear infinite 1s;
-    }   
-    .paw-print-6 {
-    opacity: 0;
-    position: absolute;
-    left: 875px;
-    top: 200px;
-    transform: rotate(10deg); 
-    -webkit-animation: walk 3s linear infinite 1.25s;
-    animation: walk 3s linear infinite 1.25s;
-    }   
-    .paw-print-7 {
-    opacity: 0;
-    position: absolute;
-    left: 1075px;
-    top: 50px;
-    transform: rotate(20deg); 
-    -webkit-animation: walk 3s linear infinite 1.5s;
-    animation: walk 3s linear infinite 1.5s;
-    }   
-    .paw-print-8 {
-    opacity: 0;
-    position: absolute;
-    left: 1150px;
-    top: 250px;
-    transform: rotate(10deg); 
-    -webkit-animation: walk 3s linear infinite 1.75s;
-    animation: walk 3s linear infinite 1.75s;
-    }
-        
-    /* walking effect animation keyframes */
-        
-    @-webkit-keyframes walk {
-    25%  {opacity: 1;}
-    100% {opacity: 0;}
-    }
-        
-    @keyframes walk {
-    /* appear */
-    25%  {opacity: 1;}
-    /* disappear */
-    100% {opacity: 0;}
+
+    .desktopWrapper {
+        display: inline;
     }
 
+    .desktopWrapper>ul {
+        text-align: right;
+        padding-right: 20px;
+    }
+
+    #contactLink {
+        padding-right: 9px;
+
+    }
+
+    #desktopLogInLink {
+        padding-left: 10px;
+        border-left: 1px solid black; 
+      }
+
+    .desktopWrapper ul li{
+        display: inline;
+        text-align: right;
+    }
+
+
+    /* Remove things for MOBILE only */
+    #hamburger {
+        display: none;
+    }
+
+    #mobileLogin {
+        display: none;
+    }
+    .hoverWrapper {
+        display: none;
+    }
 }
+
+
+
+

@@ -23,98 +23,62 @@ $style = NULL;
                 <img src="#" alt="LOGO">
             </div>
             <div id="middleHeader">
-                <div class="paw-print-1">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>
-                
-                <div class="paw-print-2">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>    
-                
-                <div class="paw-print-3">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>    
-                    
-                <div class="paw-print-4">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>
-                
-                <div class="paw-print-5">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>
-                    
-                <div class="paw-print-6">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>
-                    
-                <div class="paw-print-7">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>
-
-                <div class="paw-print-8">
-                    <div class="pad large"></div>
-                    <div class="pad small-1"></div>
-                    <div class="pad small-2"></div>
-                    <div class="pad small-3"></div>
-                    <div class="pad small-4"></div>
-                </div>
+  <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>
             <div id="headerRight">
-                <div id="hamburger">
-                    <div class="nav-icon">
-                        <div class="line"></div>
-                    </div>
-                    <div class="hoverwrapper">
-                        <ul>
-                            <li><a href="#">Login</a></li>
-                            <!-- Will need to make this dynamic if wanted -->
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#">Counseling</a></li>
-                            <li><a href="#">Visit</a></li>
-                            <li><a href="#">Apply</a></li>
-                        </ul>
-                    </div>
+                <div class="desktopWrapper">
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li id="contactLink"><a href="#">Contact</a></li>
+                        <li id="desktopLogInLink"><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>        
+                <div id="mobileLogin">
+                        <img src="" alt="default">
+                        <a id="mobileLogin" href="#">Log In</a> 
+                </div>
+                <div class="menu-btn"> 
+                        <div class="btn-line"></div> 
+                        <div class="btn-line"></div> 
+                        <div class="btn-line"></div>
                 </div> 
-                <?php
-                if (isset($_SESSION)) {
-                    // Call Database for Image, Username, and Ratings
-                    // Insert Information
-                }   else {
-                ?>
-                <img src="#" alt="defaultPic">
-                <!-- Include Randomizer for default logo -->
-                <?php
-                }
-                ?>
+                <div class="hoverWrapper">
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Create Account</a></li>
+                    </ul>
+                </div>
+                <script> 
+                    // select dom items 
+                    const menuBtn =  
+                        document.querySelector(".menu-btn"); 
+                
+                    const hoverWrapper =  
+                        document.querySelector(".hoverWrapper"); 
+                
+                
+                    // Set the initial state of the menu 
+                    let showMenu = false; 
+                
+                    menuBtn.addEventListener("click", toggleMenu); 
+                
+                    function toggleMenu() { 
+                        if (!showMenu) { 
+                            menuBtn.classList.add("close"); 
+                            hoverWrapper.classList.add("show"); 
+                            showMenu = true; 
+                        } else { 
+                            menuBtn.classList.remove("close"); 
+                            hoverWrapper.classList.remove("show"); 
+                            showMenu = false; 
+                        } 
+                    } 
+                </script> 
             </div>
         </div> 
     </header>
@@ -122,6 +86,16 @@ $style = NULL;
     <!-- TODO: Add Content -->
     <?= $content; ?>
     <!-- TODO: Add Footer -->
+    <footer>
+        <ul class="footer">
+            <li>Home</li>
+            <li>Privacy & Legal</li>
+            <li>Contact</li>
+            <li>Career</li>
+            <!-- Meet the team link -->
+            <!-- <li>SOCIAL MEDIA LINKS</li> -->
+        </ul>
+    </footer>
 </body>
 
 </html>
