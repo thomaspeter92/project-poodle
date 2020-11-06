@@ -1,4 +1,9 @@
 /* Main style.css */
+@font-face {
+    font-family: "monsterRatRegular";
+    src: url("./Montserrat/Montserrat-Regular.ttf") format("truetype");
+  }
+
 body {
     margin: 0;
     padding: 0;
@@ -12,6 +17,7 @@ header {
     z-index: 9;
     background-color: white;
     padding-top: 10px;
+    font-family: "monsterRatRegular"
 }
 
 .headerWrapper {
@@ -29,9 +35,10 @@ header {
 
 footer {
     padding-bottom: 10px;
+    font-family: "monsterRatRegular"
 }
 
-.footer {
+footer>ul {
 display: flex;
 justify-content: center;
 list-style-type: none;
@@ -42,9 +49,60 @@ padding-bottom: 10px;
 
 footer>ul>li {
 padding-bottom: 10px;
+padding-right: 10px;
+padding-left: 10px;
 color: #393c41;
-font-size: 14px;
-font-family: Arial, Helvetica, sans-serif
+font-size: small;
+font-family: "monsterRatRegular"
+
+}
+
+footer>p {
+    font-size: x-small;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.footer {
+    margin-bottom: 0px;
+}
+
+#social-icons-list {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+#social-icons-list li span{
+font-size: 0px;
+}
+
+#social-icons-list li a span{
+    display:inline-block;
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px
+}
+
+.icon-social-facebook-large {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjMgMjJ2LTguMkgxNmwuNC0zLjJoLTN2LTJjMC0xIC4yLTEuNiAxLjUtMS42aDEuNlY0LjFMMTQuMSA0Yy0yLjMgMC00IDEuNS00IDQuMnYyLjRINy41djMuMmgyLjdWMjJoMy4xeiIvPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+ 
+}
+
+.icon-social-instagram-large {
+background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjAgOC4zaDBjMC0uOC0uMi0xLjMtLjQtMS44cy0uNC0uOS0uOC0xLjMtLjgtLjYtMS4zLS44YTc3LjggNzcuOCAwIDAwLTExIDAgMy40IDMuNCAwIDAwLTIgMmMtLjMuNi0uNCAxLjItLjQgMmE3OCA3OCAwIDAwLjMgOS4xYy4yLjUuNCAxIC44IDEuMy40LjQuOC42IDEuMy44YTY2LjUgNjYuNSAwIDAwMTEgMCAzLjQgMy40IDAgMDAyLTJjLjMtLjYuNC0xLjEuNC0yYTc4IDc4IDAgMDAwLTcuM3oiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTE2LjUgOC41YTEgMSAwIDExMC0yIDEgMSAwIDAxMCAyTTEyIDhhNCA0IDAgMTEwIDggNCA0IDAgMDEwLTh6bTAgNmEyIDIgMCAxMDAtNCAyIDIgMCAwMDAgNHoiIGZpbGw9IiMwMDAiLz48L2c+PC9zdmc+);
+    background-repeat: no-repeat;
+}
+
+.icon-social-twitter-large {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxIDYuM2wtMi4xLjZjLjgtLjUgMS4zLTEuMyAxLjYtMi4xLS43LjQtMS41LjctMi4zLjlhMy43IDMuNyAwIDAwLTIuNy0xLjIgMy43IDMuNyAwIDAwLTMuNyAzLjhWOWMtMy0uMS01LjctMS42LTcuNi00YTQgNCAwIDAwLS41IDJjMCAxLjIuNyAyLjQgMS43IDMuMS0uNiAwLTEuMi0uMS0xLjctLjQgMCAxLjggMS4zIDMuMyAzIDMuN2wtMSAuMUg1YTMuNyAzLjcgMCAwMDMuNSAyLjZBNy4zIDcuMyAwIDAxMyAxNy44YzEuNyAxLjEgMy42IDEuNyA1LjcgMS43IDYuOCAwIDEwLjUtNS44IDEwLjUtMTAuOHYtLjVjLjctLjUgMS4zLTEuMiAxLjgtMnoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+}
+
+.icon-social-youtube-large {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTkgNWg3LjRjMS4yIDAgMi40IDAgMy42LjIuNSAwIDEgLjMgMS41LjZzMSAxIDEgMS42Yy4zLjcuNCAxLjUuNCAyLjN2MmEyOS43IDI5LjcgMCAwMS0uMyA1LjZjLS4zIDEtMS4xIDEuOC0yLjEgMmwtMi4yLjJIMTZsLTMuMi4xaC01QTEyMy4yIDEyMy4yIDAgMDEzIDE5Yy0uOC0uNC0xLjQtMS0xLjYtMi0uMi0uNy0uMy0xLjQtLjMtMi4ybC0uMS0yYTI5LjcgMjkuNyAwIDAxLjUtNS42Yy4yLTEgMS0xLjcgMi0yQTEzIDEzIDAgMDE1LjcgNUg5bS45IDQuMXY2LjJsNS43LTMuMS01LjctMy4xIi8+PC9zdmc+);
+    background-repeat: no-repeat;
 }
 
 
@@ -97,7 +155,7 @@ font-family: Arial, Helvetica, sans-serif
         right: 0px;
         background-color: white;
         color: black;
-        font-family: sans-serif;
+        font-family: "monsterRatRegular";
         text-align: left;
         height: 100vw;
         width: 250px;
@@ -168,7 +226,7 @@ font-family: Arial, Helvetica, sans-serif
         border-left: 1px solid black; 
       }
 
-    .desktopWrapper ul li{
+    .desktopWrapper>ul>li{
         display: inline;
         text-align: right;
     }

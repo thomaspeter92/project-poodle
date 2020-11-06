@@ -16,7 +16,6 @@ $style = NULL;
 </head>
 
 <body>
-    <!-- TODO: main menu -->
     <header>
     <div class="headerWrapper">   
         <div id="headerLeft">
@@ -36,8 +35,20 @@ $style = NULL;
                     </ul>
                 </div>        
                 <div id="mobileLogin">
-                        <img src="" alt="default">
-                        <a id="mobileLogin" href="#">Log In</a> 
+                        <?php
+                        if (!isset($_SESSION['id'])) {?>
+                            <img src="" alt="default">
+                            <a id="mobileLogin" href="#">Log In</a> 
+                        <?php 
+                        } else {
+                        ?>
+                            <img src="" alt="default">
+                            <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                                <?php echo $_SESSION['name'] ?>
+                            </a> 
+                        <?php
+                        }
+                        ?>
                 </div>
                 <div class="menu-btn"> 
                         <div class="btn-line"></div> 
@@ -49,10 +60,19 @@ $style = NULL;
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">Sign In</a></li>
+                        <?php
+                        if (!isset($_SESSION['id'])) {?>
+                        <li><a href="#">Log In</a></li>
                         <li><a href="#">Create Account</a></li>
+                        <?php 
+                        } else {
+                        ?>
+                        <li><a href="index.php?action=logout">Log Out</a></li>
+                        <?php }
+                        ?>
                     </ul>
                 </div>
+                <!-- The following script controls menu animation on Click -->
                 <script> 
                     // select dom items 
                     const menuBtn =  
@@ -82,19 +102,48 @@ $style = NULL;
             </div>
         </div> 
     </header>
-    <!-- maybe include or variable depending on -->
+
     <!-- TODO: Add Content -->
     <?= $content; ?>
-    <!-- TODO: Add Footer -->
+
+    <!-- FOOTER START -->
     <footer>
         <ul class="footer">
             <li>Home</li>
             <li>Privacy & Legal</li>
             <li>Contact</li>
             <li>Career</li>
-            <!-- Meet the team link -->
-            <!-- <li>SOCIAL MEDIA LINKS</li> -->
         </ul>
+        <ul id="social-icons-list">
+            <li>
+                <a href="http://www.facebook.com/" title="facebook">
+                    <span class="social icon-social-facebook-large">Facebook</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.instagram.com/" title="instagram">
+                    <span class="social icon-social-instagram-large">Instagram</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://twitter.com/" title="twitter">
+                    <span class="social icon-social-twitter-large">Twitter</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.youtube.com/" title="youtube">
+                    <span class="social icon-social-youtube-large">Youtube</span>
+                </a>
+            </li>
+            <!-- Meet the team link -->
+        </ul>    
+        <p>
+        © 2020 XXXXXXXX.com is a registered trademark. All rights reserved. 
+        Macys.com, LLC, 151 West 34th Street, New York, NY 10001. Macy's 
+        Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
+        Request our corporate name & address by email.
+        </p>
+
     </footer>
 </body>
 
