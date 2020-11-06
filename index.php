@@ -1,4 +1,5 @@
 <!-- index.php -->
+<?php session_start()?>
 <?php
 require("./controller/controller.php");
 

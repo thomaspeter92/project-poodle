@@ -16,7 +16,7 @@ function showPetProfile($petId){
 }
 function showPetPreview($ownerId){
     // echo $petId;
-    $previewManager = new PreviewManager();
+    $previewManager = new PetProfileManager();
     $petPreviews = $previewManager->getPreview($ownerId);
     require("./view/previewPet.php");
 }
