@@ -29,6 +29,29 @@ class MemberManager extends Manager{
         return password_verify($passwordLogin, $hashed_password);
     }
     
+    public function getMemberDataByEmail($email) {
+        $email = htmlspecialchars($email);
+        $db = $this->dbConnect();
+        $query = "SELECT id, name, kakao, google FROM member WHERE email=:email";
+        $response = $db->prepare($query);
+        $response->bindParam('email', $email, PDO::PARAM_STR);
+        $response->execute();
+        $data = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        return $data;
+    }
+
+    public function getMemberDataByID($id) {
+        $id = htmlspecialchars($id);
+        $db = $this->dbConnect();
+        $query = "SELECT id, name, kakao, google FROM member WHERE id=:id";
+        $response = $db->prepare($query);
+        $response->bindParam('id', $id, PDO::PARAM_STR);
+        $response->execute();
+        $data = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        return $data;
+    }
 
     public function addNewMember($params){
         $db = $this->dbConnect();
@@ -72,18 +95,41 @@ class MemberManager extends Manager{
         return true;
     }
 
-    public function createSession($params){
+    function addNewMemberByKakao($name, $email)
+    {
+        $name = htmlspecialchars($name);
+        $email = htmlspecialchars($email);
+        $password = uniqid();
+        $kakao = 1;
         $db = $this->dbConnect();
-        $email = htmlspecialchars($params['email']);
-        $memberLogin = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
-        $memberLogin->bindParam(1,$email, PDO::PARAM_STR);
-        $memberLogin->execute();
-        $user = $memberLogin->fetch(PDO::FETCH_ASSOC);
-        $membername = $user['name'];
-        $memberid = $user['id'];
-        $_SESSION['name'] = $membername;
-        $_SESSION['id'] = $memberid;
-        // echo $_SESSION['name'];
-        $memberLogin->closeCursor();
+        
+        $query = "INSERT INTO member(name, password, email, kakao) 
+                                VALUES(:name, :password, :email, :kakao)";
+        $response = $db->prepare($query);
+        $response->bindValue(":name", $name, PDO::PARAM_STR);
+        $response->bindValue(":password", $password, PDO::PARAM_STR);
+        $response->bindValue(":email", $email, PDO::PARAM_STR);
+        $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
+        $result = $response->execute();
+        $response->closeCursor();
+        
+        return $result;
+    }
+
+    public function createSessionByEmail($email){
+        $db = $this->dbConnect();
+        $email = htmlspecialchars($email);
+        $response = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
+        $response->bindParam(1, $email, PDO::PARAM_STR);
+        $response->execute();
+        $user = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+
+        if ($user) {
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['id'] = $user['id'];
+            return true;
+        }
+        return false;
     }
 }

@@ -25,7 +25,7 @@
     <div>
     <button type="button" name="kakaoSignUp" id="kakaoSignUp">Kakao Sign Up</button>
     </div>
-    <form id="kakaoLoginForm" action="index.php?action=kakaoSignUp" method="POST">
+    <form id="kakaoForm" method="POST">
         <input type="hidden" name="kakaoNickname" id="kakaoNickname">
         <input type="hidden" name="kakaoEmail" id="kakaoEmail">
         <!-- <input type="hidden" name="kakaoid" id="kakaoid"> -->

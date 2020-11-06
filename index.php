@@ -33,9 +33,6 @@ try {
         case "logout":
             logout();
             break;
-        case "kakao":
-            testShowKakaoLogin($action);
-            break;
         case "kakaoSignUp":
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
@@ -47,9 +44,9 @@ try {
             echo "<br>";
 
             if ($kakaoNickname and $kakaoEmail) {
-                testKakaoLogin($kakaoNickname, $kakaoEmail);
+                kakaoSignUp($kakaoNickname, $kakaoEmail);
             } else {
-                throw new Exception("Kakao Login is failed", 1000);
+                throw new Exception("Kakao Sign Up is failed", 1000);
             }
             break;
         default:

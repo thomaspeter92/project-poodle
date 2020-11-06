@@ -59,13 +59,21 @@
                 console.log(response);
                 console.log(id, nickname, email);
 
+                const form = document.querySelector("#kakaoForm");
+                form.querySelector("#kakaoNickname").value = nickname;
+                form.querySelector("#kakaoEmail").value = email;
+                // form.querySelector("#kakaoid").value = id;
+                
                 if (signUp) {
-                    const form = document.querySelector("#kakaoLoginForm");
-                    // form.querySelector("#kakaoid").value = id;
-                    form.querySelector("#kakaoNickname").value = nickname;
-                    form.querySelector("#kakaoEmail").value = email;
-                    form.submit();
+                    //TODO: Direct to user profile page?????
+                    form.action = "index.php?action=kakaoSignUp";
+                    // form.action = "kakaologinResult.php?signUp=true";
+                } else {
+                    //TODO: Direct to user profile page???? or current page???
+                    form.action = "index.php";
+                    // form.action = "kakaologinResult.php";
                 }
+                form.submit();
             },
             fail: function(error) {
                 console.log("[requestUserInfo]");

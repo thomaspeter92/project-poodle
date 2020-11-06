@@ -1,7 +1,5 @@
 <?php
-// This is for Controller functions.
 require_once('./model/MemberManager.php');
-require_once("./model/TestKakaoManager.php");
 
 function landing()
 {
@@ -35,11 +33,13 @@ function addNewMember($params)
     $registrationManager = new MemberManager();
     $register = $registrationManager->addNewMember($params);
 
-    echo $_SESSION["name"];
-
     if($register){
-        $registrationManager->createSession($params);
-        header("Location: index.php");
+        $email = $params['email'];
+        if ($registrationManager->createSessionByEmail($email)) {
+            header("Location: index.php");
+        } else {
+            throw new Exception("Failed to create Session!!", 1001);    
+        }
     }else{ 
         //header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
     }
@@ -51,25 +51,31 @@ function logout()
     header("Location: index.php");
 }
 
-function testShowKakaoLogin($action)
+function kakaoSignUp($name, $email)
 {
-    if ($action === "kakao") {
-        require("./view/kakaologin.php");
+    $manager = new MemberManager();
+    $memeberData = $manager->getMemberDataByEmail($email);
+    
+    if ($memeberData) {
+        //TODO: Show the user is already signed up with kakao
+
+
+        createSession($memeberData["id"], $memeberData["name"]);
+        header("Location: index.php");
+    } else {
+        $result = $manager->addNewMemberByKakao($name, $email);
+        if ($result) {
+            if ($manager->createSessionByEmail($email)) {
+                require("./view/kakaologinResult.php");
+            } else {
+                throw new Exception("Failed to create Session!!", 1001);    
+            }
+        } else {
+            throw new Exception("Failed to add new member!!", 1001);
+        }
     }
 }
-
-function testKakaoLogin($name, $email)
-{
-    $manager = new TestKakaoManager();
-
-    //Check if the email exists
-
-
-    $result = $manager->addMemeber($name, $email);
-
-    if ($result) {
-        require("./view/kakaologinResult.php");
-    } else {
-        throw new Exception("Failed to add new member!!", 1001);
-    }
+function createSession($id, $name) {
+    $_SESSION['id'] = $id;
+    $_SESSION['name'] = $name;
 }
