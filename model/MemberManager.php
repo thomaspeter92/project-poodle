@@ -14,14 +14,17 @@ class MemberManager extends Manager{
         $db = $this->dbConnect();
         $emailLogin = addslashes(htmlspecialchars((htmlentities(trim($params['emailLogin']))))); 
         $passwordLogin = addslashes(htmlspecialchars((htmlentities(trim($params['passwordLogin']))))); 
-        setcookie('email',$emailLogin,time()+365*24*3600,null,null,false,true); 
-        setcookie('password',$passwordLogin,time()+365*24*3600,null,null,false,true); 
-        $memberlogin = $db->prepare("SELECT email, name password FROM member WHERE email=:email");
+        // setcookie('email',$emailLogin,time()+365*24*3600,null,null,false,true); 
+        // setcookie('password',$passwordLogin,time()+365*24*3600,null,null,false,true); 
+        $memberlogin = $db->prepare("SELECT id, email, name, password FROM member WHERE email=:email");
         $memberlogin->bindParam('email', $emailLogin, PDO::PARAM_STR);
         $memberlogin->execute();
-        $_SESSION['name'] = $memberlogin['name'];
         $user = $memberlogin->fetch(PDO::FETCH_ASSOC);
         $hashed_password = $user['password'];
+        $membername = $user['name'];
+        $memberid = $user['id'];
+        $_SESSION['name'] = $membername;
+        $_SESSION['id'] = $memberid;
         $memberlogin->closeCursor();
         return password_verify($passwordLogin, $hashed_password);
     }

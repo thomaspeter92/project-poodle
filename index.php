@@ -1,5 +1,7 @@
 <!-- index.php -->
+
 <?php
+session_start();
 require("./controller/controller.php");
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
@@ -28,6 +30,9 @@ try {
             }else{
                 header("Location: index.php?action=registration&error=registration"); 
             }
+            break;
+        case "logout":
+            logout();
             break;
         default:
             landing();

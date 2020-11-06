@@ -13,10 +13,9 @@ function checkLogin ($params) {
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
     if($status) {
-        session_start();
         header("Location: index.php");
     }else {
-        header("Location: index.php?action=login&error=login");
+        // header("Location: index.php?action=login&error=login");
 
     }
 }
@@ -35,5 +34,9 @@ function addNewMember($params){
         header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
     }
 
+}
+
+function logout(){
+    session_destroy();
 }
    
