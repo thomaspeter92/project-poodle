@@ -2,6 +2,7 @@
 body {
     margin: auto;
     font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
 }
 
 /*FOR THE CAROUSEL */
@@ -56,20 +57,6 @@ body {
     background-color: #8093F1;
 }
 
-#divdiv {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0px;
-    background-color: pink;
-    transition: 1s;
-}
-
-.bigbigbig {
-    height: 100%;
-}
-
-
 /* ******** FOR THE LANDING PAGE CONTENT ******* */
 
 .content {
@@ -88,25 +75,28 @@ body {
 
 #content2 {
     height: 90vh;
-    background-color: #acf39d;
+    background-color: #72ddf7;
     flex-direction: row;
 }
 
 #content3 {
-    height: 90vh;
-    background-color: white;
+    height: 95vh;
+    background-image: url(../images/pawWallpaper.png);
+    background-size: cover;
+    /* background-color: white; */
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 }
 
 #content4 {
-    height: auto;
-    background-color: #72ddf7;
-    color: white;
-    font-size: 4em;
+    height: 200vh;
+    font-size: 3em;
+    background-image: url(../images/Untitled\ design.png);
+    background-size: cover;
+    justify-content: flex-start;
 }
-
 
 #contentContainer {
     display: flex;
@@ -166,7 +156,6 @@ span {
 .ball3 {
     background-image: url(../images/portraitDog5.jpg);
 }
-
 .button2 {
     width: 300px;
     height: 50px;
@@ -187,35 +176,13 @@ span {
     transform: translateY(0px);
 }
 
-
-.sideContentBefore {
-    width: 60px;
-    height: 150px;
-    background-color: white;
-    position: absolute;
-    left: 0;
-    overflow: hidden;
-    transition: 1.2s ease-in-out;
-}
-
-.sideContentBefore > * {
-    display: none;
-}
-
-.sideContentAfter {
-    width: 100%;
-    height: 80%;
-    clip-path: polygon(0 1%, 100% 1%, 100% 100%, 0% 100%);
-    display: flex;
-    justify-content: center;
-}
-
 .content3inner {
     width: 25%;
-    height: 80%;
+    height: 70%;
     background-image: url(../images/portraitDog1.jpg);
     background-size: cover;
-    position: relative;
+    border-radius: 50px 0px 50px 0px;
+    transition: 0.3s;
 }
 
 .content3inner:nth-child(2){
@@ -230,54 +197,173 @@ span {
     transition: 2s;
 }
 
-#content4 h5 {
-    margin: 0; 
-    display: inline-block
+.content3inner:hover {
+    transform: translateY(-15px);
+    box-shadow: 5px 10px 18px #acacac;
 }
 
+#content3text {
+    position: absolute;
+    top: .5%;
+    left: 5%;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 
+/* *************EXPANDING CONTENT TEST******************************** */
 
-/* SECOND OPTION FOR HOMEPAGE */
-/* div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#insideContainer {
+    position: relative;
+    flex-direction: column;
+    width: 85%;
+    height:50%;
+    border-radius: 100px;
+}
+
+.inside {
+    overflow: hidden;
+    height: 12%;
     width: 100%;
-    height: 100vh;
-}
-
-h2 {
-    padding: 10px 15px;
-    font-family: sans-serif;
-    border-radius: 10px;
+    text-align: center;
     color: white;
-    font-size: 5em;
+    transition: .8s;
+    margin-bottom: 10px;
+    background-color: #72ddf7;
+    border-radius: 50px;
 }
 
-div:nth-child(1) {
-    background-image: url(../images/dogCarousel4.jpg);
-    background-size: cover;
-    background-attachment: fixed;
+.inside:hover {
+    cursor: pointer;
+    background-color: #8093F1;
+
 }
-div:nth-child(2) {
-    background-color: teal;
-    height: 200px;
+
+.afterClick {
+    height: 80%;
+    
 }
-div:nth-child(3) {
-    background-image: url(../images/dogCarousel2.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-} */
+
+.inside > h3 {
+    font-size: 1.2em;
+    display: inline-block;
+    font-weight: normal;
+    text-align: left;
+}
+
+.insideContent {
+    width: 90%;
+    height: 80%;
+    opacity: 0;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    transition: .6s;
+    text-align: right;
+    /* box-shadow: 5px 10px 18px #acacac; */
+    /* border-radius: 50px; */
+}
+
+.insideContentAfterClick {
+    opacity: 1;
+}
+
+.insideContent p {
+    font-size: 0.3em;
+    color: black;
+    padding-right: 10px;
+}
 
 
+.fas {
+    transition: .6s;
+    color: white;
+}
+
+.arrowClick {
+    transform: rotate(180deg);
+}
+
+.insideContent img {
+    height: 100%;
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+}
+
+
+
+/* ******************MEDIA QUERY*************************************** */
 
 @media (max-width: 1125px) {
 
-    #carousel > img {
-        position: absolute;
-        /* width: 100v; */
-        /* left: -90%; */
-        height: 100%;
+    #carousel {
+        height: 80vh;
+        background-image: url(../images/portraitDog5.jpg);
+        background-size: cover;
     }
 
+    #carouselTextBox {
+        display: none;
+    }
+
+    #carousel > img {
+        display: none;
+    }
+
+    #content1 {
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    #contentContainer {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
+    }
+
+    #content2 {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+
+    .boxAppearAfter {
+        height: 40%;
+        width: 80%;
+        margin: 10px;
+    }
+
+    #mapImg{
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    #content3 {
+        flex-direction: column;
+        height: 150vh;
+    }
+
+    .content3inner {
+        width: 80%;
+        height: 80%;
+        margin: 20px;
+    }
+
+    #content4 {
+        height: 100vh;
+    }
+
+    .inside {
+        height: auto;
+        width: 100%;
+    }
+}
+
+@keyframes slideshow {
+
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }

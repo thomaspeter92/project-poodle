@@ -2,14 +2,10 @@
 ob_start();
 ?>
 
-<!-- **** PLACEHOLDER FOR JOHNS HEADER!!! *** -->
-
-
 <div id="carousel">
     <img src="./public/images/dogCarousel4.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel3.jpg" alt="" class="carouselImg">
-    <!-- <img src="./public/images/dogCarousel1.jpg" alt="" class="carouselImg"> -->
 
     <div id="carouselTextBox">
             <p>I LOVE DOGS! WOOF!</p>
@@ -50,46 +46,48 @@ ob_start();
         <h3>Awesome Location Features</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam unde, nisi soluta ea quibusdam debitis suscipit, quis nemo mollitia possimus commodi. Laboriosam ab rem eos assumenda, quo molestias quae voluptas.</p>
     </div>
-    <div id="mapImg"><img src="./public/images/googleMapPreview.png" alt=""></div>
-    <div class="sideContentBefore">
-        <h2>SIGN UP TO OUR NEWSLETTER</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas magnam expedita voluptatem minima omnis? Ad incidunt minima natus enim quis quasi dolorem vitae sunt rem cumque. Voluptatum cupiditate id atque!</p>
-    </div>
+    <img id="mapImg" src="./public/images/googleMapPreview.png" alt="">
 </div>
 
 <div id="content3" class="content">
-    <div class="content3inner content3inner1">
-        <div id="divdiv"></div>
-    </div>
-    <div class="content3inner">
-        <div></div>
-    </div>
-    <div class="content3inner">
-        <div></div>
-    </div>
+    <p id="content3text">+20,000 Profiles</p>
+    <div class="content3inner content3inner1"></div>
+    <div class="content3inner"></div>
+    <div class="content3inner"></div>
 </div>
+
+<!-- *****************EXPANDING CONTENT CONTAINER ***************** -->
 
 <div id="content4" class="content">
-    <div>
-        <h5>I LOVE DOGS</h5>
-        <i class="fas fa-arrow-circle-down"></i>
-    </div>
-    <div>
-        <h5>DOGS ARE AMAZING</h5>
-        <i class="fas fa-arrow-circle-down"></i>
-    </div>
-    <div>
-        <h5>I WANT A DOG</h5>
-        <i class="fas fa-arrow-circle-down"></i>
+    <div id="insideContainer">
+        <div class="inside inside1">
+            <h3>I LOVE DOGS</h3><i class="fas fa-arrow-circle-down"></i>
+            <div class="insideContent">
+                <article>
+                    <h4>I'm Lovin It</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur doloremque temporibus porro dolorum minima id quo aliquam aspernatur molestiae cupiditate repellendus, similique laborum ab, dolore iure quaerat inventore mollitia!</p>
+                </article>
+            </div>
+
+
+        </div>
+        <div class="inside inside2">
+            <h3>DOGS ARE AMAZING</h3><i class="fas fa-arrow-circle-down"></i>
+            <div class="insideContent">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis dolorem architecto iure modi nobis, aliquid ex. Exercitationem quo quos laudantium nihil ullam cumque? At dolores voluptates quod laborum. Omnis, maxime?</p>
+            </div>
+
+        </div>
+        <div class="inside inside3">
+            <h3>I WANT A DOG</h3><i class="fas fa-arrow-circle-down"></i>
+            <div class="insideContent">
+                <div class="insideContentText">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet repudiandae consequatur cumque sequi nulla aliquam maiores tempora labore ipsa fugit exercitationem, culpa possimus pariatur dicta a iusto molestiae delectus dolorem.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-<!-- *** SECOND OPTION WITH PARALLAX SCROLLING ***** -->
-<!-- <div><h2>TOMAS 1</h2></div>
-<div><h2>TOMAS 2</h2></div>
-<div id="last"><h2>TOMAS 3</h2></div> -->
 
 
 <?php
