@@ -3,6 +3,7 @@
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");
 require_once('./model/MemberManager.php');
+
 function landing()
 {
     require("./view/landing.php");

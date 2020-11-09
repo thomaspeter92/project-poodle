@@ -3,6 +3,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
     body{
+        
         font-family: 'Montserrat', sans-serif;
         margin:0;
         padding:0;
@@ -15,6 +16,11 @@
         background-image: url("./public/images/wallpaper.jpeg");
         /* background-size: cover; */
     }
+
+    /* body: first-child{
+        margin-top: 15%;
+    } */
+
     .petListElement{
         height: 20%;
         width: 90%;

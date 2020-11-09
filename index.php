@@ -14,7 +14,8 @@ try {
             showPetProfile($_REQUEST['petid']);
             break;
         case "petPreview":
-            showPetPreview($_REQUEST['ownerId']);
+            showPetPreview($_SESSION['id']);
+            break;
         case "login":
             login();
             break;
