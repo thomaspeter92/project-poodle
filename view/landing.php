@@ -1,6 +1,7 @@
 <?php
 ob_start();
 ?>
+    <link rel="stylesheet" href="./public/css/landing.css">
 
 <!-- ************** CAROUSEL AREA ************* -->
 
@@ -144,6 +145,10 @@ ob_start();
 </div>
 
 <a href="index.php?action=petPreview&ownerId=1">Testing preview</a>
+
+<script src="./public/js/carousel.js"></script>
+
+
 <?php
 $content = ob_get_clean();
 require("template.php");
