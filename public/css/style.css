@@ -1,1 +1,251 @@
 /* Main style.css */
+@font-face {
+    font-family: "monsterRatRegular";
+    src: url("./Montserrat/Montserrat-Regular.ttf") format("truetype");
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    position:fixed;
+    margin: 0px;
+    width: 100%;
+    z-index: 9;
+    background-color: white;
+    padding-top: 10px;
+    font-family: "monsterRatRegular"
+}
+
+.headerWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+#headerRight {
+    display: flex;
+    padding-right: 20px;
+}
+
+
+footer {
+    padding-bottom: 10px;
+    font-family: "monsterRatRegular"
+}
+
+footer>ul {
+display: flex;
+justify-content: center;
+list-style-type: none;
+text-align: center;
+align-items: center;
+padding-bottom: 10px;
+}
+
+footer>ul>li {
+padding-bottom: 10px;
+padding-right: 10px;
+padding-left: 10px;
+color: #393c41;
+font-size: small;
+font-family: "monsterRatRegular"
+
+}
+
+footer>p {
+    font-size: x-small;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.footer {
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+
+#social-icons-list {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-left: 0px;
+}
+
+#social-icons-list li span{
+font-size: 0px;
+}
+
+#social-icons-list li a span{
+    display:inline-block;
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px
+}
+
+.icon-social-facebook-large {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjMgMjJ2LTguMkgxNmwuNC0zLjJoLTN2LTJjMC0xIC4yLTEuNiAxLjUtMS42aDEuNlY0LjFMMTQuMSA0Yy0yLjMgMC00IDEuNS00IDQuMnYyLjRINy41djMuMmgyLjdWMjJoMy4xeiIvPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+ 
+}
+
+.icon-social-instagram-large {
+background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjAgOC4zaDBjMC0uOC0uMi0xLjMtLjQtMS44cy0uNC0uOS0uOC0xLjMtLjgtLjYtMS4zLS44YTc3LjggNzcuOCAwIDAwLTExIDAgMy40IDMuNCAwIDAwLTIgMmMtLjMuNi0uNCAxLjItLjQgMmE3OCA3OCAwIDAwLjMgOS4xYy4yLjUuNCAxIC44IDEuMy40LjQuOC42IDEuMy44YTY2LjUgNjYuNSAwIDAwMTEgMCAzLjQgMy40IDAgMDAyLTJjLjMtLjYuNC0xLjEuNC0yYTc4IDc4IDAgMDAwLTcuM3oiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTE2LjUgOC41YTEgMSAwIDExMC0yIDEgMSAwIDAxMCAyTTEyIDhhNCA0IDAgMTEwIDggNCA0IDAgMDEwLTh6bTAgNmEyIDIgMCAxMDAtNCAyIDIgMCAwMDAgNHoiIGZpbGw9IiMwMDAiLz48L2c+PC9zdmc+);
+    background-repeat: no-repeat;
+}
+
+.icon-social-twitter-large {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxIDYuM2wtMi4xLjZjLjgtLjUgMS4zLTEuMyAxLjYtMi4xLS43LjQtMS41LjctMi4zLjlhMy43IDMuNyAwIDAwLTIuNy0xLjIgMy43IDMuNyAwIDAwLTMuNyAzLjhWOWMtMy0uMS01LjctMS42LTcuNi00YTQgNCAwIDAwLS41IDJjMCAxLjIuNyAyLjQgMS43IDMuMS0uNiAwLTEuMi0uMS0xLjctLjQgMCAxLjggMS4zIDMuMyAzIDMuN2wtMSAuMUg1YTMuNyAzLjcgMCAwMDMuNSAyLjZBNy4zIDcuMyAwIDAxMyAxNy44YzEuNyAxLjEgMy42IDEuNyA1LjcgMS43IDYuOCAwIDEwLjUtNS44IDEwLjUtMTAuOHYtLjVjLjctLjUgMS4zLTEuMiAxLjgtMnoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+}
+
+.icon-social-youtube-large {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTkgNWg3LjRjMS4yIDAgMi40IDAgMy42LjIuNSAwIDEgLjMgMS41LjZzMSAxIDEgMS42Yy4zLjcuNCAxLjUuNCAyLjN2MmEyOS43IDI5LjcgMCAwMS0uMyA1LjZjLS4zIDEtMS4xIDEuOC0yLjEgMmwtMi4yLjJIMTZsLTMuMi4xaC01QTEyMy4yIDEyMy4yIDAgMDEzIDE5Yy0uOC0uNC0xLjQtMS0xLjYtMi0uMi0uNy0uMy0xLjQtLjMtMi4ybC0uMS0yYTI5LjcgMjkuNyAwIDAxLjUtNS42Yy4yLTEgMS0xLjcgMi0yQTEzIDEzIDAgMDE1LjcgNUg5bS45IDQuMXY2LjJsNS43LTMuMS01LjctMy4xIi8+PC9zdmc+);
+    background-repeat: no-repeat;
+}
+
+
+@media screen and (max-width: 1120px) {
+    /* Remove DESKTOP ONLY STUFF */
+    .desktopWrapper {
+        display: none;
+    }
+
+    /* Styling the menu button */
+    .menu-btn { 
+        /* position: absolute;  */
+        z-index: 20; 
+        margin-left: 15px;
+        padding-top: 5px; 
+        cursor: pointer; 
+        transition: all 0.5s ease-out; 
+    } 
+  
+    /* Styling the hamburger lines */
+    .menu-btn .btn-line { 
+        width: 28px; 
+        height: 3px; 
+        margin: 0 0 5px 0; 
+        background: black; 
+        transition: all 0.5s ease-out; 
+    } 
+  
+    /* Adding tranform to the X */
+    .menu-btn.close { 
+        transform: rotate(180deg); 
+    } 
+  
+    /* Styling the three lines  
+        to make it an X */
+    .menu-btn.close .btn-line:nth-child(1) { 
+        transform: rotate(45deg) translate(5px, 5px);
+    } 
+  
+    .menu-btn.close .btn-line:nth-child(2) { 
+        opacity: 0; 
+    } 
+  
+    .menu-btn.close .btn-line:nth-child(3) { 
+        transform: rotate(-45deg) translate(7px, -6px); 
+    } 
+
+    .hoverWrapper.show {
+        position: absolute;
+        right: 0px;
+        background-color: white;
+        color: black;
+        font-family: "monsterRatRegular";
+        text-align: left;
+        height: 100vw;
+        width: 250px;
+        transition: right 1s;
+        padding-top: 0;
+        z-index: 10;
+    }
+
+    .hoverWrapper {
+        position: absolute;
+        right: -250px;
+        background-color: white;
+        color: black;
+        font-family: sans-serif;
+        text-align: left;
+        height: 100vw;
+        width: 250px;
+        transition: right 1s;
+        padding-top: 0;
+        z-index: 10;
+    }
+    .hoverWrapper>ul {
+        list-style-type: none;
+    }
+    
+    .hoverWrapper>ul>li {
+        font-size: 12px;
+        padding-top: 5%;
+        padding-bottom: 10%;
+        border-bottom: grey 1px solid;
+    }
+
+    #mobileLogin {
+        padding-top: 5px;
+    }
+}
+
+
+/* DESKTOP SETTINGS */
+@media screen and (min-width: 1120px) {
+    .middleheader {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        list-style-type: none;
+        text-align: center;
+        align-items: center;
+        margin: 0px;
+    }
+
+
+    .desktopWrapper {
+        display: inline;
+    }
+
+    .desktopWrapper>ul {
+        text-align: right;
+        padding-right: 20px;
+    }
+
+    #contactLink {
+        padding-right: 9px;
+        border-right: 1px solid black; 
+    }
+
+    #desktopLogInLink {
+        padding-left: 5px;
+      }
+
+    .desktopWrapper>ul>li{
+        display: inline;
+        text-align: right;
+    }
+
+
+    /* Remove things for MOBILE only */
+    #hamburger {
+        display: none;
+    }
+
+    #mobileLogin {
+        display: none;
+    }
+    .hoverWrapper {
+        display: none;
+    }
+}
+
+
+
+

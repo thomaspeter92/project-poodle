@@ -1,3 +1,4 @@
+
 <?php ob_start(); ?>
 <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
@@ -43,7 +44,19 @@
 
     <script src='./public/js/googlelogin.js'></script>
     
+
+    <div>
+        <button type="button" name="kakaoLogin" id="kakaoLogin"><img src="./public/images/kakaoLogin/en/kakao_login_large_narrow.png"></button>
+    </div>
+    <form id="kakaoForm" method="POST">
+        <input type="hidden" name="kakaoNickname" id="kakaoNickname">
+        <input type="hidden" name="kakaoEmail" id="kakaoEmail">
+        <!-- <input type="hidden" name="kakaoid" id="kakaoid"> -->
+    </form>
+    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
+    <script src='./public/js/kakaologin.js'></script>
 <?php
 $content = ob_get_clean();
 require("template.php");
 ?>
+
