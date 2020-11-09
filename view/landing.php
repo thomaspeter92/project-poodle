@@ -2,6 +2,8 @@
 ob_start();
 ?>
 
+<!-- ************** CAROUSEL AREA ************* -->
+
 <div id="carousel">
     <img src="./public/images/dogCarousel4.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">
@@ -14,25 +16,26 @@ ob_start();
 </div>
 
 
+<!-- ************************* CONTENT 1 AREA **************** -->
 <div id="content1" class="content">
-    <div id="contentContainer">
+    <div id="content1container">
         <div class="contentBox">
             <div class="imageBall"></div>
-            <span></span>
+            <span class="bar"></span>
             <h3>Meet Friends</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
 
         <div class="contentBox">
             <div class="imageBall ball2"></div>
-            <span></span>
+            <span class="bar"></span>
             <h3>Make Memories</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
 
         <div class="contentBox">
             <div class="imageBall ball3"></div>
-            <span></span>
+            <span class="bar"></span>
             <h3>Create Events</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
@@ -41,6 +44,8 @@ ob_start();
     <div class="button2 button"><p>LEARN MORE</p></div>
 </div>
 
+
+<!-- ************************* CONTENT 2 AREA **************** -->
 <div id="content2" class="content">
     <div class="contentBox boxAppearBefore">
         <h3>Awesome Location Features</h3>
@@ -49,37 +54,65 @@ ob_start();
     <img id="mapImg" src="./public/images/googleMapPreview.png" alt="">
 </div>
 
+
+<!-- ************************* CONTENT 3 AREA **************** -->
 <div id="content3" class="content">
     <p id="content3text">+20,000 Profiles</p>
-    <div class="content3inner content3inner1"></div>
-    <div class="content3inner"></div>
-    <div class="content3inner"></div>
+    <div class="content3inner">
+        <div class="clickMe"></div>
+        <section class="content3hidden">
+            <div class="profileImageBall"></div>
+            <h5>Betty Boop</h5>
+            <p>"I'm a kind dog looking to have fun with another cute pup!"</p>
+            <p>Friendliness: *****</p>
+            <p>Fitness Level: ***</p>
+        </section>
+    </div>
+    <div class="content3inner">
+        <div class="clickMe"></div>
+        <section class="content3hidden">
+            <div class="profileImageBall"></div>
+            <h5>Baby</h5>
+            <p>"I'm a kind dog looking to have fun with another cute pup!"</p>
+            <p>Friendliness: *****</p>
+            <p>Fitness Level: ***</p>
+        </section>
+    </div>
+    <div class="content3inner">
+        <div class="clickMe"></div>
+        <section class="content3hidden">
+            <div class="profileImageBall"></div>
+            <h5>Lil Pup</h5>
+            <p>"I'm a kind dog looking to have fun with another cute pup!"</p>
+            <p>Friendliness: *****</p>
+            <p>Fitness Level: ***</p>
+        </section>
+    </div>
 </div>
 
-<!-- *****************EXPANDING CONTENT CONTAINER ***************** -->
 
+<!-- ************************* CONTENT 4 AREA **************** -->
 <div id="content4" class="content">
-    <div id="insideContainer">
-        <div class="inside inside1">
-            <h3>I LOVE DOGS</h3><i class="fas fa-arrow-circle-down"></i>
+    <div id="expandingContainer">
+        <div class="insideContainer inside1">
+            <h3>VR Features</h3><i class="fas fa-arrow-circle-down"></i>
             <div class="insideContent">
                 <article>
-                    <h4>I'm Lovin It</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur doloremque temporibus porro dolorum minima id quo aliquam aspernatur molestiae cupiditate repellendus, similique laborum ab, dolore iure quaerat inventore mollitia!</p>
                 </article>
             </div>
 
 
         </div>
-        <div class="inside inside2">
-            <h3>DOGS ARE AMAZING</h3><i class="fas fa-arrow-circle-down"></i>
+        <div class="insideContainer inside2">
+            <h3>Create Events</h3><i class="fas fa-arrow-circle-down"></i>
             <div class="insideContent">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis dolorem architecto iure modi nobis, aliquid ex. Exercitationem quo quos laudantium nihil ullam cumque? At dolores voluptates quod laborum. Omnis, maxime?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis dolorem architecto iure modi nobis, aliquid ex. Exercitationem quo quos laudantium nihil ullam cumque? At dolores voluptates quod laborum. Omnis, maxime? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex. Explicabo eaque provident odit doloremque consequatur deserunt error mollitia cumque debitis eius dolor ullam suscipit perferendis porro expedita, quasi amet! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, pariatur! Sapiente vero delectus quas optio officiis iusto!</p>
             </div>
 
         </div>
-        <div class="inside inside3">
-            <h3>I WANT A DOG</h3><i class="fas fa-arrow-circle-down"></i>
+        <div class="insideContainer inside3">
+            <h3>Meet Other Owners</h3><i class="fas fa-arrow-circle-down"></i>
             <div class="insideContent">
                 <div class="insideContentText">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet repudiandae consequatur cumque sequi nulla aliquam maiores tempora labore ipsa fugit exercitationem, culpa possimus pariatur dicta a iusto molestiae delectus dolorem.</p>
@@ -87,8 +120,28 @@ ob_start();
             </div>
         </div>
     </div>
+
+
+    <section id="content4section">
+        <article class="content4article">
+            <h5>About Us</h5>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente alias ab, mollitia natus est ea maxime doloremque iusto tempore fugiat accusamus id tempora! Quam sunt, voluptatibus aperiam incidunt soluta sit!</p>
+        </article>
+        <article class="content4article">
+            <h5>Manage Your Pets Seamlessly</h5>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente alias ab, mollitia natus est ea maxime doloremque iusto tempore fugiat accusamus id tempora! Quam sunt, voluptatibus aperiam incidunt soluta sit!</p>
+        </article>
+</section>
 </div>
 
+<div id="content5" class="content">
+    <div class="content5div"></div>
+    <div class="content5div"></div>
+    <div class="content5div"></div>
+    <div class="content5div"></div>
+    <div class="content5div"></div>
+    <div class="content5div"></div>
+</div>
 
 <?php
 $content = ob_get_clean();
