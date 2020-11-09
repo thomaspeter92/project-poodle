@@ -1,8 +1,78 @@
 <?php
-// This is for Controller functions.
 
+// This is for Controller functions.
+require_once('./model/MemberManager.php');
 
 function landing()
 {
     require("./view/landing.php");
 }
+
+function login()
+{
+    require('./view/loginView.php');
+}
+
+function logout()
+{
+    session_destroy();
+    header("Location: index.php");
+}
+
+function googleSignIn(){
+    $manager = new MemberManager();
+    $comments = array();
+    $email = isset($_REQUEST['googleEmail']) ? $_REQUEST['googleEmail'] : NULL;
+    $name = isset($_REQUEST['googleName']) ? $_REQUEST['googleName'] : NULL;
+    // $picture = isset($_REQUEST['googlePicture']) ? $_REQUEST['googlePicture'] : NULL;
+    $userId = isset($_REQUEST['googleUserId']) ? $_REQUEST['googleUserId'] : NULL;
+    $comments[0] = 'Inside GoogleIn';
+   
+    $memberData = $manager->getMemberDataByEmail($email);
+    if($memberData){
+        //Create Session if user is a google member
+
+        if($memberData['google'] ==1){
+            createSession($memberData['id'], $memberData['name']);
+            // header("Location: index.php");
+           
+        }elseif($memberData['google'] ==0){
+            throw new Exception("Member was not registered through Google SignIn. Please use other method to sign in");
+        
+        }
+
+    }
+}
+
+
+function googleSignUp(){
+    $manager = new MemberManager();
+    $comments = array();
+    $email = isset($_REQUEST['googleEmail']) ? $_REQUEST['googleEmail'] : NULL;
+    $name = isset($_REQUEST['googleName']) ? $_REQUEST['googleName'] : NULL;
+    // $picture = isset($_REQUEST['googlePicture']) ? $_REQUEST['googlePicture'] : NULL;
+    $userId = isset($_REQUEST['googleUserId']) ? $_REQUEST['googleUserId'] : NULL;
+
+      //Register user as a member in database
+      $params['email'] = $email;
+      $params['name'] = $name;
+      $params['userId'] = $userId;
+
+      $result = $manager->addNewMemberByGoogle($params);
+      if ($result){
+          if ($manager->createSessionByEmail($email)){
+              // header("Location: index.php");
+            //   $comments[1]= 'New member created';
+          }else{
+              throw new Exception("Failed to create Session!!, 1001");
+          }
+      } else{
+          throw new Exception("Failed to add new member!!, 1001");
+      }
+}
+
+function createSession($id, $name) {
+    $_SESSION['id'] = $id;
+    $_SESSION['name'] = $name;
+}
+
