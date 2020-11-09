@@ -1,0 +1,503 @@
+/* Main style.css */
+body {
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+/*********FOR THE CAROUSEL *********/
+#carousel {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.carouselImg {
+    position: fixed;
+    width: 100vw;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    top: -10%;
+    z-index: -1;
+}
+
+#carouselTextBox {
+    width: 300px;
+    height: 250px;
+    color: white;
+    position: absolute;
+    left: 8%;
+    top: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+#carouselButton {
+    background-color: #72ddf7;
+    width: 200px;
+    text-align: center;
+    border-radius: 100px;
+    color:white;
+    font-size: 0.5em;
+    font-weight: normal;
+}
+
+#carouselButton:hover {
+    background-color: #8093F1;
+}
+
+.button:hover {
+    background-color: #8093F1;
+}
+
+/* ******** FOR THE LANDING PAGE CONTENT ******* */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100vw;
+    position: relative;
+}
+
+/* ************* CONTENT 1 AREA *********** */
+
+#content1 {
+    height: 90vh;
+    background-color: white;
+}
+
+#content1container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.contentBox {
+    width: 350px;
+    height: 350px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.contentBox > p, h3 {
+    text-align: center;
+    width: 80%;
+    margin: 0;
+    font-size: 1em;
+}
+
+.contentBox> h3 {
+    font-weight: 600;
+    font-size: 2em;
+    
+}
+
+.bar {
+    background-color: #72ddf7;
+    height: 10px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+.imageBall {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    background-image: url(../images/dogCarousel0.jpg);
+    background-size: cover;
+    clip-path: circle(50% at 50% 50%);
+    transition: 2s;
+}
+
+.imageBall:hover {
+    transform: rotate(360deg);
+}
+
+.ball2 {
+    background-image: url(../images/portraitDog4.jpg);
+}
+
+.ball3 {
+    background-image: url(../images/portraitDog5.jpg);
+}
+.button2 {
+    width: 300px;
+    height: 50px;
+    background-color: #72ddf7;
+    text-align: center;
+    border-radius: 100px;
+    color:white
+}
+
+/* **************** CONTENT 2 AREA ******************** */
+
+#content2 {
+    height: 90vh;
+    background-color: #72ddf7;
+    flex-direction: row;
+}
+
+.boxAppearBefore {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s all ease-in-out;
+}
+
+.boxAppearAfter {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+/* ************** CONTENT 3 AREA *************** */
+
+#content3 {
+    height: 90vh;
+    background-image: url(../images/greyWallpaper.png);
+    background-size: cover;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.content3inner {
+    width: 25%;
+    height: 70%;
+    background-image: url(../images/portraitDog1.jpg);
+    background-size: cover;
+    border-radius: 50px 0px 50px 0px;
+    transition: 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.content3inner:nth-child(2){
+    background-image: url(../images/portraitDog2.jpg);
+}
+
+.content3inner:nth-child(3){
+    background-image: url(../images/portraitDog3.jpg);
+}
+
+.content3inner > div {
+    transition: 2s;
+}
+
+.content3inner:hover {
+    transform: translateY(-15px);
+    box-shadow: 5px 10px 18px #acacac;
+}
+
+.content3selected {
+    transform: translateY(-15px);
+    box-shadow: 5px 10px 18px #acacac;
+}
+
+#content3text {
+    position: absolute;
+    top: .5%;
+    left: 5%;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.clickMe {
+    background-image: url(../images/clickMe.png);
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: 10px;
+    animation: bounce 1s infinite;
+}
+
+.content3hidden {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s ease-in-out;
+    padding-right: 20px;
+}
+
+.content3reveal {
+    opacity: 1;
+    z-index: 100;
+    position: absolute;
+}
+
+.content3hidden * {
+    border-top: 1px solid lightgray;
+}
+
+.profileImageBall {
+    background-image: url(../images/portraitDog2\ copy.jpg);
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: #72ddf7 5px solid;
+}
+
+
+/* *************** CONTENT 4 AREA **************/
+
+#content4 {
+    height: 100vh;
+    max-height: 200vh;
+    font-size: 3em;
+    background-color: rgb(233, 233, 233);
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+#expandingContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height:95%;
+    background-color: rgb(233, 233, 233);
+}
+
+.insideContainer {
+    height: 65px;
+    width: 100%;
+    text-align: center;
+    color: black;
+    transition: .8s;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.insideContainer:hover {
+    cursor: pointer;
+
+}
+
+.afterClick {
+    height: 100%;
+}
+
+.insideContainer > h3 {
+    font-size: 5vh;
+    display: inline-block;
+    font-weight: normal;
+    text-align: left;
+}
+
+.insideContent {
+    width: 90%;
+    height: 80%;
+    opacity: 0;
+    margin: auto;
+    overflow: hidden;
+    display: none;
+    justify-content: space-between;
+    transition: .6s;
+    text-align: right;
+}
+
+.insideContentAfterClick {
+    opacity: 1;
+    display: flex;
+}
+
+.insideContent p {
+    font-size: 0.3em;
+    color: black;
+    padding-right: 10px;
+}
+
+
+.fas {
+    transition: .6s;
+    color: rgb(233, 233, 233);
+    ;
+}
+
+.arrowClick {
+    transform: rotate(180deg);
+}
+
+.insideContent img {
+    height: 100%;
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+}
+
+#content4section {
+    width: 45%;
+    height: 90%;
+}
+
+.content4article {
+    height: 45%;
+    margin: 0;
+}
+
+.content4article h5 {
+    font-weight: 600;
+    font-size: .6;
+    text-align: right;
+    margin: 0 0 10px 0;
+}
+
+.content4article p {
+    font-size: .4em;
+    text-align: right;
+    margin: 0;
+    font-weight: lighter;
+}
+
+#content5 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100vh;
+    background-color: white;
+}
+.content5div {
+    width: 33.15%;
+    height: 49.5%;
+    border: 1px solid lightgrey;
+    margin: 0;
+}
+
+.content5div:hover {
+    background-color: rgb(233, 233, 233);
+}
+
+/* ******************MEDIA QUERY*************************************** */
+
+@media (max-width: 900px) {
+
+    #carousel {
+        height: 80vh;
+        background-image: url(../images/portraitDog5.jpg);
+        background-size: cover;
+    }
+
+    #carouselTextBox {
+        display: none;
+    }
+
+    #carousel > img {
+        display: none;
+    }
+
+    #content1 {
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    #content1container {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
+    }
+
+    #content2 {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+
+    .boxAppearAfter {
+        height: 40%;
+        width: 80%;
+        margin: 10px;
+    }
+
+    #mapImg{
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    #content3 {
+        flex-direction: column;
+        height: 200vh;
+    }
+
+    .content3inner {
+        width: 80%;
+        height: 80%;
+        margin: 5%;
+    }
+
+    .content3inner:nth-of-type(1) {
+        margin-top: 20%;
+    }
+
+    #content4 {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #expandingContainer {
+        /* height: 10%; */
+        width: 95%;
+    }
+
+    .insideContainer > h3 {
+        font-size: .5em;
+    }
+
+    .afterClick {
+        height: 80%;
+    }
+
+    .fas {
+        font-size: .5em;
+    }
+
+    #content4section {
+        width: 95%;
+    }
+
+    .content4article h5 {
+        font-size: .2;
+    }
+
+    #content5 {
+        height: 100vh;
+    }
+
+    .content5div {
+        width: 49%;
+        height: 33%;
+    }
+}
+
+
+@keyframes bounce {
+    
+    50%{
+        transform: translateY(5px);
+        transition: ease-in-out;
+    }
+
+    100%{
+        transform: translateY(-5px);
+        transition: ease-in-out;
+    }
+}

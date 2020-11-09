@@ -1,9 +1,9 @@
 <!-- index.php -->
-<?php session_start()?>
 <?php
+session_start();
 require("./controller/controller.php");
-
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
+
 try {
     switch ($action) {
         case "landing":
@@ -15,11 +15,35 @@ try {
             break;
         case "petPreview":
             showPetPreview($_REQUEST['ownerId']);
+        case "login":
+            login();
+            break;
+        case "checkLogin" :
+            if(!empty($_REQUEST['emailLogin']) && !empty($_REQUEST['passwordLogin'])){
+                checkLogin($_REQUEST);
+            } else {
+               header("Location: index.php?action=login&error=login");   
+            }
+            break;
+        case "registration":
+            registration();
+            break;
+        case "registrationInput":
+            if(!empty($_REQUEST['username']) && !empty($_REQUEST['password']) &&!empty($_REQUEST['email'])){
+                addNewMember($_REQUEST);
+            }else{
+                header("Location: index.php?action=registration&error=registration"); 
+            }
+            break;
+        case "logout":
+            logout();
             break;
         default:
             landing();
             break;
     }
 } catch (Exception $e) {
-    require("error.php");
+    require("./view/error.php");
 }
+
+
