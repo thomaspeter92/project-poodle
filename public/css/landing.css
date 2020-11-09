@@ -410,7 +410,7 @@ body {
         padding-bottom: 30px;
     }
 
-    #contentContainer {
+    #content1container {
         flex-direction: column;
         justify-content: space-between;
         height: 90%;
@@ -450,23 +450,41 @@ body {
 
     #content4 {
         flex-direction: column;
+        height: auto;
     }
 
-    .inside {
-        height: 10%;
-        width: 100%;
+    #expandingContainer {
+        /* height: 10%; */
+        width: 95%;
+    }
+
+    .insideContainer > h3 {
+        font-size: .5em;
     }
 
     .afterClick {
         height: 80%;
     }
 
-    .inside h3 {
-        font-size: .4em;
-    }
-
     .fas {
         font-size: .5em;
+    }
+
+    #content4section {
+        width: 95%;
+    }
+
+    .content4article h5 {
+        font-size: .2;
+    }
+
+    #content5 {
+        height: 100vh;
+    }
+
+    .content5div {
+        width: 49%;
+        height: 33%;
     }
 }
 
