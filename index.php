@@ -33,18 +33,20 @@ try {
         case "logout":
             logout();
             break;
-        case "kakaoSignUp":
+        case "kakaoLogin":
+            $kakaoSignUp = isset($_REQUEST["kakaoSignUp"]) ? $_REQUEST["kakaoSignUp"] : NULL;
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
             // $kakaoid = isset($_REQUEST["kakaoid"]) ? $_REQUEST["kakaoid"] : NULL;
-
-            echo $kakaoNickname;
-            echo "<br>";
-            echo $kakaoEmail;
-            echo "<br>";
-
+            
             if ($kakaoNickname and $kakaoEmail) {
-                kakaoSignUp($kakaoNickname, $kakaoEmail);
+                $memberData = array(
+                    "name" => $kakaoNickname,
+                    "email" => $kakaoEmail,
+                    "kakao" => TRUE,
+                    "google" => FALSE,
+                );
+                ($kakaoSignUp === "true") ? signUpWith($memberData) : signInWith($memberData);
             } else {
                 throw new Exception("Kakao Sign Up is failed", 1000);
             }

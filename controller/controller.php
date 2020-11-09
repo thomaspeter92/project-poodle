@@ -51,22 +51,37 @@ function logout()
     header("Location: index.php");
 }
 
-function kakaoSignUp($name, $email)
+function createSession($id, $name) {
+    $_SESSION['id'] = $id;
+    $_SESSION['name'] = $name;
+}
+
+function signUpWith($memberData)
 {
+    if (empty($memberData["name"]) or empty($memberData["email"])) {
+        throw new Exception("Sign up is failed!", 1003);
+    }
+    $name = $memberData["name"];
+    $email = $memberData["email"];
+
     $manager = new MemberManager();
-    $memeberData = $manager->getMemberDataByEmail($email);
-    
-    if ($memeberData) {
+    $memberDataFromDB = $manager->getMemberDataByEmail($email);
+    if ($memberDataFromDB) {
         //TODO: Show the user is already signed up with kakao
 
-
-        createSession($memeberData["id"], $memeberData["name"]);
+        if (empty($memberDataFromDB["id"]) or empty($memberDataFromDB["name"])) {
+            throw new Exception("Sign up is failed!", 1004);
+        }
+        $sessionID = $memberDataFromDB["id"];
+        $sessionName = isset($memberData["name"]) ? 
+                        $memberData["name"] : $memberDataFromDB["name"];
+        createSession($sessionID, $sessionName);
         header("Location: index.php");
     } else {
         $result = $manager->addNewMemberByKakao($name, $email);
         if ($result) {
             if ($manager->createSessionByEmail($email)) {
-                require("./view/kakaologinResult.php");
+                header("Location: index.php");
             } else {
                 throw new Exception("Failed to create Session!!", 1001);    
             }
@@ -75,7 +90,30 @@ function kakaoSignUp($name, $email)
         }
     }
 }
-function createSession($id, $name) {
-    $_SESSION['id'] = $id;
-    $_SESSION['name'] = $name;
+
+function signInWith($memberData) {
+    if (empty($memberData["email"])) {
+        throw new Exception("Sign in is failed!", 1001);
+    }
+    $email = $memberData["email"];
+
+    $manager = new MemberManager();
+    $memberDataFromDB = $manager->getMemberDataByEmail($email);
+    if ($memberDataFromDB) {
+        if (empty($memberData["id"]) or empty($memberData["name"])) {
+            throw new Exception("Sign in is failed!", 1002);
+        }
+        $sessionID = $memberDataFromDB["id"];
+        $sessionName = isset($memberData["name"]) ? 
+                        $memberData["name"] : $memberDataFromDB["name"];
+        createSession($sessionID, $sessionName);
+        header("Location: index.php");
+    } else {
+        //TODO: It is not valid email. You haven't signed up yet. 
+        
+        throw new Exception("Failed to sign in!!", 1001);
+
+
+    }
 }
+
