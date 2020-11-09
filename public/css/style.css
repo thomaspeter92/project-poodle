@@ -152,9 +152,9 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         transform: rotate(-45deg) translate(7px, -6px); 
     } 
 
-    .hoverWrapper.show {
+    .hoverWrapper {
         position: absolute;
-        right: 0px;
+        right: -250px;
         background-color: white;
         color: black;
         font-family: "monsterRatRegular";
@@ -166,19 +166,10 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         z-index: 10;
     }
 
-    .hoverWrapper {
-        position: absolute;
-        right: -250px;
-        background-color: white;
-        color: black;
-        font-family: sans-serif;
-        text-align: left;
-        height: 100vw;
-        width: 250px;
-        transition: right 1s;
-        padding-top: 0;
-        z-index: 10;
+    .hoverWrapper.show {
+        right: 0px;
     }
+
     .hoverWrapper>ul {
         list-style-type: none;
     }

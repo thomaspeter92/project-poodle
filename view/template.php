@@ -159,7 +159,6 @@ $style = NULL;
         Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
         Request our corporate name & address by email.
         </p>
-
     </footer>
 </body>
 
