@@ -13,6 +13,26 @@
         width: 70%;
         height: 70%;
     }
+
+
+    @media (max-device-width : 400px) {
+
+        .petProfileImage{
+            box-shadow: 3px 3px 3px grey;
+            border-radius: 10px;    
+            margin-top: 30%;
+            margin-left: 10%;
+            width: 100px;
+            height: 180px;
+        }
+
+
+        .petProfileMainContent{
+            width: 40%;
+        }
+
+    }
+
 </style>
 
 
