@@ -30,7 +30,7 @@ $style = NULL;
                     <ul>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
-                        <li id="contactLink"><a href="#">Contact</a></li>
+                        <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <img src="" alt="default"><li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
