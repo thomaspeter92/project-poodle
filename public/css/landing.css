@@ -333,7 +333,7 @@ body {
 
 .fas {
     transition: .6s;
-    color: rgb(233, 233, 233);
+    color: #72ddf7;
     ;
 }
 
@@ -378,12 +378,8 @@ body {
 }
 .content5div {
     width: 33.15%;
-<<<<<<< HEAD
     height: 50%;
     /* border: 1px solid lightgrey; */
-=======
-    height: 49.5%;
->>>>>>> sprint1
     margin: 0;
 }
 

@@ -15,6 +15,7 @@ try {
             break;
         case "petPreview":
             showPetPreview($_REQUEST['ownerId']);
+            break;
         case "login":
             login();
             break;
