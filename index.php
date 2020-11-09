@@ -1,5 +1,4 @@
 <!-- index.php -->
-
 <?php
 session_start();
 require("./controller/controller.php");
@@ -10,6 +9,12 @@ try {
         case "landing":
             landing();
             break;
+        case "petprofile":
+            // print_r($_REQUEST);
+            showPetProfile($_REQUEST['petid']);
+            break;
+        case "petPreview":
+            showPetPreview($_REQUEST['ownerId']);
         case "login":
             login();
             break;

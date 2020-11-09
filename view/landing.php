@@ -143,6 +143,7 @@ ob_start();
     <div class="content5div"></div>
 </div>
 
+<a href="index.php?action=petPreview&ownerId=1">Testing preview</a>
 <?php
 $content = ob_get_clean();
 require("template.php");
