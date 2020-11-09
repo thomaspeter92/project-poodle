@@ -378,8 +378,8 @@ body {
 }
 .content5div {
     width: 33.15%;
-    height: 49.5%;
-    border: 1px solid lightgrey;
+    height: 50%;
+    /* border: 1px solid lightgrey; */
     margin: 0;
 }
 
