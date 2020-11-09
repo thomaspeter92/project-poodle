@@ -33,6 +33,9 @@ try {
         case "logout":
             logout();
             break;
+        case "contactPage":
+            contactPage();
+            break;
         default:
             landing();
             break;

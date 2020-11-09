@@ -44,3 +44,6 @@ function logout(){
     header("Location: index.php");
 }
    
+function contactPage(){
+    require('./view/contactPageView.php');
+}
