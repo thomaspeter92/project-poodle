@@ -83,6 +83,8 @@
     };
 
     const logoutWithKakao = () => {
+        //Franco
+        if (Kakao){
         if (!Kakao.Auth.getAccessToken()) {
             console.log("[logoutWithKakao]");
             alert("Not logged in");
@@ -92,6 +94,7 @@
             console.log("[logoutWithKakao]");
             console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
         });
+        } //Franco
     };
 
     // For deleting account of Poodle

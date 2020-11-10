@@ -10,7 +10,9 @@ $style = NULL;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
-
+    <!-- Franco -->
+    <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> 
     <?= ($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
@@ -83,12 +85,20 @@ $style = NULL;
                         <?php 
                         } else {
                         ?>
-                        <li><a href="index.php?action=logout">Sign Out</a></li>
+                        <form id="signOutForm" method="POST">
+                        </form>
+                        <!-- Franco -->
+                        <!-- <li><a href="index.php?action=logout">Sign Out</a></li>  -->
+                        <li><a href="#" onclick="signAllOut()">Sign Out</a></li>
                         <?php }
                         ?>
                     </ul>
                 </div>
                 <!-- The following script controls menu animation on Click -->
+
+                <!-- //Franco -->
+                <script src="./public/js/googlelogin.js"></script>
+                <script src="./public/js/kakaologin.js"></script>
                 <script> 
                     // select dom items 
                     const menuBtn =  
@@ -114,6 +124,18 @@ $style = NULL;
                             showMenu = false; 
                         } 
                     } 
+
+                    //Franco 
+                    function signAllOut(){
+                        //sign out from google
+                        googleSignOut();
+                        // googleSignOut();
+                        logoutWithKakao();
+                        console.log("siginig out");
+                        const form = document.querySelector("#signOutForm");
+                        form.action = "index.php?action=logout";
+                        form.submit();
+                    }
                 </script> 
             </div>
         </div> 

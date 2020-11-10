@@ -127,15 +127,26 @@ class MemberManager extends Manager{
     public function createSessionByEmail($email){
         $db = $this->dbConnect();
         $email = htmlspecialchars($email);
-        $response = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
+        $response = $db->prepare("SELECT id, email, name, kakao, google FROM member WHERE email=?");
         $response->bindParam(1, $email, PDO::PARAM_STR);
         $response->execute();
         $user = $response->fetch(PDO::FETCH_ASSOC);
         $response->closeCursor();
 
+        //Franco 9Nov2020
+        //Added SESSION type. Type can be 'google', 'kakao' or 'default'
+        $type="default";
+        if($user['kakao'] ==1){
+            $type = "kakao";
+        }elseif ($user['google']==1){
+            $type = "google";
+        }
+
+
         if ($user) {
             $_SESSION['name'] = $user['name'];
             $_SESSION['id'] = $user['id'];
+            $_SESSION['type'] = $type;
             return true;
         }
         return false;

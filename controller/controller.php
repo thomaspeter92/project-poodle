@@ -53,6 +53,26 @@ function addNewMember($params)
 
 function logout()
 {
+    //Franco 9Nov2020
+    //Sign out of google or kakao according to session type
+    if ($_SESSION['type']=='google'){
+      echo '<script type="text/javascript">',
+            'googleSignOut();',
+             '</script>';
+        //   echo '<script> window.onload = function(){
+        //     googleSignOut(); </script>';
+            //     echo '<script type="text/javascript" src="./public/js/googlelogin.js">',
+            // 'googleSignOut();',
+            //  '</script>';
+    
+    
+    }
+    if ($_SESSION['type']=='kakao'){
+        echo '<script type="text/javascript">',
+        'logoutWithKakao();',
+         '</script>';
+    }
+    session_unset();
     session_destroy();
     header("Location: index.php");
 }
@@ -65,8 +85,8 @@ function kakaoSignUp($name, $email)
     if ($memeberData) {
         //TODO: Show the user is already signed up with kakao
 
-
-        createSession($memeberData["id"], $memeberData["name"]);
+        //@TODO Check with Hongshik if it should be a kakao type session
+        createSession($memeberData["id"], $memeberData["name"],"kakao");
         header("Location: index.php");
     } else {
         $result = $manager->addNewMemberByKakao($name, $email);
@@ -97,8 +117,8 @@ function googleSignIn(){
         //Create Session if user is a google member
 
         if($memberData['google'] ==1){
-            createSession($memberData['id'], $memberData['name']);
-            // header("Location: index.php");
+            createSession($memberData['id'], $memberData['name'], "google");
+            header("Location: index.php");
            
         }elseif($memberData['google'] ==0){
             throw new Exception("Member was not registered through Google SignIn. Please use other method to sign in");
@@ -125,7 +145,7 @@ function googleSignUp(){
       $result = $manager->addNewMemberByGoogle($params);
       if ($result){
           if ($manager->createSessionByEmail($email)){
-              // header("Location: index.php");
+              header("Location: index.php");
             //   $comments[1]= 'New member created';
           }else{
               throw new Exception("Failed to create Session!!, 1001");
@@ -135,9 +155,12 @@ function googleSignUp(){
       }
 }
 
-function createSession($id, $name) {
+function createSession($id, $name, $type) {
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
+    //Franco 9Nov2020
+    //Added SESSION type. Type can be "google", "kakao" or "default"
+    $_SESSION['type'] = $type;
 }
 
 
