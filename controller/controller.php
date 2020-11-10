@@ -21,14 +21,13 @@ function showPetPreview($ownerId){
     require("./view/previewPet.php");
 }
 
-
-
+function addEditInput() {
+    require("./view/addEditPetView.php");
+}
 
 function petAddEdit($params) {
     $addEditManager = new PetProfileManager();
     $addEditManager->addEditPet($params);
-    print_r($params);
-    require("./view/previewPet.php");
 }
 
 
