@@ -26,6 +26,7 @@ function showPetPreview($ownerId){
 function petAddEdit($params) {
     $addEditManager = new PetProfileManager();
     $addEditManager->addEditPet($params);
+    print_r($params);
     require("./view/previewPet.php");
 }
 

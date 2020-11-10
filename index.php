@@ -41,6 +41,7 @@ try {
             break;
         case "addEditPet":
             showPetPreview($_REQUEST['ownerId']);
+            petAddEdit($_REQUEST);
             break;
         default:
             landing();
