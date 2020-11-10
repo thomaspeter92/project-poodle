@@ -12,7 +12,9 @@ $style = NULL;
     <link rel="stylesheet" href="./public/css/style.css">
     <!-- Franco -->
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> 
+    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script> 
+    <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
+    
     <?= ($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
@@ -126,15 +128,26 @@ $style = NULL;
                     } 
 
                     //Franco 
-                    function signAllOut(){
-                        //sign out from google
-                        googleSignOut();
-                        // googleSignOut();
-                        logoutWithKakao();
-                        console.log("siginig out");
-                        const form = document.querySelector("#signOutForm");
-                        form.action = "index.php?action=logout";
-                        form.submit();
+                    // function signAllOut(){
+
+                    //     //sign out from google
+                    //     googleSignOut();
+                    //     logoutWithKakao();
+
+                    //     const form = document.querySelector("#signOutForm");
+                    //     form.action = "index.php?action=logout";
+                    //     form.submit();
+                    // }
+
+                    function initGoogle(){
+                        const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
+                        gapi.load('auth2', function() {
+                        gapi.auth2.init({client_id:CLIENT_ID});
+                         });
+                    }
+
+                    function initKakao(){
+                        Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
                     }
                 </script> 
             </div>

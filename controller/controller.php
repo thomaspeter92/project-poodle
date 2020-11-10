@@ -36,25 +36,7 @@ function registration()
 
 function logout()
 {
-    //Franco 9Nov2020
-    //Sign out of google or kakao according to session type
-    if ($_SESSION['type']=='google'){
-      echo '<script type="text/javascript">',
-            'googleSignOut();',
-             '</script>';
-        //   echo '<script> window.onload = function(){
-        //     googleSignOut(); </script>';
-            //     echo '<script type="text/javascript" src="./public/js/googlelogin.js">',
-            // 'googleSignOut();',
-            //  '</script>';
-    
-    
-    }
-    if ($_SESSION['type']=='kakao'){
-        echo '<script type="text/javascript">',
-        'logoutWithKakao();',
-         '</script>';
-    }
+
     session_unset();
     session_destroy();
     header("Location: index.php");
@@ -168,13 +150,7 @@ function googleSignUp(){
       }
 }
 
-function createSession($id, $name, $type) {
-    $_SESSION['id'] = $id;
-    $_SESSION['name'] = $name;
-    //Franco 9Nov2020
-    //Added SESSION type. Type can be "google", "kakao" or "default"
-    $_SESSION['type'] = $type;
-}
+
 
 
 

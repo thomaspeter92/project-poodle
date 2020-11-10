@@ -57,7 +57,7 @@
         <button type="button" name="kakaoLogin" id="kakaoLogin"><img src="./public/images/kakaoLogin/en/kakao_login_large_narrow.png"></button>
     </div>
     <?php require("./view/kakaoForm.php"); ?>
-    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
+    <!-- <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script> -->
     <script src='./public/js/kakaologin.js'></script>
     <script src='./public/js/googlelogin.js'></script>
 <?php

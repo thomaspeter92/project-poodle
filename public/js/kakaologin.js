@@ -63,7 +63,22 @@
         });
     };
 
-    const logoutWithKakao = () => {
+    // const logoutWithKakao = () => {
+    //     //Franco
+    //     if (Kakao){
+    //     if (!Kakao.Auth.getAccessToken()) {
+    //         console.log("[logoutWithKakao]");
+    //         alert("Not logged in");
+    //         return;
+    //     }
+    //     Kakao.Auth.logout(() => {
+    //         console.log("[logoutWithKakao]");
+    //         console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+    //     });
+    //     } //Franco
+    // };
+
+    function logoutWithKakao (){
         //Franco
         if (Kakao){
         if (!Kakao.Auth.getAccessToken()) {
@@ -76,7 +91,7 @@
             console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
         });
         } //Franco
-    };
+    }
 
     // For deleting account of Poodle
     const disconnectWithKakao = () => {
