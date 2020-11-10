@@ -28,14 +28,12 @@
                 // console.log(authObj);
                 requestUserInfo(function(id, nickname, email) {
                     const form = document.querySelector("#kakaoForm");
-                    alert(signUp);
-                    (signUp) ? 
-                        form.querySelector("#kakaoSignUp").value = true :
-                        form.querySelector("#kakaoSignUp").value = false
                     form.querySelector("#kakaoNickname").value = nickname;
                     form.querySelector("#kakaoEmail").value = email;
-                    // form.querySelector("#kakaoid").value = id;
-                    
+                    form.querySelector("#kakaoid").value = id;
+                    (signUp) ? 
+                        form.querySelector("#kakaoSignUp").value = true :
+                        form.querySelector("#kakaoSignUp").value = false;
                     //TODO: Direct to user profile page?????
                     form.action = "index.php?action=kakaoLogin";
                     form.submit();       

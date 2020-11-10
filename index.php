@@ -25,7 +25,13 @@ try {
             break;
         case "registrationInput":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['email'])) {
-                addNewMember($_REQUEST);
+                $memberData = array(
+                    "name" => $_REQUEST['username'],
+                    "password" => $_REQUEST['password'],
+                    "email" => $_REQUEST['email'],
+                    "kakao" => 0, "google" => 0,
+                );
+                signUpWith($memberData);
             } else {
                 header("Location: index.php?action=registration&error=registration");
             }
@@ -37,16 +43,26 @@ try {
             $kakaoSignUp = isset($_REQUEST["kakaoSignUp"]) ? $_REQUEST["kakaoSignUp"] : NULL;
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
-            // $kakaoid = isset($_REQUEST["kakaoid"]) ? $_REQUEST["kakaoid"] : NULL;
+            $kakaoid = isset($_REQUEST["kakaoid"]) ? $_REQUEST["kakaoid"] : NULL;
             
             if ($kakaoNickname and $kakaoEmail) {
-                $memberData = array(
-                    "name" => $kakaoNickname,
-                    "email" => $kakaoEmail,
-                    "kakao" => TRUE,
-                    "google" => FALSE,
-                );
-                ($kakaoSignUp === "true") ? signUpWith($memberData) : signInWith($memberData);
+                if ($kakaoSignUp === "true") {
+                    $memberData = array(
+                        "name" => $kakaoNickname,
+                        "password" => $kakaoid. "." .uniqid(),
+                        "email" => $kakaoEmail,
+                        "kakao" => 1, "google" => 0,
+                    );
+                    signUpWith($memberData);
+                 } 
+                 else {
+                    $memberData = array(
+                        "name" => $kakaoNickname,
+                        "email" => $kakaoEmail,
+                        "kakao" => 1, "google" => 0,
+                    );
+                    signInWith($memberData);
+                 } 
             } else {
                 throw new Exception("Kakao Sign Up is failed", 1000);
             }
