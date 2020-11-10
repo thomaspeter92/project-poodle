@@ -29,43 +29,70 @@ class MemberManager extends Manager{
         return password_verify($passwordLogin, $hashed_password);
     }
     
-
-    public function addNewMember($params){
+    public function getMemberDataByEmail($email) {
+        $email = htmlspecialchars($email);
         $db = $this->dbConnect();
-        $name = htmlspecialchars($params['username']);
-        $email = htmlspecialchars($params['email']);
-        $password = htmlspecialchars($params['password']);
-        $confirmPassword = htmlspecialchars($params['confirmpass']);
-       echo $name;
-       
-        // if($password != $confirmPassword){
-        //     return false;
-        // }
-        
-        //grabbed the existing email from database
-        $req = $db->prepare("SELECT email from member WHERE email = ?");
-        $req->bindParam(1, $email, PDO::PARAM_STR);
-        $req->execute();
-        $user = $req->fetch(PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        
-        //if email exists in the db then we return false
-        // if($user){
-        //     return false;
-        // }
+        $query = "SELECT id, name, kakao, google FROM member WHERE email=:email";
+        $response = $db->prepare($query);
+        $response->bindParam('email', $email, PDO::PARAM_STR);
+        $response->execute();
+        $data = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        return $data;
+    }
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-          
-        }else{
+    public function getMemberDataByID($id) {
+        $id = htmlspecialchars($id);
+        $db = $this->dbConnect();
+        $query = "SELECT id, name, kakao, google FROM member WHERE id=:id";
+        $response = $db->prepare($query);
+        $response->bindParam('id', $id, PDO::PARAM_STR);
+        $response->execute();
+        $data = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        return $data;
+    }
+
+    function addNewMember($params) {
+        $name = htmlspecialchars($params["name"]);
+        $password = htmlspecialchars($params["password"]);
+        $email = htmlspecialchars($params["email"]);
+        $kakao = htmlspecialchars($params["kakao"]);
+        $google = htmlspecialchars($params["google"]);
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
         }
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $newuser = $db->prepare("INSERT INTO member(name, password, email) VALUES(?,?,?)");
-        $newuser->bindParam(1,$name, PDO::PARAM_STR);
-        $newuser->bindParam(2,$hashedPassword, PDO::PARAM_STR);
-        $newuser->bindParam(3,$email, PDO::PARAM_STR);
-        $newuser->execute();
-        $newuser->closeCursor();
-        return true;
+
+        $db = $this->dbConnect();
+        $query = "INSERT INTO member(name, password, email, kakao, google) 
+                                VALUES(:name, :password, :email, :kakao, :google)";
+        $response = $db->prepare($query);
+        $response->bindValue(":name", $name, PDO::PARAM_STR);
+        $response->bindValue(":password", $password, PDO::PARAM_STR);
+        $response->bindValue(":email", $email, PDO::PARAM_STR);
+        $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
+        $response->bindValue(":google", $google, PDO::PARAM_INT);
+        $result = $response->execute();
+        $response->closeCursor();
+        
+        return $result;
+    }
+
+    public function createSessionByEmail($email){
+        $db = $this->dbConnect();
+        $email = htmlspecialchars($email);
+        $response = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
+        $response->bindParam(1, $email, PDO::PARAM_STR);
+        $response->execute();
+        $user = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+
+        if ($user) {
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['id'] = $user['id'];
+            return true;
+        }
+        return false;
     }
 }

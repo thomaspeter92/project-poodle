@@ -1,5 +1,9 @@
 <?php $title= "login"?>
 <?php ob_start();?>
+    <br>
+    <br>
+    <br>
+    <br>
     <?php
         if(isset($_GET['error'])) {
             echo " something went wrong please try to log again";
@@ -19,6 +23,13 @@
     <a href="http://localhost/projectPoodle/index.php?action=registration">
         <button name="login" id="login" >register</button>
     </a> 
+    <!-- kakao sign in -->
+    <div>
+        <button type="button" name="kakaoLogin" id="kakaoLogin"><img src="./public/images/kakaoLogin/en/kakao_login_large_narrow.png"></button>
+    </div>
+    <?php require("./view/kakaoForm.php"); ?>
+    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
+    <script src='./public/js/kakaologin.js'></script>
 <?php
 $content = ob_get_clean();
 require("template.php");

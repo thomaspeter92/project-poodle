@@ -1,5 +1,9 @@
-<?php $title= "registration"?>
+<?php $title = "registration" ?>
 <?php ob_start(); ?>
+    <br>
+    <br>
+    <br>
+    <br>
     <?php
         if(isset($_GET['error'])){
             echo "please more sure you entered everything correctly";
@@ -15,6 +19,16 @@
         <div id="kakao"></div> <!--kakao login registration here-->
         <input type="submit" name="subscribe" id="subscribe" value="subscribe"><br/><br/>
     </form>
+    <a href="index.php?action=login">    
+        <button name="login" id="login" value="Sign In">Sign In</button>
+    </a>
+    <!-- kakao sign up -->
+    <div>
+        <button type="button" name="kakaoSignUp" id="kakaoSignUp">Kakao Sign Up</button>
+    </div>
+    <?php require("./view/kakaoForm.php"); ?>
+    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
+    <script src='./public/js/kakaologin.js'></script>
 <?php 
 $content = ob_get_clean();
 require("template.php");
