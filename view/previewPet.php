@@ -2,7 +2,16 @@
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    
+
+
+    
+
+
+
+
     body{
+        
         font-family: 'Montserrat', sans-serif;
         margin:0;
         padding:0;
@@ -15,6 +24,11 @@
         background-image: url("./public/images/wallpaper.jpeg");
         /* background-size: cover; */
     }
+
+    /* body: first-child{
+        margin-top: 15%;
+    } */
+
     .petListElement{
         height: 20%;
         width: 90%;
@@ -28,7 +42,7 @@
         /* margin-left: 3%; */
         /* padding-left: 3%; */
         background-color: rgba(213, 253, 255, 0.3);
-        margin-top: 5%;
+        /* margin-top: 5%; */
         margin-bottom: 5%;
         display: flex;
         justify-content: space-around;
@@ -80,7 +94,7 @@
         height: 65%;
     }
 
-    }
+}
 </style>
 
 <?php $style = ob_get_contents();?>
@@ -88,7 +102,7 @@
 <?php ob_start();?>
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
-
+<br><br><br><br>
 <?php foreach($petPreviews as $preview):?>
     <div class = "petListElement" data-petId="<?=$preview['id']?>">
         <!-- <p>-----------------------------------</p> -->
@@ -149,13 +163,13 @@
                 if(xhr.status == 200){
                     console.log(xhr.responseText);
                     let modalPetObj = {
-                        add: null,
+                        
                         edit : editPet,
                         del : delPet,
                     }
                     console.log(modalPetObj);
                     let petView = new Modal(xhr.responseText);
-                    petView.generate(modalPetObj);
+                    petView.generate(modalPetObj, allowCancel=true);
                 }
             }
             //inside event listener of AJAX
