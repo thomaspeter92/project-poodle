@@ -6,3 +6,4 @@ class Manager
         return new PDO('mysql:host=localhost;dbname=projectPoodle;charset=utf8', 'root', '');
     }
 }
+
