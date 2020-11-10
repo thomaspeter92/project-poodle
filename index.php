@@ -73,10 +73,33 @@ try {
                 throw new Exception("Kakao Sign Up is failed", 1000);
             }
         case "googleSignIn":
-                googleSignIn();
+            $email = isset($_REQUEST['googleEmail']) ? $_REQUEST['googleEmail'] : NULL;
+            $name = isset($_REQUEST['googleName']) ? $_REQUEST['googleName'] : NULL;
+            $pictureURL = isset($_REQUEST['googlePicture']) ? $_REQUEST['googlePicture'] : NULL;
+            $userId = isset($_REQUEST['googleUserId']) ? $_REQUEST['googleUserId'] : NULL;
+            $memberData = array(
+                "name" => $name,
+                "email" => $email,
+                "kakao" => 0, "google" => 1,
+                "imageURL" => $pictureURL,
+            );
+            signInWith($memberData);
             break;
         case "googleSignUp":
-                googleSignUp();
+            $email = isset($_REQUEST['googleEmail']) ? $_REQUEST['googleEmail'] : NULL;
+            $name = isset($_REQUEST['googleName']) ? $_REQUEST['googleName'] : NULL;
+            $pictureURL = isset($_REQUEST['googlePicture']) ? $_REQUEST['googlePicture'] : NULL;
+            $userId = isset($_REQUEST['googleUserId']) ? $_REQUEST['googleUserId'] : NULL;
+
+            //Register user as a member in database
+            $memberData = array(
+                "name" => $name,
+                "password" => $userId. "." .uniqid(),
+                "email" => $email,
+                "kakao" => 0, "google" => 1,
+                "imageURL" => $pictureURL,
+            );
+            signUpWith($memberData);
 
             break;
         default:

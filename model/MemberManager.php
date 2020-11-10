@@ -57,6 +57,7 @@ class MemberManager extends Manager{
     function addNewMember($params) {
         $name = htmlspecialchars($params["name"]);
         $password = htmlspecialchars($params["password"]);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
@@ -69,7 +70,7 @@ class MemberManager extends Manager{
                                 VALUES(:name, :password, :email, :kakao, :google)";
         $response = $db->prepare($query);
         $response->bindValue(":name", $name, PDO::PARAM_STR);
-        $response->bindValue(":password", $password, PDO::PARAM_STR);
+        $response->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
         $response->bindValue(":email", $email, PDO::PARAM_STR);
         $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
         $response->bindValue(":google", $google, PDO::PARAM_INT);
@@ -77,44 +78,4 @@ class MemberManager extends Manager{
         $response->closeCursor();
         return $result;
     }
-
-    public function addNewMemberByGoogle($params){
-        $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO member (name, password, email, date_subscription,kakao,google) VALUES(:name,:pass,:email,NOW(),:kakao, :google)');
-        $req->bindValue(':name',htmlspecialchars($params['name']),PDO::PARAM_STR);
-        $req->bindValue(':pass',htmlspecialchars($params['userId']),PDO::PARAM_STR);
-        $req->bindValue(':email',htmlspecialchars($params['email']),PDO::PARAM_STR);
-        $req->bindValue(':kakao',0,PDO::PARAM_INT);
-        $req->bindValue(':google',1,PDO::PARAM_INT);
-        $result = $req->execute();
-        $req->closeCursor();
-    }
-    public function createSessionByEmail($email){
-        $db = $this->dbConnect();
-        $email = htmlspecialchars($email);
-        $response = $db->prepare("SELECT id, email, name, kakao, google FROM member WHERE email=?");
-        $response->bindParam(1, $email, PDO::PARAM_STR);
-        $response->execute();
-        $user = $response->fetch(PDO::FETCH_ASSOC);
-        $response->closeCursor();
-
-        //Franco 9Nov2020
-        //Added SESSION type. Type can be 'google', 'kakao' or 'default'
-        $type="default";
-        if($user['kakao'] ==1){
-            $type = "kakao";
-        }elseif ($user['google']==1){
-            $type = "google";
-        }
-
-
-        if ($user) {
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['type'] = $type;
-            return true;
-        }
-        return false;
-    }
-
 }
