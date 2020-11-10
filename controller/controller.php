@@ -22,6 +22,15 @@ function showPetPreview($ownerId){
     require("./view/previewPet.php");
 }
 
+function addEditInput() {
+    require("./view/addEditPetView.php");
+}
+
+function petAddEdit($params) {
+    $addEditManager = new PetProfileManager();
+    $addEditManager->addEditPet($params);
+}
+
 function login()
 {
     require('./view/loginView.php');

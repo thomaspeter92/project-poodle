@@ -122,6 +122,9 @@
     </div>
 <?php endforeach;?>
 
+<button id="addPetButton"> Add a Pet!</button>
+
+
 <script src="./public/js/Modal.js"></script>
 <script>
 
@@ -141,6 +144,43 @@
     function delPet (petId){
         //something
     }
+
+    function addPet() {
+        let xhr = new XMLHttpRequest();
+                // pageStart and article.
+                let addPetForm = document.querySelector('#addPetForm');
+                let params = new FormData(addPetForm);
+
+
+            xhr.open("POST", "index.php?action=addEditPet");
+            xhr.onload = function() {
+                if (xhr.status ==  200){
+                    this.innerHTML = " ";
+                }
+            }
+            xhr.send(params);
+
+            location.reload();
+    }
+
+
+    let addPetButton = document.querySelector('#addPetButton');
+    addPetButton.addEventListener('click', function(e) {
+        let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'index.php?action=addEditInput');
+            xhr.onload = function () {
+                if(xhr.status == 200){
+                    console.log(xhr.responseText);
+                    let modalPetObj = {
+                        add : addPet,
+                    }
+                    console.log(modalPetObj);
+                    let petView = new Modal(xhr.responseText);
+                    petView.generate(modalPetObj, allowCancel=true);
+                }
+            }
+            xhr.send(null);
+    })
 
 
     let elements = document.getElementsByClassName("petListElement");

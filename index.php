@@ -54,6 +54,12 @@ try {
         case "logout":
             logout();
             break;
+        case "addEditInput":
+            addEditInput();
+            break;
+        case "addEditPet":
+            petAddEdit($_REQUEST);
+            break;
         case "aboutUs":
             aboutUs();
             break;
