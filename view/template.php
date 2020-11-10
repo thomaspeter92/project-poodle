@@ -67,7 +67,7 @@ $style = NULL;
                         } else {
                         ?>
                             <img src="" alt="default">
-                            <a id="mobileLogin" href="index.php?action=login">
+                            <a id="mobileLogin" href="index.php?action=petPreview">
                                 <?php echo $_SESSION['name'] ?>
                             </a> 
                         <?php

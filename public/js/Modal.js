@@ -2,16 +2,12 @@ class Modal{
     //constructor that set the member variable
     constructor(inContent){
         this.modalContent = inContent;
-        this.buttonMethods = {
-            add : null,
-            edit : null,
-            del : null,
-        }
+        this.buttonMethods = {}
     }
 
 
 
-    generate (methods){
+    generate (methods, allowCancel=false){
         this.buttonMethods = methods;
         let modalMainDiv = document.createElement("div");
         modalMainDiv.className="modalMainDiv";
@@ -44,33 +40,40 @@ class Modal{
         let modalDivButtons = document.createElement("div");
         modalDivButtons.className="modalDivButtons";
         console.log(this.buttonMethods);
-        if(this.buttonMethods.add) {
-            let modalButtonAdd = document.createElement("button");
-            modalButtonAdd.className="modalButtonAdd";
-            modalButtonAdd.textContent="Add";
-            modalButtonAdd.addEventListener("click", this.buttonMethods.add);
-            modalDivButtons.appendChild(modalButtonAdd);
+
+
+
+        for (let addedButton in this.buttonMethods){
+                let modalButton = document.createElement("button");
+                modalButton.className="modalButton";
+                modalButton.textContent=addedButton;
+                modalButton.addEventListener("click", this.buttonMethods[addedButton]);
+                modalDivButtons.appendChild(modalButton);
         }
         
-        if(this.buttonMethods.del) {
-            let modalButtonDelete = document.createElement("button");
-                modalButtonDelete.className="modalButtonDelete";
-                modalButtonDelete.textContent="Delete";
-                modalButtonDelete.addEventListener("click", this.buttonMethods.del);
-                modalDivButtons.appendChild(modalButtonDelete);
-        }
-        if(this.buttonMethods.edit) {
-            let modalButtonEdit = document.createElement("button");
-                modalButtonEdit.className="modalButtonEdit";
-                modalButtonEdit.textContent="Edit";
-                modalButtonEdit.addEventListener("click", this.buttonMethods.edit);
-                modalDivButtons.appendChild(modalButtonEdit);
-        }
+
+
+
+        
+        
+       
        
 
         modalSubDiv.appendChild(modalButtonClose);
         modalSubDiv.appendChild(modalDivContent);
         modalSubDiv.appendChild(modalDivButtons);
+
+        if(allowCancel) {
+            let buttonCancel = document.createElement("button");
+            buttonCancel.className="modalCancel";
+            buttonCancel.textContent="Cancel";
+            buttonCancel.addEventListener("click", function(){document.body.removeChild(modalMainDiv)
+            });
+            let cancelDiv = document.createElement("div");
+            cancelDiv.className="modalCancelDiv";
+            cancelDiv.appendChild(buttonCancel);
+            modalSubDiv.appendChild(cancelDiv);
+        }
         
         modalMainDiv.appendChild(modalSubDiv);
         document.body.appendChild(modalMainDiv);
