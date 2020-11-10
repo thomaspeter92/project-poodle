@@ -38,7 +38,9 @@ function contentReveal() {
     this.classList.contains('content3selected') ? this.classList.remove('content3selected') : this.classList.add('content3selected');
 }
 
-
+function mouseOverElevate(e) {
+    this.classList.contains('content5divMouseOver') ? this.classList.remove('content5divMouseOver') : this.classList.add('content5divMouseOver');
+}
 
 
 
@@ -61,5 +63,11 @@ for (let i = 0; i<content3divs.length; i++) {
 let expandingDivs = document.querySelectorAll('.insideContainer');
 for (let i=0; i<expandingDivs.length; i++) {
     expandingDivs[i].addEventListener('click', clickExpand);
+}
+
+let content5div = document.querySelectorAll('.content5div');
+for (let i = 1; i<content5div.length; i++) {
+    content5div[i].addEventListener('mouseenter', mouseOverElevate)
+    content5div[i].addEventListener('mouseleave', mouseOverElevate) 
 }
 
