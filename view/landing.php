@@ -1,14 +1,9 @@
 <?php
 ob_start();
 ?>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="./public/css/landing.css">
-
-=======
 <head>
     <link rel="stylesheet" href="./public/css/landing.css">
 </head>
->>>>>>> sprint1
 <!-- ************** CAROUSEL AREA ************* -->
 
 <div id="carousel">
