@@ -22,8 +22,6 @@ function showPetPreview($ownerId){
 }
 
 
-
-
 function login(){
     require('./view/loginView.php');
 }
