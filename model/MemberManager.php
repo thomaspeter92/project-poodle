@@ -54,60 +54,25 @@ class MemberManager extends Manager{
         return $data;
     }
 
-    public function addNewMember($params){
-        $db = $this->dbConnect();
-        $name = htmlspecialchars($params['username']);
-        $email = htmlspecialchars($params['email']);
-        $password = htmlspecialchars($params['password']);
-        $confirmPassword = htmlspecialchars($params['confirmpass']);
-       
-       
-        // if($password != $confirmPassword){
-        //     return false;
-        // }
+    function addNewMember($params) {
+        $name = htmlspecialchars($params["name"]);
+        $password = htmlspecialchars($params["password"]);
+        $email = htmlspecialchars($params["email"]);
+        $kakao = htmlspecialchars($params["kakao"]);
+        $google = htmlspecialchars($params["google"]);
         
-        //grabbed the existing email from database
-        $req = $db->prepare("SELECT email from member WHERE email = ?");
-        $req->bindParam(1, $email, PDO::PARAM_STR);
-        $req->execute();
-        $user = $req->fetch(PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        
-        //if email exists in the db then we return false
-        // if($user){
-        //     return false;
-        // }
-
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-          
-        }else{
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
         }
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $newuser = $db->prepare("INSERT INTO member(name, password, email) VALUES(?,?,?)");
-        $newuser->bindParam(1,$name, PDO::PARAM_STR);
-        $newuser->bindParam(2,$hashedPassword, PDO::PARAM_STR);
-        $newuser->bindParam(3,$email, PDO::PARAM_STR);
-        $newuser->execute();
-        $newuser->closeCursor();
-        return true;
-    }
-
-    function addNewMemberByKakao($name, $email)
-    {
-        $name = htmlspecialchars($name);
-        $email = htmlspecialchars($email);
-        $password = uniqid();
-        $kakao = 1;
         $db = $this->dbConnect();
-        
-        $query = "INSERT INTO member(name, password, email, kakao) 
-                                VALUES(:name, :password, :email, :kakao)";
+        $query = "INSERT INTO member(name, password, email, kakao, google) 
+                                VALUES(:name, :password, :email, :kakao, :google)";
         $response = $db->prepare($query);
         $response->bindValue(":name", $name, PDO::PARAM_STR);
         $response->bindValue(":password", $password, PDO::PARAM_STR);
         $response->bindValue(":email", $email, PDO::PARAM_STR);
         $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
+        $response->bindValue(":google", $google, PDO::PARAM_INT);
         $result = $response->execute();
         $response->closeCursor();
         return $result;

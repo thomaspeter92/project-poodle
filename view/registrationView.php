@@ -45,13 +45,9 @@
     <button type='button' id='signOut' onclick='googleSignOut()'>SignOutGoogle</button>
 
     <div>
-    <button type="button" name="kakaoSignUp" id="kakaoSignUp">Kakao Sign Up</button>
+        <button type="button" name="kakaoSignUp" id="kakaoSignUp">Kakao Sign Up</button>
     </div>
-    <form id="kakaoForm" method="POST">
-        <input type="hidden" name="kakaoNickname" id="kakaoNickname">
-        <input type="hidden" name="kakaoEmail" id="kakaoEmail">
-        <!-- <input type="hidden" name="kakaoid" id="kakaoid"> -->
-    </form>
+    <?php require("./view/kakaoForm.php"); ?>
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
     <script src='./public/js/kakaologin.js'></script>
     <script src='./public/js/googlelogin.js'></script>

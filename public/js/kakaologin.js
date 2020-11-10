@@ -20,12 +20,24 @@
     //     });
     // }
     
-    const signUpWithKakao = () => {
+    const loginWithKakao = (signUp) => {
+        //TODO: try/catch for fail
         Kakao.Auth.loginForm({
             success: function(authObj) {
-                console.log("Login Success!!");
-                console.log(authObj);
-                requestUserInfo(true);
+                // console.log("Login Success!!");
+                // console.log(authObj);
+                requestUserInfo(function(id, nickname, email) {
+                    const form = document.querySelector("#kakaoForm");
+                    form.querySelector("#kakaoNickname").value = nickname;
+                    form.querySelector("#kakaoEmail").value = email;
+                    form.querySelector("#kakaoid").value = id;
+                    (signUp) ? 
+                        form.querySelector("#kakaoSignUp").value = true :
+                        form.querySelector("#kakaoSignUp").value = false;
+                    //TODO: Direct to user profile page?????
+                    form.action = "index.php?action=kakaoLogin";
+                    form.submit();       
+                });
             },
             fail: function(err) {
                 console.log("Login Failed!!");
@@ -34,46 +46,15 @@
         });
     };
 
-    const loginWithKakao = () => {
-        Kakao.Auth.loginForm({
-            success: function(authObj) {
-                console.log("Login Success!!");
-                console.log(authObj);
-                requestUserInfo();
-            },
-            fail: function(err) {
-                console.log("Login Failed!!");
-                console.log(error);
-            },
-        });
-    };
-
-    const requestUserInfo = (signUp) => {
+    const requestUserInfo = (callback) => {
+        //TODO: try/catch for fail
         Kakao.API.request({
             url: '/v2/user/me',
             success: function(response) {
                 const id = response.id;
                 const nickname = response.properties.nickname;
                 const email = response.kakao_account.email;
-                console.log("[requestUserInfo]");
-                console.log(response);
-                console.log(id, nickname, email);
-
-                const form = document.querySelector("#kakaoForm");
-                form.querySelector("#kakaoNickname").value = nickname;
-                form.querySelector("#kakaoEmail").value = email;
-                // form.querySelector("#kakaoid").value = id;
-                
-                if (signUp) {
-                    //TODO: Direct to user profile page?????
-                    form.action = "index.php?action=kakaoSignUp";
-                    // form.action = "kakaologinResult.php?signUp=true";
-                } else {
-                    //TODO: Direct to user profile page???? or current page???
-                    form.action = "index.php";
-                    // form.action = "kakaologinResult.php";
-                }
-                form.submit();
+                callback(id, nickname, email);
             },
             fail: function(error) {
                 console.log("[requestUserInfo]");
@@ -114,13 +95,13 @@
 
     const kakaoSignUpBtn = document.querySelector("#kakaoSignUp");
     if (kakaoSignUpBtn) {
-        kakaoSignUpBtn.addEventListener("click", signUpWithKakao);
+        kakaoSignUpBtn.addEventListener("click", () => loginWithKakao(true));
     }
 
     const kakaoLoginBtn = document.querySelector("#kakaoLogin");
     // const kakaoLoginBtn = document.querySelector("#custom-login-btn");
     if (kakaoLoginBtn) {
-        kakaoLoginBtn.addEventListener("click", loginWithKakao);
+        kakaoLoginBtn.addEventListener("click", () => loginWithKakao(false));
     }
 
     const kakaoLogoutBtn = document.querySelector("#kakaoLogout");
@@ -128,52 +109,10 @@
         kakaoLogoutBtn.addEventListener("click", logoutWithKakao);
     }
 
+    //TODO: Disconnect button for deleting account
     // const kakaoDisconnectBtn = document.querySelector("#kakaoDisconnect");
     // if (kakaoDisconnectBtn) {
     //     kakaoDisconnectBtn.addEventListener("click", disconnectWithKakao);
     // }
 }
 
-// const loginWithKakao = () => {
-//     Kakao.Auth.login({
-//         success: (authObj) => {
-//             console.log("Login Success!!");
-//             console.log(authObj);
-//             console.log(JSON.stringify(authObj));
-//             console.log(authObj.access_token);
-//             console.log(authObj.refresh_token);
-//             console.log(Kakao.Auth.getAccessToken());
-//         }, 
-//         fail: (err) => {
-//             console.log("Login Fail!!!");
-//             console.error(err);
-//             // JSON.stringify(err)
-//         }
-//     });
-
-// try {
-//     return new Promise((resolve, reject) => {
-//         console.log(Kakao);
-//         if (!Kakao) {
-//             reject("Kakao instance does not existed.");
-//         } 
-//         Kakao.Auth.login({
-//             success: (authObj) => {
-//                 console.log("Login Success!!");
-//                 console.log(authObj);
-//                 console.log(JSON.stringify(authObj));
-//                 console.log(authObj.access_token);
-//                 console.log(authObj.refresh_token);
-//             }, 
-//             fail: (err) => {
-//                 console.log("Login Fail!!!");
-//                 console.error(err);
-//                 // JSON.stringify(err)
-//             }
-//         });
-//     });
-// } catch (err) {
-//     console.log("Catch!!!");
-//     console.error(err);
-// }
-// };
