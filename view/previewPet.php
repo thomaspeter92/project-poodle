@@ -103,6 +103,7 @@
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <br><br><br><br>
+
 <?php foreach($petPreviews as $preview):?>
     <div class = "petListElement" data-petId="<?=$preview['id']?>">
         <!-- <p>-----------------------------------</p> -->
@@ -150,6 +151,8 @@
             // we get the owner and pet id
             let target  = e.target;
             let petId = target.getAttribute("data-petId");
+            let params = new FormData();
+            params.append("petId", petId);
             target  = e.target;
             while (!petId) {
                 target = target.parentNode;
@@ -161,13 +164,13 @@
             xhr.open('GET', 'index.php?action=petprofile&petid='+petId);
             xhr.onload = function () {
                 if(xhr.status == 200){
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                     let modalPetObj = {
                         
                         edit : editPet,
                         del : delPet,
                     }
-                    console.log(modalPetObj);
+                    // console.log(modalPetObj);
                     let petView = new Modal(xhr.responseText);
                     petView.generate(modalPetObj, allowCancel=true);
                 }
@@ -175,6 +178,7 @@
             //inside event listener of AJAX
             
             //console.log("test");
+            // console.log()
             xhr.send(null);
         
         });
