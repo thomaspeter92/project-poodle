@@ -52,8 +52,10 @@ window.addEventListener('scroll', scrollAppear);
 const carouselImages = document.querySelectorAll('.carouselImg');
 const nextImageDelay = 4000;
 let imageCounter = 0;
-carouselImages[imageCounter].style.opacity = 1;
-setInterval(nextImage, nextImageDelay);
+if(carouselImages[imageCounter] ) {
+    carouselImages[imageCounter].style.opacity = 1;
+    setInterval(nextImage, nextImageDelay);
+}
 
 let content3divs = document.querySelectorAll('.content3inner');
 for (let i = 0; i<content3divs.length; i++) {

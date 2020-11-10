@@ -10,6 +10,10 @@ $style = NULL;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
+<<<<<<< HEAD
+=======
+
+>>>>>>> sprint1
 
 
     <!-- FONT LINKS -->
@@ -27,7 +31,7 @@ $style = NULL;
     <header>
     <div class="headerWrapper">   
         <div id="headerLeft">
-                <img src="#" alt="LOGO">
+                <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40">
             </div>
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
@@ -37,7 +41,7 @@ $style = NULL;
                     <ul>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
-                        <li id="contactLink"><a href="#">Contact</a></li>
+                        <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <img src="" alt="default"><li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
@@ -47,7 +51,7 @@ $style = NULL;
                         ?>
                             <img src="" alt="default">
                             <li>
-                                <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                                <a id="mobileLogin" href="index.php?action=petPreview">
                                     <?php echo $_SESSION['name'] ?>
                                 </a>
                             </li>
@@ -66,7 +70,7 @@ $style = NULL;
                         } else {
                         ?>
                             <img src="" alt="default">
-                            <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                            <a id="mobileLogin" href="index.php?action=petPreview">
                                 <?php echo $_SESSION['name'] ?>
                             </a> 
                         <?php
@@ -82,7 +86,7 @@ $style = NULL;
                     <ul>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                         <li><a href="index.php?action=login">Sign In</a></li>

@@ -14,7 +14,18 @@ try {
             showPetProfile($_REQUEST['petid']);
             break;
         case "petPreview":
+<<<<<<< HEAD
             showPetPreview($_REQUEST['ownerId']);
+=======
+            if(isset($_SESSION['id'])){
+                showPetPreview($_SESSION['id']);
+            }else{
+                login();
+            }
+            
+            //We have to check if it also works with our cookies 
+            
+>>>>>>> sprint1
             break;
         case "login":
             login();
@@ -39,9 +50,14 @@ try {
         case "logout":
             logout();
             break;
+<<<<<<< HEAD
         case "addEditPet":
             showPetPreview($_REQUEST['ownerId']);
             petAddEdit($_REQUEST);
+=======
+        case "contactPage":
+            contactPage();
+>>>>>>> sprint1
             break;
         default:
             landing();
