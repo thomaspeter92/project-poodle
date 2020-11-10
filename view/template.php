@@ -28,7 +28,7 @@ $style = NULL;
     <header>
     <div class="headerWrapper">   
         <div id="headerLeft">
-                <img src="#" alt="LOGO">
+                <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40">
             </div>
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
@@ -48,7 +48,7 @@ $style = NULL;
                         ?>
                             <img src="" alt="default">
                             <li>
-                                <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                                <a id="mobileLogin" href="index.php?action=petPreview">
                                     <?php echo $_SESSION['name'] ?>
                                 </a>
                             </li>
@@ -67,7 +67,7 @@ $style = NULL;
                         } else {
                         ?>
                             <img src="" alt="default">
-                            <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                            <a id="mobileLogin" href="index.php?action=login">
                                 <?php echo $_SESSION['name'] ?>
                             </a> 
                         <?php

@@ -2,6 +2,14 @@
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    
+
+
+    
+
+
+
+
     body{
         
         font-family: 'Montserrat', sans-serif;
@@ -34,7 +42,7 @@
         /* margin-left: 3%; */
         /* padding-left: 3%; */
         background-color: rgba(213, 253, 255, 0.3);
-        margin-top: 5%;
+        /* margin-top: 5%; */
         margin-bottom: 5%;
         display: flex;
         justify-content: space-around;
@@ -86,7 +94,7 @@
         height: 65%;
     }
 
-    }
+}
 </style>
 
 <?php $style = ob_get_contents();?>
@@ -94,7 +102,7 @@
 <?php ob_start();?>
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
-
+<br><br><br><br>
 <?php foreach($petPreviews as $preview):?>
     <div class = "petListElement" data-petId="<?=$preview['id']?>">
         <!-- <p>-----------------------------------</p> -->
@@ -150,7 +158,7 @@
             
             // AJAX
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'index.php?action=petprofile&petid='+petId);
+            xhr.open('GET', 'index.php?action=petprofile');
             xhr.onload = function () {
                 if(xhr.status == 200){
                     console.log(xhr.responseText);

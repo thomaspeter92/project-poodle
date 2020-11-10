@@ -14,7 +14,14 @@ try {
             showPetProfile($_REQUEST['petid']);
             break;
         case "petPreview":
-            showPetPreview($_SESSION['id']);
+            if(isset($_SESSION['id'])){
+                showPetPreview($_SESSION['id']);
+            }else{
+                login();
+            }
+            
+            //We have to check if it also works with our cookies 
+
             break;
         case "login":
             login();
