@@ -36,7 +36,7 @@ $style = NULL;
             <div id="headerRight">
                 <div class="desktopWrapper">
                     <ul>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="index.php?action=aboutUs">About Us</a></li>
                         <li><a href="#">Partners</a></li>
                         <li id="contactLink"><a href="#">Contact</a></li>
                         <?php
@@ -48,7 +48,7 @@ $style = NULL;
                         ?>
                             <img src="" alt="default">
                             <li>
-                                <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
+                                <a id="desktopProfile" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
                                     <?php echo $_SESSION['name'] ?>
                                 </a>
                             </li>
@@ -81,7 +81,7 @@ $style = NULL;
                 </div> 
                 <div class="hoverWrapper">
                     <ul>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="index.php?action=aboutUs">About Us</a></li>
                         <li><a href="#">Partners</a></li>
                         <li><a href="#">Contact</a></li>
                         <?php

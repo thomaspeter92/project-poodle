@@ -44,3 +44,7 @@ function logout(){
     header("Location: index.php");
 }
    
+
+function aboutUs(){
+    require('./view/aboutUsView.php');
+}

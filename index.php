@@ -33,6 +33,9 @@ try {
         case "logout":
             logout();
             break;
+        case "aboutUs":
+            aboutUs();
+            break;
         default:
             landing();
             break;
