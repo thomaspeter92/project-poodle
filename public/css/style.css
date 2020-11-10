@@ -421,11 +421,11 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         width: 8em;
     }
 }
-@media screen and (max-height: 812px){
+/* @media screen and (max-height: 812px){
     .contactPageEmail, .contactPageNumber,.contactPageFax {
         margin-top: 10%;
     }
-}
+} */
 
 @media screen and (max-height: 653px){
     .contactPageEmail, .contactPageNumber,.contactPageFax {
