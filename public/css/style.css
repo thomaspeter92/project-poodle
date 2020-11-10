@@ -21,6 +21,7 @@ header {
 }
 
 .headerWrapper {
+    /* background-color: hotpink; */
     display: flex;
     width: 100%;
     justify-content: space-between;
