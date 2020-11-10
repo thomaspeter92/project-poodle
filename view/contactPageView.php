@@ -1,24 +1,24 @@
 <?php $title= "contactPage"?>
 <?php ob_start(); ?>
 <div class="contactPage1">
-    <h1>Get in touch</h1>
+    <h1><strong>Get in touch</strong></h1>
     <div class="topContent">
         <div class="contactPageEmail">
-            <div class="circle"><h2><i class="far fa-envelope fa-3x"></i></h2></div>
+            <div class="circle"><h2><i class="far fa-envelope"></i></h2></div>
             <div class="email">
                 <h2>EMAIL</h2>
                 <p>contactus@contactus.com</p>
             </div>
         </div>
         <div class="contactPageNumber">
-            <div class="circle"> <h2><i class="fas fa-phone fa-3x"></i></h2> </div>
+            <div class="circle"> <h2><i class="fas fa-phone"></i></h2> </div>
             <div class="phoneNumber">
                 <h2>PHONE</h2>
                 <p>+82 010 1234 5678</p>
             </div>
         </div>
         <div class="contactPageFax">
-            <div class="circle"> <h2><i class="fas fa-fax fa-3x"></i></h2> </div>
+            <div class="circle"> <h2><i class="fas fa-fax"></i></h2> </div>
             <div class="faxNumber">
                 <h2>FAX</h2>
                 <p>+82 010 1234 5678</p>

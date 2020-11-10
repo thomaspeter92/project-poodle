@@ -1,7 +1,9 @@
 <?php
 ob_start();
 ?>
-
+<head>
+    <link rel="stylesheet" href="./public/css/landing.css">
+</head>
 <!-- ************** CAROUSEL AREA ************* -->
 
 <div id="carousel">

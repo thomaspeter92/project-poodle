@@ -10,7 +10,7 @@ $style = NULL;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
-    <link rel="stylesheet" href="./public/css/landing.css">
+
 
 
     <!-- FONT LINKS -->
@@ -83,7 +83,7 @@ $style = NULL;
                     <ul>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Partners</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                         <li><a href="index.php?action=login">Sign In</a></li>
