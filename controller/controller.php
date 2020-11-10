@@ -50,20 +50,10 @@ function signUpWith($memberData)
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     if ($memberDataFromDB) {
+        signInWith($memberData);
+        
         //TODO: Show the user is already signed up with kakao
-
-        if (empty($memberDataFromDB["id"]) or empty($memberDataFromDB["name"])) {
-            throw new Exception("Sign up is failed!", 1001);
-        }
-        $sessionID = $memberDataFromDB["id"];
-        $sessionName = isset($memberData["name"]) ? 
-                        $memberData["name"] : $memberDataFromDB["name"];
-        createSession($sessionID, $sessionName);
-
-        //TODO: Add createSessionByEmail function in contoller.php 
-        //      -> instead of MemberManager.createSessionByEmail
-
-        header("Location: index.php");
+        
     } else {
         if (empty($memberData["name"]) 
          or empty($memberData["password"]) 
@@ -75,11 +65,7 @@ function signUpWith($memberData)
 
         $result = $manager->addNewMember($memberData);
         if ($result) {
-            if ($manager->createSessionByEmail($email)) {
-                header("Location: index.php");
-            } else {
-                throw new Exception("Failed to create Session!!", 1003);    
-            }
+            signInWith($memberData);
         } else {
             throw new Exception("Failed to add new member!!", 1004);
         }

@@ -78,21 +78,4 @@ class MemberManager extends Manager{
         
         return $result;
     }
-
-    public function createSessionByEmail($email){
-        $db = $this->dbConnect();
-        $email = htmlspecialchars($email);
-        $response = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
-        $response->bindParam(1, $email, PDO::PARAM_STR);
-        $response->execute();
-        $user = $response->fetch(PDO::FETCH_ASSOC);
-        $response->closeCursor();
-
-        if ($user) {
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['id'] = $user['id'];
-            return true;
-        }
-        return false;
-    }
 }
