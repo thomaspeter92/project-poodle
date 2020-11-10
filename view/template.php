@@ -48,7 +48,7 @@ $style = NULL;
                         ?>
                             <img src="" alt="default">
                             <li>
-                                <a id="mobileLogin" href="index.php?action=petPreview">
+                                <a id="desktopLogin" href="index.php?action=petPreview">
                                     <?php echo $_SESSION['name'] ?>
                                 </a>
                             </li>
