@@ -21,7 +21,7 @@ try {
             }
             
             //We have to check if it also works with our cookies 
-
+            
             break;
         case "login":
             login();

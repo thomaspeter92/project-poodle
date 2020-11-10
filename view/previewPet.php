@@ -158,18 +158,18 @@
             
             // AJAX
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'index.php?action=petprofile');
+            xhr.open('GET', 'index.php?action=petprofile&petid='+petId);
             xhr.onload = function () {
                 if(xhr.status == 200){
                     console.log(xhr.responseText);
                     let modalPetObj = {
-                        add: null,
+                        
                         edit : editPet,
                         del : delPet,
                     }
                     console.log(modalPetObj);
                     let petView = new Modal(xhr.responseText);
-                    petView.generate(modalPetObj);
+                    petView.generate(modalPetObj, allowCancel=true);
                 }
             }
             //inside event listener of AJAX

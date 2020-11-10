@@ -112,4 +112,10 @@ body{
         margin-top: 15%;
     }
 
+    .modalCancelDiv{
+        position: absolute;
+        top: 85%;
+        left: 38%;
+    }
+
 }
