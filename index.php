@@ -39,6 +39,9 @@ try {
         case "logout":
             logout();
             break;
+        case "addEditPet":
+            showPetPreview($_REQUEST['ownerId']);
+            break;
         default:
             landing();
             break;

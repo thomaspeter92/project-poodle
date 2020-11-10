@@ -28,4 +28,21 @@ require_once("Manager.php");
             return $profile; 
         }
         
+        public function addEditPet($params) {
+            $db = $this-> dbConnect();
+            $req = $db->prepare("INSERT INTO petProfile (name, type, breed, age, gender, weight, color, friendliness, activityLevel, ownerId) VALUES (:name, :type, :breed, :age, :gender, :weight, :color, :friendliness, :activityLevel, :ownerId)");
+                $req->bindParam('name', htmlspecialchars($params['name']));
+                $req->bindParam('type', htmlspecialchars($params['type']));
+                $req->bindParam('breed', htmlspecialchars($params['breed']));
+                $req->bindParam('age', htmlspecialchars($params['age']));
+                $req->bindParam('gender', htmlspecialchars($params['gender']));
+                $req->bindParam('weight', htmlspecialchars($params['weight']));
+                $req->bindParam('color', htmlspecialchars($params['color']));
+                $req->bindParam('friendliness', htmlspecialchars($params['friendliness']));
+                $req->bindParam('acitivtyLevel', htmlspecialchars($params['activityLevel']));
+                $req->bindParam('ownerId', htmlspecialchars($params['ownerId']));
+
+            $req->execute();
+            $req->closeCursor();
+        }
     }
