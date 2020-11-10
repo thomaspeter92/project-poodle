@@ -18,17 +18,18 @@
     width: auto;
 }
 
-h1 {
+.textBlock h1 {
     color: white;
     font-family: monsterRatBold;
 }
-h2 {
+.textBlock h2 {
     color: white;
     font-family: monsterRatBold;
 }
 
-p {
+.textBlock2 p {
     color: white;
+    font-family: monsterRatRegular;
 }
 
 .container {
