@@ -52,7 +52,7 @@ function addNewMember($params){
 
     if($register){
         $registrationManager->createSession($params);
-        header("Location: index.php");
+        header("Location: index.php?action=petPreview");
     }else{ 
         //header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
     }
