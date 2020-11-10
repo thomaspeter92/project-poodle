@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300;1,400&display=swap');
+
+
+
+
+
+
+
+
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin:0;
+    padding:0;
+}
+
+
+
+.modalMainDiv{
+    position: absolute;
+    position: fixed;
+    top:0%;
+    left:0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modalSubDiv{
+    box-shadow: 3px 3px 3px rgb(39, 39, 39);
+
+    /* background-color: #f5b657; */
+    background-image: url("../images/wallpaper.jpeg");
+    border-radius: 15px;
+    position: relative;
+    margin: 25%;
+    /* border: 1px solid black; */
+    /* background-color: white; */
+    width: 50%;
+    height: 50%;
+    /* display: flex; */
+    /* justify-content: space-around; */
+    /* align-items: flex-end; */
+}
+
+.modalDivContent{
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+.modalDivButtons{
+    position: absolute;
+    top: 69%;
+    left: 1%;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.modalDivButtons button{
+    margin: 10%;
+    width: 25%;
+    height: 10%;
+    margin-bottom: 5%;
+}
+
+.modalSubDiv .modalButtonClose{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+
+
+
+@media (max-device-width : 400px) {
+
+    .modalDivButtons{
+        position: absolute;
+        top: 65%;
+        left: 1%;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 7%;
+    }
+
+    .modalSubDiv{
+        font-size: 0.8em;
+        box-shadow: 3px 3px 3px grey;
+        /* background-color: ivory; */
+        /* background-image: url("./public/images/wallpaper.jpeg"); */
+        background-image: url("../images/mobileWall.jpeg");  
+        background-size: cover;
+        /* border: 2px solid grey; */
+        border-radius: 15px;
+        position: relative;
+        margin: auto;
+        /* border: 1px solid black; */
+        /* background-color: white; */
+        width: 80%;
+        height: 60%;
+        /* display: flex; */
+        /* justify-content: space-around; */
+        /* align-items: flex-end; */
+    }
+
+    .modalDivContent{
+        margin-left: 15%;
+        margin-top: 15%;
+    }
+
+    .modalCancelDiv{
+        position: absolute;
+        top: 85%;
+        left: 38%;
+    }
+
+}
