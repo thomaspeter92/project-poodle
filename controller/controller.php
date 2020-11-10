@@ -34,9 +34,10 @@ function logout()
     header("Location: index.php");
 }
 
-function createSession($id, $name) {
+function createSession($id, $name, $imageURL) {
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
+    $_SESSION['imageURL'] = $imageURL;
 }
 
 function signUpWith($memberData)
@@ -58,16 +59,12 @@ function signUpWith($memberData)
         $sessionName = isset($memberData["name"]) ? 
                         $memberData["name"] : $memberDataFromDB["name"];
         createSession($sessionID, $sessionName);
+
+        //TODO: Add createSessionByEmail function in contoller.php 
+        //      -> instead of MemberManager.createSessionByEmail
+
         header("Location: index.php");
     } else {
-        // echo "<pre>";
-        // print_r($memberData);
-        // echo "</pre>";
-        // echo array_key_exists("kakao", $memberData);
-        // echo "<br>";
-        // echo array_key_exists("google", $memberData);
-        // echo "<br>";
-
         if (empty($memberData["name"]) 
          or empty($memberData["password"]) 
          or empty($memberData["email"])
@@ -105,7 +102,13 @@ function signInWith($memberData) {
         $sessionID = $memberDataFromDB["id"];
         $sessionName = isset($memberData["name"]) ? 
                         $memberData["name"] : $memberDataFromDB["name"];
-        createSession($sessionID, $sessionName);
+        if (isset($memberData["imageURL"])) {
+            $sessionImageURL = $memberData["imageURL"];
+        } else {
+            //TODO: Set Profile image URL by our server's image
+        }
+
+        createSession($sessionID, $sessionName, $sessionImageURL);
         header("Location: index.php");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
@@ -117,6 +120,8 @@ function signInWith($memberData) {
         echo "<br>";
         echo "TODO: It is not valid email. You haven't signed up yet. ";
         // throw new Exception("Failed to sign in!!", 1007);
+
+        // header("Location: index.php?action=login&error=notSignedUp");
     }
 }
 

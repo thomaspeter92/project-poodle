@@ -1,4 +1,7 @@
 <?php
+//TODO: Default image URL
+$DEFAULT_IMAGE_URL = "./private/profile/defaultProfile.png";
+$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
 
 // TODO: Use $style for additional css
 $style = NULL;
@@ -58,7 +61,7 @@ $style = NULL;
                         <?php 
                         } else {
                         ?>
-                            <img src="" alt="default">
+                            <img src=<?= $sessionImageURL;?> alt="default">
                             <a id="mobileLogin" href="index.php?action=petPreview&ownerId=<?php echo $_SESSION['id'] ?>">
                                 <?php echo $_SESSION['name'] ?>
                             </a> 
