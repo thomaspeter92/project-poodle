@@ -47,6 +47,7 @@ try {
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
             $kakaoid = isset($_REQUEST["kakaoid"]) ? $_REQUEST["kakaoid"] : NULL;
+            $kakaoThumbnailURL = isset($_REQUEST["kakaoThumbnailURL"]) ? $_REQUEST["kakaoThumbnailURL"] : NULL;
             
             if ($kakaoNickname and $kakaoEmail) {
                 if ($kakaoSignUp === "true") {
@@ -55,6 +56,7 @@ try {
                         "password" => $kakaoid. "." .uniqid(),
                         "email" => $kakaoEmail,
                         "kakao" => 1, "google" => 0,
+                        "imageURL" => $kakaoThumbnailURL,
                     );
                     signUpWith($memberData);
                  } 
@@ -63,6 +65,7 @@ try {
                         "name" => $kakaoNickname,
                         "email" => $kakaoEmail,
                         "kakao" => 1, "google" => 0,
+                        "imageURL" => $kakaoThumbnailURL,
                     );
                     signInWith($memberData);
                  } 

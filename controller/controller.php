@@ -42,9 +42,10 @@ function logout()
     header("Location: index.php");
 }
 
-function createSession($id, $name) {
+function createSession($id, $name, $imageURL) {
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
+    $_SESSION['imageURL'] = $imageURL;
 }
 
 function signUpWith($memberData)
@@ -57,25 +58,11 @@ function signUpWith($memberData)
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     if ($memberDataFromDB) {
+        signInWith($memberData);
+        
         //TODO: Show the user is already signed up with kakao
-
-        if (empty($memberDataFromDB["id"]) or empty($memberDataFromDB["name"])) {
-            throw new Exception("Sign up is failed!", 1001);
-        }
-        $sessionID = $memberDataFromDB["id"];
-        $sessionName = isset($memberData["name"]) ? 
-                        $memberData["name"] : $memberDataFromDB["name"];
-        createSession($sessionID, $sessionName);
-        header("Location: index.php");
+        
     } else {
-        // echo "<pre>";
-        // print_r($memberData);
-        // echo "</pre>";
-        // echo array_key_exists("kakao", $memberData);
-        // echo "<br>";
-        // echo array_key_exists("google", $memberData);
-        // echo "<br>";
-
         if (empty($memberData["name"]) 
          or empty($memberData["password"]) 
          or empty($memberData["email"])
@@ -86,11 +73,7 @@ function signUpWith($memberData)
 
         $result = $manager->addNewMember($memberData);
         if ($result) {
-            if ($manager->createSessionByEmail($email)) {
-                header("Location: index.php");
-            } else {
-                throw new Exception("Failed to create Session!!", 1003);    
-            }
+            signInWith($memberData);
         } else {
             throw new Exception("Failed to add new member!!", 1004);
         }
@@ -170,7 +153,13 @@ function signInWith($memberData) {
         $sessionID = $memberDataFromDB["id"];
         $sessionName = isset($memberData["name"]) ? 
                         $memberData["name"] : $memberDataFromDB["name"];
-        createSession($sessionID, $sessionName);
+        if (isset($memberData["imageURL"])) {
+            $sessionImageURL = $memberData["imageURL"];
+        } else {
+            //TODO: Set Profile image URL by our server's image
+        }
+
+        createSession($sessionID, $sessionName, $sessionImageURL);
         header("Location: index.php");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
@@ -182,6 +171,8 @@ function signInWith($memberData) {
         echo "<br>";
         echo "TODO: It is not valid email. You haven't signed up yet. ";
         // throw new Exception("Failed to sign in!!", 1007);
+
+        // header("Location: index.php?action=login&error=notSignedUp");
     }
 }
 

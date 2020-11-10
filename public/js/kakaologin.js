@@ -26,17 +26,18 @@
             success: function(authObj) {
                 // console.log("Login Success!!");
                 // console.log(authObj);
-                requestUserInfo(function(id, nickname, email) {
+                requestUserInfo(function(id, nickname, email, thumbnailURL) {
                     const form = document.querySelector("#kakaoForm");
                     form.querySelector("#kakaoNickname").value = nickname;
                     form.querySelector("#kakaoEmail").value = email;
                     form.querySelector("#kakaoid").value = id;
+                    form.querySelector("#kakaoThumbnailURL").value = thumbnailURL;
                     (signUp) ? 
                         form.querySelector("#kakaoSignUp").value = true :
                         form.querySelector("#kakaoSignUp").value = false;
                     //TODO: Direct to user profile page?????
                     form.action = "index.php?action=kakaoLogin";
-                    form.submit();       
+                    form.submit();
                 });
             },
             fail: function(err) {
@@ -54,7 +55,8 @@
                 const id = response.id;
                 const nickname = response.properties.nickname;
                 const email = response.kakao_account.email;
-                callback(id, nickname, email);
+                const thumbnailURL = response.properties.thumbnail_image;
+                callback(id, nickname, email, thumbnailURL);
             },
             fail: function(error) {
                 console.log("[requestUserInfo]");
