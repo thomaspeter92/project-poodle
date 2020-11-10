@@ -3,40 +3,73 @@
     font-family: "monsterRatRegular";
     src: url("./Montserrat/Montserrat-Regular.ttf") format("truetype");
   }
-
+a{
+    text-decoration: none;
+}
 body {
     margin: 0;
     padding: 0;
 }
-
+ul{
+    padding-inline-start: 40px;
+    padding-inline-end: 40px;
+}
 
 header {
     position:fixed;
     margin: 0px;
     width: 100%;
     z-index: 9;
-    background-color: white;
+    background: linear-gradient(180deg, #e9e9e9, transparent );
     padding-top: 10px;
     font-family: "monsterRatRegular"
 }
 
 .headerWrapper {
-    /* background-color: hotpink; */
     display: flex;
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
 }
-
+#headerLeft{
+    padding-left: 1em;
+    padding-top: .2em;
+    padding-bottom: .25em;
+}
 #headerRight {
     display: flex;
-    padding-right: 20px;
+    padding-right: 1em;
+}
+.desktopWrapper>ul>li>a{
+    text-decoration: none;
+    
+}
+.menuItems{
+    display: block; 
+}
+.menuItems>ul {
+    list-style-type: none;
+}
+.menuItems>ul>li {
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+    font-family: "monsterRatRegular";
+    color:rgb(233, 233, 233);
+    font-size: 1.3em;
+    border-bottom: grey 1px solid;
 }
 
+.menuItems>ul>li>a{
+    text-decoration: none;
+    color:rgb(233, 233, 233);
+}
 
 footer {
     padding-bottom: 10px;
-    font-family: "monsterRatRegular"
+    font-family: "monsterRatRegular";
+    background: linear-gradient( white, transparent );
 }
 
 footer>ul {
@@ -56,6 +89,9 @@ color: #393c41;
 font-size: small;
 font-family: "monsterRatRegular"
 
+}
+.signedInImage, #mobileLogin, .menu-btn{
+    padding: .5em;
 }
 
 footer>p {
@@ -156,11 +192,12 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     .hoverWrapper.show {
         position: absolute;
         right: 0px;
-        background-color: white;
-        color: black;
+        /* background-color: white; */
+        background: #393E41;
+        border-radius: 1em;
         font-family: "monsterRatRegular";
         text-align: left;
-        height: 100vw;
+        height: 50vh;
         width: 250px;
         transition: right 1s;
         padding-top: 0;
@@ -170,29 +207,45 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     .hoverWrapper {
         position: absolute;
         right: -250px;
-        background-color: white;
-        color: black;
+        /* background-color: white; */
+        background-color: #393E41;
+        border-radius: 1em;
         font-family: sans-serif;
         text-align: left;
-        height: 100vw;
+        height: 50vh;
         width: 250px;
         transition: right 1s;
         padding-top: 0;
         z-index: 10;
     }
-    .hoverWrapper>ul {
-        list-style-type: none;
-    }
     
-    .hoverWrapper>ul>li {
-        font-size: 12px;
-        padding-top: 5%;
-        padding-bottom: 10%;
-        border-bottom: grey 1px solid;
-    }
-
-    #mobileLogin {
+    #mobileSignIn, #mobileLogin {
         padding-top: 5px;
+    }
+    #mobileSignIn, .signOut{
+        text-decoration: none;
+        padding: .5em;
+        border-radius: 3em;
+        border: 2px transparent;
+        color:black;
+        background:  #F8C533;
+        box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+    }
+    #mobileLogin>img{
+        margin-right: 1em;
+    }
+    #mobileLogin{
+        padding-top: 0;
+        color: #393E41;   
+    }
+    .signOut, .headerUserImage{
+        margin: 2em;    
     }
 }
 
@@ -208,17 +261,39 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         align-items: center;
         margin: 0px;
     }
-
-
     .desktopWrapper {
         display: inline;
     }
-
     .desktopWrapper>ul {
         text-align: right;
         padding-right: 20px;
     }
-
+    .desktopWrapper>ul>li>a{
+        color: #393E41;
+        font-weight: bolder;
+        padding: .5em;
+    }
+    .desktopWrapper>ul>li>a:hover{
+            color: white;
+    }
+    .headerUserImage{
+        padding: .5em;
+    }
+   .headerSignUp, .signOut{
+        padding: .5em;
+        border-radius: 3em;
+        border: 2px transparent;
+        color: rgb(233, 233, 233);
+        background: #F8C533;
+        box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+    }
+    
     #contactLink {
         padding-right: 9px;
         border-right: 1px solid black; 
@@ -232,8 +307,7 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         display: inline;
         text-align: right;
     }
-
-
+   
     /* Remove things for MOBILE only */
     #hamburger {
         display: none;
