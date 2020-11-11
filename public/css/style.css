@@ -112,7 +112,27 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTkgNWg3LjRjMS4yIDAgMi40IDAgMy42LjIuNSAwIDEgLjMgMS41LjZzMSAxIDEgMS42Yy4zLjcuNCAxLjUuNCAyLjN2MmEyOS43IDI5LjcgMCAwMS0uMyA1LjZjLS4zIDEtMS4xIDEuOC0yLjEgMmwtMi4yLjJIMTZsLTMuMi4xaC01QTEyMy4yIDEyMy4yIDAgMDEzIDE5Yy0uOC0uNC0xLjQtMS0xLjYtMi0uMi0uNy0uMy0xLjQtLjMtMi4ybC0uMS0yYTI5LjcgMjkuNyAwIDAxLjUtNS42Yy4yLTEgMS0xLjcgMi0yQTEzIDEzIDAgMDE1LjcgNUg5bS45IDQuMXY2LjJsNS43LTMuMS01LjctMy4xIi8+PC9zdmc+);
     background-repeat: no-repeat;
 }
+/* Partners */
+#partner-icons-list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid rgb(232, 232, 232);
+    padding-top: 5px;
+    margin: 5px 5px;
+}
 
+#partner-icons-list>div {
+    padding-left: 10px;    
+}
+#icon-partner-wcoding-large img {
+    width: 100px;
+    height: 23px;
+}
+#icon-partner-lechienblanc-large img {
+    width: 60px;
+    height: 60px;
+}
 
 @media screen and (max-width: 1120px) {
     /* Remove DESKTOP ONLY STUFF */
