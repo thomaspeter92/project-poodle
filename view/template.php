@@ -54,7 +54,8 @@ $style = NULL;
                                     <?php echo $_SESSION['name'] ?>
                                 </a>
                             </li>
-                            <li><a href="index.php?action=logout">Sign Out</a></li> 
+                            <!-- <li><a href="index.php?action=logout">Sign Out</a></li>  -->
+                            <li><a href="#" onclick="signAllOut()">Sign Out</a></li>
                         <?php
                         }
                         ?>
