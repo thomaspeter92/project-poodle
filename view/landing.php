@@ -1,7 +1,9 @@
 <?php
 ob_start();
 ?>
-
+<head>
+    <link rel="stylesheet" href="./public/css/landing.css">
+</head>
 <!-- ************** CAROUSEL AREA ************* -->
 
 <div id="carousel">
@@ -135,15 +137,43 @@ ob_start();
 </div>
 
 <div id="content5" class="content">
-    <div class="content5div"></div>
-    <div class="content5div"></div>
-    <div class="content5div"></div>
-    <div class="content5div"></div>
-    <div class="content5div"></div>
-    <div class="content5div"></div>
+        <div class="content5div">
+            <h5>Introducing New Ways to Meet Friends and Enjoy Time With Your Pets</h5>
+        </div>
+        <div class="content5div">
+            <h5>Browse Events Nearby</h5>
+            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <i class="fas fa-arrow-circle-right arrowBall"></i>
+        </div>
+        <div class="content5div">
+            <h5>Moniter Pets With Ease</h5>
+            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <i class="fas fa-arrow-circle-right arrowBall"></i>
+        </div>
+        <div class="content5div">
+        </div>
+        <div class="content5div">
+            <h5>Arrange Play Dates</h5>
+            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <i class="fas fa-arrow-circle-right arrowBall"></i>
+        </div>
+        <div class="content5div">
+            <h5>Find Walkers and Sitters</h5>
+            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <i class="fas fa-arrow-circle-right arrowBall"></i>
+        </div>
+        <div class="content5div">
+        <h5>Share Content With Others</h5>
+            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <i class="fas fa-arrow-circle-right arrowBall"></i>
+        </div>
 </div>
 
 <a href="index.php?action=petPreview&ownerId=1">Testing preview</a>
+
+<script src="./public/js/carousel.js"></script>
+
+
 <?php
 $content = ob_get_clean();
 require("template.php");

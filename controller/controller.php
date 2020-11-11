@@ -1,8 +1,9 @@
 <?php
 // This is for Controller functions.
+require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");
-require_once('./model/MemberManager.php');
+require_once("./controller/signinController.php");
 
 function landing()
 {
@@ -21,6 +22,7 @@ function showPetPreview($ownerId){
     $petPreviews = $previewManager->getPreview($ownerId);
     require("./view/previewPet.php");
 }
+<<<<<<< HEAD
 
 
 
@@ -57,10 +59,12 @@ function addNewMember($params){
         //header("Location: index.php?action=registration&error=registration"); //@TODO not going here on error
     }
 
-}
-
-function logout(){
-    session_destroy();
-    header("Location: index.php");
-}
+=======
    
+function aboutUs(){
+    require('./view/aboutUsView.php');
+>>>>>>> 564782d856711e0cce4a279c2a51511a88203a69
+}
+function contactPage(){
+    require('./view/contactPageView.php');
+}

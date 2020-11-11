@@ -4,6 +4,11 @@
     src: url("./Montserrat/Montserrat-Regular.ttf") format("truetype");
   }
 
+@font-face {
+    font-family: "monsterRatBold";
+    src: url("./Montserrat/Montserrat-Bold.ttf") format("truetype");
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -153,9 +158,9 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         transform: rotate(-45deg) translate(7px, -6px); 
     } 
 
-    .hoverWrapper.show {
+    .hoverWrapper {
         position: absolute;
-        right: 0px;
+        right: -250px;
         background-color: white;
         color: black;
         font-family: "monsterRatRegular";
@@ -167,19 +172,10 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         z-index: 10;
     }
 
-    .hoverWrapper {
-        position: absolute;
-        right: -250px;
-        background-color: white;
-        color: black;
-        font-family: sans-serif;
-        text-align: left;
-        height: 100vw;
-        width: 250px;
-        transition: right 1s;
-        padding-top: 0;
-        z-index: 10;
+    .hoverWrapper.show {
+        right: 0px;
     }
+
     .hoverWrapper>ul {
         list-style-type: none;
     }
@@ -247,6 +243,193 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     }
 }
 
+/* CONTACT PAGE */
+.contactPage1{
+    padding-top: 10%;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    padding: auto;
+    text-decoration: none;
+}
+.contactPage1>h1{
+    font-family: "monsterRatRegular";
+    text-align: center;    
+    color: rgb(233, 233, 233);
 
+    text-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.topContent{
+    font-family: "monsterRatRegular";
+ 
+}
+.topContent>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.circle>h2{
+    padding-top: 15%;
+    text-align: center;
+    color:  rgb(233, 233, 233);
+}
 
+#contactMainImage{
+    width: 100%;
+}
 
+.contactPageEmail, .contactPageNumber, .contactPageFax{
+    display: inline-block;
+    justify-content: space-around;
+    align-items: center;
+    color:  rgb(233, 233, 233);
+}
+.email, .phoneNumber, .faxNumber{
+    text-align: center;
+}
+.email>h2, .phoneNumber>h2, .faxNumber>h2{
+    font-weight: bold;
+}
+.contactPageHeadquarters>h1{
+    padding-left: 5%;
+    color: #F5B64B; 
+    font-size: 3em;
+}
+.contactMiddle{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+}
+.contactMiddle>div{
+    display: inline-block;
+    justify-content: space-around;
+}
+.contactMiddle>div>p{
+    color: lightgrey;
+}
+.contactMiddle>div>h1{
+    margin-top: 0px;
+    color: #F5B64B; 
+    font-size: 3em;
+}
+.contactDivider{
+    background-color: #3E91B7;  
+    display: inline-block;
+    vertical-align: middle;
+}
+.contactMiddleText{
+    text-align: center;
+}
+@media screen and (min-width: 1120px){
+    .contactPage1{
+        background-image: url('../images/contactPageHeader.jpg');
+    }
+    .contactPage1>div{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10em;
+        padding-right: 10em;
+    }
+    .contactPage1>h1{
+        font-size: 5em;
+        margin-top: 0px;  
+    }
+    .topContent{ 
+        padding-top: 3em;
+    }
+    .circle{
+        background-color: rgba(233, 233, 233, .5);
+        box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        height: 10em;
+        width: 10em;
+        transition: transform 1s; 
+    }
+    .circle:hover{
+        background-color: rgba(245, 182, 75, 1);
+        transform: scale(1.2);
+    
+    }
+    .fa-envelope, .fa-phone, .fa-fax{
+        font-size: 5rem;
+    }
+    .contactDivider{
+        height: .1em;
+        width: 10em;
+    }
+}
+@media screen and (max-width: 1120px){
+    .contactPage1{
+        background-image: url('../images/contactPageMobile.jpg');  
+        padding: auto;
+        height: 100vh;
+    }
+    .contactPage1>h1{
+        font-size: 3em;
+        
+    }
+    .topContent{
+        padding: auto;
+        height: 100vh;
+        width: 100vw;
+    }
+    .circle{
+        background-color: rgba(233, 233, 233, .5);
+        box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        height: 4em;
+        width: 4em;
+        
+    }
+    .circle>h2{
+        padding-top: 0;
+    }
+    .fa-envelope, .fa-phone, .fa-fax{
+        font-size: 2rem;
+    }
+    .contactDivider{
+        margin-top: -1em;
+        height: .1em;
+        width: 8em;
+    }
+}
+@media screen and (max-height: 812px){
+    .contactPageEmail, .contactPageNumber,.contactPageFax {
+        margin-top: 10%;
+    }
+}
+
+@media screen and (max-height: 653px){
+    .contactPageEmail, .contactPageNumber,.contactPageFax {
+        margin-top: 3%;
+    }
+}
+@media screen and (max-height: 667px){
+.email>p, .phoneNumber>p, .faxNumber>p{
+    margin-top: -12%;
+}
+}
