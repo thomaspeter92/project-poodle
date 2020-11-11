@@ -24,22 +24,25 @@ header {
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
-    margin-top: 1.5em;
+    /* margin-top: 1.5em; */
 }
 .fa-paw{
     color: white;
 }
 #headerLeft{
-    padding-left: 1em;
-    /* padding-top: 1em; */
+    padding-left: 1.5em;
+    padding-top: .5em;
 }
-#headerLeft>i{
-    margin-top: -1em;
+#headerLeft>a>img{
+    margin-top: 0;
+    height: 3em;
+    width: 3em;
 }
 
 #headerRight{
     display: flex;
     padding-right: 1em;
+    margin-top: 1.5em;
 }
 .desktopWrapper>div>a{
     text-decoration: none;
@@ -121,8 +124,6 @@ font-family: "monsterRatRegular"
     padding: .5em;
 }
 .pawImage{
-
-
     margin-left: 1em;
     margin-right: 1em;
     position: relative;

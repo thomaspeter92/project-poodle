@@ -30,14 +30,14 @@ $style = NULL;
         <?php
         if (!isset($_SESSION['id'])) { ?>
             <div id="headerLeft">
-                <a href="index.php?action=landing"><i class="fas fa-paw fa-2x"> </i></a>
+                <a href="index.php?action=landing"><img src="./public/images/logoHeader.png"></a>
                 <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
         <?php
         }else{
         ?>
             <div id="headerLeft">
-                <a href="index.php?action=petProfileView"><i class="fas fa-paw fa-2x"> </i></a>
+                <a href="index.php?action=petProfileView"><img src="./public/images/logoHeader.png"></a>
                 <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
         <?php
