@@ -202,7 +202,6 @@ $style = NULL;
         Request our corporate name & address by email.
         </p>
     </footer>
-    <script src="./public/js/carousel.js"></script>
 </body>
 
 </html>

@@ -55,7 +55,7 @@ try {
             logout();
             break;
         case "addEditInput":
-            addEditInput();
+            displayAddEditInput(!empty($_REQUEST['petId']) ? $_REQUEST['petId'] : '');
             break;
         case "addEditPet":
             petAddEdit($_REQUEST);

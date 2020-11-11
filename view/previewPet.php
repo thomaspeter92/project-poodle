@@ -128,30 +128,14 @@
 <script src="./public/js/Modal.js"></script>
 <script>
 
-    function editPet(petId) {
-
-        console.log("EDITION OF PEEEEEETTTTT");
-        let xhr = new XMLHttpRequest();
-            // xhr.open('GET', 'index.php?action=editPet&petid='+petId);
-            // xhr.onload = function () {
-            //     if(xhr.responseText == "success") {
-
-            //     }
-            // }
-            // xhr.send(null);
-    }
-
     function delPet (petId){
         //something
     }
 
-    function addPet() {
+    function addEditPet() {
         let xhr = new XMLHttpRequest();
-                // pageStart and article.
-                let addPetForm = document.querySelector('#addPetForm');
-                let params = new FormData(addPetForm);
-
-
+            let addPetForm = document.querySelector('#addPetForm');
+            let params = new FormData(addPetForm);
             xhr.open("POST", "index.php?action=addEditPet");
             xhr.onload = function() {
                 if (xhr.status ==  200){
@@ -159,29 +143,35 @@
                 }
             }
             xhr.send(params);
-
             location.reload();
     }
 
+    function addEditFormDisplay(petId) {
+        let xhr = new XMLHttpRequest();
+        if (petId) {
+            xhr.open('GET', 'index.php?action=addEditInput&petId='+petId);
+        } else {
+            xhr.open('GET', 'index.php?action=addEditInput');
+        }
+        xhr.onload = function () {
+            if(xhr.status == 200){
+                console.log(xhr.responseText);
+                let modalPetObj = {
+                    Submit : addEditPet,
+                }
+                console.log(modalPetObj);
+                let petView = new Modal(xhr.responseText);
+                petView.generate(modalPetObj, allowCancel=false);
+            }
+        }
+        xhr.send(null);
+    }
 
     let addPetButton = document.querySelector('#addPetButton');
     addPetButton.addEventListener('click', function(e) {
-        let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'index.php?action=addEditInput');
-            xhr.onload = function () {
-                if(xhr.status == 200){
-                    console.log(xhr.responseText);
-                    let modalPetObj = {
-                        add : addPet,
-                    }
-                    console.log(modalPetObj);
-                    let petView = new Modal(xhr.responseText);
-                    petView.generate(modalPetObj, allowCancel=true);
-                }
-            }
-            xhr.send(null);
-    })
-
+        let petId = e.target.getAttribute("data-petId")
+        addEditFormDisplay(petId)
+    }); 
 
     let elements = document.getElementsByClassName("petListElement");
     // console.log(elements);
@@ -203,8 +193,9 @@
                 if(xhr.status == 200){
                     console.log(xhr.responseText);
                     let modalPetObj = {
-                        
-                        edit : editPet,
+                        edit : function () {
+                            addEditFormDisplay(petId);
+                        },
                         del : delPet,
                     }
                     console.log(modalPetObj);
@@ -220,7 +211,44 @@
         });
     }
 
-    
+
+//KEEP THESE FUNCTIONS INCASE BUGS. MAY NEED TO REVERT BACK TO THEM
+
+    // function editPet(petId) {
+    //     let xhr = new XMLHttpRequest();
+    //         xhr.open('GET', 'index.php?action=addEditInput&petId='+petId);
+    //         xhr.onload = function () {
+    //             if(xhr.status == 200){
+    //                 console.log(xhr.responseText);
+    //                 let modalPetObj = {
+    //                     Submit : addEditPet,
+    //                 }
+    //                 console.log(modalPetObj);
+    //                 let petView = new Modal(xhr.responseText);
+    //                 petView.generate(modalPetObj, allowCancel=false);
+    //             }
+    //         }
+    //         xhr.send(null);
+    // }
+
+    // {
+    //     let xhr = new XMLHttpRequest();
+    //         xhr.open('GET', 'index.php?action=addEditInput');
+    //         xhr.onload = function () {
+    //             if(xhr.status == 200){
+    //                 console.log(xhr.responseText);
+    //                 let modalPetObj = {
+    //                     add : addEditPet,
+    //                 }
+    //                 console.log(modalPetObj);
+    //                 let petView = new Modal(xhr.responseText);
+    //                 petView.generate(modalPetObj, allowCancel=false);
+    //             }
+    //         }
+    //         xhr.send(null);
+    // })
+
+
 
 </script>
 <?php $content = ob_get_clean();

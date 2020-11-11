@@ -28,21 +28,37 @@ require_once("Manager.php");
             return $profile; 
         }
         
-        public function addEditPet($params) {
-            $newPet = $params;
+        public function addEditPet($newPet) {
+
             $db = $this-> dbConnect();
-            $req = $db->prepare("INSERT INTO petProfile (name, type, breed, age, gender, weight, color, friendliness, activityLevel, ownerId) VALUES (?,?,?,?,?,?,?,?,?,?)");
-                $req->bindParam(1,$newPet['name'],PDO::PARAM_STR);
-                $req->bindParam(1,$newPet['name'],PDO::PARAM_STR);
-                $req->bindParam(2,$newPet['type'],PDO::PARAM_STR);
-                $req->bindParam(3,$newPet['breed'],PDO::PARAM_STR);
-                $req->bindParam(4,$newPet['age'],PDO::PARAM_INT);
-                $req->bindParam(5,$newPet['gender'],PDO::PARAM_STR);
-                $req->bindParam(6,$newPet['weight'],PDO::PARAM_INT);
-                $req->bindParam(7,$newPet['color'],PDO::PARAM_STR);
-                $req->bindParam(8,$newPet['friendliness'],PDO::PARAM_STR);
-                $req->bindParam(9,$newPet['activityLevel'],PDO::PARAM_STR);
-                $req->bindParam(10,$newPet['ownerId']);
+            
+            if (empty($newPet['petId'])) {
+                $req = $db->prepare("INSERT INTO petProfile (name, type, breed, age, gender, weight, color, friendliness, activityLevel, ownerId) VALUES (:name, :type, :breed, :age, :gender, :weight, :color, :friendliness, :activityLevel, :ownerId)");
+            } else {
+                $req = $db->prepare("UPDATE petProfile SET name = :name,  type = :type, breed = :breed, age = :age, gender = :gender, weight = :weight, color= :color, friendliness= :friendliness, activityLevel= :activityLevel, ownerId= :ownerId WHERE id = :petId");
+                $req->bindParam(':petId', $newPet['petId'], PDO::PARAM_STR);
+            }
+
+            $name = htmlspecialchars($newPet['name']);
+            $type = htmlspecialchars($newPet['type']);
+            $breed = htmlspecialchars($newPet['breed']);
+            $age = htmlspecialchars($newPet['age']);
+            $gender = htmlspecialchars($newPet['gender']);
+            $weight = htmlspecialchars($newPet['weight']);
+            $color = htmlspecialchars($newPet['color']);
+            $friendliness = htmlspecialchars($newPet['friendliness']);
+            $activityLevel = htmlspecialchars($newPet['activityLevel']);
+
+            $req->bindParam(':name',$name,PDO::PARAM_STR);
+            $req->bindParam(':type',$type,PDO::PARAM_STR);
+            $req->bindParam(':breed',$breed,PDO::PARAM_STR);
+            $req->bindParam(':age',$age,PDO::PARAM_INT);
+            $req->bindParam(':gender',$gender,PDO::PARAM_STR);
+            $req->bindParam(':weight',$weight,PDO::PARAM_INT);
+            $req->bindParam(':color',$color,PDO::PARAM_STR);
+            $req->bindParam(':friendliness',$friendliness,PDO::PARAM_STR);
+            $req->bindParam(':activityLevel',$activityLevel,PDO::PARAM_STR);
+            $req->bindParam(':ownerId',$newPet['ownerId'],PDO::PARAM_INT);
 
             $req->execute();
             $req->closeCursor();
