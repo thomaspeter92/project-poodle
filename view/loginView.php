@@ -1,8 +1,12 @@
-<<<<<<< HEAD
 <?php $title= "login"?>
 
 
 <?php ob_start();?>
+<!-- <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com"> -->
+<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
+<link rel="stylesheet" href="./public/css/googleStyle.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>  -->
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -58,16 +62,8 @@
 </style>
 <?php $style = ob_get_contents();?>
 
-=======
 
-<?php ob_start(); ?>
-<!-- <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com"> -->
-<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
-<link rel="stylesheet" href="./public/css/googleStyle.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>  -->
-<?php $style=ob_get_contents();?>
->>>>>>> 564782d856711e0cce4a279c2a51511a88203a69
+
 
 <?php ob_start();?>
     <br>
@@ -84,12 +80,9 @@
         <input type="hidden" name="action" value="checkLogin">
         email: <input type="text" name="emailLogin" id="emailLogin" value=<?php echo isset($_COOKIE['username'])? $_COOKIE['username']: " ";?>><br/><br/>
         password: <input type="password" name="passwordLogin" id="passwordLogin" value=<?php echo isset($_COOKIE['password'])? $_COOKIE['password']: " ";?>><br/><br/>
-<<<<<<< HEAD
         
         <br>
         <div class="registerSignInDiv">
-=======
->>>>>>> 564782d856711e0cce4a279c2a51511a88203a69
         <a href="index.php">
             <button name="connect" id="connect">connect</button>
         </a>
@@ -103,9 +96,7 @@
     <a href="http://localhost/projectPoodle/index.php?action=registration">
         <button name="login" id="login" >register</button>
     </a> 
-<<<<<<< HEAD
     </div>
-=======
 
     <!-- For google -->
     <div id='signin' class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
@@ -136,7 +127,6 @@
     <!-- <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script> -->
     <script src='./public/js/kakaologin.js'></script>
     <script src='./public/js/googlelogin.js'></script>
->>>>>>> 564782d856711e0cce4a279c2a51511a88203a69
 <?php
 $content = ob_get_clean();
 require("template.php");

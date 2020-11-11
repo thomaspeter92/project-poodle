@@ -1,8 +1,11 @@
-<<<<<<< HEAD
 
 
 <?php $title= "registration"?>
 <?php ob_start();?>
+<meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
+<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
+<link rel="stylesheet" href="./public/css/googleStyle.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -57,17 +60,8 @@
 
 </style>
 <?php $style = ob_get_contents();?>
-=======
-<?php $title = "registration" ?>
-<?php ob_start(); ?>
-<meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
-<link rel="stylesheet" href="./public/css/googleStyle.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> 
-<?php $style=ob_get_contents();?>
 
->>>>>>> 564782d856711e0cce4a279c2a51511a88203a69
+
 <?php ob_start(); ?>
     <br>
     <br>
