@@ -26,56 +26,102 @@ $style = NULL;
 
 <body>
     <header>
-    <div class="headerWrapper">   
-        <div id="headerLeft">
-            <i class="fas fa-paw fa-2x"></i>
-            <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
+    <div class="headerWrapper">
+        <?php
+        if (!isset($_SESSION['id'])) { ?>
+            <div id="headerLeft">
+                <a href="index.php?action=landing"><i class="fas fa-paw fa-2x"> </i></a>
+                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
-            <div id="middleHeader">
+        <?php
+        }else{
+        ?>
+            <div id="headerLeft">
+                <a href="index.php?action=petProfileView"><i class="fas fa-paw fa-2x"> </i></a>
+                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
+            </div>
+        <?php
+        }
+        ?>
+        <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
         </div>
             <div id="headerRight">
                 <div class="desktopWrapper">
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
+                        <div class="headerLinks">
+                            <a href="#">About Us</p>
+                            <a href="#">Partners</a>
+                            <a id="contactLink" href="index.php?action=contactPage">Contact</a>
+                        </div>
+                        
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <!-- <img class=""src="" alt="default"><li id="desktopLogInLink"> -->
-                            <img class="headUserImage"> <i class="fas fa-paw fa-2x"></i></img>
-                            <li><a href="index.php?action=login">Sign In</a></li> 
-                            <li class="headerSignUp"><a href="index.php?action=registration">Sign Up</a></li>
+                            
+                            <div><img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                            <div>
+                                <a href="index.php?action=login">Sign In</a>
+                                <a class="headerSignUp" href="index.php?action=registration">Sign Up</a>
+                            </div>
                             <?php 
                         } else {
                         ?>
-                            <!-- <img class="headerUserImage" src="" alt="default"> -->
-                            <i class="fas fa-paw fa-2x"></i>
-                            <li>
-                                <a id="mobileLogin" href="index.php?action=petPreview">
-                                    <?php echo $_SESSION['name'] ?>
-                                </a>
-                            </li>
-                            <li class="signOut"><a href="index.php?action=logout">Sign Out</a></li> 
+                            <div class="userImage">
+                                <div><img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                                <!-- <div><i class="fas fa-star"></i></div> -->
+                                <div class="stars">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                </div>
+                            </div>
+                            <div>
+                                <a id="mobileLogin" href="index.php?action=petPreview"><?php echo $_SESSION['name'] ?></a>
+                            </div>
+                            <div>
+                                <i class="far fa-bell"></i>
+                            </div>
+                            <div class="signOutWrapper">
+                                <a class="signOut" href="index.php?action=logout">Sign Out</a>  
+                            </div> 
                         <?php
                         }
                         ?>
-                    </ul>
-                </div>        
-                <div id="mobileLogin">
+                </div>  
+                <div id="mobileWrapper">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <!-- <img src="" alt="default"> -->
-                            <i class="fas fa-paw fa-2x"></i>
-                            <a id="mobileSignIn" href="index.php?action=login">Sign In</a> 
+                            <div class="pawImageWrapper">
+                                <img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default">
+                            </div>
+                            <div class="mobileSignInWrapper">
+                                <a class="mobileSignIn" href="index.php?action=login">Sign In</a> 
+                            </div>
                         <?php 
                         } else {
-                        ?>
-                            <!-- <img class="signedInImage"src="" alt="default"> -->
-                            <i class="fas fa-paw fa-3x"></i>
-                            <a id="mobileLogin" href="index.php?action=petPreview">
-                                <?php echo $_SESSION['name'] ?>
-                            </a> 
+                        ?>  
+                            <div class="mobileLoggedIn">
+                                <div class="userImage">
+                                    <div><img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                                    <!-- <div><i class="fas fa-star"></i></div> -->
+                                    <div class="stars">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="index.php?action=petPreview">
+                                        <?php echo $_SESSION['name'] ?>
+                                    </a> 
+                                </div>
+                                <div>
+                                    <i class="far fa-bell"></i>
+                                </div>
+                            </div>
                         <?php
                         }
                         ?>
@@ -87,21 +133,19 @@ $style = NULL;
                 </div> 
                 <div class="hoverWrapper">
                     <div class="menuItems">
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Partners</a></li>
-                            <li><a href="index.php?action=contactPage">Contact</a></li>
-                            <?php
-                            if (!isset($_SESSION['id'])) {?>
-                            <li><ahref="index.php?action=login">Sign In</a></li>
-                            <li><a href="index.php?action=registration">Sign Up</a></li>
-                            <?php 
-                            } else {
-                            ?>
-                            <li><a href="index.php?action=logout">Sign Out</a></li>
-                            <?php }
-                            ?>
-                        </ul>
+                        <?php
+                        if (!isset($_SESSION['id'])) {?>
+                            <p><a href="index.php?action=login">Sign In</a></p>
+                            <p><a href="index.php?action=registration">Sign Up</a></p>
+                        <?php 
+                        } else {
+                        ?>
+                            <p><a href="index.php?action=logout">Sign Out</a></p>
+                        <?php }
+                        ?>
+                        <p><a href="#">About Us</a></p>
+                        <p><a href="#">Partners</a></p>
+                        <p><a href="index.php?action=contactPage">Contact</a></p>
                     </div>
                 </div>
                 <!-- The following script controls menu animation on Click -->
