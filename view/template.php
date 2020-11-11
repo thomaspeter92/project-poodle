@@ -30,8 +30,10 @@ $style = NULL;
     <header>
     <div class="headerWrapper">   
         <div id="headerLeft">
+            <a href="index.php">
                 <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40">
-            </div>
+            </a>
+        </div>
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>

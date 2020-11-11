@@ -12,7 +12,8 @@ try {
             landing();
             break;
         case "petprofile":
-            // print_r($_REQUEST);
+            // print_r($_POST['petId']);
+            // isThatReallyMyDog($_SESSION['id', $_REQUEST['petid'])
             showPetProfile($_REQUEST['petid']);
             break;
         case "petPreview":

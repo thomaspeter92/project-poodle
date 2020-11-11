@@ -1,10 +1,64 @@
+<?php $title= "login"?>
 
-<?php ob_start(); ?>
 
-<!-- <link rel="stylesheet" href="./public/css/googleStyle.css"> -->
+
+<?php ob_start();?>
+<!-- <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com"> -->
+<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
+<link rel="stylesheet" href="./public/css/googleStyle.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>  -->
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+    body{
+
+    }
+
+    .registerDiv{
+        background-color: lightgrey;
+        font-weight: bold;
+        margin: 2%;
+        padding: 4%;
+        border: 2px solid grey;
+        border-radius: 5px;
+    }
+
+    
+
+    .registerButtons{
+        /* width: 80%; */
+        display: flex;
+        justify-content: center;
+    }
+    
+
+    .registerSignInDiv{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .spaceDiv{
+        margin: 2%;
+    }
+
+    #connect{
+        border-radius: 8px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        border: 2px solid grey;
+    }
+
+    #login{
+        border-radius: 5px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        border: 2px solid grey;
+    }
     div#main{
         padding-top:10vh;
     }
@@ -50,10 +104,10 @@
         box-shadow: 0 0 20px rgb(75,150,246);
     }
 
-
-
 </style>
-<?php $style=ob_get_contents();?>
+<?php $style = ob_get_contents();?>
+
+
 
 <?php ob_start();?>
 

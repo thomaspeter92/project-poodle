@@ -1,31 +1,12 @@
 // Kakao Login
 {
     Kakao.cleanup();
-    console.log(Kakao.isInitialized());
     Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
-    console.log(Kakao.isInitialized());
 
-    // if (document.querySelector("#kakaoLoginContainer")) {
-    //     Kakao.Auth.createLoginButton({
-    //         container: "#kakaoLoginContainer",
-    //         success: function(response) {
-    //             console.log("Login Success!!");
-    //             console.log(response);
-    //             requestUserInfo();
-    //         },
-    //         fail: function(error) {
-    //             console.log("Login Failed!!");
-    //             console.log(error);
-    //         },
-    //     });
-    // }
-    
     const loginWithKakao = (signUp) => {
         //TODO: try/catch for fail
         Kakao.Auth.loginForm({
             success: function(authObj) {
-                // console.log("Login Success!!");
-                // console.log(authObj);
                 requestUserInfo(function(id, nickname, email, thumbnailURL) {
                     const form = document.querySelector("#kakaoForm");
                     form.querySelector("#kakaoNickname").value = nickname;
@@ -65,33 +46,18 @@
         });
     };
 
-    // const logoutWithKakao = () => {
-    //     //Franco
-    //     if (Kakao){
-    //     if (!Kakao.Auth.getAccessToken()) {
-    //         console.log("[logoutWithKakao]");
-    //         alert("Not logged in");
-    //         return;
-    //     }
-    //     Kakao.Auth.logout(() => {
-    //         console.log("[logoutWithKakao]");
-    //         console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
-    //     });
-    //     } //Franco
-    // };
-
     function logoutWithKakao (){
         //Franco
         if (Kakao){
-        if (!Kakao.Auth.getAccessToken()) {
-            console.log("[logoutWithKakao]");
-            alert("Not logged in");
-            return;
-        }
-        Kakao.Auth.logout(() => {
-            console.log("[logoutWithKakao]");
-            console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
-        });
+            if (!Kakao.Auth.getAccessToken()) {
+                console.log("[logoutWithKakao]");
+                alert("Not logged in");
+                return;
+            }
+            Kakao.Auth.logout(() => {
+                console.log("[logoutWithKakao]");
+                console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+            });
         } //Franco
     }
 
@@ -116,7 +82,6 @@
     }
 
     const kakaoLoginBtn = document.querySelector("#kakaoLogin");
-    // const kakaoLoginBtn = document.querySelector("#custom-login-btn");
     if (kakaoLoginBtn) {
         kakaoLoginBtn.addEventListener("click", () => loginWithKakao(false));
     }
