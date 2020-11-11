@@ -41,7 +41,7 @@ $style = NULL;
                 <div class="desktopWrapper">
                     <ul>
                         <li><a href="index.php?action=aboutUs">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
+                        <li><a href="index.php?action=partners">Partners</a></li>
                         <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>

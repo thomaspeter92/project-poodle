@@ -26,6 +26,11 @@ function showPetPreview($ownerId){
 function aboutUs(){
     require('./view/aboutUsView.php');
 }
+
+function showPartnersPage() {
+    require('./view/partnersView.php');
+}
+
 function contactPage(){
     require('./view/contactPageView.php');
 }

@@ -58,6 +58,9 @@ try {
         case "aboutUs":
             aboutUs();
             break;
+        case "partners":
+            showPartnersPage();
+            break;
         case "contactPage":
             contactPage();
             break;
