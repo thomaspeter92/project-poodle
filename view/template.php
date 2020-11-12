@@ -85,7 +85,8 @@ $style = NULL;
                                 <i class="far fa-bell"></i>
                             </div>
                             <div class="signOutWrapper">
-                                <a class="signOut" href="index.php?action=logout">Sign Out</a>  
+                                <a class="signOut" href="#" onclick="signAllOut()">Sign Out</a>
+                                <!-- <a class="signOut" href="index.php?action=logout">Sign Out</a>   -->
                             </div> 
                         <?php
                         }

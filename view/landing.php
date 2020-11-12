@@ -169,14 +169,6 @@ ob_start();
         </div>
 </div>
 
-<<<<<<< HEAD
-=======
-<a href="index.php?action=petPreview&ownerId=1">Testing preview</a>
-
-<script src="./public/js/carousel.js"></script>
-
-
->>>>>>> 2b46ff0ec55a74df91eeed0c56644cdf5b89696d
 <?php
 $content = ob_get_clean();
 require("template.php");

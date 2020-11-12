@@ -27,6 +27,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 30;
 }
 .modalSubDiv{
     box-shadow: 3px 3px 3px rgb(39, 39, 39);
