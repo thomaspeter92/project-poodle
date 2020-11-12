@@ -6,13 +6,18 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, type, breed, age, gender, weight, color, friendliness, activityLevel, photo FROM petProfile WHERE id = ?");
+            $req = $db->prepare("SELECT name, type, breed, age, gender, weight, color, friendliness, activityLevel, photo, ownerId FROM petProfile WHERE id = ?");
             //bindparam
             $req -> execute(array($petId));
-            $profile = $req -> fetch(PDO::FETCH_ASSOC);
+            $profiles = $req -> fetch(PDO::FETCH_ASSOC);
             $req -> closeCursor();
-            // print_r($profile);
-            return $profile; 
+            // print_r($profiles);
+            if($_SESSION["id"]==$profiles["ownerId"]){
+                return $profiles;
+            } else{
+                return false;
+            }
+             
         }
 
         public function getPreview($ownerId){
@@ -27,6 +32,16 @@ require_once("Manager.php");
             // print_r($profile);
             return $profile; 
         }
+
+        // public function isThatMyDog($ownerId, $petId){
+        //     $db = $this-> dbConnect();
+        //     $req = $db->prepare("SELECT name, breed, age, photo, color, id FROM petProfile WHERE ownerId = ?");
+        //     $req -> execute(array($ownerId));
+        //     $profiles = $req->fetchAll(PDO::FETCH_ASSOC);
+        //     $req -> closeCursor();
+        //     return in_array($petId, $profiles);
+            
+        // }
         
         public function addEditPet($newPet) {
 
