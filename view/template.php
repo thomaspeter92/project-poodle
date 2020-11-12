@@ -205,6 +205,7 @@ $style = NULL;
         </p>
     </footer>
     <script src="./public/js/carousel.js"></script>
+    
 </body>
 
 </html>

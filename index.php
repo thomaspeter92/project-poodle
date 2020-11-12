@@ -120,6 +120,25 @@ try {
             );
             signUpWith($memberData);
             break;
+        case "accountView":
+            if(isset($_SESSION['id'])){
+                accountView($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
+        case "changePW":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            }
+            else if (empty($_REQUEST['currentPW']) && empty($_REQUEST['newPW']) && empty($_REQUEST['confirmPW'])) {
+                header("Location: index.php?action=petPreview&error=passwordEmpty");
+            } else if($_REQUEST['newPW'] !== $_REQUEST['confirmPW']) {
+                header("Location: index.php?action=petPreview&error=passwordMatch");
+            } else {
+                checkChangePW($_REQUEST, $_SESSION['id']);
+            }
+            break;
         default:
             landing();
             break;

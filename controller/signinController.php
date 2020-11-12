@@ -11,7 +11,7 @@ function checkLogin($params)
     if ($status) {
         header("Location: index.php");
     } else {
-        // header("Location: index.php?action=login&error=login");
+        header("Location: index.php?action=login&error=login");
 
     }
 }

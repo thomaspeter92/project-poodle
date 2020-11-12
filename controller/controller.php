@@ -4,6 +4,7 @@ require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");
 require_once("./controller/signinController.php");
+require_once("./controller/accountController.php");
 
 function landing()
 {
@@ -29,3 +30,9 @@ function aboutUs(){
 function contactPage(){
     require('./view/contactPageView.php');
 }
+
+function accountView($userID){
+    $manager = new MemberManager();
+    $memberDataFromDB = $manager->getMemberDataByID($userID);
+    require("./view/accountView.php");
+};

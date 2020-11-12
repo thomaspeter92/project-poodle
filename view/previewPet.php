@@ -2,12 +2,6 @@
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-    
-
-
-    
-
-
 
 
     body{
@@ -67,6 +61,20 @@
         margin-top: 15%;
     }
 
+.accountWrapper {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accountBox {
+    border-style: ridge;
+    text-align: center;
+    padding-bottom: 20px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
     @media (max-device-width : 400px) {
 
         .petPreviewContents{
@@ -93,8 +101,9 @@
         width: 30% ;
         height: 65%;
     }
-
 }
+
+
 </style>
 
 <?php $style = ob_get_contents();?>
@@ -102,7 +111,15 @@
 <?php ob_start();?>
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
-<br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+<div class="accountWrapper">
+    <div class="accountBox">
+        <img class="profilePic" src="<?= $sessionImageURL;?>" alt="Profile Pic">
+        <p><?= $_SESSION['name'];?></p>
+        <p class="manageAccount">Manage Account</p>
+    </div>
+</div>
 
 <?php foreach($petPreviews as $preview):?>
     <div class = "petListElement" data-petId="<?=$preview['id']?>">
@@ -184,7 +201,75 @@
         });
     }
 
-    
+    [document.querySelector('.profilePic'), document.querySelector('.manageAccount')].forEach(item => {
+        item.addEventListener('click', event => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'index.php?action=accountView');
+            xhr.onload = function () {
+                if(xhr.status == 200){
+                    let modalPetObj = {
+                                    
+                        save : editPet,
+                        cancel : delPet,
+                    }
+                    // console.log(modalPetObj);
+                    let petView = new Modal(xhr.responseText);
+                    petView.generate(modalPetObj, allowCancel=false);   
+                        
+                    
+                    // Event Listener BUtttons
+                    let changePassword = document.querySelector("#changePassword");
+                    let cancel = document.querySelector('#cancelPW')
+
+                    // Divs
+                    let passwordDefault = document.querySelector(".passwordDefault");
+                    let changePW = document.querySelector('.changePW');
+                    
+                    // Add event listeners
+                    changePassword.addEventListener('click', event => {
+                        changePW.removeAttribute("hidden");
+                        passwordDefault.setAttribute("hidden", true);
+                    });
+
+                    cancel.addEventListener('click', event => {
+                        changePW.setAttribute("hidden", true);
+                        passwordDefault.removeAttribute("hidden") 
+                        
+                    });
+
+                    const submitButton = document.querySelector("#changePWSubmit");
+                    submitButton.addEventListener("click", event => {
+                        const currentPW = document.querySelector("#currentPW").value;
+                        const confirmPW = document.querySelector("#confirmPW").value;
+                        const newPW = document.querySelector("#newPW").value;
+
+                        const url = "./controller/changePWController.php";
+                        const params = new FormData();
+                        params.append("currentPW", currentPW);
+                        params.append("confirmPW", confirmPW);
+                        params.append("newPW", newPW);
+
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", url);
+                        xhr.addEventListener("load", () => {
+                            if (xhr.status === 200) {
+                                alert(xhr.responseText);
+                            }
+                        });
+                        xhr.send(params);
+                        // console.log(params);
+                    });
+
+                }
+
+            }
+            xhr.send(null);
+        })
+    })
+
+
+
+
 
 </script>
 <?php $content = ob_get_clean();
