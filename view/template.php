@@ -28,14 +28,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
 
 <body>
     <header>
-<<<<<<< HEAD
-    <div class="headerWrapper">   
-        <div id="headerLeft">
-            <a href="index.php">
-                <img src="./public/images/logoPet.png" alt="LOGO" height="60" width="60">
-            </a>
-        </div>
-=======
         <div class="headerWrapper">
         <?php
         if (!isset($_SESSION['id'])) { ?>
@@ -47,32 +39,22 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
         }else{
         ?>
             <div id="headerLeft">
-                <a href="index.php?action=petProfileView"><img src="./public/images/logoHeader.png"></a>
+                <a href="index.php?action=petPreview"><img src="./public/images/logoHeader.png"></a>
                 <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
         <?php
         }
         ?>
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>
             <div id="headerRight">
                 <div class="desktopWrapper">
-<<<<<<< HEAD
-                    <ul>
-                        <li><a href="index.php?action=aboutUs">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="index.php?action=legalPage">Privacy/Legal</a></li>
-                        <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
-                        
-=======
                         <div class="headerLinks">
                             <a href="index.php?action=aboutUs">About Us</a>
                             <a href="index.php?action=partners">Partners</a>
                             <a href="index.php?action=contactPage">Contact</a>
                         </div>
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             
@@ -112,18 +94,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                 <div id="mobileWrapper">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-<<<<<<< HEAD
-                            <img src="" alt="default">
-                            <a id="mobileLogin1" href="index.php?action=login">Sign In</a> 
-                        <?php 
-                        } else {
-                        ?>
-                            <img id="defaultProfileImage"  src=<?= $sessionImageURL; ?> alt="default" height="35" width="35">
-                            <a id="mobileLogin" href="index.php?action=petPreview">
-
-                                <?php echo $_SESSION['name'] ?>
-                            </a> 
-=======
                             <div class="userImageWrapper">
                                 <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
                             </div>
@@ -155,7 +125,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                                     <i class="far fa-bell"></i>
                                 </div>
                             </div>
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
                         <?php
                         }
                         ?>
@@ -166,15 +135,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <div class="btn-line"></div>
                 </div> 
                 <div class="hoverWrapper">
-<<<<<<< HEAD
-                    <ul>
-                        <li><a href="index.php?action=aboutUs">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="index.php?action=contactPage">Contact</a></li>
-                        <li><a href="index.php?action=legalPage">Privacy/Legal</a></li>
-=======
                     <div class="menuItems">
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <p><a href="index.php?action=login">Sign In</a></p>

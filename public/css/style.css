@@ -308,25 +308,6 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         color:black;
         background:  #F8C533;
     }
-<<<<<<< HEAD
-
-    #mobileLogin {
-        height: 100%;
-        /* display: flex; */
-        /* justify-content: ; */
-        position: absolute; 
-        top: 28%;
-        left: 75%;
-        padding-top: 5px;
-        margin-right: 20%;
-    }
-
-    #defaultProfileImage{
-        position: absolute;
-        top: -13%;
-        left: 45%;
-        margin-right:55%;
-=======
    
     #mobileWrapper>img{
         margin-right: 1em;
@@ -357,7 +338,6 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     }
     .menuItems>p>a{
         color: white;
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
     }
 }
 
