@@ -1,4 +1,7 @@
 <?php
+//TODO: Default image URL
+$DEFAULT_IMAGE_URL = "./private/profile/defaultProfile.png";
+$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
 
 // TODO: Use $style for additional css
 $style = NULL;
@@ -10,15 +13,14 @@ $style = NULL;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
-
-
-
     <!-- FONT LINKS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
-
+    <!-- Franco -->
+    <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script> 
+    <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
     <?= ($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
@@ -57,7 +59,7 @@ $style = NULL;
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             
-                            <div><img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                            <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
                             <div>
                                 <a href="index.php?action=login">Sign In</a>
                                 <a class="headerSignUp" href="index.php?action=registration">Sign Up</a>
@@ -65,8 +67,8 @@ $style = NULL;
                             <?php 
                         } else {
                         ?>
-                            <div class="userImage">
-                                <div><img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                            <div class="userImageWrapper">
+                                <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
                                 <!-- <div><i class="fas fa-star"></i></div> -->
                                 <div class="stars">
                                     <img class="" src="./public/images/star.png" alt="default">
@@ -92,8 +94,8 @@ $style = NULL;
                 <div id="mobileWrapper">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <div class="pawImageWrapper">
-                                <img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default">
+                            <div class="userImageWrapper">
+                                <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
                             </div>
                             <div class="mobileSignInWrapper">
                                 <a class="mobileSignIn" href="index.php?action=login">Sign In</a> 
@@ -102,9 +104,10 @@ $style = NULL;
                         } else {
                         ?>  
                             <div class="mobileLoggedIn">
-                                <div class="userImage">
-                                    <div><img class="pawImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
-                                    <!-- <div><i class="fas fa-star"></i></div> -->
+                                <div class="userImageWrapper">
+                                    <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                                    <!-- <div class="userImage"> -->
+                                    <!-- <div><img src=<?= $sessionImageURL;?> alt="default"></div> -->
                                     <div class="stars">
                                         <img class="" src="./public/images/star.png" alt="default">
                                         <img class="" src="./public/images/star.png" alt="default">
@@ -132,7 +135,11 @@ $style = NULL;
                         <div class="btn-line"></div>
                 </div> 
                 <div class="hoverWrapper">
-                    <div class="menuItems">
+                    <!-- <div class="menuItems"> -->
+                    <ul>
+                        <li><a href="index.php?action=aboutUs">About Us</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <p><a href="index.php?action=login">Sign In</a></p>
@@ -141,6 +148,11 @@ $style = NULL;
                         } else {
                         ?>
                             <p><a href="index.php?action=logout">Sign Out</a></p>
+                        <!-- <form id="signOutForm" method="POST">
+                        </form>
+                            Franco
+                         <li><a href="index.php?action=logout">Sign Out</a></li>  -->
+                        <li><a href="#" onclick="signAllOut()">Sign Out</a></li> -->
                         <?php }
                         ?>
                         <p><a href="#">About Us</a></p>
@@ -149,6 +161,10 @@ $style = NULL;
                     </div>
                 </div>
                 <!-- The following script controls menu animation on Click -->
+
+                <!-- //Franco -->
+                <script src="./public/js/googlelogin.js"></script>
+                <script src="./public/js/kakaologin.js"></script>
                 <script> 
                     // select dom items 
                     const menuBtn =  
@@ -174,6 +190,29 @@ $style = NULL;
                             showMenu = false; 
                         } 
                     } 
+
+                    //Franco 
+                    // function signAllOut(){
+
+                    //     //sign out from google
+                    //     googleSignOut();
+                    //     logoutWithKakao();
+
+                    //     const form = document.querySelector("#signOutForm");
+                    //     form.action = "index.php?action=logout";
+                    //     form.submit();
+                    // }
+
+                    function initGoogle(){
+                        const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
+                        gapi.load('auth2', function() {
+                        gapi.auth2.init({client_id:CLIENT_ID});
+                         });
+                    }
+
+                    function initKakao(){
+                        Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
+                    }
                 </script> 
             </div>
         </div> 
@@ -219,7 +258,6 @@ $style = NULL;
         Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
         Request our corporate name & address by email.
         </p>
-
     </footer>
     <script src="./public/js/carousel.js"></script>
 </body>

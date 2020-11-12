@@ -39,6 +39,7 @@
 
 </style>
 
+<?php if($petProfile != false){ ?>
 
 <div class=petProfile>
     <div class="petProfileMainContent">
@@ -57,5 +58,12 @@
         <img class="petProfileImage" src="./public/images/testImage<?=$petProfile['photo']?>.jpg" />
     </div>
 </div>
+
+
+<?php }else{
+    echo "We are not able to find your pet information";
+}
+?>
+
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>

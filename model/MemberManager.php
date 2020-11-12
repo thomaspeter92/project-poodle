@@ -1,3 +1,4 @@
+      
 <?php 
 require_once("Manager.php");
 /**
@@ -29,61 +30,52 @@ class MemberManager extends Manager{
         return password_verify($passwordLogin, $hashed_password);
     }
     
-
-    public function addNewMember($params){
+    public function getMemberDataByEmail($email) {
+        $email = htmlspecialchars($email);
         $db = $this->dbConnect();
-        $name = htmlspecialchars($params['username']);
-        $email = htmlspecialchars($params['email']);
-        $password = htmlspecialchars($params['password']);
-        $confirmPassword = htmlspecialchars($params['confirmpass']);
-       
-       
-        // if($password != $confirmPassword){
-        //     return false;
-        // }
-        
-        //grabbed the existing email from database
-        $req = $db->prepare("SELECT email from member WHERE email = ?");
-        $req->bindParam(1, $email, PDO::PARAM_STR);
-        $req->execute();
-        $user = $req->fetch(PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        
-        //if email exists in the db then we return false
-        // if($user){
-        //     return false;
-        // }
-
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-          
-        }else{
-            return false;
-        }
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $newuser = $db->prepare("INSERT INTO member(name, password, email) VALUES(?,?,?)");
-        $newuser->bindParam(1,$name, PDO::PARAM_STR);
-        $newuser->bindParam(2,$hashedPassword, PDO::PARAM_STR);
-        $newuser->bindParam(3,$email, PDO::PARAM_STR);
-        $newuser->execute();
-        $newuser->closeCursor();
-        
-
-
-        return true;
+        $query = "SELECT id, name, kakao, google FROM member WHERE email=:email";
+        $response = $db->prepare($query);
+        $response->bindParam('email', $email, PDO::PARAM_STR);
+        $response->execute();
+        $data = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        return $data;
     }
 
-    public function createSession($params){
+    public function getMemberDataByID($id) {
+        $id = htmlspecialchars($id);
         $db = $this->dbConnect();
-        $email = htmlspecialchars($params['email']);
-        $memberLogin = $db->prepare("SELECT id, email, name FROM member WHERE email=?");
-        $memberLogin->bindParam(1,$email, PDO::PARAM_STR);
-        $memberLogin->execute();
-        $user = $memberLogin->fetch(PDO::FETCH_ASSOC);
-        $membername = $user['name'];
-        $memberid = $user['id'];
-        $_SESSION['name'] = $membername;
-        $_SESSION['id'] = $memberid;
-        // echo $_SESSION['name'];
-        $memberLogin->closeCursor();
+        $query = "SELECT id, name, kakao, google FROM member WHERE id=:id";
+        $response = $db->prepare($query);
+        $response->bindParam('id', $id, PDO::PARAM_STR);
+        $response->execute();
+        $data = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        return $data;
+    }
+
+    function addNewMember($params) {
+        $name = htmlspecialchars($params["name"]);
+        $password = htmlspecialchars($params["password"]);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $email = htmlspecialchars($params["email"]);
+        $kakao = htmlspecialchars($params["kakao"]);
+        $google = htmlspecialchars($params["google"]);
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            return false;
+        }
+        $db = $this->dbConnect();
+        $query = "INSERT INTO member(name, password, email, kakao, google) 
+                                VALUES(:name, :password, :email, :kakao, :google)";
+        $response = $db->prepare($query);
+        $response->bindValue(":name", $name, PDO::PARAM_STR);
+        $response->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
+        $response->bindValue(":email", $email, PDO::PARAM_STR);
+        $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
+        $response->bindValue(":google", $google, PDO::PARAM_INT);
+        $result = $response->execute();
+        $response->closeCursor();
+        return $result;
     }
 }
