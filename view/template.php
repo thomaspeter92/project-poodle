@@ -4,7 +4,7 @@ $DEFAULT_IMAGE_URL = "./private/profile/defaultProfile.png";
 $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
 
 // TODO: Use $style for additional css
-$style = NULL;
+// $style = NULL;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,14 +21,14 @@ $style = NULL;
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script> 
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
-    <?= ($style) ? $style : ""; ?>
+    <?= isset($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
 </head>
 
 <body>
     <header>
-    <div class="headerWrapper">
+        <div class="headerWrapper">
         <?php
         if (!isset($_SESSION['id'])) { ?>
             <div id="headerLeft">
@@ -45,9 +45,9 @@ $style = NULL;
         <?php
         }
         ?>
-        <div id="middleHeader">
+            <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
-        </div>
+            </div>
             <div id="headerRight">
                 <div class="desktopWrapper">
                         <div class="headerLinks">
@@ -55,7 +55,6 @@ $style = NULL;
                             <a href="index.php?action=partners">Partners</a>
                             <a href="index.php?action=contactPage">Contact</a>
                         </div>
-                        
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             
@@ -244,15 +243,26 @@ $style = NULL;
                 </a>
             </li>
             <!-- Meet the team link -->
-        </ul>    
+        </ul>
         <p>
         © 2020 XXXXXXXX.com is a registered trademark. All rights reserved. 
         Macys.com, LLC, 151 West 34th Street, New York, NY 10001. Macy's 
         Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
         Request our corporate name & address by email.
         </p>
+        <div id="partner-icons-list">
+            <div id="icon-partner-wcoding-large">
+                <a href="http://www.wcoding.com/" title="wcoding">
+                    <img src="./public/images/partners/wcoding1.png" alt="wcoding">
+                </a>
+            </div>
+            <div id="icon-partner-lechienblanc-large">
+                <a href="https://www.instagram.com/lechienblancseoul/" title="lechienblanc">
+                    <img src="./public/images/partners/leChienBlanc.jpg" alt="lechienblanc">
+                </a>
+            </div>
+        </div>
     </footer>
-    <script src="./public/js/carousel.js"></script>
 </body>
 
 </html>
