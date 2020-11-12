@@ -29,3 +29,6 @@ function aboutUs(){
 function contactPage(){
     require('./view/contactPageView.php');
 }
+function legalPage(){
+    require('./view/legalPageView.php');
+}

@@ -122,7 +122,9 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
 
     /* Styling the menu button */
     .menu-btn { 
-        /* position: absolute;  */
+        position: absolute; 
+        top: 28%;
+        left: 84%;
         z-index: 20; 
         margin-left: 15px;
         padding-top: 5px; 
@@ -132,8 +134,8 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
   
     /* Styling the hamburger lines */
     .menu-btn .btn-line { 
-        width: 28px; 
-        height: 3px; 
+        width: 35px; 
+        height: 4px; 
         margin: 0 0 5px 0; 
         background: black; 
         transition: all 0.5s ease-out; 
@@ -147,7 +149,7 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     /* Styling the three lines  
         to make it an X */
     .menu-btn.close .btn-line:nth-child(1) { 
-        transform: rotate(45deg) translate(5px, 5px);
+        transform: rotate(45deg) translate(7px, 5px);
     } 
   
     .menu-btn.close .btn-line:nth-child(2) { 
@@ -188,7 +190,21 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     }
 
     #mobileLogin {
+        height: 100%;
+        /* display: flex; */
+        /* justify-content: ; */
+        position: absolute; 
+        top: 28%;
+        left: 75%;
         padding-top: 5px;
+        margin-right: 20%;
+    }
+
+    #defaultProfileImage{
+        position: absolute;
+        top: -13%;
+        left: 45%;
+        margin-right:55%;
     }
 }
 

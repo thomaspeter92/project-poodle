@@ -17,6 +17,7 @@ body{
 
 
 .modalMainDiv{
+    z-index: 30;
     position: absolute;
     position: fixed;
     top:0%;

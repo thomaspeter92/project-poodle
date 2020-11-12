@@ -61,6 +61,9 @@ try {
         case "contactPage":
             contactPage();
             break;
+        case "legalPage":
+            legalPage();
+            break;
         case "kakaoLogin":
             $kakaoSignUp = isset($_REQUEST["kakaoSignUp"]) ? $_REQUEST["kakaoSignUp"] : NULL;
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;

@@ -31,7 +31,7 @@ $style = NULL;
     <div class="headerWrapper">   
         <div id="headerLeft">
             <a href="index.php">
-                <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40">
+                <img src="./public/images/logoPet.png" alt="LOGO" height="60" width="60">
             </a>
         </div>
             <div id="middleHeader">
@@ -42,7 +42,9 @@ $style = NULL;
                     <ul>
                         <li><a href="index.php?action=aboutUs">About Us</a></li>
                         <li><a href="#">Partners</a></li>
+                        <li><a href="index.php?action=legalPage">Privacy/Legal</a></li>
                         <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
+                        
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <img src="" alt="default"><li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
@@ -66,11 +68,11 @@ $style = NULL;
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <img src="" alt="default">
-                            <a id="mobileLogin" href="index.php?action=login">Sign In</a> 
+                            <a id="mobileLogin1" href="index.php?action=login">Sign In</a> 
                         <?php 
                         } else {
                         ?>
-                            <img src=<?= $sessionImageURL;?> alt="default">
+                            <img id="defaultProfileImage" src=<?= $sessionImageURL; ?> alt="default" height="35" width="35">
                             <a id="mobileLogin" href="index.php?action=petPreview">
 
                                 <?php echo $_SESSION['name'] ?>
@@ -89,6 +91,7 @@ $style = NULL;
                         <li><a href="index.php?action=aboutUs">About Us</a></li>
                         <li><a href="#">Partners</a></li>
                         <li><a href="index.php?action=contactPage">Contact</a></li>
+                        <li><a href="index.php?action=legalPage">Privacy/Legal</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                         <li><a href="index.php?action=login">Sign In</a></li>
