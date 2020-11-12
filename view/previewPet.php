@@ -132,8 +132,19 @@
         //something
     }
 
+
+
     function addEditPet() {
-        let xhr = new XMLHttpRequest();
+        let addPetForm = document.querySelector('#addPetForm');
+        let petName = document.querySelector('#name');
+        let petType = document.querySelector('#type');
+        let petBreed = document.querySelector('#breed');
+        let petAge = document.querySelector('#age');
+        
+        if (petName.value < 2 || petType.value < 2 || petBreed.value < 2 || parseInt(petAge.value) < 0) {
+            return null;
+        } else {
+            let xhr = new XMLHttpRequest();
             let addPetForm = document.querySelector('#addPetForm');
             let params = new FormData(addPetForm);
             xhr.open("POST", "index.php?action=addEditPet");
@@ -144,6 +155,7 @@
             }
             xhr.send(params);
             location.reload();
+        }
     }
 
     function addEditFormDisplay(petId) {

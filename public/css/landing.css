@@ -22,6 +22,10 @@ body {
     z-index: -1;
 }
 
+.mobileCarousel {
+    display: none;
+}
+
 #carouselTextBox {
     width: 300px;
     height: 250px;
@@ -164,46 +168,24 @@ body {
 
 #content3 {
     height: 90vh;
-    background-image: url(../images/greyWallpaper.png);
+    /* background-image: url(../images/greyWallpaper.png); */
     background-size: cover;
-    background-color: white;
+    background-color: rgb(248, 248, 248);
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     position: relative;
 }
 
-.content3inner {
-    width: 25%;
-    height: 70%;
-    background-image: url(../images/portraitDog1.jpg);
-    background-size: cover;
-    border-radius: 50px 0px 50px 0px;
-    transition: 0.3s;
-    overflow: hidden;
-    position: relative;
-}
-
-.content3inner:nth-child(2){
-    background-image: url(../images/portraitDog2.jpg);
-}
-
-.content3inner:nth-child(3){
-    background-image: url(../images/portraitDog3.jpg);
-}
-
-.content3inner > div {
-    transition: 2s;
-}
-
-.content3inner:hover {
-    transform: translateY(-15px);
+#content3 img{
+    width: 45%;
+    border-radius: 10px;
     box-shadow: 5px 10px 18px #acacac;
+
 }
 
-.content3selected {
-    transform: translateY(-15px);
-    box-shadow: 5px 10px 18px #acacac;
+#content3 img:nth-of-type(3) {
+    display: none;
 }
 
 #content3text {
@@ -214,48 +196,16 @@ body {
     font-weight: bold;
 }
 
-.clickMe {
-    background-image: url(../images/clickMe.png);
-    background-size: cover;
-    width: 100px;
-    height: 100px;
+#leftRightArrow {
     position: absolute;
-    bottom: 10px;
-    animation: bounce 1s infinite;
+    right: 5%;
+    top: 5%;
+    font-size: 2.5em;
 }
 
-.content3hidden {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    text-align: center;
-    overflow: hidden;
-    opacity: 0;
-    transition: .5s ease-in-out;
-    padding-right: 20px;
-}
-
-.content3reveal {
-    opacity: 1;
-    z-index: 100;
-    position: absolute;
-}
-
-.content3hidden * {
-    border-top: 1px solid lightgray;
-}
-
-.profileImageBall {
-    background-image: url(../images/portraitDog2\ copy.jpg);
-    background-size: cover;
-    width: 100px;
-    height: 100px;
+#leftRightArrow i {
+    box-shadow: 5px 10px 18px #acacac;
     border-radius: 100%;
-    border: #72ddf7 5px solid;
 }
 
 
@@ -270,6 +220,18 @@ body {
     flex-direction: row;
 }
 
+.largeImage{
+    height: 100%; 
+    margin-bottom: 50px;
+}
+
+/* ************ EXPANDING CONTENT AREA ***************** */
+
+#expandingSection {
+    height: 100vh;
+    background-color: rgb(248, 248, 248);
+    flex-direction: row;
+}
 #expandingContainer {
     position: relative;
     display: flex;
@@ -280,7 +242,7 @@ body {
 }
 
 .insideContainer {
-    height: 65px;
+    height: 50px;
     width: 100%;
     text-align: center;
     color: black;
@@ -288,6 +250,8 @@ body {
     margin-bottom: 10px;
     background-color: white;
     border-radius: 50px;
+    box-shadow: 5px 10px 18px #acacac;
+
 }
 
 .insideContainer:hover {
@@ -304,6 +268,7 @@ body {
     display: inline-block;
     font-weight: normal;
     text-align: left;
+    padding-top: 5px;
 }
 
 .insideContent {
@@ -324,16 +289,17 @@ body {
 }
 
 .insideContent p {
-    font-size: 0.3em;
+    font-size: 1em;
     color: black;
     padding-right: 10px;
 }
 
 
-.fas {
+.downArrow {
     transition: .6s;
     color: #72ddf7;
     ;
+    font-size: 2em;
 }
 
 .arrowClick {
@@ -368,7 +334,6 @@ body {
     margin: 0;
     font-weight: lighter;
 }
-
 
 /* ****************** CONTENT 5 AREA **************** */
 
@@ -434,33 +399,7 @@ body {
 }
 
 /* ******************MEDIA QUERY*************************************** */
-
 @media (max-width: 900px) {
-
-    #carousel {
-        height: 80vh;
-        background-image: url(../images/portraitDog5.jpg);
-        background-size: cover;
-    }
-
-    #carouselTextBox {
-        display: none;
-    }
-
-    #carousel > img {
-        display: none;
-    }
-
-    #content1 {
-        height: auto;
-        padding-bottom: 30px;
-    }
-
-    #content1container {
-        flex-direction: column;
-        justify-content: space-between;
-        height: 90%;
-    }
 
     #content2 {
         flex-direction: column;
@@ -480,18 +419,99 @@ body {
     }
 
     #content3 {
+        height: auto;
+    }
+
+    #content3 img {
+        margin: 80px 0 50px 0;
+    }
+
+
+    #content4 {
         flex-direction: column;
-        height: 200vh;
     }
 
-    .content3inner {
-        width: 80%;
-        height: 80%;
-        margin: 5%;
+    #content4section {
+        width: 90%;
     }
 
-    .content3inner:nth-of-type(1) {
-        margin-top: 20%;
+    .content4article h5 {
+        font-size: .2;
+        text-align: center;
+    }
+    .content4article p {
+        text-align: center;
+        font-size: .5em;
+        margin-bottom: 20px;
+    }
+
+    #expandingSection {
+        flex-direction: column;
+        height: 90vh
+    }
+
+    #expandingContainer {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .insideContainer {
+        height: auto;
+    }
+
+    .largeImage{
+        height: 50%;
+    }
+}
+
+@media (max-width:750px) {
+    #carouselTextBox {
+        display: none;
+    }
+
+    #carouselImg {
+        display: none;
+    }
+
+    .mobileCarousel {
+        display: initial;
+        width: 100%;    }
+
+    #content1 {
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    #content1container {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
+    }
+
+    #content3 {
+        flex-direction: column;
+    }
+
+    #content3 img {
+        width: 70%;
+        margin: 15px 0 15px 0;
+    }
+
+    #content3 img:nth-of-type(1) {
+        margin-top: 80px;
+    }
+
+    #content3 img:nth-of-type(3) {
+        display: initial;
+        margin-bottom: 25px;
+    }
+
+    #leftRightArrow {
+        display: none;
+    }
+
+    .largeImage {
+        display: none;
     }
 
     #content4 {
@@ -499,39 +519,88 @@ body {
         height: auto;
     }
 
-    #expandingContainer {
-        /* height: 10%; */
-        width: 95%;
-    }
-
-    .insideContainer > h3 {
-        font-size: .5em;
-    }
-
-    .afterClick {
-        height: 80%;
-    }
-
-    .fas {
-        font-size: .5em;
-    }
-
     #content4section {
         width: 95%;
     }
 
-    .content4article h5 {
-        font-size: .2;
+    #expandingSection {
+        height: auto;
+    }
+
+    #expandingContainer h3{
+        font-size: 1.2em;
     }
 
     #content5 {
-        height: 100vh;
+        height: 155vh;
     }
 
     .content5div {
-        width: 49%;
-        height: 33%;
+        width: 50%;
+        height: 27%;
+
     }
+
+    .content5div:nth-of-type(1) {
+        width: 100%;
+        height: 20%;
+    }
+
+    .content5div h5 {
+        margin: 15px 0 0px 0;
+        text-align: center;
+        font-size: 2em;
+    }
+    
+
+    .arrowBall {
+        font-size: 1.5em;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    /* #carousel {
+        height: 80vh;
+        background-image: url(../images/portraitDog5.jpg);
+        background-size: cover;
+    } */
+
+    #carouselTextBox {
+        display: none;
+    }
+
+    #content1 {
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    #content1container {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
+    }
+
+    .content5div h5 {
+        font-size: 1.5em;
+    }
+
+    .content5div p {
+        font-size: .5em;
+    }
+
+    .content5div:nth-of-type(3) {
+        background-image: url(../images/dogWalk2.jpg);
+        background-size: cover;    
+    }
+
+    .content5div:nth-of-type(7) {
+        background-image: url(../images/dogWalk3.jpg);
+        background-size: cover;    
+    }
+
+
 }
 
 

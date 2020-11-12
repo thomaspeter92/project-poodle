@@ -11,6 +11,10 @@ ob_start();
     <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel3.jpg" alt="" class="carouselImg">
 
+    <img src="./public/images/dogCarousel0.jpg" alt="" class="carouselImg mobileCarousel">
+    <img src="./public/images/contactPageMobile.jpg" alt="" class="carouselImg mobileCarousel">
+    <img src="./public/images/portraitDog2.jpg" alt="" class="carouselImg mobileCarousel">
+
     <div id="carouselTextBox">
             <p>I LOVE DOGS! WOOF!</p>
             <div id="carouselButton" class="button"><p>LEARN MORE</p></div>
@@ -60,7 +64,12 @@ ob_start();
 <!-- ************************* CONTENT 3 AREA **************** -->
 <div id="content3" class="content">
     <p id="content3text">+20,000 Profiles</p>
-    <div class="content3inner">
+    <div id="leftRightArrow"><i class="fas fa-arrow-circle-left"></i> <i class="fas fa-arrow-circle-right"></i></div>
+    <img class="content3image" src="./public/images/profilePreview.png" alt="">
+    <img class="content3image" src="./public/images/profilePreview2.png" alt="">
+    <img class="content3image" src="./public/images/profilePreview3.png" alt="">
+
+    <!-- <div class="content3inner">
         <div class="clickMe"></div>
         <section class="content3hidden">
             <div class="profileImageBall"></div>
@@ -79,8 +88,8 @@ ob_start();
             <p>Friendliness: *****</p>
             <p>Fitness Level: ***</p>
         </section>
-    </div>
-    <div class="content3inner">
+    </div> -->
+    <!-- <div class="content3inner">
         <div class="clickMe"></div>
         <section class="content3hidden">
             <div class="profileImageBall"></div>
@@ -89,13 +98,14 @@ ob_start();
             <p>Friendliness: *****</p>
             <p>Fitness Level: ***</p>
         </section>
-    </div>
+    </div> -->
 </div>
 
 
 <!-- ************************* CONTENT 4 AREA **************** -->
 <div id="content4" class="content">
-    <div id="expandingContainer">
+    <img class="largeImage" src="./public/images/contactPageMobile.jpg">
+    <!-- <div id="expandingContainer">
         <div class="insideContainer inside1">
             <h3>VR Features</h3><i class="fas fa-arrow-circle-down"></i>
             <div class="insideContent">
@@ -121,7 +131,7 @@ ob_start();
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <section id="content4section">
@@ -136,9 +146,40 @@ ob_start();
 </section>
 </div>
 
+<div id="expandingSection" class="content">
+    <div id="expandingContainer">
+            <div class="insideContainer inside1">
+                <h3>VR Features</h3><i class="fas fa-arrow-circle-down downArrow"></i>
+                <div class="insideContent">
+                    <article>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur doloremque temporibus porro dolorum minima id quo aliquam aspernatur molestiae cupiditate repellendus, similique laborum ab, dolore iure quaerat inventore mollitia!</p>
+                    </article>
+                </div>
+
+
+            </div>
+            <div class="insideContainer inside2">
+                <h3>Create Events</h3><i class="fas fa-arrow-circle-down downArrow"></i>
+                <div class="insideContent">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis dolorem architecto iure modi nobis, aliquid ex. Exercitationem quo quos laudantium nihil ullam cumque? At dolores voluptates quod laborum. Omnis, maxime? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex. Explicabo eaque provident odit doloremque consequatur deserunt error mollitia cumque debitis eius dolor ullam suscipit perferendis porro expedita, quasi amet! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, pariatur! Sapiente vero delectus quas optio officiis iusto!</p>
+                </div>
+
+            </div>
+            <div class="insideContainer inside3">
+                <h3>Meet Other Owners</h3><i class="fas fa-arrow-circle-down downArrow"></i>
+                <div class="insideContent">
+                    <div class="insideContentText">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet repudiandae consequatur cumque sequi nulla aliquam maiores tempora labore ipsa fugit exercitationem, culpa possimus pariatur dicta a iusto molestiae delectus dolorem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="largeImage" src="./public/images/portraitDog3.jpg" alt="">
+</div>
+
 <div id="content5" class="content">
         <div class="content5div">
-            <h5>Introducing New Ways to Meet Friends and Enjoy Time With Your Pets</h5>
+            <h5>Introducing New Ways to Meet Friends and Enjoy Time With Your Pets...</h5>
         </div>
         <div class="content5div">
             <h5>Browse Events Nearby</h5>
@@ -168,8 +209,6 @@ ob_start();
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
 </div>
-
-<a href="index.php?action=petPreview&ownerId=1">Testing preview</a>
 
 <script src="./public/js/carousel.js"></script>
 
