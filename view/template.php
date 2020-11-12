@@ -72,7 +72,7 @@ $style = NULL;
                         <?php 
                         } else {
                         ?>
-                            <img id="defaultProfileImage" src=<?= $sessionImageURL; ?> alt="default" height="35" width="35">
+                            <img id="defaultProfileImage"  src=<?= $sessionImageURL; ?> alt="default" height="35" width="35">
                             <a id="mobileLogin" href="index.php?action=petPreview">
 
                                 <?php echo $_SESSION['name'] ?>
