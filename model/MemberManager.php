@@ -80,12 +80,11 @@ class MemberManager extends Manager{
     }
 
     function changePW($newPW, $userID) {
-        $newPW = htmlspecialchars($newPW["newPW"]);
+        $newPW1 = htmlspecialchars($newPW);
         $db = $this->dbConnect();
         $query = "UPDATE member SET password = :password WHERE id = :userID";
         $response = $db->prepare($query);
-        // $response->bindValue(":password", password_hash($newPW, PASSWORD_DEFAULT), PDO::PARAM_STR);
-        $response->bindValue(":password", $newPW, PDO::PARAM_STR);
+        $response->bindValue(":password", password_hash($newPW1, PASSWORD_DEFAULT), PDO::PARAM_STR);
         $response->bindValue(":userID", $userID, PDO::PARAM_INT);
         $result = $response->execute();
         $response->closeCursor();

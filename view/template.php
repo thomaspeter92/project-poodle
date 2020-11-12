@@ -263,11 +263,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
             </div>
         </div>
     </footer>
-<<<<<<< HEAD
     <script src="./public/js/carousel.js"></script>
     
-=======
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
 </body>
 
 </html>

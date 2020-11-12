@@ -244,7 +244,6 @@
         });
     }
 
-<<<<<<< HEAD
     [document.querySelector('.profilePic'), document.querySelector('.manageAccount')].forEach(item => {
         item.addEventListener('click', event => {
             let xhr = new XMLHttpRequest();
@@ -253,8 +252,12 @@
                 if(xhr.status == 200){
                     let modalPetObj = {
                                     
-                        save : editPet,
-                        cancel : delPet,
+                        save : function saveAccountChanges() {
+
+                        },
+                        cancel : function closeModal() {
+                            
+                        },
                     }
                     // console.log(modalPetObj);
                     let petView = new Modal(xhr.responseText);
@@ -312,7 +315,6 @@
     })
 
 
-=======
 
 //KEEP THESE FUNCTIONS INCASE BUGS. MAY NEED TO REVERT BACK TO THEM
 
@@ -349,7 +351,6 @@
     //         }
     //         xhr.send(null);
     // })
->>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
 
 
 
