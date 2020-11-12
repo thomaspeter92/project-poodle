@@ -55,6 +55,12 @@ try {
         case "logout":
             logout();
             break;
+        case "addEditInput":
+            displayAddEditInput(!empty($_REQUEST['petId']) ? $_REQUEST['petId'] : '');
+            break;
+        case "addEditPet":
+            petAddEdit($_REQUEST);
+            break;
         case "aboutUs":
             aboutUs();
             break;
