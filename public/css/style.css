@@ -341,13 +341,11 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         justify-content: space-between;
         padding-left: 10em;
         padding-right: 10em;
+        padding-top: 1em;
     }
     .contactPage1>h1{
         font-size: 5em;
         margin-top: 0px;  
-    }
-    .topContent{ 
-        padding-top: 3em;
     }
     .circle{
         background-color: rgba(233, 233, 233, .5);
@@ -385,13 +383,16 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         height: 100vh;
     }
     .contactPage1>h1{
-        font-size: 3em;
-        
+        font-size: 300%;   
     }
     .topContent{
         padding: auto;
         height: 100vh;
         width: 100vw;
+    }
+    .topContent>div{
+        height: 25vh;
+        padding: auto;
     }
     .circle{
         background-color: rgba(233, 233, 233, .5);
@@ -421,15 +422,10 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         width: 8em;
     }
 }
-@media screen and (max-height: 812px){
-    .contactPageEmail, .contactPageNumber,.contactPageFax {
-        margin-top: 10%;
-    }
-}
 
 @media screen and (max-height: 653px){
     .contactPageEmail, .contactPageNumber,.contactPageFax {
-        margin-top: 3%;
+        margin-top: 1%;
     }
 }
 @media screen and (max-height: 667px){
