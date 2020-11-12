@@ -8,6 +8,13 @@ function nextImage() {
     carouselImages[imageCounter].style.opacity = 1;
 }
 
+function nextImageMobile() {
+    mobileCarousel[imageCounter2].style.opacity = 0;
+    imageCounter2 == 2 ? imageCounter2 = -1 : null;
+    imageCounter2 += 1;
+    mobileCarousel[imageCounter2].style.opacity = 1;
+}
+
 function scrollAppear() {
     let textBox = document.querySelector('.boxAppearBefore');
     let boxPosition = textBox.getBoundingClientRect().top;
@@ -55,6 +62,12 @@ let imageCounter = 0;
 if(carouselImages[imageCounter] ) {
     carouselImages[imageCounter].style.opacity = 1;
     setInterval(nextImage, nextImageDelay);
+}
+const mobileCarousel = document.querySelectorAll('.mobileCarousel');
+let imageCounter2 = 0; 
+if(mobileCarousel[imageCounter2] ) {
+    mobileCarousel[imageCounter2].style.opacity = 1;
+    setInterval(nextImageMobile, nextImageDelay);
 }
 
 let content3divs = document.querySelectorAll('.content3inner');

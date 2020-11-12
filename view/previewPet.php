@@ -140,26 +140,68 @@
     </div>
 <?php endforeach;?>
 
+<button id="addPetButton"> Add a Pet!</button>
+
+
 <script src="./public/js/Modal.js"></script>
 <script>
-
-    function editPet(petId) {
-
-        console.log("EDITION OF PEEEEEETTTTT");
-        let xhr = new XMLHttpRequest();
-            // xhr.open('GET', 'index.php?action=editPet&petid='+petId);
-            // xhr.onload = function () {
-            //     if(xhr.responseText == "success") {
-
-            //     }
-            // }
-            // xhr.send(null);
-    }
 
     function delPet (petId){
         //something
     }
 
+
+
+    function addEditPet() {
+        let addPetForm = document.querySelector('#addPetForm');
+        let petName = document.querySelector('#name');
+        let petType = document.querySelector('#type');
+        let petBreed = document.querySelector('#breed');
+        let petAge = document.querySelector('#age');
+        
+        if (petName.value < 2 || petType.value < 2 || petBreed.value < 2 || parseInt(petAge.value) < 0) {
+            return null;
+        } else {
+            let xhr = new XMLHttpRequest();
+            let addPetForm = document.querySelector('#addPetForm');
+            let params = new FormData(addPetForm);
+            xhr.open("POST", "index.php?action=addEditPet");
+            xhr.onload = function() {
+                if (xhr.status ==  200){
+                    this.innerHTML = " ";
+                }
+            }
+            xhr.send(params);
+            location.reload();
+        }
+    }
+
+    function addEditFormDisplay(petId) {
+        let xhr = new XMLHttpRequest();
+        if (petId) {
+            xhr.open('GET', 'index.php?action=addEditInput&petId='+petId);
+        } else {
+            xhr.open('GET', 'index.php?action=addEditInput');
+        }
+        xhr.onload = function () {
+            if(xhr.status == 200){
+                console.log(xhr.responseText);
+                let modalPetObj = {
+                    Submit : addEditPet,
+                }
+                console.log(modalPetObj);
+                let petView = new Modal(xhr.responseText);
+                petView.generate(modalPetObj, allowCancel=false);
+            }
+        }
+        xhr.send(null);
+    }
+
+    let addPetButton = document.querySelector('#addPetButton');
+    addPetButton.addEventListener('click', function(e) {
+        let petId = e.target.getAttribute("data-petId")
+        addEditFormDisplay(petId)
+    }); 
 
     let elements = document.getElementsByClassName("petListElement");
     // console.log(elements);
@@ -183,8 +225,9 @@
                 if(xhr.status == 200){
                     // console.log(xhr.responseText);
                     let modalPetObj = {
-                        
-                        edit : editPet,
+                        edit : function () {
+                            addEditFormDisplay(petId);
+                        },
                         del : delPet,
                     }
                     // console.log(modalPetObj);
@@ -201,6 +244,7 @@
         });
     }
 
+<<<<<<< HEAD
     [document.querySelector('.profilePic'), document.querySelector('.manageAccount')].forEach(item => {
         item.addEventListener('click', event => {
             let xhr = new XMLHttpRequest();
@@ -268,6 +312,44 @@
     })
 
 
+=======
+
+//KEEP THESE FUNCTIONS INCASE BUGS. MAY NEED TO REVERT BACK TO THEM
+
+    // function editPet(petId) {
+    //     let xhr = new XMLHttpRequest();
+    //         xhr.open('GET', 'index.php?action=addEditInput&petId='+petId);
+    //         xhr.onload = function () {
+    //             if(xhr.status == 200){
+    //                 console.log(xhr.responseText);
+    //                 let modalPetObj = {
+    //                     Submit : addEditPet,
+    //                 }
+    //                 console.log(modalPetObj);
+    //                 let petView = new Modal(xhr.responseText);
+    //                 petView.generate(modalPetObj, allowCancel=false);
+    //             }
+    //         }
+    //         xhr.send(null);
+    // }
+
+    // {
+    //     let xhr = new XMLHttpRequest();
+    //         xhr.open('GET', 'index.php?action=addEditInput');
+    //         xhr.onload = function () {
+    //             if(xhr.status == 200){
+    //                 console.log(xhr.responseText);
+    //                 let modalPetObj = {
+    //                     add : addEditPet,
+    //                 }
+    //                 console.log(modalPetObj);
+    //                 let petView = new Modal(xhr.responseText);
+    //                 petView.generate(modalPetObj, allowCancel=false);
+    //             }
+    //         }
+    //         xhr.send(null);
+    // })
+>>>>>>> f3ff05c9efa4122dc786916e379185ee103186d5
 
 
 
