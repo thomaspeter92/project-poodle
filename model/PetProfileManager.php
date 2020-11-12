@@ -78,4 +78,15 @@ require_once("Manager.php");
             $req->execute();
             $req->closeCursor();
         }
+
+        public function deletePet($petId) {
+
+            $db = $this->dbConnect();
+
+            $req = $db->prepare("DELETE FROM petProfile WHERE id = :petId");
+            $req->bindParam(':petId',$petId,PDO::PARAM_INT);
+
+            $req->execute();
+            $req->closeCursor();
+        }
     }

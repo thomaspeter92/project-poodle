@@ -61,6 +61,9 @@ try {
         case "addEditPet":
             petAddEdit($_REQUEST);
             break;
+        case "delPet":
+            deletePet($_REQUEST['petId']);
+            break;
         case "aboutUs":
             aboutUs();
             break;

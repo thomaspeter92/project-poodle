@@ -25,12 +25,23 @@
         /* background-size: cover; */
     }
 
+    #wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    #contentLeft {
+        width: 90%;
+    }
+
     /* body: first-child{
         margin-top: 15%;
     } */
 
     .petListElement{
-        height: 20%;
+        height: 200px;
         width: 90%;
         margin-left: auto;
         margin-right: auto;
@@ -58,14 +69,40 @@
     .petPreviewImage{
         margin: 3%;
         border-radius: 5px;
-        width: 15% ;
-        height: 65%;
+        height: 30%;
     }
 
     .petDivPreviewImage{
         width: 40%;
         margin-top: 15%;
     }
+
+    #addPetButton {
+	background-color: #72ddf7;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:13px 76px;
+    text-decoration:none;
+    border-style: none;
+    box-shadow: 5px 10px 18px #acacac;
+    margin-bottom: 20px;
+    }
+
+    #addPetButton:hover {
+	background-color:#5cbf2a;
+    }   
+
+    #addPetButton:active {
+	position:relative;
+	top:1px;
+    }
+
+
+
 
     @media (max-device-width : 400px) {
 
@@ -93,7 +130,6 @@
         width: 30% ;
         height: 65%;
     }
-
 }
 </style>
 
@@ -104,34 +140,44 @@
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <br><br><br><br>
 
-<?php foreach($petPreviews as $preview):?>
-    <div class = "petListElement" data-petId="<?=$preview['id']?>">
-        <!-- <p>-----------------------------------</p> -->
-        <div class="petPreviewContents">
-            
-            <p>NAME <?=" : ".$preview['name'];?></p>
-            <p>BREED <?=" : ".$preview['breed'];?></p>
-            <p>AGE <?=" : ".$preview['age']." years";?></p>
-            <p>COLOR <?=" : ".$preview['color'];?></p>
-        </div>
-        <!-- <div class="petDivPreviewImage"> -->
-            <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
-            <!-- <p><a href="index.php?action=petprofile&petid=">Full Profile</a></p> -->
-        <!-- </div> -->
-        <!-- <p>-----------------------------------</p> -->
-    
+<div id="wrapper">
+    <div id="contentLeft">
+        <?php foreach($petPreviews as $preview):?>
+            <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                <div class="petPreviewContents">
+                    <p>NAME <?=" : ".$preview['name'];?></p>
+                    <p>BREED <?=" : ".$preview['breed'];?></p>
+                    <p>AGE <?=" : ".$preview['age']." years";?></p>
+                    <p>COLOR <?=" : ".$preview['color'];?></p>
+                </div>
+                <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
+            </div>
+        <?php endforeach;?>
     </div>
-<?php endforeach;?>
-
+<!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
 <button id="addPetButton"> Add a Pet!</button>
 
+</div>
 
 <script src="./public/js/Modal.js"></script>
 <script>
 
     function delPet (petId){
-        //something
+        if (confirm('Are you sure you want to delete?')) { 
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "index.php?action=delPet&petId="+petId);
+            let params = new FormData();
+            params.append("petId",petId);
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    console.log('OKURT!')
+                }
+            }
+            xhr.send(params);
+            location.reload();
+        }
     }
+
 
 
 
@@ -168,11 +214,9 @@
         }
         xhr.onload = function () {
             if(xhr.status == 200){
-                console.log(xhr.responseText);
                 let modalPetObj = {
                     Submit : addEditPet,
                 }
-                console.log(modalPetObj);
                 let petView = new Modal(xhr.responseText);
                 petView.generate(modalPetObj, allowCancel=false);
             }
@@ -187,10 +231,8 @@
     }); 
 
     let elements = document.getElementsByClassName("petListElement");
-    // console.log(elements);
     for(i=0; i<elements.length; i++){
         elements[i].addEventListener('click', function(e){
-            // we get the owner and pet id
             let target  = e.target;
             let petId = target.getAttribute("data-petId");
             let params = new FormData();
@@ -206,22 +248,18 @@
             xhr.open('GET', 'index.php?action=petprofile&petid='+petId);
             xhr.onload = function () {
                 if(xhr.status == 200){
-                    // console.log(xhr.responseText);
                     let modalPetObj = {
                         edit : function () {
                             addEditFormDisplay(petId);
                         },
-                        del : delPet,
+                        delete : function() {
+                            delPet(petId);
+                        },
                     }
-                    // console.log(modalPetObj);
                     let petView = new Modal(xhr.responseText);
                     petView.generate(modalPetObj, allowCancel=true);
                 }
             }
-            //inside event listener of AJAX
-            
-            //console.log("test");
-            // console.log()
             xhr.send(null);
         
         });

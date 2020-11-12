@@ -34,7 +34,8 @@ p {
     </p>
     <p>
         <label for="gender">Gender:</label><br>
-        <input type="text" id="gender" name="gender" value="<?=$petProfile['gender']; ?>">
+        <input type="radio" id="male" name="gender" value="male">Male
+        <input type="radio" id="female" name="gender" value="female">Female
     </p>
     <p>
         <label for="weight">Weight(kg):</label><br>
@@ -58,7 +59,7 @@ p {
     </p>
     <p>
         <input type="hidden" name="ownerId" value="<?= $_SESSION['id']; ?>">
-        <input type="hidden" name="petId" value="<?= isset($petId) ? $petId : null ;?>">
+        <input type="hidden" id="petId" name="petId" value="<?= isset($petId) ? $petId : null ;?>">
     </p>
 </form>
 
