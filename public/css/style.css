@@ -196,7 +196,7 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
 /* Partners */
 #partner-icons-list {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     border-top: 1px solid rgb(232, 232, 232);
     padding-top: 5px;
