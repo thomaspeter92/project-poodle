@@ -4,7 +4,7 @@ section {
 }
 
 section>div:first-child {
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
     height: 65px;
 }
 
