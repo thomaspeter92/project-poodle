@@ -34,6 +34,11 @@ function petAddEdit($params) {
     $addEditManager->addEditPet($params);
 }
 
+function deletePet($petId) {
+    $deleteManager = new PetProfileManager();
+    $deleteManager->deletePet($petId);
+}
+
 function aboutUs(){
     require('./view/aboutUsView.php');
 }
@@ -44,4 +49,7 @@ function showPartnersPage() {
 
 function contactPage(){
     require('./view/contactPageView.php');
+}
+function legalPage(){
+    require('./view/legalPageView.php');
 }

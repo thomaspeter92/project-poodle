@@ -71,9 +71,20 @@ require_once("Manager.php");
             $req->bindParam(':gender',$gender,PDO::PARAM_STR);
             $req->bindParam(':weight',$weight,PDO::PARAM_INT);
             $req->bindParam(':color',$color,PDO::PARAM_STR);
-            $req->bindParam(':friendliness',$friendliness,PDO::PARAM_STR);
-            $req->bindParam(':activityLevel',$activityLevel,PDO::PARAM_STR);
+            $req->bindParam(':friendliness',$friendliness,PDO::PARAM_INT);
+            $req->bindParam(':activityLevel',$activityLevel,PDO::PARAM_INT);
             $req->bindParam(':ownerId',$newPet['ownerId'],PDO::PARAM_INT);
+
+            $req->execute();
+            $req->closeCursor();
+        }
+
+        public function deletePet($petId) {
+
+            $db = $this->dbConnect();
+
+            $req = $db->prepare("DELETE FROM petProfile WHERE id = :petId");
+            $req->bindParam(':petId',$petId,PDO::PARAM_INT);
 
             $req->execute();
             $req->closeCursor();
