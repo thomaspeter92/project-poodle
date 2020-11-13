@@ -35,6 +35,11 @@ function petAddEdit($params) {
     $addEditManager->addEditPet($params);
 }
 
+function deletePet($petId) {
+    $deleteManager = new PetProfileManager();
+    $deleteManager->deletePet($petId);
+}
+
 function aboutUs(){
     require('./view/aboutUsView.php');
 }
@@ -46,9 +51,15 @@ function showPartnersPage() {
 function contactPage(){
     require('./view/contactPageView.php');
 }
+<<<<<<< HEAD
 
 function accountView($userID){
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByID($userID);
     require("./view/accountView.php");
 };
+=======
+function legalPage(){
+    require('./view/legalPageView.php');
+}
+>>>>>>> 6668fa152f3f2643e0bdb6a094a3a8f528a2d604

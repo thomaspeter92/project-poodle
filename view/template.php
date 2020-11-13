@@ -39,7 +39,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
         }else{
         ?>
             <div id="headerLeft">
-                <a href="index.php?action=petProfileView"><img src="./public/images/logoHeader.png"></a>
+                <a href="index.php?action=petPreview"><img src="./public/images/logoHeader.png"></a>
                 <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
         <?php
