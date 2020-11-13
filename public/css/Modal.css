@@ -7,9 +7,8 @@ body{
     padding:0;
 }
 
-
-
 .modalMainDiv{
+    z-index: 30;
     position: absolute;
     position: fixed;
     top:0%;
@@ -20,6 +19,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 30;
 }
 .modalSubDiv{
     box-shadow: 3px 3px 3px rgb(39, 39, 39);
@@ -29,13 +29,6 @@ body{
     border-radius: 15px;
     position: relative;
     margin: 25%;
-    /* border: 1px solid black; */
-    /* background-color: white; */
-    width: 50%;
-    height: 50%;
-    /* display: flex; */
-    /* justify-content: space-around; */
-    /* align-items: flex-end; */
 }
 
 .modalDivContent{
@@ -116,3 +109,8 @@ body{
     }
 
 }
+
+
+/* ********* STLYES FOR ModifyModal / extension of Modal.js */
+/** SPECIFIC MODAL PET */
+

@@ -49,7 +49,7 @@ try {
                 );
                 signUpWith($memberData);
             } else {
-                header("Location: index.php?action=registration&error=registration");
+                header("Location: index.php?action=petPreview&error=incomplete");
             }
             break;
         case "logout":
@@ -59,7 +59,11 @@ try {
             displayAddEditInput(!empty($_REQUEST['petId']) ? $_REQUEST['petId'] : '');
             break;
         case "addEditPet":
-            petAddEdit($_REQUEST);
+            if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
+                petAddEdit($_REQUEST);
+            } else {
+
+            }
             break;
         case "delPet":
             deletePet($_REQUEST['petId']);
@@ -72,6 +76,9 @@ try {
             break;
         case "contactPage":
             contactPage();
+            break;
+        case "legalPage":
+            legalPage();
             break;
         case "kakaoLogin":
             $kakaoSignUp = isset($_REQUEST["kakaoSignUp"]) ? $_REQUEST["kakaoSignUp"] : NULL;

@@ -51,9 +51,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
             <div id="headerRight">
                 <div class="desktopWrapper">
                         <div class="headerLinks">
-                            <a href="index.php?action=aboutUs">About Us</p>
+                            <a href="index.php?action=aboutUs">About Us</a>
                             <a href="index.php?action=partners">Partners</a>
-                            <a id="contactLink" href="index.php?action=contactPage">Contact</a>
+                            <a href="index.php?action=contactPage">Contact</a>
                         </div>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
@@ -84,6 +84,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                                 <i class="far fa-bell"></i>
                             </div>
                             <div class="signOutWrapper">
+                                <!-- <a class="signOut" href="#" onclick="signAllOut()">Sign Out</a> -->
                                 <a class="signOut" href="index.php?action=logout">Sign Out</a>  
                             </div> 
                         <?php
@@ -134,11 +135,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <div class="btn-line"></div>
                 </div> 
                 <div class="hoverWrapper">
-                    <!-- <div class="menuItems"> -->
-                    <ul>
-                        <li><a href="index.php?action=aboutUs">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="index.php?action=contactPage">Contact</a></li>
+                    <div class="menuItems">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <p><a href="index.php?action=login">Sign In</a></p>
@@ -146,16 +143,12 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <?php 
                         } else {
                         ?>
-                            <p><a href="index.php?action=logout">Sign Out</a></p>
-                        <!-- <form id="signOutForm" method="POST">
-                        </form>
-                            Franco
-                         <li><a href="index.php?action=logout">Sign Out</a></li>  -->
-                        <li><a href="#" onclick="signAllOut()">Sign Out</a></li> -->
+                        <p><a href="index.php?action=logout">Sign Out</a></p>
+                         <!-- <p><a href="#" onclick="signAllOut()">Sign Out</a></p> -->
                         <?php }
                         ?>
-                        <p><a href="#">About Us</a></p>
-                        <p><a href="#">Partners</a></p>
+                        <p><a href="index.php?action=aboutUs">About Us</a></p>
+                        <p><a href="index.php?action=partners">Partners</a></p>
                         <p><a href="index.php?action=contactPage">Contact</a></p>
                     </div>
                 </div>

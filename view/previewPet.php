@@ -21,7 +21,7 @@
         font-weight: bolder;
         /* display: flex; */
         /* align: center; */
-        background-image: url("./public/images/wallpaper.jpeg");
+        /* background-image: url("./public/images/wallpaper.jpeg"); */
         /* background-size: cover; */
     }
 
@@ -42,7 +42,7 @@
 
     .petListElement{
         height: 200px;
-        width: 90%;
+        width: 50%;
         margin-left: auto;
         margin-right: auto;
         /* padding: auto; */
@@ -93,8 +93,12 @@
     }
 
     #addPetButton:hover {
-	background-color:#5cbf2a;
-    }   
+	background-color:#ff3864;
+    }
+
+    #addPetButton:focus {
+        outline: none;
+    }
 
     #addPetButton:active {
 	position:relative;
@@ -125,10 +129,10 @@
         }
 
         .petPreviewImage{
-        margin-top: 8%;
-        border-radius: 5px;
-        width: 30% ;
-        height: 65%;
+            margin-top: 8%;
+            border-radius: 5px;
+            width: 30% ;
+            height: 65%;
     }
 }
 </style>
@@ -160,6 +164,7 @@
 </div>
 
 <script src="./public/js/Modal.js"></script>
+
 <script>
 
     function delPet (petId){
@@ -168,18 +173,10 @@
             xhr.open("POST", "index.php?action=delPet&petId="+petId);
             let params = new FormData();
             params.append("petId",petId);
-            xhr.onload = function() {
-                if (xhr.status == 200) {
-                    console.log('OKURT!')
-                }
-            }
             xhr.send(params);
             location.reload();
         }
     }
-
-
-
 
     function addEditPet() {
         let addPetForm = document.querySelector('#addPetForm');
@@ -189,6 +186,10 @@
         let petAge = document.querySelector('#age');
         
         if (petName.value < 2 || petType.value < 2 || petBreed.value < 2 || parseInt(petAge.value) < 0) {
+            petName.value < 2 ? petName.style.borderColor = 'red' : petName.style.borderColor = 'lightgrey'
+            petType.value < 2 ? petType.style.borderColor = 'red' : petType.style.borderColor = 'lightgrey' ;
+            petBreed.value < 2 ? petBreed.style.borderColor = 'red' : petBreed.style.borderColor = 'lightgrey' ;
+            parseInt(petAge.value) < 0 || petAge.value === '' ? petAge.style.borderColor = 'red' : petAge.style.borderColor = 'lightgrey' ;
             return null;
         } else {
             let xhr = new XMLHttpRequest();

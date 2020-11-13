@@ -12,9 +12,6 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 
-    body{
-
-    }
 
     .registerDiv{
         background-color: lightgrey;
@@ -93,7 +90,7 @@
     </div>
     <br>
     <div class="registerSignInDiv">
-    <a href="http://localhost/projectPoodle/index.php?action=registration">
+    <a href="http://localhost/projectPoodle/index.php?action=pet">
         <button name="login" id="login" >register</button>
     </a> 
     </div>
