@@ -76,7 +76,7 @@ require_once("Manager.php");
             $req->bindParam(':ownerId',$newPet['ownerId'],PDO::PARAM_INT);
 
             $req->execute();
-            $req->closeCursor();
+            $req->closeCursor();           
         }
 
         public function deletePet($petId) {
