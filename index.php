@@ -60,7 +60,9 @@ try {
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
-                petAddEdit($_REQUEST);
+                $file = $_FILES['photo'];
+                print_r($file);
+                // petAddEdit($_REQUEST);
             } else {
 
             }
@@ -142,6 +144,20 @@ try {
             break;
         case "eventsList":
             showEventsListPage();
+            break;
+        case "showEventDetail" :
+            showEventDetail($_REQUEST['eventId']);
+            break;
+        case "eventCommentPost" :
+            eventCommentPost($_REQUEST);
+            showEventDetail($_REQUEST['eventId']);
+            break;
+        case "deleteEventComment" :
+            deleteEventComment($_REQUEST['commentId']);
+            break;
+
+        case "loadSingleComment" :
+            loadSingleComment($_REQUEST['commentId']);
             break;
         default:
             landing();
