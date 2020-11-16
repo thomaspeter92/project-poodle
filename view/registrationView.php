@@ -11,18 +11,25 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
+    input{
+        padding-left: 2em;
+        padding-right: 2em;
+    }
     
 
     .registerDiv{
-        background-color: lightgrey;
+        display: flex;
+        justify-content: center;
+        /* background-color: lightgrey;
         font-weight: bold;
         margin: 2%;
         padding: 4%;
         border: 2px solid grey;
-        border-radius: 5px;
+        border-radius: 5px; */
     }
-
+    .registerDiv>form>p{
+        text-align: center;
+    }
     
 
     .registerButtons{
@@ -42,20 +49,20 @@
     .spaceDiv{
         margin: 2%;
     }
-
+/* 
     #subscribe{
         border-radius: 8px;
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
         border: 2px solid grey;
-    }
+    } */
 
-    #login{
+    /* #login{
         border-radius: 5px;
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
         border: 2px solid grey;
-    }
+    } */
 
 </style>
 <?php $style = ob_get_contents();?>
@@ -82,9 +89,9 @@
             <div id="kakao"></div> <!--kakao login registration here-->
             <br>
             <div class="registerButtons">
-                <input type="submit" name="subscribe" id="subscribe" value="Sign Up"><br/><br/>
-                
+                <button type="submit" name="subscribe" id="subscribe">Sign Up</button><br/><br/>
             </div>
+            <p> all fields are required </p>
         </form>
         
     </div>
@@ -110,8 +117,7 @@
         <input type="hidden" id="googlePicture" name='googlePicture'>
         <input type="hidden" id="googleUserId" name='googleUserId'>
     </form>
-    <button type='button' id='signOut' onclick='googleSignOut()'>SignOutGoogle</button>
-
+    <!-- <button type='button' id='signOut' onclick='googleSignOut()'>SignOutGoogle</button> -->
     <div>
         <button type="button" name="kakaoSignUp" id="kakaoSignUp">Kakao Sign Up</button>
     </div>

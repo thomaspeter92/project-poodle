@@ -482,10 +482,10 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     align-items: center;
     color:  rgb(233, 233, 233);
 }
-.email, .phoneNumber, .faxNumber{
+.contactEmail, .phoneNumber, .faxNumber{
     text-align: center;
 }
-.email>h2, .phoneNumber>h2, .faxNumber>h2{
+.contactEmail>h2, .phoneNumber>h2, .faxNumber>h2{
     font-weight: bold;
 }
 .contactPageHeadquarters>h1{

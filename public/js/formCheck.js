@@ -1,8 +1,8 @@
 const formCheck = () => {
-    //making sure passwords match
-    const password = document.querySelector(`.password`);
+    const password = document.querySelector(`.password`); 
     const confirmPassword = document.querySelector(`.confirmPassword`);
     const email = document.querySelector(`.email`);
+    //add `required` to your required inputs 
 
     if(confirmPassword){
         confirmPassword.addEventListener(`keyup`, function(){
@@ -34,7 +34,7 @@ const formCheck = () => {
     //only makes sure both passwords match
     if(password){
         password.addEventListener(`keyup`, function(){
-            if(password.value === confirmPassword.value.trim()){
+            if(password.value === confirmPassword.value.trim() && password.value.length > 0){
                 password.className=`blue`;
                 confirmPassword.className=`blue`;
             }else {
@@ -45,16 +45,11 @@ const formCheck = () => {
     }
 
     //email check
-    // var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    // var emailVerify = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email.value);
-    var emailVerify = emailRegex.test(email.value);
+    var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-   
     if(email){
         email.addEventListener(`keyup`, function(){
-            console.log(email.value);
-            console.log(emailVerify);
+            var emailVerify = emailRegex.test(email.value);
             if(emailVerify == true){
                 email.className = `blue`;
             }else if(emailVerify == false){
@@ -64,28 +59,16 @@ const formCheck = () => {
       
     }
 
-   const required = document.querySelector(`required`);
-   if(required){
-    required.addEventListener(`keyup`, function(){
-        console.log(required);
-        if(required.value.length > 0){
-            email.className = `blue`;
-        }else{
-            email.className = `red`;
-        }
-    });
-  
-}
     //empty input check
-    var input = document.querySelector(`input[required]`);
-    // if(input){
-    //     input.addEventListener(`keyup`, function(){
-    //         if(input.value.length > 0){
-    //             input.className = `blue`;
-    //         }else if(input.value.length = 0){
-    //             input.className = `red`;
-    //         }
-    //     });
-    // }
+    var requiredInput = document.querySelector(`input[required]`);
+    if(requiredInput){
+        requiredInput.addEventListener(`keyup`, function(){
+            if(requiredInput.value.length > 0){
+                requiredInput.className = `blue`;
+            }else{
+                requiredInput.className = `red`;
+            }
+        });
+    }
 }
 formCheck();
