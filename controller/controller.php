@@ -53,3 +53,7 @@ function contactPage(){
 function legalPage(){
     require('./view/legalPageView.php');
 }
+
+function showEventsListPage() {
+    require('./view/eventsListView.php');
+}
