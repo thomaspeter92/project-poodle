@@ -1,7 +1,17 @@
-.green{
-    border: 2px solid green;
+.blue{
+    /* border: 2px solid blue; */
+    background: url(../images/checkBlue.svg);
+    background-color: white;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 125px;
 }
 
 .red{
-    border: 2px solid red;
+    background: url(../images/checkRed.svg);
+    background-color: white;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 125px;
 }
+

@@ -7,8 +7,8 @@ const formCheck = () => {
     if(confirmPassword){
         confirmPassword.addEventListener(`keyup`, function(){
             if(confirmPassword.value === password.value.trim()){
-                password.className=`green`;
-                confirmPassword.className=`green`;
+                password.className=`blue`;
+                confirmPassword.className=`blue`;
             }else{
                 password.className=`red`;
                 confirmPassword.className=`red`;
@@ -22,8 +22,8 @@ const formCheck = () => {
 //     if(password){
 //         password.addEventListener(`keyup`, function(){
 //             if(password.value === confirmPassword.value.trim() && passwordVerify != -1){
-//                 password.className=`green`;
-//                 confirmPassword.className=`green`;
+//                 password.className=`blue`;
+//                 confirmPassword.className=`blue`;
 //             }else {
 //                 password.className=`red`;
 //                 confirmPassword.className=`red`;
@@ -35,8 +35,8 @@ const formCheck = () => {
     if(password){
         password.addEventListener(`keyup`, function(){
             if(password.value === confirmPassword.value.trim()){
-                password.className=`green`;
-                confirmPassword.className=`green`;
+                password.className=`blue`;
+                confirmPassword.className=`blue`;
             }else {
                 password.className=`red`;
                 confirmPassword.className=`red`;
@@ -45,14 +45,18 @@ const formCheck = () => {
     }
 
     //email check
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)$/g;
+    // var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    // var emailVerify = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email.value);
     var emailVerify = emailRegex.test(email.value);
+
    
     if(email){
         email.addEventListener(`keyup`, function(){
+            console.log(email.value);
             console.log(emailVerify);
             if(emailVerify == true){
-                email.className = `green`;
+                email.className = `blue`;
             }else if(emailVerify == false){
                 email.className = `red`;
             }
@@ -65,7 +69,7 @@ const formCheck = () => {
     required.addEventListener(`keyup`, function(){
         console.log(required);
         if(required.value.length > 0){
-            email.className = `green`;
+            email.className = `blue`;
         }else{
             email.className = `red`;
         }
@@ -73,11 +77,11 @@ const formCheck = () => {
   
 }
     //empty input check
-    // const input = document.querySelector(`input`);
+    var input = document.querySelector(`input[required]`);
     // if(input){
     //     input.addEventListener(`keyup`, function(){
     //         if(input.value.length > 0){
-    //             input.className = `green`;
+    //             input.className = `blue`;
     //         }else if(input.value.length = 0){
     //             input.className = `red`;
     //         }

@@ -77,9 +77,9 @@
         <form method="POST" action="index.php" autocomplete="off">
             <input type="hidden" name="action" value="registrationInput">
             name: <input type="text" name="username" class="username" required><br/><br/>
-            password: <input type="password"name="password" class="password"><br/><br/>
-            confirm password: <input type="password" name="confirmpass"  class="confirmPassword"><br/><br/>
-            email: <input type="text" name="email" class="email"><br/><br/>
+            password: <input type="password"name="password" class="password" required><br/><br/>
+            confirm password: <input type="password" name="confirmpass"  class="confirmPassword" required><br/><br/>
+            email: <input type="text" name="email" class="email" required><br/><br/>
             <div id="google"></div> <!--google login registration here-->
             <div id="kakao"></div> <!--kakao login registration here-->
             <br>
