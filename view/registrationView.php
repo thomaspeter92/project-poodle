@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="./public/css/googleStyle.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="./public/css/Modal.css"/>
+<link rel="stylesheet" href="./public/css/form.css"/>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
@@ -75,10 +76,10 @@
     <div class = "registerDiv">
         <form method="POST" action="index.php" autocomplete="off">
             <input type="hidden" name="action" value="registrationInput">
-            name: <input type="text" name="username" id="username" ><br/><br/>
-            password: <input type="password"name="password" id="password"><br/><br/>
-            confirm password: <input type="password" name="confirmpass" id="confirmpass"><br/><br/>
-            email: <input type="text" name="email" id="email"><br/><br/>
+            name: <input type="text" name="username" class="username" required><br/><br/>
+            password: <input type="password"name="password" class="password"><br/><br/>
+            confirm password: <input type="password" name="confirmpass"  class="confirmPassword"><br/><br/>
+            email: <input type="text" name="email" class="email"><br/><br/>
             <div id="google"></div> <!--google login registration here-->
             <div id="kakao"></div> <!--kakao login registration here-->
             <br>
@@ -120,6 +121,8 @@
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
     <script src='./public/js/kakaologin.js'></script>
     <script src='./public/js/googlelogin.js'></script>
+
+    <script src='./public/js/formCheck.js'></script>
 <?php 
 $content = ob_get_clean();
 require("template.php");

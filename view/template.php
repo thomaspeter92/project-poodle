@@ -152,16 +152,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <p><a href="index.php?action=contactPage">Contact</a></p>
                     </div>
                 </div>
-                <div class="notifWrapper">
-                    <div class="notifItems">
-                        <?php if (!isset($_SESSION['id'])) { ?>
-                            <p>notif 1</p>
-                            <p>notif 2</p>
-                            <p>notif 3</p>
-                            <p>notif 4</p>
-                            <p>notif 5</p>
-                        <?php } ?>
-                    </div>
+               
                 <!-- The following script controls menu animation on Click -->
 
                 <!-- //Franco -->
