@@ -1,133 +1,52 @@
+<!-- <script src="https://apis.google.com/js/platform.js"></script> -->
+    <div id="SignUpMain">
+        <div class = "registerDiv">
+        
+            <form method="POST" action="index.php" autocomplete="off" id='formSignUp'>
 
+                <input type="hidden" name="action" value="registrationInput" required>
+                <div class='subSection'>
+                    <label for="username" class="form_col">Name :</label>
+                    <input type="text" name="username" id="username" class="loginInput" required>
+                </div>
+                <div class='subSection'>
+                    <label for="password" class="form_col">Password :</label>
+                    <input type="password"name="password" class="loginInput" id="password" required>
+                </div>
+                <div class='subSection'>
+                    <label for="confirmpass" class="form_col">Confirm password :</label>
+                    <input type="password" name="confirmpass" class="loginInput" id="confirmpass" required>
+                </div>
+                <div class='subSection'>
+                    <label for="email" class="form_col">Email :</label>
+                    <input type="text" name="email" id="email" class="loginInput" required>
+                </div>
+                <div class='subSection'>
+                <input type="submit" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
+                </div>
+            </form>
+            <div class="thirdParty">
+                <div id='thirdPartyGoogle2'>
+                    <div class='divText'>Sign up with Google :</div>
+  
+                </div>
 
-<?php $title= "registration"?>
-<?php ob_start();?>
-<meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
-<link rel="stylesheet" href="./public/css/googleStyle.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="./public/css/Modal.css"/>
-<link rel="stylesheet" href="./public/css/form.css"/>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
-    input{
-        padding-left: 2em;
-        padding-right: 2em;
-    }
-    
-
-    .registerDiv{
-        display: flex;
-        justify-content: center;
-        /* background-color: lightgrey;
-        font-weight: bold;
-        margin: 2%;
-        padding: 4%;
-        border: 2px solid grey;
-        border-radius: 5px; */
-    }
-    .registerDiv>form>p{
-        text-align: center;
-    }
-    
-
-    .registerButtons{
-        /* width: 80%; */
-        display: flex;
-        justify-content: center;
-    }
-    
-
-    .registerSignInDiv{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .spaceDiv{
-        margin: 2%;
-    }
-/* 
-    #subscribe{
-        border-radius: 8px;
-        font-weight: bold;
-        font-family: 'Montserrat', sans-serif;
-        border: 2px solid grey;
-    } */
-
-    /* #login{
-        border-radius: 5px;
-        font-weight: bold;
-        font-family: 'Montserrat', sans-serif;
-        border: 2px solid grey;
-    } */
-
-</style>
-<?php $style = ob_get_contents();?>
-
-
-<?php ob_start(); ?>
-    <br>
-    <br>
-    <br>
-    <br>
-    <?php
-        if(isset($_GET['error'])){
-            echo "please more sure you entered everything correctly";
-        }
-    ?>
-    <div class = "registerDiv">
-        <form method="POST" action="index.php" autocomplete="off">
-            <input type="hidden" name="action" value="registrationInput">
-            name: <input type="text" name="username" class="username" required><br/><br/>
-            password: <input type="password"name="password" class="password" required><br/><br/>
-            confirm password: <input type="password" name="confirmpass"  class="confirmPassword" required><br/><br/>
-            email: <input type="text" name="email" class="email" required><br/><br/>
-            <div id="google"></div> <!--google login registration here-->
-            <div id="kakao"></div> <!--kakao login registration here-->
-            <br>
-            <div class="registerButtons">
-                <button type="submit" name="subscribe" id="subscribe">Sign Up</button><br/><br/>
+                <div id='thirdPartyKakao2'>
+                    <div class='divText'>Sign up with Kakao :</div>
+                    <div class="buttonK" id="kakaoSignUp">
+                        <img id="kakaoLogo" src="./public/images/kakaoLogin/en/kakao_login_medium.png">
+                    </div>
+                </div>
             </div>
-            <p> all fields are required </p>
-        </form>
-        
-    </div>
-    <div class=registerSignInDiv>
-        
-            <div class="orYouCan">OR YOU CAN...</div>
-        
-        <div class=spaceDiv></div>
-        <a href="index.php?action=login">    
-            <button name="login" id="login" value="Sign In">Sign In</button>
-        </a>
-    </div>
-   
+            <hr/>
+            <div class=registerSignInDiv>
+                
+                <div id="withUs">Already with us? </div>
+                <button name="login" id="regLogin" value="Sign In" class="loginButton">Sign In</button>
 
-      <!-- For google -->
-      <div>
-        <span>Sign up with Google:</span>
-        <div id='signin' class="g-signin2" data-onsuccess="onGoogleSignUp"></div> 
+            </div>
+        </div>
     </div>
-    <form id="googleForm" method="POST">
-        <input type="hidden" id="googleName" name='googleName'>
-        <input type="hidden" id="googleEmail" name='googleEmail'>
-        <input type="hidden" id="googlePicture" name='googlePicture'>
-        <input type="hidden" id="googleUserId" name='googleUserId'>
-    </form>
-    <!-- <button type='button' id='signOut' onclick='googleSignOut()'>SignOutGoogle</button> -->
-    <div>
-        <button type="button" name="kakaoSignUp" id="kakaoSignUp">Kakao Sign Up</button>
-    </div>
-    <?php require("./view/kakaoForm.php"); ?>
-    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
-    <script src='./public/js/kakaologin.js'></script>
-    <script src='./public/js/googlelogin.js'></script>
 
-    <script src='./public/js/formCheck.js'></script>
-<?php 
-$content = ob_get_clean();
-require("template.php");
-?>
+    <?php require("kakaoForm.php"); ?>
+    <?php require("googleForm.php"); ?>
