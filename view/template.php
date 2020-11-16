@@ -4,7 +4,7 @@ $DEFAULT_IMAGE_URL = "./private/profile/defaultProfile.png";
 $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
 
 // TODO: Use $style for additional css
-$style = NULL;
+// $style = NULL;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +24,7 @@ $style = NULL;
     <!-- <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script>  -->
     <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script> 
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
-
-    <?= ($style) ? $style : ""; ?>
+    <?= isset($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
 
@@ -42,54 +41,103 @@ $style = NULL;
 
 <body>
     <header>
-    <div class="headerWrapper">   
-        <div id="headerLeft">
-            <a href="index.php">
-                <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40">
-            </a>
-        </div>
+        <div class="headerWrapper">
+        <?php
+        if (!isset($_SESSION['id'])) { ?>
+            <div id="headerLeft">
+                <a href="index.php?action=landing"><img src="./public/images/logoHeader.png"></a>
+                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
+            </div>
+        <?php
+        }else{
+        ?>
+            <div id="headerLeft">
+                <a href="index.php?action=petPreview"><img src="./public/images/logoHeader.png"></a>
+                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
+            </div>
+        <?php
+        }
+        ?>
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>
             <div id="headerRight">
                 <div class="desktopWrapper">
-                    <ul>
-                        <li><a href="index.php?action=aboutUs">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
+                        <div class="headerLinks">
+                            <a href="index.php?action=aboutUs">About Us</a>
+                            <a href="index.php?action=partners">Partners</a>
+                            <a href="index.php?action=contactPage">Contact</a>
+                        </div>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <img src="" alt="default"><li id="desktopLogInLink"><a href="#">Sign In</a></li>
-                            <li id="desktopSignUpLink"><a href='#'>Sign Up</a></li>
+                            
+                            <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                            <div>
+                            <li id="desktopLogInLink"><a href="#">Sign In</a></li>
+                            <li id="desktopSignUpLink"><a href='#' class="headerSignUp">Sign Up</a></li>
+                            </div>
                             <?php 
                         } else {
                         ?>
-                            <img src="" alt="default">
-                            <li>
-                                <a id="desktopLogin" href="index.php?action=petPreview">
-                                    <?php echo $_SESSION['name'] ?>
-                                </a>
-                            </li>
-
-                            <li><a href="#" onclick="signAllOut()">Sign Out</a></li>
+                            <div class="userImageWrapper">
+                                <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                                <!-- <div><i class="fas fa-star"></i></div> -->
+                                <div class="stars">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                    <img class="" src="./public/images/star.png" alt="default">
+                                </div>
+                            </div>
+                            <div>
+                                <a id="mobileLogin" href="index.php?action=petPreview"><?php echo $_SESSION['name'] ?></a>
+                            </div>
+                            <div>
+                                <i class="far fa-bell"></i>
+                            </div>
+                            <div class="signOutWrapper">
+                                <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
+                                  
+                            </div> 
                         <?php
                         }
                         ?>
-                    </ul>
-                </div>        
-                <div id="mobileLogin">
+                </div>  
+                <div id="mobileWrapper">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <img src="" alt="default">
-                            <a id="mobileLogInLink2" href="#">Sign In</a> 
+                            <div class="userImageWrapper">
+                                <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                            </div>
+                            <div class="mobileSignInWrapper">
+                                <a class="mobileSignIn" id="mobileLogInLink2" href="#">Sign In</a> 
+                            </div>
                         <?php 
                         } else {
-                        ?>
-                            <img src=<?= $sessionImageURL;?> alt="default">
-                            <a id="mobileLogin" href="index.php?action=petPreview">
-
-                                <?php echo $_SESSION['name'] ?>
-                            </a> 
+                        ?>  
+                            <div class="mobileLoggedIn">
+                                <div class="userImageWrapper">
+                                    <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                                    <!-- <div class="userImage"> -->
+                                    <!-- <div><img src=<?= $sessionImageURL;?> alt="default"></div> -->
+                                    <div class="stars">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                        <img class="" src="./public/images/star.png" alt="default">
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="index.php?action=petPreview">
+                                        <?php echo $_SESSION['name'] ?>
+                                    </a> 
+                                </div>
+                                <div>
+                                    <i class="far fa-bell"></i>
+                                </div>
+                            </div>
                         <?php
                         }
                         ?>
@@ -100,24 +148,24 @@ $style = NULL;
                         <div class="btn-line"></div>
                 </div> 
                 <div class="hoverWrapper">
-                    <ul>
-                        <li><a href="index.php?action=aboutUs">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="index.php?action=contactPage">Contact</a></li>
+                    <div class="menuItems">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                        <li id="mobileLogInLink1"> <a href="#">Sign In</a></li>
-                        <li id="mobileSignUpLink"><a href="#">Sign Up</a></li>
+                            <p id="mobileLogInLink1"><a href="#">Sign In</a></p>
+                            <p id="mobileSignUpLink"><a href="#">Sign Up</a></p>
                         <?php 
                         } else {
                         ?>
                         <form id="signOutForm" method="POST">
                         </form>
+                        <p><a href="#"  onclick="signAllOut()">Sign Out</a></p>
 
-                        <li><a href="#" onclick="signAllOut()">Sign Out</a></li>
                         <?php }
                         ?>
-                    </ul>
+                        <p><a href="index.php?action=aboutUs">About Us</a></p>
+                        <p><a href="index.php?action=partners">Partners</a></p>
+                        <p><a href="index.php?action=contactPage">Contact</a></p>
+                    </div>
                 </div>
                 <!-- The following script controls menu animation on Click -->
 
@@ -192,14 +240,27 @@ $style = NULL;
                 </a>
             </li>
             <!-- Meet the team link -->
-        </ul>    
+        </ul>
         <p>
         © 2020 XXXXXXXX.com is a registered trademark. All rights reserved. 
         Macys.com, LLC, 151 West 34th Street, New York, NY 10001. Macy's 
         Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
         Request our corporate name & address by email.
         </p>
-    </footer> 
+<div id="partner-icons-list">
+            <div id="icon-partner-wcoding-large">
+                <a href="http://www.wcoding.com/" title="wcoding">
+                    <img src="./public/images/partners/wcoding1.png" alt="wcoding">
+                </a>
+            </div>
+            <div id="icon-partner-lechienblanc-large">
+                <a href="https://www.instagram.com/lechienblancseoul/" title="lechienblanc">
+                    <img src="./public/images/partners/leChienBlanc.jpg" alt="lechienblanc">
+                </a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         function initGoogle(){
             const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
@@ -216,12 +277,9 @@ $style = NULL;
     <script src="./public/js/kakaologin.js"></script>
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
-     <script src="./public/js/signInUpModal.js"></script>
-  
+    <script src="./public/js/signInUpModal.js"></script>
   
 
-    <!-- TODO NEED TO Uncomment carousel -->
-    <!-- <script src="./public/js/carousel.js"></script> -->
 
  
 

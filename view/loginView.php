@@ -31,8 +31,6 @@
                 <button name="login" id="logRegister" class='loginButton'>Sign Up</button>
             </div>
 
-
-
         </div>
     </div>
     
