@@ -13,17 +13,31 @@ $style = NULL;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="./public/css/Modal.css"/>
+    <link rel="stylesheet" href="./public/css/login.css"/>
     <!-- FONT LINKS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Franco -->
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script> 
+    <!-- <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script>  -->
+    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script> 
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
+
     <?= ($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
+
+    <style>
+        #desktopSignUpLink:hover{
+            cursor:pointer
+        }
+        #desktopLogInLink:hover{
+            cursor:pointer
+        }
+
+    </style>
 </head>
 
 <body>
@@ -45,8 +59,8 @@ $style = NULL;
                         <li id="contactLink"><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <img src="" alt="default"><li id="desktopLogInLink"><a href="index.php?action=login">Sign In</a></li>
-                            <li><a href="index.php?action=registration">Sign Up</a></li>
+                            <img src="" alt="default"><li id="desktopLogInLink"><a href="#">Sign In</a></li>
+                            <li id="desktopSignUpLink"><a href='#'>Sign Up</a></li>
                             <?php 
                         } else {
                         ?>
@@ -56,7 +70,7 @@ $style = NULL;
                                     <?php echo $_SESSION['name'] ?>
                                 </a>
                             </li>
-                            <!-- <li><a href="index.php?action=logout">Sign Out</a></li>  -->
+
                             <li><a href="#" onclick="signAllOut()">Sign Out</a></li>
                         <?php
                         }
@@ -67,7 +81,7 @@ $style = NULL;
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <img src="" alt="default">
-                            <a id="mobileLogin" href="index.php?action=login">Sign In</a> 
+                            <a id="mobileLogInLink2" href="#">Sign In</a> 
                         <?php 
                         } else {
                         ?>
@@ -92,15 +106,14 @@ $style = NULL;
                         <li><a href="index.php?action=contactPage">Contact</a></li>
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                        <li><a href="index.php?action=login">Sign In</a></li>
-                        <li><a href="index.php?action=registration">Sign Up</a></li>
+                        <li id="mobileLogInLink1"> <a href="#">Sign In</a></li>
+                        <li id="mobileSignUpLink"><a href="#">Sign Up</a></li>
                         <?php 
                         } else {
                         ?>
                         <form id="signOutForm" method="POST">
                         </form>
-                        <!-- Franco -->
-                        <!-- <li><a href="index.php?action=logout">Sign Out</a></li>  -->
+
                         <li><a href="#" onclick="signAllOut()">Sign Out</a></li>
                         <?php }
                         ?>
@@ -108,9 +121,7 @@ $style = NULL;
                 </div>
                 <!-- The following script controls menu animation on Click -->
 
-                <!-- //Franco -->
-                <script src="./public/js/googlelogin.js"></script>
-                <script src="./public/js/kakaologin.js"></script>
+
                 <script> 
                     // select dom items 
                     const menuBtn =  
@@ -137,32 +148,16 @@ $style = NULL;
                         } 
                     } 
 
-                    //Franco 
-                    // function signAllOut(){
-
-                    //     //sign out from google
-                    //     googleSignOut();
-                    //     logoutWithKakao();
-
-                    //     const form = document.querySelector("#signOutForm");
-                    //     form.action = "index.php?action=logout";
-                    //     form.submit();
-                    // }
-
-                    function initGoogle(){
-                        const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
-                        gapi.load('auth2', function() {
-                        gapi.auth2.init({client_id:CLIENT_ID});
-                         });
-                    }
-
-                    function initKakao(){
-                        Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
-                    }
+                 
                 </script> 
             </div>
         </div> 
     </header>
+
+    <!-- Divs below are used for Google buttons -->
+    <div id="googleHome">
+        <div id='gSigninBut' class='g-signin2' data-onsuccess='onGoogleSignIn' style='position:absolute;top:-9999px;left:-9999px;'></div>
+    </div>
 
     <!-- TODO: Add Content -->
     <?= $content; ?>
@@ -204,8 +199,32 @@ $style = NULL;
         Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
         Request our corporate name & address by email.
         </p>
-    </footer>
-    <script src="./public/js/carousel.js"></script>
+    </footer> 
+    <script>
+        function initGoogle(){
+            const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
+            gapi.load('auth2', function() {
+            gapi.auth2.init({client_id:CLIENT_ID});
+                });
+        }
+
+        function initKakao(){
+            Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
+        }
+    </script>
+    <script src="./public/js/googlelogin.js"></script>
+    <script src="./public/js/kakaologin.js"></script>
+    <script src="./public/js/Modal.js"></script> 
+    <script src="./public/js/ModalLogin.js"></script> 
+     <script src="./public/js/signInUpModal.js"></script>
+  
+  
+
+    <!-- TODO NEED TO Uncomment carousel -->
+    <!-- <script src="./public/js/carousel.js"></script> -->
+
+ 
+
 </body>
 
 </html>

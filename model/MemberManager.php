@@ -22,10 +22,7 @@ class MemberManager extends Manager{
         $memberlogin->execute();
         $user = $memberlogin->fetch(PDO::FETCH_ASSOC);
         $hashed_password = $user['password'];
-        $membername = $user['name'];
-        $memberid = $user['id'];
-        $_SESSION['name'] = $membername;
-        $_SESSION['id'] = $memberid;
+
         $memberlogin->closeCursor();
         return password_verify($passwordLogin, $hashed_password);
     }
