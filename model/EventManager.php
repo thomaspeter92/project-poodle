@@ -5,7 +5,6 @@ require_once("Manager.php");
 
         public function getUpcomingEvents() {
             //WED, NOV 18, 7:00 PM
-            //%a, %b %d, %h:%i %p
             $db = $this->dbconnect();
             $query = "SELECT e.id, e.name, e.location, m.name AS hostName, 
                         DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
@@ -20,6 +19,31 @@ require_once("Manager.php");
             return $events;
         }
 
+        public function getMembersCountBy($eventId) {
+            $db = $this->dbconnect();
+            $query = "SELECT COUNT(*) AS guestCount
+                        FROM eventAttend
+                        WHERE eventId = :eventId";
+            $req = $db->prepare($query);
+            $req->bindValue(":eventId", $eventId, PDO::PARAM_INT);
+            $req->execute();
+            $count = $req->fetch(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $count->guestCount;
+        }
+
+        public function getMembersBy($eventId) {
+            //TODO: Get members profile images by eventId, first should be the host
+            $db = $this->dbconnect();
+            $query = "";
+            $req = $db->prepare($query);
+            $req->bindValue(":eventId", $eventId, PDO::PARAM_INT);
+            $req->execute();
+            $events = $req->fetchAll(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $events;
+        }
+        
         public function getEventDetail($eventId) {
 
             $db = $this->dbconnect();

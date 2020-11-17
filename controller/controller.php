@@ -50,6 +50,11 @@ function showUpcomingEventsList() {
     }
 }
 
+function getGuestCountOfEvent($eventId) {
+    $manager = new EventManager();
+    return $manager->getMembersCountBy($eventId);
+}
+
 function showEventDetail($eventId) {
     $showEvent = new EventManager();
     $event = $showEvent->getEventDetail($eventId);
