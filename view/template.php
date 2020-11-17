@@ -73,8 +73,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                             
                             <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
                             <div>
-                            <li id="desktopLogInLink"><a href="#">Sign In</a></li>
-                            <li id="desktopSignUpLink"><a href='#' class="headerSignUp">Sign Up</a></li>
+                            <a href="#" id="desktopLogInLink">Sign In</a>
+                            <a href='#' class="headerSignUp"id="desktopSignUpLink">Sign Up</a>
                             </div>
                             <?php 
                         } else {
@@ -247,7 +247,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
         Credit and Customer Service, PO Box 8113, Mason, Ohio 45040. 
         Request our corporate name & address by email.
         </p>
-<div id="partner-icons-list">
+        <div id="partner-icons-list">
             <div id="icon-partner-wcoding-large">
                 <a href="http://www.wcoding.com/" title="wcoding">
                     <img src="./public/images/partners/wcoding1.png" alt="wcoding">

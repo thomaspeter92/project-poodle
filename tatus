@@ -1,0 +1,748 @@
+[33mcommit 3830b166a05c13df53e15182fc2ec771af27d10a[m[33m ([m[1;36mHEAD -> [m[1;32maddEditDelEvents[m[33m)[m
+Merge: 138817a d75a4af
+Author: Franco <chungyh29@yahoo.com>
+Date:   Mon Nov 16 16:58:54 2020 +0900
+
+    Merge eventPageDetailed into branch addEditDelEvents
+    
+    Merge branch 'eventPageDetailed' of https://github.com/reactHong/projectPoodle into addEditDelEvents
+
+[33mcommit d75a4af244a543b3220654740ec13c291c7f65d4[m[33m ([m[1;31morigin/eventPageDetailed[m[33m)[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Mon Nov 16 16:01:22 2020 +0900
+
+    added many features for event page(EventManager, evntView etc.)
+
+[33mcommit 138817a1b46a061f0b9bee69ef0384da358e29c8[m[33m ([m[1;31morigin/sprint2[m[33m, [m[1;31morigin/loginModal[m[33m, [m[1;32msprint2[m[33m, [m[1;32mloginModal[m[33m)[m
+Merge: ba90056 93eba8d
+Author: Franco <chungyh29@yahoo.com>
+Date:   Mon Nov 16 15:44:42 2020 +0900
+
+    Start loginModal
+
+[33mcommit ba900561115578eb23ee706a41cc4af504fcffa1[m
+Author: Franco <chungyh29@yahoo.com>
+Date:   Mon Nov 16 15:16:35 2020 +0900
+
+    Merging login in modal form
+
+[33mcommit 93eba8d05fabe6d95505edcea44f0bb3b6f2a7a4[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 13 14:20:48 2020 +0900
+
+    [Start] Start sprint2
+
+[33mcommit d0c275cbfcc880c4b23a38f0181f1c79a0012c36[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 13 14:19:48 2020 +0900
+
+    Merge sprint1 into master - sprint1 finished
+
+[33mcommit 28aecc1c731534cee7c20776be0635de2c79fbd0[m[33m ([m[1;31morigin/sprint1[m[33m)[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 13 13:08:15 2020 +0900
+
+    Merge partners_page into sprint1
+
+[33mcommit aa78a580921cae044012fee640a8d4fe52f74ef8[m[33m ([m[1;31morigin/partners_page[m[33m)[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 13 12:58:49 2020 +0900
+
+    Modify background color in partners page
+
+[33mcommit fde215bbcb533a5deace73292b7cac5073fafcf9[m
+Merge: 9a66b80 6668fa1
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 13 12:57:24 2020 +0900
+
+    Merge branch 'sprint1' of https://github.com/reactHong/projectPoodle into partners_page
+
+[33mcommit 9a66b800c90564ede2be8abc0d4b49136647d46f[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 13 12:56:33 2020 +0900
+
+    Modify Partners page and Partners logo
+
+[33mcommit 6668fa152f3f2643e0bdb6a094a3a8f528a2d604[m[33m ([m[1;31morigin/addEditPet_new[m[33m)[m
+Merge: f249dea 3d7884e
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Fri Nov 13 11:28:53 2020 +0900
+
+    Merge branch 'sprint1' of https://github.com/reactHong/projectPoodle into addEditPet_new
+
+[33mcommit f249deac35a53217bf4734b02ea7465526fd06bd[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Fri Nov 13 11:15:24 2020 +0900
+
+    fixed typo
+
+[33mcommit 4b71c224f83251467042efec3512fe955a01e50f[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Fri Nov 13 11:14:27 2020 +0900
+
+    added delete pet, changed styling to modal on add/modify pet
+
+[33mcommit 3d7884e9c4dd74423321cbd8642faa5cdc4c6092[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 15:03:12 2020 +0900
+
+    fixed logo link
+
+[33mcommit fe2792df1bdc23f6530f4f4b5f6a271690126ae8[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Thu Nov 12 14:20:31 2020 +0900
+
+    added delete function with modal
+
+[33mcommit a32468f691ed8145f04798e1d1900beede14e946[m[33m ([m[1;31morigin/privacyLegal[m[33m)[m
+Merge: ee77f4a f3ff05c
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Thu Nov 12 14:17:42 2020 +0900
+
+    merged with header style
+
+[33mcommit ee77f4a9552ba37cd172235e58026d8f9e096d90[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Thu Nov 12 14:08:02 2020 +0900
+
+    minor change not saved
+
+[33mcommit 9341a9729900931157bf983e4d97f07ffeff3848[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Thu Nov 12 14:01:33 2020 +0900
+
+    privacy/legal page and fixed header burger
+
+[33mcommit f3ff05c9efa4122dc786916e379185ee103186d5[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Thu Nov 12 11:48:21 2020 +0900
+
+    Fixed a bug about signout
+
+[33mcommit 62041de3f9e970406c9ce7157d3d943f9ed576fd[m[33m ([m[1;31morigin/headerFooterDesign[m[33m)[m
+Merge: 5f37acc 17037c7
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 11:43:08 2020 +0900
+
+    fixed menu after marging sprint1 again
+
+[33mcommit 5f37acc3f0df6314d154f011ed4b71fda707ebf8[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 11:39:42 2020 +0900
+
+    fix menu after first merge to sprint 1
+
+[33mcommit 95756e912b518218bc38f755c9c6f867c82dde3a[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 11:21:04 2020 +0900
+
+    fixing menu after merging with sprint 1
+
+[33mcommit 17037c7cf864cce117ede1bd83ba0ef8c00916dc[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Thu Nov 12 10:50:07 2020 +0900
+
+    Merged partners_page into sprint1
+
+[33mcommit 1656f18dab6444dc4ce90541f56dc5b138bb26a9[m
+Merge: 2dc86ff d99ccc3
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Thu Nov 12 10:48:24 2020 +0900
+
+    Merged sprint1 into partners_page
+
+[33mcommit d99ccc3bb95efe5849d91a9a6153cb87ca9575bf[m
+Merge: 1e066fe 2d4f1fb
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 10:42:52 2020 +0900
+
+    merging headerFooterDesign to sprint1
+
+[33mcommit 1e066fe44f49315be752bec8f3f783ac052b1103[m
+Merge: b104f10 7d98b92
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 10:37:25 2020 +0900
+
+    Merge branch 'sprint1' of https://github.com/reactHong/projectPoodle into sprint1
+
+[33mcommit 2d4f1fb97bedd5f8eb9cc45c192b822de91d1d7c[m
+Merge: c8971a2 2b46ff0
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 12 10:36:47 2020 +0900
+
+    merged with sprint1
+
+[33mcommit 7d98b9225bcc80a798771f358a8af161160e9c30[m
+Merge: 84150b2 2b46ff0
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Thu Nov 12 10:30:11 2020 +0900
+
+    accepted changes from sprint1
+
+[33mcommit 84150b24582016ccd0b45a0a756a212ac6816235[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Thu Nov 12 10:22:13 2020 +0900
+
+    major layour changes to the landing page and add/edit form complete (but still needs styling etc)
+
+[33mcommit 2dc86ffa97308b5845eebebc53154c118adeb8ad[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Wed Nov 11 23:40:43 2020 +0900
+
+    Add partners images & Modify partners page
+
+[33mcommit b82fb4b7d7a24b1ca1f2d275f27e54069073e8da[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Wed Nov 11 18:05:06 2020 +0900
+
+    the basic feature of add/edit pet is complete, needs styling and polishing
+
+[33mcommit c8971a2fdfbe5dcc918699aa83afb2a0ec8a1d24[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Wed Nov 11 17:08:19 2020 +0900
+
+    first draft with our logo
+
+[33mcommit d37a4d665ec603711d10deab35404a03aecd4fec[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Wed Nov 11 16:08:05 2020 +0900
+
+    draft 2 - before client meeting
+
+[33mcommit a21027efa8a716205c1aea6af3cda57425e34ac6[m
+Merge: d10e8bc 2b46ff0
+Author: Franco <chungyh29@yahoo.com>
+Date:   Wed Nov 11 12:56:14 2020 +0900
+
+    Merged with sprint1 for modal
+
+[33mcommit d10e8bc764e6ccc6555ed66d37b4df53eb867ac4[m
+Author: Franco <chungyh29@yahoo.com>
+Date:   Wed Nov 11 12:44:20 2020 +0900
+
+    changed css for login page
+
+[33mcommit e10da3713f59318139bbb219f08de835303b54a4[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Wed Nov 11 12:26:48 2020 +0900
+
+    Add a page for partners
+
+[33mcommit 2b46ff0ec55a74df91eeed0c56644cdf5b89696d[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Wed Nov 11 12:08:40 2020 +0900
+
+    Fix an error after merging
+
+[33mcommit 8398dea5ad6d6affc02aae3694c95c53376c1b35[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Wed Nov 11 12:05:46 2020 +0900
+
+    minor bug fix
+
+[33mcommit c05b6fd9476b67b8c993fcd215712fc8cb65b50b[m[33m ([m[1;31morigin/registerStyle[m[33m)[m
+Merge: b5f8157 564782d
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Wed Nov 11 11:49:53 2020 +0900
+
+    11/11/2020 Kakao, Google, other minor fixes
+
+[33mcommit 564782d856711e0cce4a279c2a51511a88203a69[m
+Merge: 6b0a1b5 dc93576
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 19:26:35 2020 +0900
+
+    Merge branch 'loginRegistration' into sprint1
+
+[33mcommit dc93576586a66036530b84397cb80fed5115c0f3[m[33m ([m[1;31morigin/loginRegistration[m[33m)[m
+Merge: 7a4a5a1 211c147
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 19:25:21 2020 +0900
+
+    Merge branch 'loginRegistration' of https://github.com/reactHong/projectPoodle into loginRegistration
+
+[33mcommit 7a4a5a18e53f6f5d9c143cd57234532cc5d829b5[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 17:58:02 2020 +0900
+
+    Create signinController.php for signin and signup & Remove comments
+
+[33mcommit 31d3e229077c42e5059093a4ea431436cc37caba[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Tue Nov 10 18:46:58 2020 +0900
+
+    Modify addEditPet
+
+[33mcommit 6b0a1b50114fa3ed27272bc2e9cc78e118147b6e[m[33m ([m[1;31morigin/carousel_new[m[33m)[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Tue Nov 10 18:08:26 2020 +0900
+
+    Modify files for carousel and landing page
+
+[33mcommit 211c1477c776455136ede1f4e36c36eb5a138c68[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 17:58:02 2020 +0900
+
+    Remove comments codes
+
+[33mcommit b5f81570e514dc5c3026161515da39938c08fc6c[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Tue Nov 10 17:50:21 2020 +0900
+
+    Temporary changes to style of the login page and clicking on logo now takes users back to the landing page
+
+[33mcommit 768584e33a39e32792218399f2ff99a685254cb8[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Tue Nov 10 17:31:48 2020 +0900
+
+    Register page styling and redirection done
+
+[33mcommit 04a4db184079d548b28624f63323887ac0b834f4[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Tue Nov 10 17:28:07 2020 +0900
+
+    draft 1
+
+[33mcommit 757791969cebb75fa85cdf1f47fc14aa5b50d73f[m[33m ([m[1;31morigin/aboutUs[m[33m, [m[1;32msprint1[m[33m)[m
+Merge: 9bc0d5d 6acc23f
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Tue Nov 10 16:32:51 2020 +0900
+
+    Merge branch 'sprint1' into aboutUs
+
+[33mcommit 6acc23fe8c8ec7bf04f0c1c031286ceed3337e47[m
+Merge: 23b0b48 b00ad16
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 16:25:31 2020 +0900
+
+    Merge loginRegistrationinto sprint1 - included Google and Kakao
+
+[33mcommit e8a0d2b471d3d69c5af679f93873ab1dd8343cc9[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Tue Nov 10 16:24:14 2020 +0900
+
+    Improved Security
+
+[33mcommit 9bc0d5d075e323114ee808f67903fd9f357554a6[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Tue Nov 10 16:22:46 2020 +0900
+
+    fixed paragraph
+
+[33mcommit 82f48eb110a3800e8ccf8a8fcfea909fd3c488d4[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Tue Nov 10 16:17:56 2020 +0900
+
+    bug fix
+
+[33mcommit 992e038fed3a1d1511c39bf956193f72b563692d[m
+Merge: 26a8c8b 23b0b48
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Tue Nov 10 16:12:42 2020 +0900
+
+    Yep
+    Merge branch 'sprint1' into aboutUs
+
+[33mcommit b00ad16a6ffe8f4f475a8014c6fddd7bc6d3a10f[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 16:08:21 2020 +0900
+
+    Integrated with Google signin and signup
+
+[33mcommit 26a8c8ba5e7d29e39d2f0d3013e21c0ce41fa436[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Tue Nov 10 16:05:23 2020 +0900
+
+    commiting about us page and  bug fix for desktop
+
+[33mcommit ad2ad28137ee7d3af8de25d1253d7739b67eddbd[m
+Merge: 5bf9368 7762edc
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 15:48:49 2020 +0900
+
+    Merge kakaologin_profileimage into loginRegistration
+
+[33mcommit 5bf9368d634e846bac304fa6be2e272a5c7281ef[m[33m ([m[1;31morigin/googlesignin[m[33m, [m[1;32mloginRegistration[m[33m, [m[1;32mgooglesignin[m[33m)[m
+Author: Franco <chungyh29@yahoo.com>
+Date:   Tue Nov 10 15:41:03 2020 +0900
+
+    Worked on signout
+
+[33mcommit 7762edc5a205818f9c62b261475a0f1db1f72df0[m[33m ([m[1;31morigin/kakaologin_profileimage[m[33m)[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 15:17:51 2020 +0900
+
+    Modify signUp function for reducing duplicated codes
+
+[33mcommit 4d72d6568101c84201fa37e89faf359a7a877caa[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 14:45:14 2020 +0900
+
+    Get profile image url from Kakao and Show the profile image
+
+[33mcommit b104f1000f66372925ccd551726021be0c260612[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Tue Nov 10 14:14:26 2020 +0900
+
+    media queries fix
+
+[33mcommit 23b0b484de85d2671254513e525fe5dc466fd198[m
+Merge: b1cb1d4 54e032c
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Tue Nov 10 14:01:06 2020 +0900
+
+    Merge branch 'sprint1' into contactPage
+
+[33mcommit b1cb1d439900c3d2012a2701533caa5f4737e28e[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Tue Nov 10 13:56:14 2020 +0900
+
+    contact page sprint 1 final final
+
+[33mcommit 54e032c84e548f7daa8196167782f08879979f34[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Tue Nov 10 12:13:56 2020 +0900
+
+    Improved Modal
+
+[33mcommit 5cfc418c42e05c3af8823d5998769766ff3abf11[m
+Merge: 2d359b1 c647837
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Tue Nov 10 12:11:27 2020 +0900
+
+    Merge branch 'sprint1' into contactPage
+
+[33mcommit 2d359b1ee58e3d541f391083cddefd8fb089fbb6[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Tue Nov 10 12:09:09 2020 +0900
+
+    sprint 1 final contact page
+
+[33mcommit b35cc07ed49f8ca8492b6e804b7a7fe9940194fe[m
+Merge: d6b7891 e21cd57
+Author: Franco <chungyh29@yahoo.com>
+Date:   Tue Nov 10 11:40:02 2020 +0900
+
+    Merge remote-tracking branch 'origin/loginRegistration' into googlesignin
+
+[33mcommit d6b7891619ad1fbe15d4060366623ec48f3740a4[m
+Author: Franco <chungyh29@yahoo.com>
+Date:   Tue Nov 10 11:30:52 2020 +0900
+
+    working on logout
+
+[33mcommit c647837ad5b1ea1ac57d6d50f6fa1df4017ee3d6[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Tue Nov 10 11:27:20 2020 +0900
+
+    11/10/2020 version of sprint1 fully working without Kakao and Google login
+
+[33mcommit e21cd57523129d6be86e4cc57040ed44b69dd763[m
+Merge: fc20cf7 7a09881
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 11:06:19 2020 +0900
+
+    Merge branch 'kakaologin' into loginRegistration
+
+[33mcommit 7a098819f950607e63e875a0ed921e505055bdbf[m[33m ([m[1;31morigin/kakaologin[m[33m)[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Tue Nov 10 10:53:58 2020 +0900
+
+    Integrate with our own login and sign up
+    
+    Make one function(addNewMember) for our own signup and kakao signup.
+    Use memeber data as an array for the parameter of signin and signup functions.
+    Add error exceptions.
+    Use kakaoid for creating password of Kakao(It won't use for the sign in)
+
+[33mcommit a01221dfe77d75e12825f4fb9a6850ccbab3e9f6[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Mon Nov 9 17:39:01 2020 +0900
+
+    Contact Page 2
+
+[33mcommit 24cd6de9f03e42171f2236079faabc1fb6c0a71b[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Mon Nov 9 16:32:57 2020 +0900
+
+    Modify kakao signin and signup
+    
+    Modify kakaologin.js because of combining kakao signin and signup by a function. Add kakaoForm.php for using common form. Modify controller.php for common signin and signup functions for 3rd party.
+
+[33mcommit 34727b3702d57660e37cd63250f2b4e6f9a9db05[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Mon Nov 9 15:32:21 2020 +0900
+
+    fixed minor bugs
+
+[33mcommit 8ef93275cdd5f0caacaac4bb45f37e8224a9b10e[m
+Merge: 9e962f1 89e2ff1
+Author: Franco <chungyh29@yahoo.com>
+Date:   Mon Nov 9 14:52:58 2020 +0900
+
+    Google sign Merge with KakaoSignin
+
+[33mcommit cd12c503acd3469f4d40caaaf6d1fce9d2238dfc[m
+Merge: c0d9a2e 5ff70ea
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Mon Nov 9 14:25:08 2020 +0900
+
+    pulleed sprint1
+
+[33mcommit 9e962f1aae2c88b337a0535e8a21f4f4d828a461[m
+Author: Franco <chungyh29@yahoo.com>
+Date:   Mon Nov 9 14:20:33 2020 +0900
+
+    Google Signin first commit
+
+[33mcommit cc843c3171982b9d078bb2def61aa1d71e0322d1[m
+Merge: 8a2160e 5ff70ea
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Mon Nov 9 14:05:56 2020 +0900
+
+    Merge branch 'sprint1' into aboutus
+
+[33mcommit c0d9a2ee0a99c08afd348de8c46b2f7cde0c9a8f[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Mon Nov 9 14:02:14 2020 +0900
+
+    finilized media query
+
+[33mcommit 8a2160e2df053d9ba1b4d4614fd61211dfc70d79[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Mon Nov 9 14:02:12 2020 +0900
+
+    commiting changes before merge to sprint 1
+
+[33mcommit 319c244774da9155b0decdea9c5476a51bd0c230[m
+Merge: 911fddf 5ff70ea
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Mon Nov 9 14:00:09 2020 +0900
+
+    Merge branch 'sprint1' into contactPage
+
+[33mcommit 911fddf097a27b16efb5a213941f28c18c140079[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Mon Nov 9 13:47:12 2020 +0900
+
+    contact page 1.1
+
+[33mcommit 5ff70eaa61d53bd977d803c8edbc418314df6c27[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Mon Nov 9 12:45:14 2020 +0900
+
+    minor media query changes
+
+[33mcommit ebff913ca839de9473211da301b47a37674616a6[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Mon Nov 9 12:28:36 2020 +0900
+
+    last edits of landing before first push
+
+[33mcommit 908df0d8744061c5d2cc2a31f5cba7a9fdb4c44b[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Mon Nov 9 09:51:55 2020 +0900
+
+    contact page 1
+
+[33mcommit 8497211795730ee5c56c919633bc4d44b6f2b680[m
+Merge: c0b0e22 e5ad9c5
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Sat Nov 7 20:00:21 2020 +0900
+
+    marged carousel and main menu branches together
+
+[33mcommit e5ad9c57f6ed7c938a89552cc3daeae3ae4cf62c[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Sat Nov 7 19:44:13 2020 +0900
+
+    mild changes to css
+
+[33mcommit df9c844daaeee7365a8bcb8010e33c40d25b0218[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Sat Nov 7 19:39:54 2020 +0900
+
+    changed name of my CSS file to landing.css
+
+[33mcommit 8e69f22cc210506851d77deb28f5ffba7c02c982[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Sat Nov 7 19:20:54 2020 +0900
+
+    mostly finished the design of landing page, need to finalise certain elements and merge with johns menu
+
+[33mcommit 89e2ff1eb13a98782036fb44af370c44b9788027[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 6 19:23:02 2020 +0900
+
+    Add kakao sign in button and kakao sign up button
+
+[33mcommit 90e2c4a588b0cdd60b49f7c752248fe2f25e1c09[m[33m ([m[1;31morigin/dogprofile[m[33m)[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Fri Nov 6 17:52:25 2020 +0900
+
+    Finalized Modal and preview pages, still need to work on some css and media queries
+
+[33mcommit 5c123830eddebe62b477ba5d71485ab305fa8344[m
+Merge: b2f59ff c0b0e22
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 6 16:45:08 2020 +0900
+
+    Merge sprint1 into kakaologin
+
+[33mcommit c0b0e223e92f5271a1fa796161ee590937cdf504[m[33m ([m[1;31morigin/mainMenu[m[33m)[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Fri Nov 6 16:32:58 2020 +0900
+
+    Added desktop header log in logic
+
+[33mcommit b2f59ff5b81ae2d100371d806992ec9b5cd6cf44[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 6 16:16:07 2020 +0900
+
+    Add kakao login in loginView.php and kakao sign up in registrationView.php
+
+[33mcommit 91d94ba7c2b02cda8aee9e1fd9390df75d8f421e[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Fri Nov 6 16:06:34 2020 +0900
+
+    connected Login Status to Header
+
+[33mcommit fc20cf71de361d9c817a886bfb4390651fd9d939[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Fri Nov 6 15:25:31 2020 +0900
+
+    delete extra php
+
+[33mcommit d23546b3ae179ad8202cd2962a46ed053b31473a[m
+Merge: 90c7dc3 94531ff
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 6 15:20:38 2020 +0900
+
+    Merge loginRegistration into kakaologin
+
+[33mcommit 90c7dc323b63ede9c40669a945dd687483c85720[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Fri Nov 6 15:17:46 2020 +0900
+
+    Implement sample kakao login page - logout, store user information to DB
+
+[33mcommit 1b80cac27873f6d62040b47afecdbb9762fcc127[m
+Merge: 818f061 94531ff
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Fri Nov 6 14:37:29 2020 +0900
+
+    Merged from login Registration Branch
+
+[33mcommit 818f061075b310487a74fe7617d193b86f013ace[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Fri Nov 6 14:28:48 2020 +0900
+
+    Header and Footer Complete with Mobile Log In State
+
+[33mcommit 94531ff0d76f0b65d2651e0b787499b1a40392c6[m[33m ([m[1;31morigin/loginRegistration_session[m[33m)[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Fri Nov 6 14:16:41 2020 +0900
+
+    login and registration with session
+
+[33mcommit be05cada14008c3e7490918152ef36c11bc9aab3[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Fri Nov 6 12:19:48 2020 +0900
+
+    Implement login and subscriptiona
+
+[33mcommit cdc20dcc154672254bf325cc11a198b31cf27167[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Fri Nov 6 11:31:59 2020 +0900
+
+    All good
+
+[33mcommit e3d600947faea8c76491f4302061060261ebf3b2[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Fri Nov 6 10:34:08 2020 +0900
+
+    basic structure of landing page completed, will add more JS, CSS functionality
+
+[33mcommit 29eeed2473f1eacc3235be24e613a64df7f762d4[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Thu Nov 5 18:12:42 2020 +0900
+
+    Implementation of preview list of pets and modals for viewing pet profiles. Still need to fix css and integrate two manager
+
+[33mcommit a29d39aa6d0845720c57c1f508345b5855229e69[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 5 17:21:12 2020 +0900
+
+    day2
+
+[33mcommit 5bdd324aa383b4d63949f8d99d720991a2a8335a[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Thu Nov 5 17:14:57 2020 +0900
+
+    Add kakao login images
+
+[33mcommit f6ac6784da3911ff8174555b7cf1b9c8d71a802a[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Thu Nov 5 17:09:39 2020 +0900
+
+    today I created a larger landing page and a lot of the editorial layout. Still need to add in some animations
+
+[33mcommit 1d5aa160e63808a32641bcdb237183550bad4136[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Thu Nov 5 10:41:42 2020 +0900
+
+    new feature menu bar
+
+[33mcommit 30b1a50174824b4c47362374167ef70813d0fef1[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Thu Nov 5 10:12:11 2020 +0900
+
+    day 1
+
+[33mcommit df3930c1efdcdcd4196030e8d112ca0839fb0aed[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Wed Nov 4 22:19:31 2020 +0900
+
+    Added two temp options for landing page image, carosel. very simple.
+
+[33mcommit 4c147f81a9e6439de5f99687d27241ed251e83be[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Wed Nov 4 19:38:57 2020 +0900
+
+    added a feature to show an individual dog's profile
+
+[33mcommit 7b98b068191f13d59051abcceab203ab7a25fc7b[m
+Author: AntiProdigy <jon.kahng@gmail.com>
+Date:   Wed Nov 4 11:16:52 2020 +0900
+
+    permissions and menu
+
+[33mcommit e53168b13867aeac752cfb796dc0718bcdbb818e[m
+Author: Woo Youn Byun <wooyounbyun@Woos-MacBook-Pro-2.local>
+Date:   Wed Nov 4 11:15:39 2020 +0900
+
+    first commit of dogProfile.php
+
+[33mcommit 328e995583709fd1e1198bf955e79e684f8be900[m
+Author: Thomas <thomasbuckley92@live.com>
+Date:   Wed Nov 4 11:14:36 2020 +0900
+
+    created branch and carousel.js
+
+[33mcommit 6b854c92ad73d4957754396c10392a385f8b8dd0[m
+Author: tiffany <tiffanyle717@gmail.com>
+Date:   Wed Nov 4 11:09:37 2020 +0900
+
+    add Login and Registration
+
+[33mcommit 3fda5ce947b27599457ae207f92c37ace8575668[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Wed Nov 4 11:06:21 2020 +0900
+
+    Add kakaologin.js
+
+[33mcommit 065663ac65d96835976277fae71764df5eed589a[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Hong Shik Kim <hong@hongs.dev>
+Date:   Wed Nov 4 10:54:50 2020 +0900
+
+    Basic layout

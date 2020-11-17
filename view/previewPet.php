@@ -1,6 +1,6 @@
 <?php ob_start();?>
 <link rel="stylesheet" href="./public/css/Modal.css"/>
-<style>
+<style> 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
     
 
