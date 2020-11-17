@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "monsterRatRegular";
+    src: url("./Montserrat/Montserrat-Regular.ttf") format("truetype");
+  }
+@font-face {
+    font-family: "monsterRatBold";
+    src: url("./Montserrat/Montserrat-Bold.ttf") format("truetype");
+}
+*{
+    font-family: "monsterRatRegular";
+}
 input {
     border-radius: 42px;
     border-style: none;
