@@ -145,6 +145,10 @@ try {
         case "events":
             showUpcomingEventsList();
             break;
+        case "searchEvents";
+            $search = isset($_REQUEST["search"]) ? $_REQUEST["search"] : NULL;
+            showSearchedEventsList($search);
+            break;
         case "showEventDetail" :
             showEventDetail($_REQUEST['eventId']);
             break;

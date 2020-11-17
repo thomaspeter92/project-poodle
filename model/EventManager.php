@@ -3,7 +3,7 @@ require_once("Manager.php");
 
     class EventManager extends Manager {
 
-        public function getUpcomingEvents() {
+        public function getUpcomingEvents($text=NULL) {
             //WED, NOV 18, 7:00 PM
             $db = $this->dbconnect();
             $query = "SELECT e.id, e.name, e.location, m.name AS hostName, 
@@ -11,8 +11,12 @@ require_once("Manager.php");
                         FROM event AS e
                         JOIN member AS m
                         ON e.hostId = m.id
-                        WHERE e.eventDate > NOW();";
+                        WHERE e.eventDate > NOW()";
+            $query .= isset($text) ? " AND e.name LIKE :text" : "";
             $req = $db->prepare($query);
+            if (isset($text)) {
+                $req->bindValue(":text", "%".$text."%", PDO::PARAM_STR);
+            }
             $req->execute();
             $events = $req->fetchAll(PDO::FETCH_OBJ);
             $req->closeCursor();

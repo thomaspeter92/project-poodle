@@ -3,8 +3,9 @@
 require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");
-require_once("./controller/signinController.php");
 require_once("./model/EventManager.php");
+require_once("./controller/signinController.php");
+require_once("./controller/eventsController.php");
 
 function landing()
 {
@@ -48,11 +49,6 @@ function showUpcomingEventsList() {
     } else {
         throw new Exception("Failed to show upcoming events!!", 2000);
     }
-}
-
-function getGuestCountOfEvent($eventId) {
-    $manager = new EventManager();
-    return $manager->getMembersCountBy($eventId);
 }
 
 function showEventDetail($eventId) {
