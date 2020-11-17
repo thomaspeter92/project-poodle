@@ -218,7 +218,7 @@
     <div class=eventDetail>
         <div class="eventDetailHeader">
             <div id="eventHeaderContent">
-                <p><?= $event['dateCreate']; ?></p>
+                <p><?= $event['eventDate']; ?></p>
                 <h3><?= $event['name']; ?></h3>
                 <div id="headerContentExtra">
                     <p><img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
@@ -266,7 +266,7 @@
                 <div id="eventInfo">
                     <div class="eventInfoChunk">
                         <i class="far fa-clock"></i> 
-                        <p><?= $event['dateCreate'];?></p>
+                        <p><?= $event['eventDate'];?></p>
                     </div>
                     <div class="eventInfoChunk">
                         <i class="fas fa-map-marker-alt"></i>

@@ -8,11 +8,11 @@ require_once("Manager.php");
             //%a, %b %d, %h:%i %p
             $db = $this->dbconnect();
             $query = "SELECT e.id, e.name, e.location, m.name AS hostName, 
-                        DATE_FORMAT(e.dateCreate, '%a, %b %d, %h:%i %p') AS dateCreated
+                        DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
                         FROM event AS e
                         JOIN member AS m
                         ON e.hostId = m.id
-                        WHERE e.dateCreate > NOW();";
+                        WHERE e.eventDate > NOW();";
             $req = $db->prepare($query);
             $req->execute();
             $events = $req->fetchAll(PDO::FETCH_OBJ);
@@ -23,7 +23,7 @@ require_once("Manager.php");
         public function getEventDetail($eventId) {
 
             $db = $this->dbconnect();
-            $req = $db->prepare("SELECT e.id eventId, e.name name, e.dateCreate dateCreate, e.location location, e.description description, e.picture picture, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.picture picture, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
 

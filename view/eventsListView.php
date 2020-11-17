@@ -19,7 +19,7 @@ ob_start();
     <div class="item">
         <div class="imgContainer"><img src="./private/event/event1.png" alt="event1"></div>
         <div class="content">
-            <div class="date"><?= $event->dateCreated; ?></div>
+            <div class="date"><?= $event->eventDate; ?></div>
             <div class="title"><?= $event->name; ?></div>
             <div class="host">Hosted by <?= $event->hostName; ?></div>
             <div class="attendees">
