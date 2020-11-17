@@ -142,7 +142,7 @@ try {
             );
             signUpWith($memberData);
             break;
-        case "eventsList":
+        case "events":
             showUpcomingEventsList();
             break;
         case "showEventDetail" :

@@ -51,6 +51,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
             <div id="headerRight">
                 <div class="desktopWrapper">
                         <div class="headerLinks">
+                            <a href="index.php?action=events">Events</a>
                             <a href="index.php?action=aboutUs">About Us</a>
                             <a href="index.php?action=partners">Partners</a>
                             <a href="index.php?action=contactPage">Contact</a>
@@ -147,6 +148,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                          <!-- <p><a href="#" onclick="signAllOut()">Sign Out</a></p> -->
                         <?php }
                         ?>
+                        <p><a href="index.php?action=events">Events</a></p>
                         <p><a href="index.php?action=aboutUs">About Us</a></p>
                         <p><a href="index.php?action=partners">Partners</a></p>
                         <p><a href="index.php?action=contactPage">Contact</a></p>
