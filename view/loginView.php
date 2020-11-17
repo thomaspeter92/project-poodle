@@ -20,9 +20,10 @@
                 <div><span>OR</span></div>
                 <div id='thirdPartyGoogle1'></div>
 
-                <div id='thirdPartyKakao1'></div>
-                <div class="buttonK" id="kakaoLogin">
-                    <img id="kakaoLogo" src="./public/images/kakaoLogin/en/kakao_login_medium.png">
+                <div id='thirdPartyKakao1'>
+                    <div class="buttonK" id="kakaoLogin">
+                        <img id="kakaoLogo" src="./public/images/kakaoLogin/en/kakao_login_medium.png">
+                    </div>
                 </div>
             </div>
             <hr>

@@ -1,6 +1,7 @@
 
     .modalSubDiv{
         /* margin: 15% 10% 30% 10%; */
+        width:50%;
         margin: auto;
         background-image: none;
         background-color: white;
@@ -73,7 +74,12 @@
     #thirdPartyGoogle2{
         height:100%;
     }
-
+    #thirdPartyGoogle1, #thirdPartyKakao1{
+        margin-top:3px;
+    }
+    #thirdPartyKakao1:hover, #thirdPartyKakao2:hover{
+        cursor:pointer;
+    }
     .subSection{
         width:100%;
         margin:4px 0;
