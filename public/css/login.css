@@ -134,9 +134,9 @@
         outline: none;
     }
     
-    .loginInput:hover {
+    /* .loginInput:hover {
         box-shadow: 5px 10px 18px lightgrey;
-    }
+    } */
 
     .loginButton{
         margin: 0;
@@ -154,9 +154,9 @@
         text-align: center;
     }
     
-    .loginButton:hover {
+    /* .loginButton:hover {
         background-color:#ff3864;
-    }
+    } */
     .loginButton:focus {
         outline: none;
     }

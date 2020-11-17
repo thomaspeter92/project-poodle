@@ -60,12 +60,18 @@ class MemberManager extends Manager{
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
         
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            return false;
-        }
         if ($password != $confirmPassword){
             return false;
         }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            return false;
+        }
+        echo $password;
+        echo $confirmPassword;
+        echo '<script type="text/javascript">
+             alert($password);
+        </script>';
+       
         $db = $this->dbConnect();
         $query = "INSERT INTO member(name, password, email, kakao, google) 
                                 VALUES(:name, :password, :email, :kakao, :google)";

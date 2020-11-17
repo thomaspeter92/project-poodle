@@ -1,20 +1,21 @@
 
 
 const createSignUpModal = () =>{
+   
     //Close the menu
     const hoverWrapper = document.querySelector(".hoverWrapper"); 
     if (hoverWrapper){
        if (hoverWrapper.classList.contains("show")) toggleMenu();
     }
 
-
+    
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'index.php?action=registration');
     xhr.onload = function () {
         if(xhr.status == 200){
             let signUpModal = new ModalLogin(xhr.responseText);
             signUpModal.generate('#gSigninBut','#googleHome');
-           
+            
             //Get the Google button from the HTML page and add to the modal page
             signUpModal.addExternalButton('#thirdPartyGoogle2','#gSigninBut','signup');
 
@@ -26,11 +27,11 @@ const createSignUpModal = () =>{
              if (regLoginBtn) {
                 regLoginBtn.addEventListener("click", () => createSignInModal());
              }
-         
+            new FormCheck().formCheck();// Marie ugly way of calling
         }
     }
     xhr.send(null);
-
+    
 }
 
 const createSignInModal = () =>{
@@ -72,6 +73,7 @@ const createSignInModal = () =>{
                 loginRegisterBtn.addEventListener("click", () => createSignUpModal());
             }
         }
+        new FormCheck().formCheck();// Marie ugly way of calling
     }
     xhr.send(null);
 }

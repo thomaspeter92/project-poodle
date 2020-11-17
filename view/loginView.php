@@ -1,16 +1,14 @@
-<?php ?>
-
     <div id="SignInMain">
         <div class = "registerDiv">
             <form method="POST" action="index.php" autocomplete="off" id='formSignIn'>
                 <input type="hidden" name="action" value="checkLogin">
                 <div class='subSection'>
                     <label for="emailLogin" class="form_col">Email :</label> 
-                    <input type="text" name="emailLogin" id="emailLogin" class="loginInput" required>
+                    <input type="text" name="emailLogin" id="emailLogin" class="loginInput required " required>
                 </div>
                 <div class='subSection'>
                     <label for="passwordLogin" class="form_col">Password :</label>
-                    <input type="password" name="passwordLogin" id="passwordLogin" class="loginInput" required>
+                    <input type="password" name="passwordLogin" id="passwordLogin" class="loginInput required" required>
                 </div>
                 <div class='subSection'>
                     <button name="connect" id="connect" class='loginButton'> <a href="index.php" id='anchorNoDecor'>Sign In</a></button>
@@ -34,8 +32,9 @@
 
         </div>
     </div>
-    
+    <!-- <script src="./projectPoodle/public/js/formCheck.js"></script> -->
     <?php require("kakaoForm.php"); ?>
     <?php require("googleForm.php"); ?>
+  
 
 

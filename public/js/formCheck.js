@@ -1,17 +1,23 @@
-const formCheck = () => {
-    const password = document.querySelector(`.password`); 
-    const confirmPassword = document.querySelector(`.confirmPassword`);
-    const email = document.querySelector(`.email`);
-    //add `required` to your required inputs 
+class FormCheck {
+
+formCheck = () => {
+    var password = document.querySelector(`.password`); 
+    var confirmPassword = document.querySelector(`.confirmPassword`);
+    var email = document.querySelector(`.email`);
+    var requiredInput = document.querySelector(`.required`);
 
     if(confirmPassword){
         confirmPassword.addEventListener(`keyup`, function(){
             if(confirmPassword.value === password.value.trim()){
-                password.className=`blue`;
-                confirmPassword.className=`blue`;
+                password.classList.remove(`red`);
+                password.classList.add(`blue`);
+                confirmPassword.classList.remove(`red`);
+                confirmPassword.classList.add(`blue`);
             }else{
-                password.className=`red`;
-                confirmPassword.className=`red`;
+                password.classList.remove(`blue`);
+                password.classList.add(`red`);
+                confirmPassword.classList.remove(`blue`);
+                confirmPassword.classList.add(`red`);
             }
         });
     }
@@ -32,14 +38,19 @@ const formCheck = () => {
 // }
 
     //only makes sure both passwords match
+  
     if(password){
         password.addEventListener(`keyup`, function(){
             if(password.value === confirmPassword.value.trim() && password.value.length > 0){
-                password.className=`blue`;
-                confirmPassword.className=`blue`;
+                password.classList.remove(`red`);
+                password.classList.add(`blue`);
+                confirmPassword.classList.remove(`red`);
+                confirmPassword.classList.add(`blue`);
             }else {
-                password.className=`red`;
-                confirmPassword.className=`red`;
+                password.classList.remove(`blue`);
+                password.classList.add(`red`);
+                confirmPassword.classList.remove(`blue`);
+                confirmPassword.classList.add(`red`);
             }
         });
     }
@@ -49,26 +60,48 @@ const formCheck = () => {
 
     if(email){
         email.addEventListener(`keyup`, function(){
+            // console.log(email.value);
             var emailVerify = emailRegex.test(email.value);
             if(emailVerify == true){
-                email.className = `blue`;
+                email.classList.remove(`red`);
+                email.classList.add(`blue`);
             }else if(emailVerify == false){
-                email.className = `red`;
+                email.classList.remove(`blue`);
+                email.classList.add(`red`);
             }
         });
       
     }
 
     //empty input check
-    var requiredInput = document.querySelector(`input[required]`);
     if(requiredInput){
         requiredInput.addEventListener(`keyup`, function(){
+            // console.log(requiredInput);
             if(requiredInput.value.length > 0){
-                requiredInput.className = `blue`;
+                requiredInput.classList.remove(`red`);
+                requiredInput.classList.add(`blue`);
             }else{
-                requiredInput.className = `red`;
+                requiredInput.classList.remove(`blue`);
+                requiredInput.classList.add(`red`);
             }
         });
     }
+   
+   
+    var signUpButton = document.querySelector('.subSection>#subscribe');
+    if(signUpButton){
+        signUpButton.addEventListener(`click`, function(){
+            var redClasses = document.querySelector(`.red`);
+            if(redClasses){
+                return false;
+            }else{
+                return true;
+            }
+        })
+    }
 }
-formCheck();
+
+
+}
+
+

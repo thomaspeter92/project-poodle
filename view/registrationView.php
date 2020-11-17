@@ -2,24 +2,24 @@
     <div id="SignUpMain">
         <div class = "registerDiv">
         
-            <form method="POST" action="index.php" autocomplete="off" id='formSignUp'>
+            <form method="POST" action="index.php" autocomplete="off" id='formSignUp' onsubmit="return new FormCheck().formCheck();">
 
                 <input type="hidden" name="action" value="registrationInput" required>
                 <div class='subSection'>
                     <label for="username" class="form_col">Name :</label>
-                    <input type="text" name="username" id="username" class="loginInput" required>
-                </div>
+                    <input type="text" name="username" id="username" class="loginInput required" required>
+                </div>  
                 <div class='subSection'>
                     <label for="password" class="form_col">Password :</label>
-                    <input type="password"name="password" class="loginInput" id="password" required>
+                    <input type="password"name="password" class="loginInput password" id="password" required>
                 </div>
                 <div class='subSection'>
                     <label for="confirmpass" class="form_col">Confirm password :</label>
-                    <input type="password" name="confirmpass" class="loginInput" id="confirmpass" required>
+                    <input type="password" name="confirmpass" class="loginInput confirmPassword" id="confirmpass" required>
                 </div>
                 <div class='subSection'>
                     <label for="email" class="form_col">Email :</label>
-                    <input type="text" name="email" id="email" class="loginInput" required>
+                    <input type="text" name="email" id="email" class="loginInput email" required>
                 </div>
                 <div class='subSection'>
                 <input type="submit" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
@@ -40,10 +40,8 @@
             </div>
             <hr/>
             <div class=registerSignInDiv>
-                
                 <div id="withUs">Already with us? </div>
                 <button name="login" id="regLogin" value="Sign In" class="loginButton">Sign In</button>
-
             </div>
         </div>
     </div>
