@@ -112,6 +112,7 @@ try {
             } else {
                 throw new Exception("Kakao Sign Up is failed", 1000);
             }
+            break;
         case "googleSignIn":
             $email = isset($_REQUEST['googleEmail']) ? $_REQUEST['googleEmail'] : NULL;
             $name = isset($_REQUEST['googleName']) ? $_REQUEST['googleName'] : NULL;
@@ -140,6 +141,9 @@ try {
                 "imageURL" => $pictureURL,
             );
             signUpWith($memberData);
+            break;
+        case "eventsList":
+            showUpcomingEventsList();
             break;
         case "showEventDetail" :
             showEventDetail($_REQUEST['eventId']);
