@@ -42,6 +42,7 @@ function deletePet($petId) {
 
 function showEventDetail($eventId) {
     $showEvent = new EventManager();
+    $guestList = $showEvent->loadGuests($eventId);
     $event = $showEvent->getEventDetail($eventId);
     $comments = $showEvent->loadComments($eventId);
     require("./view/eventDetailedView.php");
@@ -61,6 +62,16 @@ function loadSingleComment($commentId) {
     $loadComment = new EventManager();
     $comment = $loadComment->loadSingleComment($commentId);
     require("./view/editEventCommentView.php");
+}
+
+// function editEventComment($params) {
+//     $editComment = new EventManager();
+//     $editComment->editComment($params);
+// }
+
+function attendEvent($params) {
+    $eventAttend = new EventManager();
+    $eventAttend->attendEventSend($params);
 }
 
 function aboutUs(){

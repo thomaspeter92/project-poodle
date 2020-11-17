@@ -146,14 +146,22 @@ try {
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
-            showEventDetail($_REQUEST['eventId']);
+            // showEventDetail($_REQUEST['eventId']);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);
             break;
-
+        // case "editEventComment" :
+        //     editEventComment($_REQUEST);
+            break;
         case "loadSingleComment" :
             loadSingleComment($_REQUEST['commentId']);
+            break;
+        case "attendEvent" :
+            attendEvent($_REQUEST);
+            break;
+        case "unattendEvent" :
+            attendEvent($_REQUEST);
             break;
         default:
             landing();

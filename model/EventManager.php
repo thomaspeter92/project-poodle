@@ -6,16 +6,33 @@ require_once("Manager.php");
         public function getEventDetail($eventId) {
 
             $db = $this->dbconnect();
-            $req = $db->prepare("SELECT e.id eventId, e.name name, e.dateCreate dateCreate, e.location location, e.description description, e.picture picture, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.picture picture, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
 
             $event =$req->fetch(PDO::FETCH_ASSOC);
 
-            $req -> closeCursor();
+            $req->closeCursor();
 
             return $event;
 
+        }
+
+        public function loadGuests($eventId) {
+
+            $db = $this->dbConnect();
+            // $req = $db->prepare("SELECT COUNT(*) FROM eventAttend WHERE eventId = :eventId");
+
+            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId");
+            $req->bindParam(':eventId',$eventId, PDO::PARAM_INT);
+            $req->execute();
+
+
+            $guestList = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            $req->closeCursor();
+
+            return $guestList;
         }
 
         public function commentPost($params) {
@@ -73,7 +90,7 @@ require_once("Manager.php");
 
             $req = $db->prepare("SELECT comment FROM eventComment WHERE id = :commentId");
 
-            $req->bindParam(':commentId', $$commentId, PDO::PARAM_INT);
+            $req->bindParam(':commentId', $commentId, PDO::PARAM_INT);
             $req->execute();
 
             $comment = $req->fetch(PDO::FETCH_ASSOC);
@@ -81,7 +98,43 @@ require_once("Manager.php");
             $req->closeCursor();
 
             return $comment;
-
         }
+
+        public function attendEventSend($params) {
+
+            $db = $this->dbConnect();
+
+            $eventId = $params['eventId'];
+            $guestId = $params['guestId'];
+
+            if ($params['action'] == 'attendEvent') {
+                $req = $db->prepare("INSERT INTO eventAttend (eventId, guestId) VALUES (:eventId, :guestId)");
+                $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
+            } else if ($params['action'] == 'unattendEvent') {
+                $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId");
+            }
+
+            $req->bindParam(':guestId',$guestId,PDO::PARAM_INT);
+
+            $req->execute();
+            $req->closeCursor();
+        }
+
+        // public function editComment($params) {
+
+        //     $db = $this->dbConnect();
+        //     $req = $db->prepare("UPDATE eventComment SET comment = :comment WHERE id = :commentId");
+
+        //     $comment = htmlspecialchars($params['editCommentInput']);
+        //     $commentId = $params['commentId'];
+
+        //     $req->bindParam(':comment',$comment,PDO::PARAM_STR);
+        //     $req->bindParam(':eventId',$commentId,PDO::PARAM_INT);
+            
+        //     $req->execute();
+        //     $req->closeCursor();
+        // }
+
+
 
     }

@@ -15,32 +15,30 @@
 
 .modalSubDiv{
     background-image: none;
-    background-color: white;
+    background-color: rgb(245, 245, 245);
     width: 50%;
-    height: 70%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
-
-#editCommentForm {
-    width: 100%;
-    height: 100%;
+    justify-content: space-around;
 }
 
 #editCommentInput {
     width: 100%;
+    height: 100%;
     border: none;
     resize: none;
     border-radius: 50px;
     padding: 20px;
-    background-color: lightgray;
+    background-color: white;
 }
 
 .modalDivContent {
     margin: 0;
-    height: auto;
+    height: 50%;
+    width: 80%;
+
 }
 
 .modalDivButtons{
@@ -48,6 +46,7 @@
     height: auto;
     width: 100%;
     align-self: flex-end;
+    margin: 25px 0 25px 0;
 }
 
 .modalDivButtons button{
@@ -75,9 +74,14 @@
 </style>
 
 
+<h4>Edit Comment:</h4>
 
-<form id="editCommentForm">
-
-<input type="text" name="editCommentInput" id="editCommentInput" value=<?=$comment;?>>
-
+<form action="index.php" method="POST" id="editCommentForm" name="editCommentForm">
+    <textarea rows="1" name="editCommentInput" id="editCommentInput" > <?=$comment['comment'];?></textarea>
+    <input type="hidden" name="commentId" value="<?=$comment['commentId'];?>">
+    <input type="hidden" name="action" value="editEventComment">
 </form>
+
+<script>
+
+</script>
