@@ -1,0 +1,58 @@
+input {
+    border-radius: 42px;
+    border-style: none;
+    padding: 5px;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textfield;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+
+.blue{
+    /* border: 2px solid blue; */
+    background: url(../images/checkBlue.svg);  
+    background-color: white;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+
+.red{
+    background: url(../images/checkRed.svg);
+    background-color: white;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+
+button, a>button {
+    margin: 0;
+    width: auto;
+    height: 50px;
+    margin-bottom: 0;
+    background-color: #72ddf7;
+    border-radius: 42px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 17px;
+    padding: 13px 76px;
+    border-style: none;
+    box-shadow: 5px 10px 18px #acacac;
+    text-align: center;
+}

@@ -1,0 +1,74 @@
+const formCheck = () => {
+    const password = document.querySelector(`.password`); 
+    const confirmPassword = document.querySelector(`.confirmPassword`);
+    const email = document.querySelector(`.email`);
+    //add `required` to your required inputs 
+
+    if(confirmPassword){
+        confirmPassword.addEventListener(`keyup`, function(){
+            if(confirmPassword.value === password.value.trim()){
+                password.className=`blue`;
+                confirmPassword.className=`blue`;
+            }else{
+                password.className=`red`;
+                confirmPassword.className=`red`;
+            }
+        });
+    }
+    //making sure password has at least 8 characters, 1 special char, 1 number, 1 lowercase, and 1 uppercase
+    // const passwordRegex = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g
+    //https://www.regextester.com/95447
+//     const passwordVerify = password.value.search(passwordRegex);
+//     if(password){
+//         password.addEventListener(`keyup`, function(){
+//             if(password.value === confirmPassword.value.trim() && passwordVerify != -1){
+//                 password.className=`blue`;
+//                 confirmPassword.className=`blue`;
+//             }else {
+//                 password.className=`red`;
+//                 confirmPassword.className=`red`;
+//             }
+//         });
+// }
+
+    //only makes sure both passwords match
+    if(password){
+        password.addEventListener(`keyup`, function(){
+            if(password.value === confirmPassword.value.trim() && password.value.length > 0){
+                password.className=`blue`;
+                confirmPassword.className=`blue`;
+            }else {
+                password.className=`red`;
+                confirmPassword.className=`red`;
+            }
+        });
+    }
+
+    //email check
+    var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if(email){
+        email.addEventListener(`keyup`, function(){
+            var emailVerify = emailRegex.test(email.value);
+            if(emailVerify == true){
+                email.className = `blue`;
+            }else if(emailVerify == false){
+                email.className = `red`;
+            }
+        });
+      
+    }
+
+    //empty input check
+    var requiredInput = document.querySelector(`input[required]`);
+    if(requiredInput){
+        requiredInput.addEventListener(`keyup`, function(){
+            if(requiredInput.value.length > 0){
+                requiredInput.className = `blue`;
+            }else{
+                requiredInput.className = `red`;
+            }
+        });
+    }
+}
+formCheck();

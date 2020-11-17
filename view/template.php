@@ -73,8 +73,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                             
                             <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
                             <div>
-                            <a href="#" id="desktopLogInLink">Sign In</a>
-                            <a href='#' class="headerSignUp"id="desktopSignUpLink">Sign Up</a>
+                            <a id="desktopLogInLink" href="#">Sign In</a>
+                            <a id="desktopSignUpLink" href='#' class="headerSignUp">Sign Up</a> 
                             </div>
                             <?php 
                         } else {
@@ -167,6 +167,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <p><a href="index.php?action=contactPage">Contact</a></p>
                     </div>
                 </div>
+               
                 <!-- The following script controls menu animation on Click -->
 
 

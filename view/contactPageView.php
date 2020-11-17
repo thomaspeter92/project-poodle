@@ -5,7 +5,7 @@
     <div class="topContent">
         <div class="contactPageEmail">
             <div class="circle"><h2><i class="far fa-envelope"></i></h2></div>
-            <div class="email">
+            <div class="contactEmail">
                 <h2>EMAIL</h2>
                 <p>contactus@contactus.com</p>
             </div>
