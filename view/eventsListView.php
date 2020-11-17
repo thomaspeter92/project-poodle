@@ -15,12 +15,13 @@ ob_start();
             <option value="Next week">Next week</option>
         </select>
     </div>
+    <?php foreach ($events as $event): ?>
     <div class="item">
         <div class="imgContainer"><img src="./private/event/event1.png" alt="event1"></div>
         <div class="content">
-            <div class="date">WED, NOV 18, 7:00 PM GMT+9</div>
-            <div class="title">Developers.IO Korea Online #02</div>
-            <div class="host">Hosted by Hongshik</div>
+            <div class="date"><?= $event->dateCreated; ?></div>
+            <div class="title"><?= $event->name; ?></div>
+            <div class="host">Hosted by <?= $event->hostName; ?></div>
             <div class="attendees">
                 <div><img src="./private/profile/user1.png"></div>
                 <div><img src="./private/profile/user2.png"></div>
@@ -28,25 +29,25 @@ ob_start();
                 <div><span>75</span></div>
             </div>
         </div>
+        <input type="hidden" class="eventId" value="<?=$event->id;?>">
     </div>
-    <div class="item">
-        <div class="imgContainer"><img src="./private/event/event2.png" alt="event1"></div>
-        <div class="content">
-            <div class="date">WED, NOV 18, 7:00 PM GMT+9</div>
-            <div class="title">Developers.IO Korea Online #02</div>
-            <div class="host">Hosted by Hongshik</div>
-            <div class="attendees">
-                <div><img src="./private/profile/user1.png"></div>
-                <div><img src="./private/profile/user2.png"></div>
-                <div><img src="./private/profile/user3.png"></div>
-                <div><span>75</span></div>
-            </div>
-        </div>
-    </div>
+    <?php endforeach; ?>
     <div>
         <button type="button">Show more events</button>
     </div>
 </section>
+<script>
+    const items = document.querySelectorAll(".item");
+    items.forEach(item => {
+        item.addEventListener("click", () => {
+            const eventId = item.querySelector(".eventId").value;
+            if (eventId) {
+                const url = `index.php?action=showEventDetail&eventId=${eventId}`;
+                window.location.href = url;
+            }
+        });    
+    });
+</script>
 <?php
 $content = ob_get_clean();
 require("template.php");

@@ -143,7 +143,7 @@ try {
             signUpWith($memberData);
             break;
         case "eventsList":
-            showEventsListPage();
+            showUpcomingEventsList();
             break;
         case "showEventDetail" :
             showEventDetail($_REQUEST['eventId']);

@@ -29,6 +29,7 @@ section>#inputOptions>input, section>#inputOptions>select {
 .item {
     padding: 20px;
     border-top: 1px solid lightgray;
+    cursor: pointer;
 }
 .item>div {
     display: inline-block;

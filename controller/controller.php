@@ -40,6 +40,16 @@ function deletePet($petId) {
     $deleteManager->deletePet($petId);
 }
 
+function showUpcomingEventsList() {
+    $manager = new EventManager();
+    $events = $manager->getUpcomingEvents();
+    if ($events) {
+        require('./view/eventsListView.php');
+    } else {
+        throw new Exception("Failed to show upcoming events!!", 2000);
+    }
+}
+
 function showEventDetail($eventId) {
     $showEvent = new EventManager();
     $event = $showEvent->getEventDetail($eventId);
@@ -78,6 +88,3 @@ function legalPage(){
     require('./view/legalPageView.php');
 }
 
-function showEventsListPage() {
-    require('./view/eventsListView.php');
-}

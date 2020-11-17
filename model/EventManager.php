@@ -3,6 +3,23 @@ require_once("Manager.php");
 
     class EventManager extends Manager {
 
+        public function getUpcomingEvents() {
+            //WED, NOV 18, 7:00 PM
+            //%a, %b %d, %h:%i %p
+            $db = $this->dbconnect();
+            $query = "SELECT e.id, e.name, e.location, m.name AS hostName, 
+                        DATE_FORMAT(e.dateCreate, '%a, %b %d, %h:%i %p') AS dateCreated
+                        FROM event AS e
+                        JOIN member AS m
+                        ON e.hostId = m.id
+                        WHERE e.dateCreate > NOW();";
+            $req = $db->prepare($query);
+            $req->execute();
+            $events = $req->fetchAll(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $events;
+        }
+
         public function getEventDetail($eventId) {
 
             $db = $this->dbconnect();
