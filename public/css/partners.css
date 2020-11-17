@@ -20,14 +20,14 @@ section>div:first-child {
     display: flex;
     flex-direction: column;
 }
-#contents>div {
-    position: relative;
-    width: 100%;
+#textBlocks {
+    margin-left: 20%;
 }
 .textBlock {
     background-color: rgba(0, 0, 0, 0.5);
     width: 500px;
-    margin-left: 20%;
+    margin-top: 5%;
+    padding: 1px;
     text-align: center;
 }
 
@@ -42,6 +42,7 @@ section>div:first-child {
 
 #partners {
     flex: 1;
+    position: relative;
 }
 .partner {
     position: absolute;
@@ -85,6 +86,11 @@ section>div:first-child {
 }
 
 @media screen and (max-width: 1000px) {
+    #textBlocks {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+    }
     #partners {
         display: flex;
         justify-content: space-evenly;
@@ -102,14 +108,24 @@ section>div:first-child {
         margin-bottom: 20%;
     }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
+    .textBlock {
+        width: 400px;
+        margin-top: 10%;
+        font-size: 0.8em;;
+    }
     .partner {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         margin-bottom: 40%;
     }
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
+    .textBlock {
+        width: 330px;
+        margin-top: 10%;
+        font-size: 0.7em;;
+    }
     .partner {
         width: 60px;
         height: 60px;
