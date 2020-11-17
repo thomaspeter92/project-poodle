@@ -54,12 +54,16 @@ class MemberManager extends Manager{
     function addNewMember($params) {
         $name = htmlspecialchars($params["name"]);
         $password = htmlspecialchars($params["password"]);
+        $confirmPassword = htmlspecialchars($params["confirmpass"]);
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
         
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            return false;
+        }
+        if ($password != $confirmPassword){
             return false;
         }
         $db = $this->dbConnect();
