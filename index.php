@@ -1,4 +1,3 @@
-<!-- index.php -->
 <?php
 session_start();
 require("./controller/controller.php");
@@ -38,6 +37,11 @@ try {
             break;
         case "registration":
             registration();
+            break;
+        case "emailCheck":
+            if(!empty($_REQUEST['email'])){
+                emailCheck($_REQUEST['email']);
+            }
             break;
         case "registrationInput":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {

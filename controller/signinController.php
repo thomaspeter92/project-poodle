@@ -33,7 +33,6 @@ function registration()
 
 function logout()
 {
-
     session_unset();
     session_destroy();
     header("Location: index.php");
@@ -44,7 +43,13 @@ function createSession($id, $name, $imageURL) {
     $_SESSION['name'] = $name;
     $_SESSION['imageURL'] = $imageURL;
 }
-
+function emailCheck($email){
+    $manager = new MemberManager();
+    $memberCheck = $manager->getMemberDataByEmail($email);
+    if($memberCheck){
+        echo "true";
+    }
+}
 function signUpWith($memberData)
 {
     if (empty($memberData["email"])) {
@@ -55,6 +60,7 @@ function signUpWith($memberData)
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     if ($memberDataFromDB) {
+        
         signInWith($memberData);
         
         //TODO: Show the user is already signed up with kakao
