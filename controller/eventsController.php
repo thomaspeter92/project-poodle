@@ -1,21 +1,13 @@
 <?php
-function showSearchedEventsList($text) {
-    $events = getSearchedEventsList($text);
-    if ($events) {
-        require("./view/eventsList.php");
-    } else {
-        throw new Exception("Failed to show upcoming events!!", 2000);
-    }
+function showSearchedEventsList($text, $option) {
+    $events = getSearchedEventsList($text, $option);
+    require("./view/eventsList.php");
 }
 
-function getSearchedEventsList($text) {
+function getSearchedEventsList($text, $option) {
     $manager = new EventManager();
-    $events = $manager->getUpcomingEvents($text);
-    if ($events) {
-        return $events;
-    } else {
-        throw new Exception("Failed to show upcoming events!!", 2000);
-    }
+    $events = $manager->getUpcomingEvents($text, $option);
+    return $events;
 }
 
 function getGuestCountOfEvent($eventId) {

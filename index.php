@@ -147,7 +147,8 @@ try {
             break;
         case "searchEvents";
             $search = isset($_REQUEST["search"]) ? $_REQUEST["search"] : NULL;
-            showSearchedEventsList($search);
+            $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
+            showSearchedEventsList($search, $option);
             break;
         case "showEventDetail" :
             showEventDetail($_REQUEST['eventId']);

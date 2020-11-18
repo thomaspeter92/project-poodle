@@ -26,6 +26,19 @@ section>#inputOptions>input, section>#inputOptions>select {
     
 }
 
+/* No Events */
+.noEvents {
+    font-family: "monsterRatBold", sans-serif;
+    padding: 40px;
+}
+.noEventsSub {
+    font-family: "monsterRatRegular", sans-serif;
+    padding: 0 40px;
+    padding-bottom: 20px;
+}
+
+
+/* Event Item */
 .item {
     padding: 20px;
     border-top: 1px solid lightgray;

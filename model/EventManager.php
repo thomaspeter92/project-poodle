@@ -3,16 +3,52 @@ require_once("Manager.php");
 
     class EventManager extends Manager {
 
-        public function getUpcomingEvents($text=NULL) {
-            //WED, NOV 18, 7:00 PM
+        /**
+         * Date: WED, NOV 18, 7:00 PM
+         */
+        public function getUpcomingEvents($text=NULL, $option=NULL) {
+            //TODO: eventDate should be changed to expiryDate
+
+
             $db = $this->dbconnect();
             $query = "SELECT e.id, e.name, e.location, m.name AS hostName, 
                         DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
                         FROM event AS e
                         JOIN member AS m
-                        ON e.hostId = m.id
-                        WHERE e.eventDate > NOW()";
+                        ON e.hostId = m.id";
+            $nextMondayDate = "DATE(DATE_ADD(NOW(), INTERVAL (7-WEEKDAY(NOW())) DAY))";
+            $thisSaturdatDate = "DATE(DATE_ADD(NOW(), INTERVAL (5-WEEKDAY(NOW())) DAY))";
+            $nextNextMondayDate = "DATE(DATE_ADD(NOW(), INTERVAL (14-WEEKDAY(NOW())) DAY))";
+            
+            switch ($option) {
+                case "anyDay":
+                    $query .= " WHERE e.eventDate > NOW()";  
+                    break;
+                case "today":
+                    $query .= " WHERE DATE(e.eventDate) = DATE(NOW()) 
+                                AND e.eventDate > NOW()";  
+                    break;
+                case "tomorrow":
+                    $query .= " WHERE DATE(e.eventDate) = DATE(DATE_ADD(NOW(), INTERVAL 1 DAY))";  
+                    break;
+                case "thisWeek": //Current Day ~ Sun
+                    $query .= " WHERE (e.eventDate BETWEEN DATE(NOW()) AND ".$nextMondayDate.")".
+                                " AND e.eventDate > NOW()";  
+                    break;
+                case "thisWeekend": //Sat, Sun
+                    $query .= " WHERE (e.eventDate BETWEEN ".$thisSaturdatDate." AND ".$nextMondayDate.")".
+                                " AND e.eventDate > NOW()";  
+                    break;
+                case "nextWeek": //Next Mon ~ Sun
+                    $query .= " WHERE (e.eventDate BETWEEN ".$nextMondayDate." AND ".$nextNextMondayDate.")".
+                                " AND e.eventDate > NOW()";  
+                    break; 
+                default:
+                    $query .= " WHERE e.eventDate > NOW()";  
+                    break;
+            }
             $query .= isset($text) ? " AND e.name LIKE :text" : "";
+            //echo $query;
             $req = $db->prepare($query);
             if (isset($text)) {
                 $req->bindValue(":text", "%".$text."%", PDO::PARAM_STR);
