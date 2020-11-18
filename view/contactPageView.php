@@ -3,13 +3,15 @@
 <div class="contactPage1">
     <h1><strong>Get in touch</strong></h1>
     <div class="topContent">
-        <div class="contactPageEmail">
-            <div class="circle"><h2><i class="far fa-envelope"></i></h2></div>
-            <div class="email">
-                <h2>EMAIL</h2>
-                <p>contactus@contactus.com</p>
+        <a href="mailto: petventure@petventure.com">
+            <div class="contactPageEmail">
+                <div class="circle"><h2><i class="far fa-envelope"></i></h2></div>
+                <div class="contactEmail">
+                    <h2>EMAIL</h2>
+                    <p>petventure@petventure.com</p>
+                </div>
             </div>
-        </div>
+        </a>
         <div class="contactPageNumber">
             <div class="circle"> <h2><i class="fas fa-phone"></i></h2> </div>
             <div class="phoneNumber">

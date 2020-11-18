@@ -40,10 +40,11 @@ try {
             registration();
             break;
         case "registrationInput":
-            if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['email'])) {
+            if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
                 $memberData = array(
                     "name" => $_REQUEST['username'],
                     "password" => $_REQUEST['password'],
+                    "confirmpass" => $_REQUEST['confirmpass'],
                     "email" => $_REQUEST['email'],
                     "kakao" => 0, "google" => 0,
                 );

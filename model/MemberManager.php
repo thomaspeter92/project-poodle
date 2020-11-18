@@ -22,10 +22,7 @@ class MemberManager extends Manager{
         $memberlogin->execute();
         $user = $memberlogin->fetch(PDO::FETCH_ASSOC);
         $hashed_password = $user['password'];
-        $membername = $user['name'];
-        $memberid = $user['id'];
-        $_SESSION['name'] = $membername;
-        $_SESSION['id'] = $memberid;
+
         $memberlogin->closeCursor();
         return password_verify($passwordLogin, $hashed_password);
     }
@@ -57,14 +54,24 @@ class MemberManager extends Manager{
     function addNewMember($params) {
         $name = htmlspecialchars($params["name"]);
         $password = htmlspecialchars($params["password"]);
+        $confirmPassword = htmlspecialchars($params["confirmpass"]);
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
         
+        if ($password != $confirmPassword){
+            return false;
+        }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
         }
+        echo $password;
+        echo $confirmPassword;
+        echo '<script type="text/javascript">
+             alert($password);
+        </script>';
+       
         $db = $this->dbConnect();
         $query = "INSERT INTO member(name, password, email, kakao, google) 
                                 VALUES(:name, :password, :email, :kakao, :google)";

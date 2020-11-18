@@ -9,10 +9,20 @@ function checkLogin($params)
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
     if ($status) {
-        header("Location: index.php");
-    } else {
+        //Franco
+        //Create session
+        $emailLogin = addslashes(htmlspecialchars((htmlentities(trim($params['emailLogin']))))); 
+        $memberDataFromDB = $loginManager->getMemberDataByEmail($emailLogin);
+
+        if ($memberDataFromDB) {
+            $memberDataFromDB["id"];
+            $memberDataFromDB["name"];
+            createSession($memberDataFromDB["id"],$memberDataFromDB["name"],"");
+            header("Location: index.php");
+        } else {
         // header("Location: index.php?action=login&error=login");
 
+        }
     }
 }
 
@@ -100,6 +110,7 @@ function signInWith($memberData) {
         echo "<br>";
         echo "<br>";
         echo "TODO: It is not valid email. You haven't signed up yet. ";
+        // echo "<script> signAllOut(); </script>";
         // throw new Exception("Failed to sign in!!", 1007);
 
         // header("Location: index.php?action=login&error=notSignedUp");
