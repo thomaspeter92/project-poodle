@@ -11,7 +11,7 @@
                     <input type="password" name="passwordLogin" id="passwordLogin" class="loginInput required" required>
                 </div>
                 <div class='subSection'>
-                    <button name="connect" id="connect" class='loginButton'> <a href="index.php" id='anchorNoDecor'>Sign In</a></button>
+                    <button type="submit" name="connect" id="connect" class='loginButton'>Sign In</button>
                 </div>
             </form>            
             <div class='thirdParty'>
