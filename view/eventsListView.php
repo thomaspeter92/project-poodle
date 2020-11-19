@@ -4,7 +4,7 @@ ob_start();
 ?>
 <section>
     <div></div>
-    <div id="inputOptions">
+    <div id="inputContainer">
         <input type="text" id="searchEvents" placeholder="Search events">
         <select id="selectOption">
             <option value="anyDay">Any day</option>
