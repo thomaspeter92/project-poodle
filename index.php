@@ -2,6 +2,8 @@
 <?php
 session_start();
 require("./controller/controller.php");
+// require("./controller/accountController.php");
+
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
 
@@ -146,22 +148,15 @@ try {
                 login();
             }
             break;
-        case "changePW":
+        case "removeProfilePic":
             if(!isset($_SESSION['id'])){
                 header("Location: index.php?action=petPreview&error=notSignedIn");
-            }
-            else if (empty($_REQUEST['currentPW']) && empty($_REQUEST['newPW']) && empty($_REQUEST['confirmPW'])) {
-                header("Location: index.php?action=petPreview&error=passwordEmpty");
-            } else if($_REQUEST['newPW'] !== $_REQUEST['confirmPW']) {
-                header("Location: index.php?action=petPreview&error=passwordMatch");
             } else {
-                checkChangePW($_REQUEST, $_SESSION['id']);
+                removeProPic($_SESSION['id']);
             }
-            break;
         default:
             landing();
             break;
-
     }
 } catch (Exception $e) {
 

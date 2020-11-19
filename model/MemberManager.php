@@ -91,4 +91,52 @@ class MemberManager extends Manager{
 
         return $result;
     }
+
+    function changeAccountName($newName, $userID) {
+        $db = $this->dbConnect();
+        $query = "UPDATE member SET name = :name WHERE id = :userID";
+        $response = $db->prepare($query);
+        $response->bindValue(":name", htmlspecialchars($newName), PDO::PARAM_STR);
+        $response->bindValue(":userID", $userID, PDO::PARAM_INT);
+        $result = $response->execute();
+        $response->closeCursor();
+
+        return $result;
+    }
+
+    function changeAccountEmail($newEmail, $userID) {
+        $db = $this->dbConnect();
+        $query = "UPDATE member SET email = :email WHERE id = :userID";
+        $response = $db->prepare($query);
+        $response->bindValue(":email", htmlspecialchars($newEmail), PDO::PARAM_STR);
+        $response->bindValue(":userID", $userID, PDO::PARAM_INT);
+        $result = $response->execute();
+        $response->closeCursor();
+
+        return $result;
+    }
+
+    function changeProfilePic($newImage, $userID) {
+    $db = $this->dbConnect();
+    $query = "UPDATE member SET profileImage = :profileImage WHERE id = :userID";
+    $response = $db->prepare($query);
+        $response->bindValue(":profileImage", htmlspecialchars($newImage), PDO::PARAM_STR);
+        $response->bindValue(":userID", $userID, PDO::PARAM_INT);
+        $result = $response->execute();
+        $response->closeCursor();
+
+        return $result;
+    }
+
+    function removeProfilePic($userID) {
+        $db = $this->dbConnect();
+        $query = "UPDATE member SET profileImage = :profileImage WHERE id = :userID";
+        $response = $db->prepare($query);
+            $response->bindValue(":profileImage", "NULL", PDO::PARAM_STR);
+            $response->bindValue(":userID", $userID, PDO::PARAM_INT);
+            $result = $response->execute();
+            $response->closeCursor();
+    
+            return $result;
+    }
 }
