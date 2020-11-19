@@ -79,8 +79,8 @@
     }
 
     .profilePicManage{
-        height: 200px;
-        width: 200px;
+        height: 150px;
+        width: 150px;
         border-radius: 50%;
         padding-top: 0px;
     }
@@ -146,10 +146,10 @@
     </div>
     <br>
     <div>First Name:</div>
-    <input type="text" name="nameInput" id="nameInput" value="<?=$memberDataFromDB['name'] ?>">
+    <input type="text" name="nameInput" id="nameInput" class="required" value="<?=$memberDataFromDB['name'] ?>">
     <br>
     <div>Email:</div>
-    <input type="text" name="emailInput" id="emailInput" value="<?=$memberDataFromDB['email'] ?>">
+    <input type="text" name="emailInput" id="emailInput" class="required email" value="<?=$memberDataFromDB['email'] ?>">
     <br>
     <br>
     <div id="accountEmpty" hidden>Cannot save blank name and email fields.</div>
@@ -160,14 +160,14 @@
     </div>
     <div class="changePW" hidden>
         <input type="hidden" name="action" value="changePW">
-        Current Password: <input type="text" name="currentPW" id="currentPW">
+        Current Password: <input type="text" name="currentPW" id="currentPW" class="required">
         <br>
         <br>
-        New Password: <input type="text" name="newPW" id="newPW">
+        New Password: <input type="text" name="newPW" id="newPW" class="required password"> 
         <br>
         <div class="needDiffPW" hidden>New Password Cannot be same as old Password</div>
         <br>
-        Confirm Password: <input type="text" name="confirmPW" id="confirmPW">
+        Confirm Password: <input type="text" name="confirmPW" id="confirmPW" class="confirmPassword required">
         <br>
         <br>
         <div class="failedPW" hidden>Incorrect Password</div>

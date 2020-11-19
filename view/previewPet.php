@@ -425,7 +425,7 @@
                     let cancelBtn = document.querySelector(".modalCancel")
                     let emptyPW = document.querySelector(".emptyPW");
                     let matchPW = document.querySelector(".matchPW")
-
+                    let accountForm = document.querySelector(".accountForm")
 
                     // PW Inputs
                     let currentInput = document.querySelector("#currentPW");
@@ -441,6 +441,7 @@
                         successPW.setAttribute("hidden", true);
                         cancelBtn.setAttribute("hidden", true);
                         emptyPW.setAttribute("hidden", true);
+                        accountForm.setAttribute("hidden", true);
                     });
 
                     cancelPW.addEventListener('click', event => {
@@ -455,6 +456,7 @@
                         failedPW.setAttribute("hidden", true);
                         emptyPW.setAttribute("hidden", true);
                         cancelBtn.removeAttribute("hidden");
+                        accountForm.removeAttribute("hidden");
                     });
 
                     const pwSubmitButton = document.querySelector("#changePWSubmit");
@@ -522,6 +524,7 @@
                         xhr.send(params);
                         // console.log(params);
                     });
+                    new FormCheck().formCheck();// Marie ugly way of calling
 
                 }
 
