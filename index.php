@@ -2,6 +2,8 @@
 <?php
 session_start();
 require("./controller/controller.php");
+// require("./controller/accountController.php");
+
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
 
@@ -151,6 +153,20 @@ try {
             $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
             showSearchedEventsList($search, $option);
             break;
+        case "accountView":
+            if(isset($_SESSION['id'])){
+                accountView($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
+        case "removeProfilePic":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            } else {
+                removeProPic($_SESSION['id']);
+            }
+            break;
         case "showEventDetail" :
             showEventDetail($_REQUEST['eventId']);
             break;
@@ -168,7 +184,6 @@ try {
         default:
             landing();
             break;
-
     }
 } catch (Exception $e) {
 

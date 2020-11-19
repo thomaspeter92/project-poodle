@@ -263,7 +263,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                 </a>
             </div>
         </div>
-    </footer>
+    </footer>    
     
     <script>
         function initGoogle(){

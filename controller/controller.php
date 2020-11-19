@@ -6,6 +6,7 @@ require_once("./model/PreviewManager.php");
 require_once("./model/EventManager.php");
 require_once("./controller/signinController.php");
 require_once("./controller/eventsController.php");
+require_once("./controller/accountController.php");
 
 function landing()
 {
@@ -85,7 +86,14 @@ function showPartnersPage() {
 function contactPage(){
     require('./view/contactPageView.php');
 }
+
+function accountView($userID){
+    $manager = new MemberManager();
+    $memberDataFromDB = $manager->getMemberDataByID($userID);
+    require("./view/accountView.php");
+};
 function legalPage(){
     require('./view/legalPageView.php');
 }
+
 
