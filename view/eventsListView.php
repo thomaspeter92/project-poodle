@@ -15,7 +15,8 @@ ob_start();
             <option value="nextWeek">Next week</option>
         </select>
         <div id="addButton">
-            <button class="button">Add a Event</button>
+            <button class="button fullText">Add a Event</button>
+            <button class="button shortText">+</button>
         </div>
     </div>
     <div id="eventsList">
@@ -69,6 +70,12 @@ ob_start();
             });
             xhr.open("GET", url);
             xhr.send(null);
+        });
+
+        const addButton = document.querySelector("#addButton>button");
+        addButton.addEventListener("click", (e) => {
+            //TODO: Popup adding event page
+            alert("TODO: Popup adding event page!")
         });
     }
 </script>
