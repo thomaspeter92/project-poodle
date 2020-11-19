@@ -13,17 +13,31 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="./public/css/Modal.css"/>
+    <link rel="stylesheet" href="./public/css/login.css"/>
+    <link rel="stylesheet" href="./public/css/form.css"/>
     <!-- FONT LINKS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Franco -->
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script> 
+    <!-- <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script>  -->
+    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script> 
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
     <?= isset($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
+
+    <style>
+        #desktopSignUpLink:hover{
+            cursor:pointer
+        }
+        #desktopLogInLink:hover{
+            cursor:pointer
+        }
+
+    </style>
 </head>
 
 <body>
@@ -61,8 +75,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                             
                             <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
                             <div>
-                                <a href="index.php?action=login">Sign In</a>
-                                <a class="headerSignUp" href="index.php?action=registration">Sign Up</a>
+                            <a id="desktopLogInLink" href="#">Sign In</a>
+                            <a id="desktopSignUpLink" href='#' class="headerSignUp">Sign Up</a> 
                             </div>
                             <?php 
                         } else {
@@ -85,8 +99,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                                 <i class="far fa-bell"></i>
                             </div>
                             <div class="signOutWrapper">
-                                <!-- <a class="signOut" href="#" onclick="signAllOut()">Sign Out</a> -->
-                                <a class="signOut" href="index.php?action=logout">Sign Out</a>  
+                                <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
+                                  
                             </div> 
                         <?php
                         }
@@ -99,7 +113,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                                 <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
                             </div>
                             <div class="mobileSignInWrapper">
-                                <a class="mobileSignIn" href="index.php?action=login">Sign In</a> 
+                                <a class="mobileSignIn" id="mobileLogInLink2" href="#">Sign In</a> 
                             </div>
                         <?php 
                         } else {
@@ -139,13 +153,15 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                     <div class="menuItems">
                         <?php
                         if (!isset($_SESSION['id'])) {?>
-                            <p><a href="index.php?action=login">Sign In</a></p>
-                            <p><a href="index.php?action=registration">Sign Up</a></p>
+                            <p id="mobileLogInLink1"><a href="#">Sign In</a></p>
+                            <p id="mobileSignUpLink"><a href="#">Sign Up</a></p>
                         <?php 
                         } else {
                         ?>
-                        <p><a href="index.php?action=logout">Sign Out</a></p>
-                         <!-- <p><a href="#" onclick="signAllOut()">Sign Out</a></p> -->
+                        <form id="signOutForm" method="POST">
+                        </form>
+                        <p><a href="#"  onclick="signAllOut()">Sign Out</a></p>
+
                         <?php }
                         ?>
                         <p><a href="index.php?action=events">Events</a></p>
@@ -154,11 +170,10 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <p><a href="index.php?action=contactPage">Contact</a></p>
                     </div>
                 </div>
+               
                 <!-- The following script controls menu animation on Click -->
 
-                <!-- //Franco -->
-                <script src="./public/js/googlelogin.js"></script>
-                <script src="./public/js/kakaologin.js"></script>
+
                 <script> 
                     // select dom items 
                     const menuBtn =  
@@ -185,32 +200,16 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         } 
                     } 
 
-                    //Franco 
-                    // function signAllOut(){
-
-                    //     //sign out from google
-                    //     googleSignOut();
-                    //     logoutWithKakao();
-
-                    //     const form = document.querySelector("#signOutForm");
-                    //     form.action = "index.php?action=logout";
-                    //     form.submit();
-                    // }
-
-                    function initGoogle(){
-                        const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
-                        gapi.load('auth2', function() {
-                        gapi.auth2.init({client_id:CLIENT_ID});
-                         });
-                    }
-
-                    function initKakao(){
-                        Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
-                    }
+                 
                 </script> 
             </div>
         </div> 
     </header>
+
+    <!-- Divs below are used for Google buttons -->
+    <div id="googleHome">
+        <div id='gSigninBut' class='g-signin2' data-onsuccess='onGoogleSignIn' style='position:absolute;top:-9999px;left:-9999px;'></div>
+    </div>
 
     <!-- TODO: Add Content -->
     <?= $content; ?>
@@ -264,7 +263,32 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                 </a>
             </div>
         </div>
-    </footer>
+    </footer>    
+    
+    <script>
+        function initGoogle(){
+            const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
+            gapi.load('auth2', function() {
+            gapi.auth2.init({client_id:CLIENT_ID});
+                });
+        }
+
+        function initKakao(){
+            Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
+        }
+    </script>
+    <script src="./public/js/formCheck.js"></script>
+    <script src="./public/js/googlelogin.js"></script>
+    <script src="./public/js/kakaologin.js"></script>
+    <script src="./public/js/Modal.js"></script> 
+    <script src="./public/js/ModalLogin.js"></script> 
+    <script src="./public/js/signInUpModal.js"></script>
+    
+    
+
+
+ 
+
 </body>
 
 </html>

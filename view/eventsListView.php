@@ -4,57 +4,69 @@ ob_start();
 ?>
 <section>
     <div></div>
-    <div id="inputOptions">
-        <input type="text" placeholder="Search events">
-        <select id="selectDay">
-            <option value="Any day">Any day</option>
-            <option value="Today">Today</option>
-            <option value="Tomorrow">Tomorrow</option>
-            <option value="This week">This week</option>
-            <option value="This weekend">This weekend</option>
-            <option value="Next week">Next week</option>
+    <div id="inputContainer">
+        <input type="text" id="searchEvents" placeholder="Search events">
+        <select id="selectOption">
+            <option value="anyDay">Any day</option>
+            <option value="today">Today</option>
+            <option value="tomorrow">Tomorrow</option>
+            <option value="thisWeek">This week</option>
+            <option value="thisWeekend">This weekend</option>
+            <option value="nextWeek">Next week</option>
         </select>
     </div>
-    <?php foreach ($events as $event): ?>
-    <div class="item">
-        <div class="imgContainer"><img src="./private/event/event1.png" alt="event1"></div>
-        <div class="content">
-            <div class="date"><?= $event->eventDate; ?></div>
-            <div class="title"><?= $event->name; ?></div>
-            <div class="host">Hosted by <?= $event->hostName; ?></div>
-            <div class="attendees">
-                <?php 
-                    $eventId = $event->id;
-                    $guestCount = getGuestCountOfEvent($eventId)+1; //+1 because of the host
-                    
-                    //TODO: Get members profile images by eventId, first should be the host
-                    
-
-                ?>
-                <div><img src="./private/profile/user1.png"></div>
-                <div><img src="./private/profile/user2.png"></div>
-                <div><img src="./private/profile/user3.png"></div>
-                <div><span><?=$guestCount;?></span></div>
-            </div>
-        </div>
-        <input type="hidden" class="eventId" value="<?=$event->id;?>">
+    <div id="eventsList">
+        <?php require("./view/eventsList.php"); ?>
     </div>
-    <?php endforeach; ?>
-    <div>
+    <!-- <div>
         <button type="button">Show more events</button>
-    </div>
+    </div> -->
 </section>
 <script>
-    const items = document.querySelectorAll(".item");
-    items.forEach(item => {
-        item.addEventListener("click", () => {
-            const eventId = item.querySelector(".eventId").value;
-            if (eventId) {
-                const url = `index.php?action=showEventDetail&eventId=${eventId}`;
-                window.location.href = url;
+    {
+        const items = document.querySelectorAll(".item");
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                const eventId = item.querySelector(".eventId").value;
+                if (eventId) {
+                    const url = `index.php?action=showEventDetail&eventId=${eventId}`;
+                    window.location.href = url;
+                }
+            });
+        });
+
+        const searchEvents = document.querySelector("#searchEvents");
+        searchEvents.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                const text = e.target.value;
+                const url = "index.php?action=searchEvents&search="+text;
+                const xhr = new XMLHttpRequest();
+                xhr.addEventListener("load", () => {
+                    if (xhr.status === 200) {
+                        const eventsList = document.querySelector("#eventsList");
+                        eventsList.innerHTML = xhr.responseText;
+                    }
+                });
+                xhr.open("GET", url);
+                xhr.send(null);
             }
-        });    
-    });
+        });
+
+        const selectOption = document.querySelector("#selectOption");
+        selectOption.addEventListener("change", (e) => {
+            const option = e.target.value;
+            const url = "index.php?action=searchEvents&option="+option;
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", () => {
+                if (xhr.status === 200) {
+                    const eventsList = document.querySelector("#eventsList");
+                    eventsList.innerHTML = xhr.responseText;
+                }
+            });
+            xhr.open("GET", url);
+            xhr.send(null);
+        });
+    }
 </script>
 <?php
 $content = ob_get_clean();

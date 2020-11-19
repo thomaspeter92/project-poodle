@@ -1,6 +1,8 @@
 <?php
 session_start();
 require("./controller/controller.php");
+// require("./controller/accountController.php");
+
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
 
@@ -39,10 +41,11 @@ try {
             registration();
             break;
         case "registrationInput":
-            if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['email'])) {
+            if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
                 $memberData = array(
                     "name" => $_REQUEST['username'],
                     "password" => $_REQUEST['password'],
+                    "confirmpass" => $_REQUEST['confirmpass'],
                     "email" => $_REQUEST['email'],
                     "kakao" => 0, "google" => 0,
                 );
@@ -142,6 +145,25 @@ try {
         case "events":
             showUpcomingEventsList();
             break;
+        case "searchEvents";
+            $search = isset($_REQUEST["search"]) ? $_REQUEST["search"] : NULL;
+            $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
+            showSearchedEventsList($search, $option);
+            break;
+        case "accountView":
+            if(isset($_SESSION['id'])){
+                accountView($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
+        case "removeProfilePic":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            } else {
+                removeProPic($_SESSION['id']);
+            }
+            break;
         case "showEventDetail" :
             showEventDetail($_REQUEST);
             break;
@@ -166,7 +188,6 @@ try {
         default:
             landing();
             break;
-
     }
 } catch (Exception $e) {
 

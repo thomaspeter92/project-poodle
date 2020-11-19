@@ -52,6 +52,20 @@
         margin-top: 15%;
     }
 
+.accountWrapper {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accountBox {
+    border-style: ridge;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
     #addPetButton {
 	background-color: #72ddf7;
 	border-radius:42px;
@@ -80,6 +94,16 @@
 	top:1px;
     }
 
+
+    .profilePic {
+            height:100px;
+            width:100px;
+    }
+
+    .modalDivContent .profilePic {
+        padding-top:20px;
+    }
+
     @media (max-device-width : 400px) {
 
         .petPreviewContents{
@@ -105,8 +129,14 @@
             border-radius: 5px;
             width: 30% ;
             height: 65%;
-    }
+        }
+
+
+
+
 }
+
+
 </style>
 
 <?php $style = ob_get_contents();?>
@@ -114,7 +144,15 @@
 <?php ob_start();?>
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
-<br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+<div class="accountWrapper">
+    <div class="accountBox">
+        <img class="profilePic" src="<?php if (isset($_SESSION['imageURL'])){ echo $_SESSION['imageURL']; } else { echo "./public/images/adminPlaceholder.png"; }; ?>" alt="Profile Pic">
+        <p><?= $_SESSION['name'];?></p>
+        <p class="manageAccount">Manage Account</p>
+    </div>
+</div>
 
 <div id="wrapper">
     <div id="contentLeft">
@@ -205,8 +243,8 @@
 
     let addPetButton = document.querySelector('#addPetButton');
     addPetButton.addEventListener('click', function(e) {
-        let petId = e.target.getAttribute("data-petId")
-        addEditFormDisplay(petId)
+        let petId = e.target.getAttribute("data-petId");
+        addEditFormDisplay(petId);
     }); 
 
     let elements = document.getElementsByClassName("petListElement");
@@ -243,6 +281,242 @@
         
         });
     }
+
+    // --------------------------ACCOUNT FUNCTIONS---------------------------------
+
+    function saveAccountChanges () {
+        const nameInput = document.querySelector("#nameInput").value;
+        const emailInput = document.querySelector("#emailInput").value;
+        const imgInput = document.querySelector("#imageInput");
+        const file = imgInput.files[0];
+
+        // console.log(nameInput);
+        // console.log(emailInput);
+        // console.log(file);
+
+        const url = "./controller/changeAccountController.php";
+        const params = new FormData();
+
+        params.append("nameInput", nameInput);
+        params.append("emailInput", emailInput);
+        params.append("file", file);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.addEventListener("load", () => {
+            if (xhr.status === 200) {
+                response = xhr.responseText;
+                console.log(response);
+                accountEmpty = document.querySelector("#accountEmpty");
+                if (response.trim() == "emptyField") {
+                    accountEmpty.removeAttribute("hidden");
+                }
+                if (response.trim() == "success") {
+                    // console.log("success");
+                    // turn reload off for testing
+                    location.reload();
+                }
+
+            }
+        })
+        xhr.send(params);
+    }
+
+    [document.querySelector('.profilePic'), document.querySelector('.manageAccount')].forEach(item => {
+        item.addEventListener('click', event => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'index.php?action=accountView');
+            xhr.onload = function () {
+                if(xhr.status == 200){
+                    let modalPetObj = {
+                        save : function () {
+                            saveAccountChanges()
+                        },
+                    }
+                    let petView = new Modal(xhr.responseText);
+                    petView.generate(modalPetObj, allowCancel=true);   
+                        
+                    
+                    // Image Event listener Buttons
+                    let imageDropBtn = document.querySelector('.imageDropBtn');
+                    let imgInput = document.querySelector("#imageInput");
+                    let imgRemove = document.querySelector("#removeImageBtn");
+
+                    // Image Divs
+                    let dropdownContent = document.querySelector('.dropdownContent')
+                    let modalWindow = document.querySelector('.modalSubDiv');
+                    let imagePreview = document.querySelector('.imagePreview')
+                    let profilePic = document.querySelector('.profilePicManage')
+
+
+
+                    // Image Dropdown Button
+                    imageDropBtn.addEventListener("click", event => {
+                        event.stopPropagation();
+                        document.querySelector(".dropdownContent").classList.toggle("show");
+                        // dropdownContent.setAttribute("hidden", true);
+                    })
+
+                    // Remove Dropdown on click inside modal
+                    modalWindow.addEventListener("click", event => {
+                        document.querySelector(".dropdownContent").classList.remove("show");
+                    })
+
+
+                    // Preview Image
+                    imgInput.addEventListener("change",  function() {
+                        const file = this.files[0];
+
+                        if(file) {
+                            const reader = new FileReader();
+
+                            imagePreview.style.display = "block";
+                            profilePic.style.display = "none"
+
+                            reader.addEventListener("load", function() {
+                                imagePreview.setAttribute("src", this.result);
+                            });
+
+                            reader.readAsDataURL(file);
+                        } else {
+                            imagePreview.style.display = "none";
+                            profilePic.style.display = "block";
+                            previewImage.setAttribute("src", "");
+                        }
+                    })
+
+                    // REMOVE PROFILE PICTURE
+                    imageDropBtn.addEventListener("click", event => {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('GET', 'index.php?action=removeProfilePic');
+                        xhr.addEventListener("load", () => {
+                            if (xhr.status === 200) {
+                            
+                            }
+                        xhr.send(null);
+                        });
+                    });
+
+
+                    // PW Event Listener BUtttons
+                    let changePassword = document.querySelector("#changePassword");
+                    let cancelPW = document.querySelector('#cancelPW');
+
+                    // PW Message Divs
+                    let passwordDefault = document.querySelector(".passwordDefault");
+                    let changePW = document.querySelector('.changePW');
+                    let saveBtn = document.querySelector(".modalButton");
+                    let successPW = document.querySelector(".successPW");
+                    let needDiffPW = document.querySelector(".needDiffPW");
+                    let failedPW = document.querySelector(".failedPW");
+                    let cancelBtn = document.querySelector(".modalCancel")
+                    let emptyPW = document.querySelector(".emptyPW");
+                    let matchPW = document.querySelector(".matchPW")
+
+
+                    // PW Inputs
+                    let currentInput = document.querySelector("#currentPW");
+                    let newInput = document.querySelector("#newPW");
+                    let confirmInput = document.querySelector("#confirmPW");
+
+                    
+                    // PW event listeners
+                    changePassword.addEventListener('click', event => {
+                        changePW.removeAttribute("hidden");
+                        passwordDefault.setAttribute("hidden", true);
+                        saveBtn.setAttribute("hidden", true);
+                        successPW.setAttribute("hidden", true);
+                        cancelBtn.setAttribute("hidden", true);
+                        emptyPW.setAttribute("hidden", true);
+                    });
+
+                    cancelPW.addEventListener('click', event => {
+                        changePW.setAttribute("hidden", true);
+                        passwordDefault.removeAttribute("hidden");
+                        saveBtn.removeAttribute("hidden");
+                        currentInput.value = "";
+                        newInput.value = "";
+                        confirmInput.value = "";
+                        successPW.setAttribute("hidden", true);
+                        needDiffPW.setAttribute("hidden", true);
+                        failedPW.setAttribute("hidden", true);
+                        emptyPW.setAttribute("hidden", true);
+                        cancelBtn.removeAttribute("hidden");
+                    });
+
+                    const pwSubmitButton = document.querySelector("#changePWSubmit");
+                    pwSubmitButton.addEventListener("click", event => {
+                        const currentPW = document.querySelector("#currentPW").value;
+                        const confirmPW = document.querySelector("#confirmPW").value;
+                        const newPW = document.querySelector("#newPW").value;
+
+                        const url = "./controller/changePWController.php";
+                        // Send URL through index PHP
+                        const params = new FormData();
+                        params.append("currentPW", currentPW);
+                        params.append("confirmPW", confirmPW);
+                        params.append("newPW", newPW);
+
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", url);
+                        xhr.addEventListener("load", () => {
+                            if (xhr.status === 200) {
+                                response = xhr.responseText;
+                                if (response.trim() == "emptyPW") {
+                                    emptyPW.removeAttribute("hidden"); 
+                                    needDiffPW.setAttribute("hidden", true);
+                                    failed.setAttribute("hidden", true);
+                                    emptyPW.setAttribute("hidden", true);
+                                    matchPW.setAttribute("hidden", true);
+                                }
+                                if (response.trim() == "matchPW") {
+                                    matchPW.removeAttribute("hidden"); 
+                                    emptyPW.setAttribute("hidden", true); 
+                                    needDiffPW.setAttribute("hidden", true);
+                                    failed.setAttribute("hidden", true);
+                                    emptyPW.setAttribute("hidden", true);
+                                }
+                                if (response.trim() == "success") {
+                                    changePW.setAttribute("hidden", true);
+                                    passwordDefault.removeAttribute("hidden"); 
+                                    saveBtn.removeAttribute("hidden");
+                                    currentInput.value = "";
+                                    newInput.value = "";
+                                    confirmInput.value = "";
+                                    successPW.removeAttribute("hidden");
+                                    needDiffPW.setAttribute("hidden", true);
+                                    failed.setAttribute("hidden", true);
+                                    emptyPW.setAttribute("hidden", true);
+                                    matchPW.setAttribute("hidden", true);
+                                } 
+                                if (response.trim() == "needDiffPW") {
+                                    currentInput.value = "";
+                                    newInput.value = "";
+                                    confirmInput.value = "";
+                                    needDiffPW.removeAttribute("hidden");
+                                    failedPW.setAttribute("hidden", true);
+                                    emptyPW.setAttribute("hidden", true);
+                                    matchPW.setAttribute("hidden", true);
+                                } 
+                                if (response.trim() == "failedPW") {
+                                    failedPW.removeAttribute("hidden");
+                                    needDiffPW.setAttribute("hidden", true);
+                                    emptyPW.setAttribute("hidden", true);
+                                    matchPW.setAttribute("hidden", true);
+                                }
+                            }
+                        });
+                        xhr.send(params);
+                        // console.log(params);
+                    });
+
+                }
+
+            }
+            xhr.send(null);
+        })
+    })
+
 
 
 
