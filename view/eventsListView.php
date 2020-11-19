@@ -27,6 +27,13 @@ ob_start();
         <button type="button">Show more events</button>
     </div> -->
 </section>
+<!-- Script used for map. @TODO Move to page related to the event list once merging is done-->
+<script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
+<!-- GEOCODER lat lon from address -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
+<!-- MAP -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2"></script>
+<script src="./public/js/event.js"></script>
 <script>
     {
         const items = document.querySelectorAll(".item");
@@ -72,20 +79,14 @@ ob_start();
             xhr.send(null);
         });
 
-        const addButton = document.querySelector("#addButton>button");
-        addButton.addEventListener("click", (e) => {
-            //TODO: Popup adding event page
-            alert("TODO: Popup adding event page!")
+        const addButtons = document.querySelectorAll("#addButton button");
+        addButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                createAddEditEventModal();
+            });
         });
     }
 </script>
-<!-- Script used for map. @TODO Move to page related to the event list once merging is done-->
-<script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
-<!-- GEOCODER lat lon from address -->
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
-<!-- MAP -->
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2"></script>
-<script src="./public/js/event.js"></script>
 <?php
 $content = ob_get_clean();
 require("template.php");
