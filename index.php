@@ -159,6 +159,11 @@ try {
         case "loadSingleComment" :
             loadSingleComment($_REQUEST['commentId']);
             break;
+
+        case "addEditEvent" :
+            addEditEvent();
+            break;
+            
         default:
             landing();
             break;

@@ -101,4 +101,34 @@ require_once("Manager.php");
 
         }
 
+        public function addEditEvent($newEvent){
+            $db = $this->dbConnect();
+
+            if(empty($newEvent['eventId'])){
+                $req = $db->prepare("INSERT INTO event (name, eventDate, location, description, hostId, picture, expiryDate, rating, guestLimit, dateCreated) VALUES (:name, :eventDate, :location, :description, :hostId,  :picture, :expiryDate, :rating, :guestLimit, :dateCreated)");
+
+            }else {
+                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDate, location = :location, description = :description, hostId = :hostId, picture = :picture, expiryDate = :expiryDate, rating = :rating, guestLimit = :guestLimit, dateCreated = :dateCreated WHERE id = :eventId");
+                $req->bindParam(':eventId', $newEvent['eventId'], PDO::PARAM_INT);
+            }
+            $name = htmlspecialchars($newEvent['name']);
+            $eventDate = htmlspecialchars($newEvent['eventDate']);
+            $eventTime = htmlspecialchars($newEvent['eventTime']);
+            $location = htmlspecialchars($newEvent['location']);
+            $description = htmlspecialchars($newEvent['description']);
+            $hostId = htmlspecialchars($newEvent['hostId']);
+            $picture = htmlspecialchars($newEvent['picture']);
+            $expiryDate = htmlspecialchars($newEvent['expiryDate']);
+            $expiryTime = htmlspecialchars($newEvent['expiryTime']);
+            $rating = htmlspecialchars($newEvent['rating']);
+            $guestLimit = htmlspecialchars($newEvent['guestLimit']);
+            $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
+
+            $req->bindParam(':name',$name,PDO::PARAM_STR);
+            $req->bindParam(':eventDate',$eventDate,PDO::PARAM_STR);
+           
+            // $req->execute();
+            $req->closeCursor();  
+        }
+
     }
