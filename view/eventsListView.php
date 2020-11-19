@@ -57,6 +57,8 @@ ob_start();
                     if (xhr.status === 200) {
                         const eventsList = document.querySelector("#eventsList");
                         eventsList.innerHTML = xhr.responseText;
+                    } else {
+                        //TODO: Show error messages
                     }
                 });
                 xhr.open("GET", url);
@@ -73,6 +75,8 @@ ob_start();
                 if (xhr.status === 200) {
                     const eventsList = document.querySelector("#eventsList");
                     eventsList.innerHTML = xhr.responseText;
+                } else {
+                    //TODO: Show error messages
                 }
             });
             xhr.open("GET", url);
@@ -81,9 +85,7 @@ ob_start();
 
         const addButtons = document.querySelectorAll("#addButton button");
         addButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                createAddEditEventModal();
-            });
+            button.addEventListener("click", () => createAddEditEventModal());
         });
     }
 </script>
