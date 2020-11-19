@@ -12,6 +12,7 @@ section {
     width: 100%;
 }
 
+/* Empty box for the area of header */
 section>div:first-child {
     /* background-color: yellowgreen; */
     height: 65px;
@@ -21,7 +22,6 @@ section>div:first-child {
     border-top: 1px solid lightgray;
     padding: 20px;
 }
-
 #searchEvents {
     outline: none;
     width: 30%;
@@ -33,7 +33,6 @@ section>div:first-child {
     padding-left: 20px;
     margin-right: 10px;
 }
-
 #selectOption {
     /* width: 80px; */
     height: 46px;
@@ -44,6 +43,13 @@ section>div:first-child {
     padding: 0;
     padding-left: 10px;
     margin-right: 10px;
+}
+#addButton {
+    float: right;
+    margin-right: 3%;
+}
+#addButton>button {
+    height: 46px;
 }
 
 /* No Events */

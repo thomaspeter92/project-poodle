@@ -14,11 +14,15 @@ ob_start();
             <option value="thisWeekend">This weekend</option>
             <option value="nextWeek">Next week</option>
         </select>
+        <div id="addButton">
+            <button class="button">Add a Event</button>
+        </div>
     </div>
     <div id="eventsList">
         <?php require("./view/eventsList.php"); ?>
     </div>
-    <!-- <div>
+    <!-- //TODO: Limit showing events
+    <div>
         <button type="button">Show more events</button>
     </div> -->
 </section>
