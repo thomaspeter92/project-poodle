@@ -284,8 +284,14 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
     <script src="./public/js/signInUpModal.js"></script>
+    
+    <!-- Script used for map. @TODO Move to page related to the event list once merging is done-->
+    <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
+    <!-- GEOCODER lat lon from address -->
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
+    <!-- MAP -->
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2"></script>
     <script src="./public/js/event.js"></script>
-  
 
 
  

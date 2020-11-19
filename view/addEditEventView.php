@@ -87,12 +87,12 @@
         border:1px solid black;
        
     } 
-    #eventMap{
+    /* #eventMap{
         width:55vw;
         height:35vh; 
         border:1px solid black;
-        /* margin:auto; */
-    }
+
+    } */
     #eventPictureContainer{
         width:55vw;
         height:35vh; 
@@ -108,6 +108,54 @@
         width:98%;
         margin-left:5px;
     }
+/* Style for maps */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    #map{
+        border: 2px solid black;
+        border-radius: 10px;
+        margin-top: 1%;
+        margin-left: auto;
+        margin-right: auto;
+        width:70%;
+        height:350px;
+    }
+    #mapContainer{
+        width: 80%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    #vendorList{
+        margin-top: 10%;
+        margin-left:3%;
+    }
+    .infoWindow{
+        /* border-radius: 5px; */
+        background-color: grey;
+        font-weight: bold;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 140px;
+        height: 30px;
+    }
+    .infoTextContents{
+        border: 1px solid black;
+    }
+    .destination{
+        color: white;
+        background-color: black;
+        text-align: center;
+    }
+    /* .modalSubDiv{
+        width: 30%;
+        height: 30%;
+    }
+    .modalDivContent{
+        width: 30%;
+        height: 30%;
+    } */
 
 </style>
 
@@ -154,7 +202,13 @@
         <div id="eventStep3">
             <!-- Choose location for event -->
             <p>Choose location to hold the event</p>
-            <div id="eventMap"></div>
+            <!-- <div id="eventMap"></div> -->
+            <div id="mapContainer">
+                <div id="map"></div>
+                <div id="vendorList">
+        
+                </div>
+            </div>
         </div>
     </div>
     <div id="stepEventFooter">
