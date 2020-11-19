@@ -431,10 +431,16 @@
             </aside>
         </div>
         <div id="eventPreviews">
-            <div class="eventPreviewItem">Preview of other event here!</div>
-            <div class="eventPreviewItem">Preview of other event here!</div>
-            <div class="eventPreviewItem">Preview of other event here!</div>
-            <div class="eventPreviewItem">Preview of other event here!</div>
+        <?php foreach($eventList as $list): ?>
+
+            <div class="eventPreviewItem">
+                <p><?= $list->eventDate ?> </p>
+                <p><?=$list->name;?></p>
+                <p><?= $list->location; ?> </p>
+            </div>
+            
+        <?php endforeach;?>
+
         </div>
     </div>
 </div>

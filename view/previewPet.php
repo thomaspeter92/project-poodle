@@ -1,5 +1,6 @@
 <?php ob_start();?>
 <link rel="stylesheet" href="./public/css/Modal.css"/>
+
 <style>
     
     body{
@@ -136,8 +137,8 @@
 
 }
 
-
 </style>
+
 
 <?php $style = ob_get_contents();?>
 

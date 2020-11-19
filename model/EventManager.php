@@ -6,7 +6,7 @@ require_once("Manager.php");
         /**
          * Date: WED, NOV 18, 7:00 PM
          */
-        public function getUpcomingEvents($text=NULL, $option=NULL) {
+        public function getUpcomingEvents($text=NULL, $option=NULL, $limit=NULL) {
             //TODO: eventDate should be changed to expiryDate
 
 
@@ -48,10 +48,14 @@ require_once("Manager.php");
                     break;
             }
             $query .= isset($text) ? " AND e.name LIKE :text" : "";
+            $query .= isset($limit) ? " LIMIT 0, :limit" : "";
             //echo $query;
             $req = $db->prepare($query);
             if (isset($text)) {
                 $req->bindValue(":text", "%".$text."%", PDO::PARAM_STR);
+            }
+            if (isset($limit)) {
+                $req->bindValue(":limit", $limit, PDO::PARAM_INT);
             }
             $req->execute();
             $events = $req->fetchAll(PDO::FETCH_OBJ);
