@@ -17,7 +17,7 @@ function checkChangePW($passwordInput, $userID){
         $result = "failedPW";
     }
     return $result;
-};
+}
 
 function checkChangeAccount($inputs, $image, $userID){
     $manager = new MemberManager();

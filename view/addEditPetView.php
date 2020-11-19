@@ -117,7 +117,7 @@ p {
 </style>
 
 
-<form action="index.php" method="GET" id="addPetForm"  autocomplete="off">
+<form action="index.php" method="GET" id="addPetForm"  autocomplete="off" enctype="multipart/form-data">
     <div>
         <p>
             <label for="name">*Name:</label><br>
@@ -160,7 +160,7 @@ p {
         </p>
         <p>
             <label for="photo">Image:</label>
-            <input type="file" id="photo" name="photo" accept="image/*">
+            <input type="file" id="photo" name="photo"> 
         </p>
         <p>
             <input type="hidden" name="ownerId" value="<?= $_SESSION['id']; ?>">

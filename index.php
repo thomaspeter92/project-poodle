@@ -42,10 +42,11 @@ try {
             registration();
             break;
         case "registrationInput":
-            if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['email'])) {
+            if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
                 $memberData = array(
                     "name" => $_REQUEST['username'],
                     "password" => $_REQUEST['password'],
+                    "confirmpass" => $_REQUEST['confirmpass'],
                     "email" => $_REQUEST['email'],
                     "kakao" => 0, "google" => 0,
                 );
@@ -62,7 +63,9 @@ try {
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
-                petAddEdit($_REQUEST);
+                $file = $_FILES['photo'];
+                print_r($file);
+                // petAddEdit($_REQUEST);
             } else {
 
             }
@@ -154,6 +157,21 @@ try {
             } else {
                 removeProPic($_SESSION['id']);
             }
+        break;
+        case "showEventDetail" :
+            showEventDetail($_REQUEST['eventId']);
+            break;
+        case "eventCommentPost" :
+            eventCommentPost($_REQUEST);
+            showEventDetail($_REQUEST['eventId']);
+            break;
+        case "deleteEventComment" :
+            deleteEventComment($_REQUEST['commentId']);
+            break;
+
+        case "loadSingleComment" :
+            loadSingleComment($_REQUEST['commentId']);
+            break;
         default:
             landing();
             break;

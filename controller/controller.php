@@ -3,6 +3,7 @@
 require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");
+require_once("./model/EventManager.php");
 require_once("./controller/signinController.php");
 require_once("./controller/accountController.php");
 
@@ -38,6 +39,29 @@ function petAddEdit($params) {
 function deletePet($petId) {
     $deleteManager = new PetProfileManager();
     $deleteManager->deletePet($petId);
+}
+
+function showEventDetail($eventId) {
+    $showEvent = new EventManager();
+    $event = $showEvent->getEventDetail($eventId);
+    $comments = $showEvent->loadComments($eventId);
+    require("./view/eventDetailedView.php");
+}
+
+function eventCommentPost($params) {
+    $commentPost = new EventManager();
+    $commentPost->commentPost($params);
+}
+
+function deleteEventComment($commentId) {
+    $deleteComment = new EventManager();
+    $deleteComment->commentDelete($commentId);
+}
+
+function loadSingleComment($commentId) {
+    $loadComment = new EventManager();
+    $comment = $loadComment->loadSingleComment($commentId);
+    require("./view/editEventCommentView.php");
 }
 
 function aboutUs(){
