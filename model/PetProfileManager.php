@@ -75,8 +75,12 @@ require_once("Manager.php");
             $req->bindParam(':activityLevel',$activityLevel,PDO::PARAM_INT);
             $req->bindParam(':ownerId',$newPet['ownerId'],PDO::PARAM_INT);
 
-            $req->execute();
-            $req->closeCursor();           
+            $success = $req->execute();
+            $req->closeCursor();
+            
+            if ($success) {
+                return $success;
+            }
         }
 
         public function deletePet($petId) {
@@ -86,7 +90,9 @@ require_once("Manager.php");
             $req = $db->prepare("DELETE FROM petProfile WHERE id = :petId");
             $req->bindParam(':petId',$petId,PDO::PARAM_INT);
 
-            $req->execute();
+            $success = $req->execute();
             $req->closeCursor();
+
+            return $success;
         }
     }
