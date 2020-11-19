@@ -95,5 +95,8 @@ function accountView($userID){
 function legalPage(){
     require('./view/legalPageView.php');
 }
+function addEditEvent(){
+    require('./view/addEditEventView.php');
+}
 
 

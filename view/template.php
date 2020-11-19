@@ -243,6 +243,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                     <span class="social icon-social-youtube-large">Youtube</span>
                 </a>
             </li>
+
             <!-- Meet the team link -->
         </ul>
         <p>
@@ -283,12 +284,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
     <script src="./public/js/signInUpModal.js"></script>
-    
-    
-
-
- 
-
 </body>
 
 </html>
