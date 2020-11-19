@@ -12,16 +12,17 @@ section {
     width: 100%;
 }
 
+/* Empty box for the area of header */
 section>div:first-child {
     /* background-color: yellowgreen; */
     height: 65px;
 }
 
+/* User Inputs */
 #inputContainer {
     border-top: 1px solid lightgray;
     padding: 20px;
 }
-
 #searchEvents {
     outline: none;
     width: 30%;
@@ -33,7 +34,6 @@ section>div:first-child {
     padding-left: 20px;
     margin-right: 10px;
 }
-
 #selectOption {
     /* width: 80px; */
     height: 46px;
@@ -44,6 +44,40 @@ section>div:first-child {
     padding: 0;
     padding-left: 10px;
     margin-right: 10px;
+}
+#addButton {
+    float: right;
+    margin-right: 3%;
+}
+#addButton>button {
+    height: 46px;
+    outline: none;
+    font-size: 0.9em;
+}
+.fullText { display: inline; }
+.shortText { display: none; }
+
+@media screen and (max-width: 600px) {
+    #addButton {
+        margin-right: 0;
+    }
+    #addButton>button {
+        /* padding: 20px; */
+        width: 46px;
+        font-size: 2.0em;
+    }
+    .fullText { display: none; }
+    .shortText { display: inline; }
+}
+@media screen and (max-width: 450px) {
+    #inputContainer {
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 450px) {
+    #searchEvents {
+        min-width: 100px;
+    }
 }
 
 /* No Events */

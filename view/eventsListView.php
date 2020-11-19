@@ -14,14 +14,26 @@ ob_start();
             <option value="thisWeekend">This weekend</option>
             <option value="nextWeek">Next week</option>
         </select>
+        <div id="addButton">
+            <button class="button fullText">Add a Event</button>
+            <button class="button shortText">+</button>
+        </div>
     </div>
     <div id="eventsList">
         <?php require("./view/eventsList.php"); ?>
     </div>
-    <!-- <div>
+    <!-- //TODO: Limit showing events
+    <div>
         <button type="button">Show more events</button>
     </div> -->
 </section>
+<!-- Script used for map. @TODO Move to page related to the event list once merging is done-->
+<script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
+<!-- GEOCODER lat lon from address -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
+<!-- MAP -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2"></script>
+<script src="./public/js/event.js"></script>
 <script>
     {
         const items = document.querySelectorAll(".item");
@@ -65,6 +77,13 @@ ob_start();
             });
             xhr.open("GET", url);
             xhr.send(null);
+        });
+
+        const addButtons = document.querySelectorAll("#addButton button");
+        addButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                createAddEditEventModal();
+            });
         });
     }
 </script>

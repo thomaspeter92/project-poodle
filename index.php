@@ -185,6 +185,11 @@ try {
         case "unattendEvent" :
             attendEvent($_REQUEST);
             break;
+
+        case "addEditEvent" :
+            addEditEvent();
+            break;
+            
         default:
             landing();
             break;
