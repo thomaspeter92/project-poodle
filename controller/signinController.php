@@ -50,6 +50,7 @@ function emailCheck($email){
         echo "true";
     }
 }
+
 function signUpWith($memberData)
 {
     if (empty($memberData["email"])) {
@@ -77,9 +78,10 @@ function signUpWith($memberData)
         $result = $manager->addNewMember($memberData);
         if ($result) {
             signInWith($memberData);
-        } else {
-            throw new Exception("Failed to add new member!!", 1004);
-        }
+        } 
+        // else {
+        //     throw new Exception("Failed to add new member!!", 1004);
+        // }
     }
 }
 

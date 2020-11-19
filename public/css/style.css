@@ -221,7 +221,9 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         display: none;
         font-family: "monsterRatRegular";
     }
-
+    .signOutWrapper{
+        display: none;
+    }
     /* Styling the menu button */
     .menu-btn { 
         position: absolute; 
@@ -308,7 +310,9 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         color:black;
         background:  #F8C533;
     }
-
+    .mobileLoggedIn>div>a{
+        display: none;
+    }
     #mobileLogin {
         height: 100%;
         /* display: flex; */
@@ -341,10 +345,13 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     .mobileLoggedIn{
         font-family: "monsterRatRegular";
         display: flex;
+        padding-right: 2em;
     }
-    .mobileLoggedIn>div{
-        margin-left: 1em;
+    .userImage{
         margin-right: 1em;
+    }
+    .fa-bell{    
+        margin-right: .5    em;
     }
     .mobileLoggedIn>div>a{
         color: black;

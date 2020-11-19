@@ -99,7 +99,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                             </div>
                             <div class="signOutWrapper">
                                 <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
-                                  
                             </div> 
                         <?php
                         }

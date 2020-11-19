@@ -66,11 +66,9 @@ class MemberManager extends Manager{
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
         }
-        echo $password;
-        echo $confirmPassword;
-        echo '<script type="text/javascript">
-             alert($password);
-        </script>';
+        if(empty($name)){
+            return false;
+        }
        
         $db = $this->dbConnect();
         $query = "INSERT INTO member(name, password, email, kakao, google) 
