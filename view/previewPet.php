@@ -132,9 +132,6 @@
             height: 65%;
         }
 
-
-
-
 }
 
 </style>
@@ -171,7 +168,6 @@
     </div>
 <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
 <button id="addPetButton"> Add a Pet!</button>
-
 </div>
 
 <script src="./public/js/Modal.js"></script>
@@ -212,14 +208,9 @@
 
             // TO-DO: ADD ERROR MESSAGING UPON FAILURE TO POST TO DB
 
-                // if(xhr.status === 200) {
-                //     let response = xhr.responseText
-                //     console.log(response.trim());
-                //     }
-                // }
-           
             xhr.send(params);
             location.reload();
+
         }
     }
 // FUNCTION TO DISPLAY THE INPUT IN A MODAL

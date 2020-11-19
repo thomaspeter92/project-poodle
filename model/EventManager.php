@@ -90,7 +90,7 @@ require_once("Manager.php");
         
         public function getEventDetail($eventId) {
             $db = $this->dbconnect();
-            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.picture picture, e.hostId hostId, e.guestLimit guestLimit, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.picture picture, e.hostId hostId, e.guestLimit guestLimit, m.name hostName, m.profileImage image FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
             $event =$req->fetch(PDO::FETCH_ASSOC);
@@ -100,7 +100,7 @@ require_once("Manager.php");
 
         public function loadGuests($eventId) {
             $db = $this->dbConnect();
-            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId");
+            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId");
             $req->bindParam(':eventId',$eventId, PDO::PARAM_INT);
             $req->execute();
             $guestList = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -128,7 +128,7 @@ require_once("Manager.php");
         public function loadComments($params) {
             $db = $this->dbConnect();
             $num = isset($params['limit']) ? $params['limit'] : 5;
-            $req = $db->prepare("SELECT c.id commentId, c.dateCreation dateCreation, c.comment comment, c.userId userId, m.name author FROM eventComment c INNER JOIN member m ON c.userId = m.id WHERE c.eventId = :eventId ORDER BY c.id DESC LIMIT 0,{$num}");
+            $req = $db->prepare("SELECT c.id commentId, c.dateCreation dateCreation, c.comment comment, c.userId userId, m.name author, m.profileImage image FROM eventComment c INNER JOIN member m ON c.userId = m.id WHERE c.eventId = :eventId ORDER BY c.id DESC LIMIT 0,{$num}");
             $req->bindParam(':eventId', $params['eventId'], PDO::PARAM_INT);
             $req->execute();
             $comments = $req->fetchAll(PDO::FETCH_ASSOC);

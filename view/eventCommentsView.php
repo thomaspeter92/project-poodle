@@ -2,7 +2,7 @@
     <div class="commentChunk">
         <p>
             <span>
-                <img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$comment['userId'];?>.jpg"></img><?=$comment['author'];?>
+                <img class="hostPhoto" src="./private/profile/<?=$comment['image'];?>"></img><?=$comment['author'];?>
             </span>
             <span>
                 <?=$comment['dateCreation'];?>

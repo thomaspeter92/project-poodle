@@ -360,7 +360,7 @@
                 <p><?= $event['eventDate']; ?></p>
                 <h3><?= $event['name']; ?></h3>
                 <div id="headerContentExtra">
-                    <p><img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
+                    <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
 
             
                 <?php 
@@ -383,7 +383,7 @@
                 <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>
                     <div id="formContent">
-                        <img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img>
+                        <img class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
                         <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                         <textarea name="comment" id="comment" rows="1" placeholder="Leave a comment..."></textarea>
@@ -422,14 +422,16 @@
                 <div id="guestList">
                     <?php foreach($guestList as $guest): ?>
                     <div class="guestListItem">
-                        <img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img>
+                        <img class="hostPhoto" src="./private/profile/<?=$guest['image'];?>"></img>
                         <p><?= $guest['guestName'] ?><br><span>
                         <?= $guest['guestId'] === $event['hostId'] ? '<strong>HOST</strong>' : 'Guest'; ?></span></p>
                     </div>
                     <?php endforeach;?>
                 </div>
+                
             </aside>
         </div>
+
         <div id="eventPreviews">
         <?php foreach($eventList as $list): ?>
 
