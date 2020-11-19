@@ -1,28 +1,14 @@
 <?php ob_start();?>
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
     
-
-
-    
-
-
-
-
     body{
         
         font-family: 'Montserrat', sans-serif;
         margin:0;
         padding:0;
-        /* background-color: rgb(114, 221, 247); */
-        /* background-color: rgb(255, 255, 255); */
-        /* background-color: #f5b657; */
         font-weight: bolder;
-        /* display: flex; */
-        /* align: center; */
-        /* background-image: url("./public/images/wallpaper.jpeg"); */
-        /* background-size: cover; */
+       
     }
 
     #wrapper {
@@ -36,28 +22,17 @@
         width: 90%;
     }
 
-    /* body: first-child{
-        margin-top: 15%;
-    } */
-
     .petListElement{
         height: 200px;
         width: 50%;
         margin-left: auto;
         margin-right: auto;
-        /* padding: auto; */
-        /* border : 2px solid grey; */
         box-shadow: 3px 3px 3px lightgrey;
         border-radius: 15px;
-        /* width: 80%; */
-        /* margin-left: 3%; */
-        /* padding-left: 3%; */
         background-color: rgba(213, 253, 255, 0.3);
-        /* margin-top: 5%; */
         margin-bottom: 5%;
         display: flex;
         justify-content: space-around;
-        
     }
 
     .petPreviewContents{
@@ -104,9 +79,6 @@
 	position:relative;
 	top:1px;
     }
-
-
-
 
     @media (max-device-width : 400px) {
 
@@ -166,7 +138,7 @@
 <script src="./public/js/Modal.js"></script>
 
 <script>
-
+// DELETE PET FUNCTION, PULLS PET ID AND ERASES FROM DB
     function delPet (petId){
         if (confirm('Are you sure you want to delete?')) { 
             let xhr = new XMLHttpRequest();
@@ -178,6 +150,7 @@
         }
     }
 
+//SAME FUNCTION USED FOR EDITNG AND ADDING PETS.
     function addEditPet() {
         let addPetForm = document.querySelector('#addPetForm');
         let petName = document.querySelector('#name');
@@ -185,27 +158,32 @@
         let petBreed = document.querySelector('#breed');
         let petAge = document.querySelector('#age');
         
-        if (petName.value < 2 || petType.value < 2 || petBreed.value < 2 || parseInt(petAge.value) < 0) {
-            petName.value < 2 ? petName.style.borderColor = 'red' : petName.style.borderColor = 'lightgrey'
-            petType.value < 2 ? petType.style.borderColor = 'red' : petType.style.borderColor = 'lightgrey' ;
-            petBreed.value < 2 ? petBreed.style.borderColor = 'red' : petBreed.style.borderColor = 'lightgrey' ;
+        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0) {
+            petName.value.length < 2 ? petName.style.borderColor = 'red' : petName.style.borderColor = 'lightgrey'
+            petType.value.length < 2 ? petType.style.borderColor = 'red' : petType.style.borderColor = 'lightgrey' ;
+            petBreed.value.length < 2 ? petBreed.style.borderColor = 'red' : petBreed.style.borderColor = 'lightgrey' ;
             parseInt(petAge.value) < 0 || petAge.value === '' ? petAge.style.borderColor = 'red' : petAge.style.borderColor = 'lightgrey' ;
             return null;
         } else {
             let xhr = new XMLHttpRequest();
             let addPetForm = document.querySelector('#addPetForm');
             let params = new FormData(addPetForm);
-            xhr.open("POST", "index.php?action=addEditPet");
-            xhr.onload = function() {
-                if (xhr.status ==  200){
-                    this.innerHTML = " ";
-                }
-            }
+            xhr.open("POST", "index.php");
+            xhr.onload = function() {}
+
+            // TO-DO: ADD ERROR MESSAGING UPON FAILURE TO POST TO DB
+
+                // if(xhr.status === 200) {
+                //     let response = xhr.responseText
+                //     console.log(response.trim());
+                //     }
+                // }
+           
             xhr.send(params);
             location.reload();
         }
     }
-
+// FUNCTION TO DISPLAY THE INPUT IN A MODAL
     function addEditFormDisplay(petId) {
         let xhr = new XMLHttpRequest();
         if (petId) {
@@ -265,43 +243,6 @@
         
         });
     }
-
-
-//KEEP THESE FUNCTIONS INCASE BUGS. MAY NEED TO REVERT BACK TO THEM
-
-    // function editPet(petId) {
-    //     let xhr = new XMLHttpRequest();
-    //         xhr.open('GET', 'index.php?action=addEditInput&petId='+petId);
-    //         xhr.onload = function () {
-    //             if(xhr.status == 200){
-    //                 console.log(xhr.responseText);
-    //                 let modalPetObj = {
-    //                     Submit : addEditPet,
-    //                 }
-    //                 console.log(modalPetObj);
-    //                 let petView = new Modal(xhr.responseText);
-    //                 petView.generate(modalPetObj, allowCancel=false);
-    //             }
-    //         }
-    //         xhr.send(null);
-    // }
-
-    // {
-    //     let xhr = new XMLHttpRequest();
-    //         xhr.open('GET', 'index.php?action=addEditInput');
-    //         xhr.onload = function () {
-    //             if(xhr.status == 200){
-    //                 console.log(xhr.responseText);
-    //                 let modalPetObj = {
-    //                     add : addEditPet,
-    //                 }
-    //                 console.log(modalPetObj);
-    //                 let petView = new Modal(xhr.responseText);
-    //                 petView.generate(modalPetObj, allowCancel=false);
-    //             }
-    //         }
-    //         xhr.send(null);
-    // })
 
 
 

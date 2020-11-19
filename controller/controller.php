@@ -32,8 +32,17 @@ function displayAddEditInput($petId) {
 
 function petAddEdit($params) {
     $addEditManager = new PetProfileManager();
-    $addEditManager->addEditPet($params);
+    $success = $addEditManager->addEditPet($params);
+
+    // TO DO ADD ERROR MESSAGING 
+    if($success) {
+        echo 'success';
+    } else {
+        echo 'error';
+    }
 }
+
+
 
 function deletePet($petId) {
     $deleteManager = new PetProfileManager();
@@ -55,11 +64,12 @@ function getGuestCountOfEvent($eventId) {
     return $manager->getMembersCountBy($eventId);
 }
 
-function showEventDetail($eventId) {
+function showEventDetail($params) {
     $showEvent = new EventManager();
-    $guestList = $showEvent->loadGuests($eventId);
-    $event = $showEvent->getEventDetail($eventId);
-    $comments = $showEvent->loadComments($eventId);
+    $guestList = $showEvent->loadGuests($params['eventId']);
+    $guestCount = $showEvent->getMembersCountBy($params['eventId']);
+    $event = $showEvent->getEventDetail($params['eventId']);
+    $comments = $showEvent->loadComments($params);
     require("./view/eventDetailedView.php");
 }
 
@@ -73,16 +83,17 @@ function deleteEventComment($commentId) {
     $deleteComment->commentDelete($commentId);
 }
 
-function loadSingleComment($commentId) {
-    $loadComment = new EventManager();
-    $comment = $loadComment->loadSingleComment($commentId);
-    require("./view/editEventCommentView.php");
+
+function loadComments($params) {
+    $commentManager = new EventManager();
+    $comments = $commentManager->loadComments($params);
+    require("./view/eventCommentsView.php");
 }
 
-// function editEventComment($params) {
-//     $editComment = new EventManager();
-//     $editComment->editComment($params);
-// }
+function editEventComment($params) {
+    $editComment = new EventManager();
+    $editComment->editComment($params);
+}
 
 function attendEvent($params) {
     $eventAttend = new EventManager();
