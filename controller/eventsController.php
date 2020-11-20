@@ -15,3 +15,9 @@ function getGuestCountOfEvent($eventId) {
     return $manager->getMembersCountBy($eventId);
 }
 
+function getGuestProfileImagesOfEvent($eventId, $limit=NULL) {
+    $manager = new EventManager();
+    $guests = $manager->getMemberProfileImagesBy($eventId, $limit);
+
+    return $guests; 
+}
