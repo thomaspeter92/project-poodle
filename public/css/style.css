@@ -226,12 +226,8 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     }
     /* Styling the menu button */
     .menu-btn { 
-        position: absolute; 
-        top: 28%;
-        left: 84%;
         z-index: 20; 
-        margin-left: 15px;
-        padding-top: 5px; 
+        padding-top: 0  ; 
         cursor: pointer; 
         transition: all 0.5s ease-out; 
     } 
@@ -299,17 +295,6 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     .hoverWrapper.show {
         right: 0px;
     }
-    .mobileSignIn, #mobileWrapper {
-        padding-top: 5px;
-    }
-    .mobileSignIn, .signOut{
-        text-decoration: none;
-        padding: .5em;
-        border-radius: 3em;
-        border: 2px transparent;
-        color:black;
-        background:  #F8C533;
-    }
     .mobileLoggedIn>div>a{
         display: none;
     }
@@ -345,7 +330,6 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     .mobileLoggedIn{
         font-family: "monsterRatRegular";
         display: flex;
-        padding-right: 2em;
     }
     .userImage{
         margin-right: 1em;

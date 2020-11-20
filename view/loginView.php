@@ -4,14 +4,14 @@
                 <input type="hidden" name="action" value="checkLogin">
                 <div class='subSection'>
                     <label for="emailLogin" class="form_col">Email :</label> 
-                    <input type="text" name="emailLogin" id="emailLogin" class="loginInput required " required>
+                    <input type="text" name="emailLogin" id="emailLogin" class="loginInput email" required>
                 </div>
                 <div class='subSection'>
                     <label for="passwordLogin" class="form_col">Password :</label>
                     <input type="password" name="passwordLogin" id="passwordLogin" class="loginInput required" required>
                 </div>
                 <div class='subSection'>
-                    <button type="submit" name="connect" id="connect" class='loginButton'>Sign In</button>
+                    <button type="submit" name="connect" id="connect" class='loginButton submitButton'>Sign In</button>
                 </div>
             </form>            
             <div class='thirdParty'>
