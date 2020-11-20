@@ -54,33 +54,39 @@ class MemberManager extends Manager{
     function addNewMember($params) {
         $name = htmlspecialchars($params["name"]);
         $password = htmlspecialchars($params["password"]);
-        $confirmPassword = htmlspecialchars($params["confirmpass"]);
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
+        $imageURL = $params["imageURL"];
         
-        if ($password != $confirmPassword){
-            return false;
+        if (empty($kakao) AND empty($google)) {
+            $confirmPassword = htmlspecialchars($params["confirmpass"]);
+            if ($password != $confirmPassword){
+                return false;
+            }
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
         }
-        echo $password;
-        echo $confirmPassword;
-        echo '<script type="text/javascript">
-             alert($password);
-        </script>';
-       
+        
+        //Save the image into the server with the URL
+        $imageFileName = NULL;
+        if (isset($imageURL)) {
+            $imageFileName = basename($imageURL);   //Get File name from URL
+            file_put_contents("./private/profile/".$imageFileName, file_get_contents($imageURL));
+        }
+
         $db = $this->dbConnect();
-        $query = "INSERT INTO member(name, password, email, kakao, google) 
-                                VALUES(:name, :password, :email, :kakao, :google)";
+        $query = "INSERT INTO member(name, password, email, kakao, google, profileImage) 
+                                VALUES(:name, :password, :email, :kakao, :google, :profileImage)";
         $response = $db->prepare($query);
         $response->bindValue(":name", $name, PDO::PARAM_STR);
         $response->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
         $response->bindValue(":email", $email, PDO::PARAM_STR);
         $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
         $response->bindValue(":google", $google, PDO::PARAM_INT);
+        $response->bindValue(":profileImage", $imageFileName, PDO::PARAM_STR);
         $result = $response->execute();
         $response->closeCursor();
         return $result;
