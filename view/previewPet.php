@@ -282,10 +282,6 @@
         const imgInput = document.querySelector("#imageInput");
         const file = imgInput.files[0];
 
-        // console.log(nameInput);
-        // console.log(emailInput);
-        // console.log(file);
-
         const url = "./controller/changeAccountController.php";
         const params = new FormData();
 
@@ -298,13 +294,11 @@
         xhr.addEventListener("load", () => {
             if (xhr.status === 200) {
                 response = xhr.responseText;
-                console.log(response);
                 accountEmpty = document.querySelector("#accountEmpty");
                 if (response.trim() == "emptyField") {
                     accountEmpty.removeAttribute("hidden");
                 }
                 if (response.trim() == "success") {
-                    // console.log("success");
                     // turn reload off for testing
                     location.reload();
                 }
@@ -499,7 +493,6 @@
                             }
                         });
                         xhr.send(params);
-                        // console.log(params);
                     });
 
                 }

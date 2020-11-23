@@ -11,7 +11,6 @@ require_once("Manager.php");
             $req -> execute(array($petId));
             $profiles = $req -> fetch(PDO::FETCH_ASSOC);
             $req -> closeCursor();
-            // print_r($profiles);
             if($_SESSION["id"]==$profiles["ownerId"]){
                 return $profiles;
             } else{
@@ -29,7 +28,7 @@ require_once("Manager.php");
             $req -> execute(array($ownerId));
             $profile = $req -> fetchAll(PDO::FETCH_ASSOC);
             $req -> closeCursor();
-            // print_r($profile);
+
             return $profile; 
         }
 

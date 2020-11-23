@@ -570,7 +570,6 @@
                             params.append('newComment', newComment)
                             xhr.open("POST", "index.php");
                             xhr.onload = function () {
-                                // console.log(xhr.responseText)
                             }
                             xhr.send(params);
                             location.reload();
@@ -597,7 +596,6 @@
     //         params.append('newComment', newComment)
     //         xhr.open("POST", "index.php");
     //         xhr.onload = function () {
-    //             // console.log(xhr.responseText)
     //         }
     //         xhr.send(params);
     //         location.reload();
