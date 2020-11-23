@@ -8,7 +8,6 @@ function checkLogin($params)
 {
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
-    echo "status: ".$status;
     if ($status) {
         //Franco
         //Create session
@@ -20,13 +19,10 @@ function checkLogin($params)
             $memberDataFromDB["name"];
             createSession($memberDataFromDB["id"],$memberDataFromDB["name"],"");
             header("Location: index.php");
-            print_r($memberDataFromDB);
         } else {
         // header("Location: index.php?action=login&error=login");
-            echo "checkLogin else";
         }
     }
-    echo "checkLogin";
 }
 
 function registration()
@@ -50,7 +46,7 @@ function emailCheck($email){
     $manager = new MemberManager();
     $memberCheck = $manager->getMemberDataByEmail($email);
     if($memberCheck){
-        echo "true";
+        // echo "true";
     }
 }
 
@@ -82,9 +78,9 @@ function signUpWith($memberData)
         if ($result) {
             signInWith($memberData);
         } 
-        // else {
-        //     throw new Exception("Failed to add new member!!", 1004);
-        // }
+        else {
+            throw new Exception("Failed to add new member!!", 1004);
+        }
     }
 }
 
@@ -116,13 +112,8 @@ function signInWith($memberData) {
         header("Location: index.php?action=petPreview");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "TODO: It is not valid email. You haven't signed up yet. ";
+       
+        //TODO: It is not valid email. You haven't signed up yet. ;
         // echo "<script> signAllOut(); </script>";
         // throw new Exception("Failed to sign in!!", 1007);
 

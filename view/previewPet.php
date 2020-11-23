@@ -170,7 +170,7 @@
 <button id="addPetButton"> Add a Pet!</button>
 </div>
 
-<script src="./public/js/Modal.js"></script>
+<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 // DELETE PET FUNCTION, PULLS PET ID AND ERASES FROM DB

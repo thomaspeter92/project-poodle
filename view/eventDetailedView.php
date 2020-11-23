@@ -447,7 +447,7 @@
     </div>
 </div>
 
-<script src="./public/js/Modal.js"></script>
+<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 {

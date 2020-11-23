@@ -58,7 +58,7 @@ class MemberManager extends Manager{
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
-        // $imageURL = $params["imageURL"];
+        $imageURL = isset($params["imageURL"]) ? $params["imageURL"] : NULL;
         
         if (empty($kakao) AND empty($google)) {
             $confirmPassword = htmlspecialchars($params["confirmpass"]);
@@ -79,7 +79,7 @@ class MemberManager extends Manager{
             $profileDir = "./private/profile/";
             $imageFileName = FileUtil::downloadFileFromURL($imageURL, $profileDir);
         }
-
+        
         $db = $this->dbConnect();
         $query = "INSERT INTO member(name, password, email, kakao, google, profileImage) 
                                 VALUES(:name, :password, :email, :kakao, :google, :profileImage)";
