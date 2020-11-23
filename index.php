@@ -139,6 +139,9 @@ try {
             );
             signUpWith($memberData);
             break;
+        case "requestMap":
+            showMap($_REQUEST['eventId']);
+            break;
         default:
             landing();
             break;

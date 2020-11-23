@@ -4,6 +4,7 @@ require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");
 require_once("./controller/signinController.php");
+require_once("./model/MapManager.php");
 
 function landing()
 {
@@ -52,4 +53,11 @@ function contactPage(){
 }
 function legalPage(){
     require('./view/legalPageView.php');
+}
+
+function showMap($eventId){
+    // echo $petId;
+    $mapManager = new MapManager();
+    $event = $mapManager->getMap($eventId);
+    require("./view/mapViewTest.php");
 }
