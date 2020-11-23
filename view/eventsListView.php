@@ -57,6 +57,7 @@ ob_start();
                     if (xhr.status === 200) {
                         const eventsList = document.querySelector("#eventsList");
                         eventsList.innerHTML = xhr.responseText;
+                        adjustFooter();
                     } else {
                         //TODO: Show error messages
                     }
@@ -75,6 +76,7 @@ ob_start();
                 if (xhr.status === 200) {
                     const eventsList = document.querySelector("#eventsList");
                     eventsList.innerHTML = xhr.responseText;
+                    adjustFooter();
                 } else {
                     //TODO: Show error messages
                 }

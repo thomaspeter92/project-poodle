@@ -144,7 +144,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAUL
     </header>
 
     <!-- TODO: Add Content -->
-    <?= $content; ?>
+    <div id="templateContent"><?= $content; ?></div>
 
     <footer>
         <ul class="footer">
@@ -201,6 +201,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAUL
         <div id='gSigninBut' class='g-signin2' data-onsuccess='onGoogleSignIn' style='position:absolute;top:-9999px;left:-9999px;'></div>
     </div>
 
+    <!-- NOTICE: tempContainer is for getting viewport height -->
+    <div id="tempContainer"></div>
+
     <!-- The following script controls menu animation on Click -->
     <script>
     {
@@ -235,6 +238,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAUL
             Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
         }
     </script>
+    <script src="./public/js/template.js"></script>
     <script src="./public/js/registrationCheck.js"></script>
     <script src="./public/js/formCheck.js"></script>
     <script src="./public/js/googlelogin.js"></script>
