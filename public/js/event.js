@@ -104,7 +104,6 @@ var getCoords = function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
             // points.push(coords);
-    // console.log(points);
     // createMarkersPoints(points);
     var marker = new kakao.maps.Marker({
             position: coords,
@@ -114,7 +113,6 @@ var getCoords = function (result, status) {
     var infowindow = new kakao.maps.InfoWindow({
                         content :"<"+(1)+">"+ locationData[1][2],
                     });
-    console.log("count");
     infowindow.open(map, marker);  
     bounds.extend(coords);
     map.setBounds(bounds);
@@ -129,7 +127,6 @@ var getCoords = function (result, status) {
 
     function useMyCoords(coords) {
         // points.push(coords);
-        // console.log(points);
         // createMarkersPoints(points);
         var marker = new kakao.maps.Marker({
                 position: coords,
@@ -139,7 +136,6 @@ var getCoords = function (result, status) {
         var infowindow = new kakao.maps.InfoWindow({
                             content :"<"+(i+1)+">"+ locationData[i][2],
                         });
-        console.log("count");
         infowindow.open(map, marker);  
         bounds.extend(coords);
         map.setBounds(bounds);
@@ -211,7 +207,6 @@ function startMap(){
             vendor.addEventListener("click", function(){
                 
                 getLatLonFromAddress(myLocation);
-                console.log("coutner qfter", counter);
         });  
     }
 }

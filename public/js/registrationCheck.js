@@ -54,7 +54,6 @@ class RegistrationCheck{
                             
                         }   
                     }
-                    // console.log("name"+check);
                     if(password){
                         var oldPassError = document.querySelector('.passwordError');
                         if(password.value.trim().length == 0 && confirmPassword.value.trim().length == 0){
@@ -95,10 +94,8 @@ class RegistrationCheck{
                             var check = true;
                         }
                     }
-                    // console.log("password"+check);
                     if(email){
                         if(email.value.trim().length == 0){
-                            // console.log('test');
                             var emptyEmailError = document.createElement('p');
                             emptyEmailError.className = "emailError";
                             emptyEmailError.style= "text-align: center; color: #FF3864; font-size: .5em;";
@@ -118,7 +115,6 @@ class RegistrationCheck{
                             var check = true
                         }
                     }
-                    // console.log("email"+check);
                     if(redInputs){
                         var oldRedError = document.querySelector('.redError');
                         if(oldRedError){
@@ -147,7 +143,6 @@ class RegistrationCheck{
                         }
                         var check = true;
                     }
-                    // console.log("red error"+check);
                     if(xhr.responseText.trim() == "true"){
                         var oldEmailError = document.querySelector('.emailError');
                         if(email.value.trim().length != 0){
@@ -174,8 +169,6 @@ class RegistrationCheck{
                             form.submit();  
                         }
                     }
-                      
-                    // console.log("final"+check);
                     
 
                 

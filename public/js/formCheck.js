@@ -61,7 +61,6 @@ formCheck = () => {
 
     if(email){
         email.addEventListener(`keyup`, function(){
-            // console.log(email.value);
             var emailVerify = emailRegex.test(email.value);
             if(emailVerify == true){
                 email.classList.remove(`red`);
@@ -79,7 +78,7 @@ formCheck = () => {
         requiredInputs[i].addEventListener(`keyup`, function(){
             for(var j=0;j<requiredInputs.length;j++){
                 var inputLength = requiredInputs[j].value.length;
-                if(inputLength == 0){
+                if(inputLength = 0){
                     requiredInputs[j].classList.remove(`blue`);
                     requiredInputs[j].classList.add(`red`);
                 }else{

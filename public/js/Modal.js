@@ -39,7 +39,6 @@ class Modal{
 
         let modalDivButtons = document.createElement("div");
         modalDivButtons.className="modalDivButtons";
-        // console.log(this.buttonMethods);
 
 
 
