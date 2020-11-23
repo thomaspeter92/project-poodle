@@ -1,7 +1,6 @@
 <?php
 session_start();
 require("./controller/controller.php");
-// require("./controller/accountController.php");
 
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
@@ -191,6 +190,9 @@ try {
         case "loadGuests" :
             loadGuests($_REQUEST);
             break;                  
+        case "requestMap":
+            showMap($_REQUEST['eventId']);
+            break;
         default:
             landing();
             break;

@@ -7,6 +7,7 @@ require_once("./model/EventManager.php");
 require_once("./controller/signinController.php");
 require_once("./controller/eventsController.php");
 require_once("./controller/accountController.php");
+require_once("./model/MapManager.php");
 
 function landing()
 {
@@ -103,4 +104,9 @@ function addEditEvent(){
     require('./view/addEditEventView.php');
 }
 
-
+function showMap($eventId){
+    // echo $petId;
+    $mapManager = new MapManager();
+    $event = $mapManager->getMap($eventId);
+    require("./view/mapViewTest.php");
+}
