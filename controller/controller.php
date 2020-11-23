@@ -1,5 +1,6 @@
 <?php
 // This is for Controller functions.
+require_once("./util/FileUtil.php");
 require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./model/PreviewManager.php");

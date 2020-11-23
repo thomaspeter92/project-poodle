@@ -30,7 +30,7 @@ class MemberManager extends Manager{
     public function getMemberDataByEmail($email) {
         $email = htmlspecialchars($email);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, kakao, google FROM member WHERE email=:email";
+        $query = "SELECT id, name, kakao, google, profileImage FROM member WHERE email=:email";
         $response = $db->prepare($query);
         $response->bindParam('email', $email, PDO::PARAM_STR);
         $response->execute();
@@ -42,7 +42,7 @@ class MemberManager extends Manager{
     public function getMemberDataByID($id) {
         $id = htmlspecialchars($id);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, password, email, kakao, google FROM member WHERE id=:id";
+        $query = "SELECT id, name, password, email, kakao, google, profileImage FROM member WHERE id=:id";
         $response = $db->prepare($query);
         $response->bindParam('id', $id, PDO::PARAM_STR);
         $response->execute();
@@ -73,8 +73,8 @@ class MemberManager extends Manager{
         //Save the image into the server with the URL
         $imageFileName = NULL;
         if (isset($imageURL)) {
-            $imageFileName = basename($imageURL);   //Get File name from URL
-            file_put_contents("./private/profile/".$imageFileName, file_get_contents($imageURL));
+            $profileDir = "./private/profile/";
+            $imageFileName = FileUtil::downloadFileFromURL($imageURL, $profileDir);
         }
 
         $db = $this->dbConnect();

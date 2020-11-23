@@ -90,17 +90,19 @@ function signInWith($memberData) {
         if (empty($memberDataFromDB["id"]) or empty($memberDataFromDB["name"])) {
             throw new Exception("Sign in is failed!", 1006);
         }
+        $profileImageDir = "./private/profile/";
         $sessionID = $memberDataFromDB["id"];
-        $sessionName = isset($memberData["name"]) ? 
-                        $memberData["name"] : $memberDataFromDB["name"];
-        if (isset($memberData["imageURL"])) {
-            $sessionImageURL = $memberData["imageURL"];
+        $sessionName = isset($memberDataFromDB["name"]) ? 
+                        $memberDataFromDB["name"] : $memberData["name"];
+        if (isset($memberDataFromDB["profileImage"])) {
+            $sessionImageURL = $profileImageDir.$memberDataFromDB["profileImage"];
         } else {
-            //TODO: Set Profile image URL by our server's image
+            if (isset($memberData["imageURL"])) {
+                $sessionImageURL = $memberData["imageURL"];
+            }
         }
-
         createSession($sessionID, $sessionName, $sessionImageURL);
-        header("Location: index.php");
+        header("Location: index.php?action=petPreview");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
         echo "<br>";
