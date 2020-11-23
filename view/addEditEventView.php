@@ -1,7 +1,7 @@
 <style>
     
     .modalSubDiv{
-        width:90%;
+        width:80%;
         height:70%;
         margin: auto;
         background-image: none;
@@ -61,30 +61,36 @@
     .eventButton:focus {
         outline: none;
     }
-    #eventDetails {
+    #eventDescription {
         border-radius:5px;
         border-style: none;
         border: 1px solid lightgrey;
         padding: 5px;
         font-size: 1em;
+        width:98%;
+        height:40vh;       
+        display:block;
+        resize:none;
+        margin-top:1vh;
     }
-    #eventDetails:focus {
+    #eventDescription:focus {
         outline: none;
     }
     
-    #eventDetails:hover {
+    #eventDescription:hover {
         box-shadow: 5px 10px 18px lightgrey;
     }
-    .SubSection2{
-        margin:5px 0;
+    .subSection2{
+        margin:15px 0;
+        display: flex;
+        justify-content: space-around;
     }
-    #eventDetails{
-        display:block;
-    }
-    #eventPicture{
+
+    #eventPictureFrame{
         width:100%;
         height:90%;
         border:1px solid black;
+        margin-top:5px;
        
     } 
     /* #eventMap{
@@ -94,8 +100,8 @@
 
     } */
     #eventPictureContainer{
-        width:55vw;
-        height:35vh; 
+        width:45vw;
+        height:45vh; 
         margin:auto;
     }
     #lblStepIndicator{
@@ -148,6 +154,13 @@
         background-color: black;
         text-align: center;
     }
+
+    .formCol2{
+        display:inline-block;
+        margin:10px 15px;
+        padding: 3px 0;
+
+    }
     /* .modalSubDiv{
         width: 30%;
         height: 30%;
@@ -159,55 +172,93 @@
 
 </style>
 
-<form action="" id="formAddEditEvent">
+<form action="index.php" id="formAddEditEvent" method="POST">
+    <input type="hidden" name="action" value="updateEventDetails">
     <div id="stepEventHeader">
         <div id="lblStepIndicator">Step 1</div>
         <progress id= "stepIndicator" value="33" max="100" ></progress>
     </div>
     <div id="stepEventSection">
-        <div id="eventStep1">
-            <div class='subSection'>
-                <label for="eventName" class="form_col">Name of event :</label> 
-                <input type="text" name="eventName" id="eventName" class="loginInput" required>
-                <label for="eventGuestLimit" class="form_col">Maximum number of guests :</label> 
-                <input type="number" name="eventGuestLimit" id="eventGuestLimit" class="loginInput" >
-            </div>
-            <fieldset class="SubSection2">
-                <legend>Enter date and time when the event is happening</legend>
-                <label for="eventDate" class="form_col">Event date :</label> 
-                <input type="date" name="eventDate" id="eventDate" class="loginInput" >
-                <label for="eventTime" class="form_col">Event time :</label> 
-                <input type="time" name="eventTime" id="eventTime" class="loginInput" >
-            </fieldset>
-            <fieldset class="SubSection2">
-                <legend>Enter last date and time for members to subscribe to event</legend>
-                <label for="eventExpiryDate" class="form_col">Last date :</label> 
-                <input type="date" name="eventExpiryDate" id="eventExpiryDate" class="loginInput" >
-                <label for="eventExpiryTime" class="form_col">Last time :</label> 
-                <input type="time" name="eventExpiryTime" id="eventExpiryTime" class="loginInput">
-            </fieldset>
-            <div class="SubSection2">
-                <div for="eventDetails" >Enter some details about the event :</div> 
-                <textarea type="number" name="eventDetails" id="eventDetails"  rows="6" columns="250" placeholder="Details of the event"></textarea>
-            </div>
-        </div>
-        <div id="eventStep2">
-            <!-- Choose picture for event -->
-            <p>Choose a picture to load regarding the event. The picture can give an idea to other members what to expect for the event </p>
-            <div id="eventPictureContainer">
-                <button>Choose a picture file to load</button>
-                <div id="eventPicture"></div>
-            </div>
-        </div>
-        <div id="eventStep3">
+        <div id="eventStep4">
             <!-- Choose location for event -->
             <p>Choose location to hold the event</p>
             <!-- <div id="eventMap"></div> -->
-            <div id="mapContainer">
+            <div class='subSection2'>
+             <label for=""></label>
+                <div id="mapContainer">
+                    <div id="map"></div>
+                    <div id="vendorList">
+                    </div>
+                </div>
+        </div>
+
+        </div>
+        <div id="eventStep1">
+            <div class='subSection2'>
+                <div>
+                    <label for="eventName" class="formCol2">Name of event :</label> 
+                    <input type="text" name="eventName" id="eventName" class="loginInput" value="<?=isset($eventEditDetails['name']) ? $eventEditDetails['name'] : ""; ?>" required>
+                </div>
+                <div>
+                    <label for="eventGuestLimit" class="formCol2">Guest limit :</label> 
+                    <input type="number" name="eventGuestLimit" id="eventGuestLimit" class="loginInput" value="<?=isset($eventEditDetails['guestLimit']) ? $eventEditDetails['guestLimit'] : ""; ?>">
+                </div>
+<!-- 
+                <div id="mapContainer">
                 <div id="map"></div>
                 <div id="vendorList">
-        
                 </div>
+            </div> -->
+
+            </div>
+            <fieldset class="subSection2">
+                <legend>Enter date and time when the event is happening</legend>
+                <div>
+                    <?php if (isset($eventEditDetails['eventDate'])){
+                        $dateObj = new DateTime($eventEditDetails['eventDate']);
+                        $eventDate = $dateObj->format('Y-m-d');
+                        $eventTime = $dateObj->format('H:i:s');
+                    }?>
+                    <?php if (isset($eventEditDetails['expiryDate'])){
+                        $dateObj = new DateTime($eventEditDetails['expiryDate']);
+                        $expiryDate = $dateObj->format('Y-m-d');
+                        $expiryTime = $dateObj->format('H:i:s');
+                    }?>
+                    <label for="eventDate" class="formCol2">Event date :</label> 
+
+                    <input type="date" name="eventDate" id="eventDate" class="loginInput" placeholder="yyyy-mm-dd" value="<?=isset($eventEditDetails['eventDate']) ? $eventDate : '' ; ?>">
+                </div>
+                <div>
+                    <label for="eventTime" class="formCol2">Event time :</label> 
+                    <input type="time" name="eventTime" id="eventTime" class="loginInput"  value="<?=isset($eventEditDetails['eventDate'])? $eventTime : '' ; ?>">
+                </div>
+            </fieldset>
+            <fieldset class="subSection2">
+                <legend>Enter last date and time for members to subscribe to event</legend>
+                <div>
+                    <label for="eventExpiryDate" class="formCol2">Last date :</label> 
+                    <input type="date" name="eventExpiryDate" id="eventExpiryDate" class="loginInput" placeholder="yyyy-mm-dd" value="<?=isset($eventEditDetails['expiryDate']) ? $expiryDate : '' ;  ?>">
+                </div>
+                <div>
+                    <label for="eventExpiryTime" class="formCol2">Last time :</label> 
+                    <input type="time" name="eventExpiryTime" id="eventExpiryTime" class="loginInput" value="<?=isset($eventEditDetails['expiryDate']) ? $expiryTime : ''; ?>">
+                </div>
+            </fieldset>
+        </div>
+        <div  id="eventStep2">
+            <div>
+                <div>Description :</div> 
+                <textarea name="eventDescription" id="eventDescription"  rows="6" columns="250" placeholder="Enter details about the event"><?=isset($eventEditDetails['description']) ? $eventEditDetails['description'] : ''?></textarea>
+            </div>
+        </div>
+        <div id="eventStep3">
+            <!-- Choose picture for event -->
+            <p>Choose a picture to load regarding the event. The picture can give an idea to other members what to expect for the event </p>
+            <div id="eventPictureContainer">
+                <button class="loginButton">Choose picture file</button>
+                <input type="hidden" id="eventPicture" name="eventPicture" value='1'>
+                <!-- TODO Value of picture to  be changed -->
+                <div id="eventPictureFrame"></div>
             </div>
         </div>
     </div>
@@ -221,6 +272,7 @@
             <button type="button" id='eventNextButton' class='eventButton'>Next ></button>
             <button type="submit" id='eventSubmitButton' class='eventButton'> Submit </button>
         </div>
-        
+        <input type="hidden" name="hostId" value="<?= $_SESSION['id']; ?>">
+        <input type="hidden"  name="eventId" value="<?= isset($eventId) ? $eventId : null ;?>">
     </div>
 </form>

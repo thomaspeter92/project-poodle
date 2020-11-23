@@ -95,8 +95,28 @@ function accountView($userID){
 function legalPage(){
     require('./view/legalPageView.php');
 }
-function addEditEvent(){
+function displayAddEditEvent($eventId){
+    if(!empty($eventId)){
+        $eventManager = new EventManager();
+        $eventEditDetails = $eventManager->getEventEditDetails($eventId);
+    }
     require('./view/addEditEventView.php');
+}
+
+function addEditEventDetails($params){
+    $eventManager = new EventManager();
+    $eventId = $eventManager->updateEventDetails($params);
+    if($eventId){
+        //display the details of newly added or edited event
+        showEventDetail($eventId);
+    }else{
+        echo "Event details were not saved properly";
+    }
+}
+
+function deleteEvent($eventId) {
+    $eventManager = new EventManager();
+    $eventManager->deleteEvent($eventId);
 }
 
 

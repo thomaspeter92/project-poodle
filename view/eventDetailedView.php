@@ -1,5 +1,5 @@
 <?php ob_start();?>
-<link rel="stylesheet" href="./public/css/Modal.css"/>
+<!-- <link rel="stylesheet" href="./public/css/Modal.css"/> -->
 
 <style>
 
@@ -208,6 +208,10 @@
         text-align: center;
     }
 
+    /* Franco */
+    #editEvent:hover, .deleteEvent:hover{
+        cursor: pointer;
+    }
 </style>
 
 <?php $style = ob_get_contents();?>
@@ -222,6 +226,10 @@
                 <h3><?= $event['name']; ?></h3>
                 <div id="headerContentExtra">
                     <p><img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
+                    <!-- Franco -->
+                    <?php if ($event['hostId'] === $_SESSION['id']) { ?>
+                        <i id="editEvent" class="fas fa-edit" data-eventid="<?=$event['eventId'];?>"></i><i class="fas fa-trash-alt deleteEvent" data-eventid="<?=$event['eventId']; ?>"></i> <?php }; ?>
+                    <!-- Franco -->
                     <button id="attendButton" class="submit">ATTEND</button>
                 </div>
             </div>
@@ -273,7 +281,8 @@
                         <p><?=$event['location']; ?></p>
                     </div>
                 </div>
-                <div id="map"><img src="./public/images/googleMapPreview.png" alt=""></div>
+                <!-- <div id="map"><img src="./public/images/googleMapPreview.png" alt=""></div> -->
+                <div id="map"></div>
                 <div id="guestList">
                     <h5>Guest List:</h5>
                     <div class="guestListItem">Guest</div>
@@ -314,10 +323,19 @@
             </div>
         </div> -->
     </div>
+    <!-- Franco -->
+    <form id="eventDeleteForm" method="POST" action="index.php?action=deleteEvent">
+        <input type="hidden" id="eventId" name="eventId" value="<?=$event['eventId'];?>">
+    </form>
 </div>
 
-<script src="./public/js/Modal.js"></script>
-
+<!-- Script used for map. @TODO Move to page related to the event list once merging is done-->
+<script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
+<!-- GEOCODER lat lon from address -->
+ <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
+<!-- MAP -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2"></script>
+<script src="./public/js/event.js"></script>
 <script>
 
     let commentForm = document.querySelector('#commentForm');
@@ -383,7 +401,33 @@
         }
     }
 
+    let deleteEventButton = document.querySelector('.deleteEvent');
+    if (deleteEventButton){
+        deleteEventButton.addEventListener('click', function(e) {
+            // let eventId = e.target.getAttribute("data-eventId");
+            deleteEvent();
+        });
+    }
 
+    function deleteEvent (){
+        if (confirm('Are you sure you want to delete?')) { 
+            let deleteFormEle = document.getElementById("eventDeleteForm");
+            deleteFormEle.submit();
+        }
+    }
+
+    // function editEvent (eventId){
+
+    //     createAddEditEventModal(eventId);
+    // }
+
+    let editEventButton = document.getElementById('editEvent');
+    if (editEventButton){
+        editEventButton.addEventListener('click', function(e) {
+            let eventId = e.target.getAttribute("data-eventid");
+            createAddEditEventModal(eventId);
+        });
+    }
 
 </script>
 

@@ -1,9 +1,15 @@
 // Franco @TODO To add this js to the Event page instead of Template
 
 var step=1;
-const createAddEditEventModal = () =>{
+const createAddEditEventModal = (id) =>{
+
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'index.php?action=addEditEvent');
+    if(id){
+        xhr.open('GET', `index.php?action=addEditEvent&eventId=${id}`);
+    }else{
+        xhr.open('GET', `index.php?action=addEditEvent`);
+    }
+
     xhr.onload = function () {
         if(xhr.status == 200){
             let addEditEventModal = new Modal(xhr.responseText);
@@ -23,11 +29,12 @@ const createAddEditEventModal = () =>{
                 eventNextBut.addEventListener("click", moveNextStep);  
             }
             showEventStep("eventStep1");
+            recommendExpiryDateTime();
             startMap();
 
         }
     }
-    xhr.send(null);
+     xhr.send(null);
 }
 
 // TODO to change the location of the add Event button
@@ -54,36 +61,98 @@ function showEventStep(currentStep){
             document.getElementById("eventStep1").style.display = "block";
             document.getElementById("eventStep2").style.display = "none";
             document.getElementById("eventStep3").style.display = "none";
+            document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "none";
             document.getElementById("eventNextButton").style.display = "block";
             document.getElementById("eventSubmitButton").style.display = "none";
-            document.getElementById("lblStepIndicator").innerHTML="Step 1 of 3";
-            document.getElementById("stepIndicator").value = "33";
+            document.getElementById("lblStepIndicator").innerHTML="Step 1 of 4";
+            document.getElementById("stepIndicator").value = "25";
             break;
         case "eventStep2":
             document.getElementById("eventStep1").style.display = "none";
             document.getElementById("eventStep2").style.display = "block";
             document.getElementById("eventStep3").style.display = "none";
+            document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "block";
             document.getElementById("eventNextButton").style.display = "block";
             document.getElementById("eventSubmitButton").style.display = "none";
-            document.getElementById("lblStepIndicator").innerHTML="Step 2 of 3";
-            document.getElementById("stepIndicator").value = "66";
+            document.getElementById("lblStepIndicator").innerHTML="Step 2 of 4";
+            document.getElementById("stepIndicator").value = "50";
             break;
         case "eventStep3":
             document.getElementById("eventStep1").style.display = "none";
             document.getElementById("eventStep2").style.display = "none";
             document.getElementById("eventStep3").style.display = "block";
+            document.getElementById("eventStep4").style.display = "none";
+            document.getElementById("eventPreviousButton").style.display = "block";
+            document.getElementById("eventNextButton").style.display = "block";
+            document.getElementById("eventSubmitButton").style.display = "none";
+            document.getElementById("lblStepIndicator").innerHTML="Step 3 of 4";
+            document.getElementById("stepIndicator").value = "75";
+            break;
+        case "eventStep4":
+            document.getElementById("eventStep1").style.display = "none";
+            document.getElementById("eventStep2").style.display = "none";
+            document.getElementById("eventStep3").style.display = "none";
+            document.getElementById("eventStep4").style.display = "block";
             document.getElementById("eventPreviousButton").style.display = "block";
             document.getElementById("eventNextButton").style.display = "none";
             document.getElementById("eventSubmitButton").style.display = "block";
-            document.getElementById("lblStepIndicator").innerHTML="Step 3 of 3";
+            document.getElementById("lblStepIndicator").innerHTML="Step 4 of 4";
             document.getElementById("stepIndicator").value = "100";
             break;
         default:
             break;
     }
 }
+
+function recommendExpiryDateTime(){
+    let eventDateEle = document.getElementById("eventDate");
+    let eventTimeEle = document.getElementById("eventTime");
+    eventDateEle.addEventListener('change', function(e){
+        // If there are no value in expiry date then recommend a date for 
+        addRecommendedDateTime();
+    });
+    eventTimeEle.addEventListener('change', function(e){
+        addRecommendedDateTime();
+    });
+
+
+}
+
+function addRecommendedDateTime(){
+    
+    let eventDateEle = document.getElementById("eventDate");
+    let eventTimeEle = document.getElementById("eventTime");
+    let expiryDateEle = document.getElementById("eventExpiryDate");
+    let expiryTimeEle = document.getElementById("eventExpiryTime");
+    let expiryDate = expiryDateEle.value;
+    let expiryTime = expiryTimeEle.value;
+    let eventDate = eventDateEle.value;
+    let eventTime = eventTimeEle.value;
+    let currentDate = new Date(eventDate+" "+eventTime);
+
+    if(eventDate && eventTime && !(expiryDate) && !(expiryTime)){
+        let recommendedDateTime = addMinutes(currentDate,-1440);
+        let dd=String(recommendedDateTime.getDate()).padStart(2,'0');
+        let mm = String(recommendedDateTime.getMonth()+1).padStart(2,'0');
+        let yyyy = recommendedDateTime.getFullYear();
+        let hh = String(recommendedDateTime.getHours());
+        let min = String(recommendedDateTime.getMinutes()).padStart(2,'0');;
+        
+        let recommendedDate = yyyy + '-' + mm +'-'+ dd;
+        let recommendedTime = hh+":"+min;
+
+         expiryDateEle.value = recommendedDate;
+         expiryTimeEle.value = recommendedTime;
+    }
+
+}
+function addMinutes(date, minutes){
+    return new Date(date.getTime()+minutes*60000);
+}
+
+
 
 
 // Functions for the mapping
@@ -214,4 +283,5 @@ function startMap(){
                 console.log("coutner qfter", counter);
         });  
     }
+
 }

@@ -183,7 +183,31 @@ try {
             break;
 
         case "addEditEvent" :
-            addEditEvent();
+            displayAddEditEvent(!empty($_REQUEST['eventId']) ? $_REQUEST['eventId'] : '');
+
+            break;
+
+        case "updateEventDetails" :
+            // updateEventDetails($eventId = isset($_REQUEST['eventId']) ? $_REQUEST['eventId'] : "" );
+
+            if (!empty($_REQUEST['eventName']) && !empty($_REQUEST['eventGuestLimit']) && !empty($_REQUEST['eventDate']) && !empty($_REQUEST['eventTime']) && !empty($_REQUEST['eventExpiryDate']) && !empty($_REQUEST['eventExpiryTime']) && !empty($_REQUEST['eventDescription'])) {
+                $eventData = array(
+                "eventName" => $_REQUEST['eventName'],
+                "eventGuestLimit" => $_REQUEST['eventGuestLimit'],
+                "eventDate" => $_REQUEST['eventDate'],
+                "eventTime" => $_REQUEST['eventTime'],
+                "eventExpiryDate" => $_REQUEST['eventExpiryDate'],
+                "eventExpiryTime" => $_REQUEST['eventExpiryTime'],
+                "eventDescription" => $_REQUEST['eventDescription'],
+                "hostId" => $_SESSION['id'],
+                "eventId" => $_REQUEST['eventId']);
+
+                addEditEventDetails($eventData);
+            }
+            break;
+        case "deleteEvent" :
+            deleteEvent($_REQUEST['eventId']);
+            showUpcomingEventsList();
             break;
             
         default:
