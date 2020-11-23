@@ -28,6 +28,7 @@ const createSignUpModal = () =>{
                 regLoginBtn.addEventListener("click", () => createSignInModal());
              }
             new FormCheck().formCheck();// Marie ugly way of calling
+            new RegistrationCheck().registrationCheck(); 
         }
     }
     xhr.send(null);
