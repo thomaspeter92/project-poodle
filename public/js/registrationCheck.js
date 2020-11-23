@@ -96,6 +96,10 @@ class RegistrationCheck{
                     }
                     if(email){
                         if(email.value.trim().length == 0){
+                            var oldEmailError = document.querySelector('.emailError');
+                            if(oldEmailError){
+                                oldEmailError.remove();
+                            }
                             var emptyEmailError = document.createElement('p');
                             emptyEmailError.className = "emailError";
                             emptyEmailError.style= "text-align: center; color: #FF3864; font-size: .5em;";
@@ -103,9 +107,6 @@ class RegistrationCheck{
                             var form = document.querySelector('form');
                             emptyEmailError.appendChild(emailErrorText);
                             form.insertBefore(emptyEmailError, form.lastChild);
-                            if(oldEmailError){
-                                oldEmailError.remove();
-                            }
                             var check = false; 
                         }else{
                             var oldEmailError = document.querySelector('.emailError')
@@ -119,6 +120,7 @@ class RegistrationCheck{
                         var oldRedError = document.querySelector('.redError');
                         if(oldRedError){
                             oldRedError.remove();
+                            var redError = document.createElement('p');
                             redError.className = "redError";
                             redError.style= "text-align: center; color: #FF3864; font-size: .5em;";
                             var redErrorText = document.createTextNode('please make sure everthing was entered correctly');
@@ -144,7 +146,6 @@ class RegistrationCheck{
                         var check = true;
                     }
                     if(xhr.responseText.trim() == "true"){
-                        var oldEmailError = document.querySelector('.emailError');
                         if(email.value.trim().length != 0){
                             var oldEmailError = document.querySelector('.emailError');
                             if(oldEmailError){

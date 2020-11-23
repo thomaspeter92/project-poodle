@@ -8,6 +8,7 @@ function checkLogin($params)
 {
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
+    echo "status: ".$status;
     if ($status) {
         //Franco
         //Create session
@@ -19,11 +20,13 @@ function checkLogin($params)
             $memberDataFromDB["name"];
             createSession($memberDataFromDB["id"],$memberDataFromDB["name"],"");
             header("Location: index.php");
+            print_r($memberDataFromDB);
         } else {
         // header("Location: index.php?action=login&error=login");
-
+            echo "checkLogin else";
         }
     }
+    echo "checkLogin";
 }
 
 function registration()

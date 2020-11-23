@@ -32,7 +32,7 @@ try {
         case "checkLogin":
             if (!empty($_REQUEST['emailLogin']) && !empty($_REQUEST['passwordLogin'])) {
                 checkLogin($_REQUEST);
-            } else {
+            }else {
                 header("Location: index.php?action=login&error=login");
             }
             break;
@@ -54,7 +54,7 @@ try {
                     "kakao" => 0, "google" => 0,
                 );
                 signUpWith($memberData);
-            } else {
+            }else {
                 header("Location: index.php?action=petPreview&error=incomplete");
             }
             break;

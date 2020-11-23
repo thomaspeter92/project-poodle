@@ -58,7 +58,7 @@ class MemberManager extends Manager{
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
-        $imageURL = $params["imageURL"];
+        // $imageURL = $params["imageURL"];
         
         if (empty($kakao) AND empty($google)) {
             $confirmPassword = htmlspecialchars($params["confirmpass"]);
