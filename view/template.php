@@ -1,7 +1,7 @@
 <?php
 //TODO: Default image URL
-$DEFAULT_IMAGE_URL = "./private/profile/defaultProfile.png";
-$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
+define("DEFAULT_IMAGE_URL", "./private/profile/defaultProfile.png");
+$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAULT_IMAGE_URL;
 
 // TODO: Use $style for additional css
 // $style = NULL;
@@ -33,10 +33,10 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
 
     <style>
         #desktopSignUpLink:hover{
-            cursor:pointer
+            cursor:pointer;
         }
         #desktopLogInLink:hover{
-            cursor:pointer
+            cursor:pointer;
         }
 
     </style>
@@ -49,157 +49,103 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                 <a href="index.php?action=landing"><img src="./public/images/logoHeader.png"></a>
             </div>
             <div id="middleHeader">
-  <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
+            <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>
             <div id="headerRight">
                 <div class="desktopWrapper">
-                        <div class="headerLinks">
-                            <a href="index.php?action=events">Events</a>
-                            <a href="index.php?action=aboutUs">About Us</a>
-                            <a href="index.php?action=partners">Partners</a>
-                            <a href="index.php?action=contactPage">Contact</a>
+                    <div class="headerLinks">
+                        <a href="index.php?action=events">Events</a>
+                        <a href="index.php?action=aboutUs">About Us</a>
+                        <a href="index.php?action=partners">Partners</a>
+                        <a href="index.php?action=contactPage">Contact</a>
+                    </div>
+                <?php if (!isset($_SESSION['id'])): ?>
+                    <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                    <div>
+                    <a id="desktopLogInLink" href="#">Sign In</a>
+                    <a id="desktopSignUpLink" href='#' class="headerSignUp">Sign Up</a> 
+                    </div>
+                <?php else :?>
+                    <div class="userImageWrapper">
+                        <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                        <!-- <div><i class="fas fa-star"></i></div> -->
+                        <div class="stars">
+                            <img class="" src="./public/images/star.png" alt="default">
+                            <img class="" src="./public/images/star.png" alt="default">
+                            <img class="" src="./public/images/star.png" alt="default">
+                            <img class="" src="./public/images/star.png" alt="default">
+                            <img class="" src="./public/images/star.png" alt="default">
                         </div>
-                        <?php
-                        if (!isset($_SESSION['id'])) {?>
-                            
-                            <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
-                            <div>
-                            <a id="desktopLogInLink" href="#">Sign In</a>
-                            <a id="desktopSignUpLink" href='#' class="headerSignUp">Sign Up</a> 
-                            </div>
-                            <?php 
-                        } else {
-                        ?>
-                            <div class="userImageWrapper">
-                                <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
-                                <!-- <div><i class="fas fa-star"></i></div> -->
-                                <div class="stars">
-                                    <img class="" src="./public/images/star.png" alt="default">
-                                    <img class="" src="./public/images/star.png" alt="default">
-                                    <img class="" src="./public/images/star.png" alt="default">
-                                    <img class="" src="./public/images/star.png" alt="default">
-                                    <img class="" src="./public/images/star.png" alt="default">
-                                </div>
-                            </div>
-                            <div>
-                                <a id="mobileLogin" href="index.php?action=petPreview"><?php echo $_SESSION['name'] ?></a>
-                            </div>
-                            <div>
-                                <i class="far fa-bell"></i>
-                            </div>
-                            <div class="signOutWrapper">
-                                <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
-                            </div> 
-                        <?php
-                        }
-                        ?>
+                    </div>
+                    <div>
+                        <a id="mobileLogin" href="index.php?action=petPreview"><?= $_SESSION['name']; ?></a>
+                    </div>
+                    <div>
+                        <i class="far fa-bell"></i>
+                    </div>
+                    <div class="signOutWrapper">
+                        <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
+                    </div> 
+                <?php endif; ?>
                 </div>  
                 <div id="mobileWrapper">
-                        <?php
-                        if (!isset($_SESSION['id'])) {?>
-                            <div class="userImageWrapper">
-                                <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                <?php if (!isset($_SESSION['id'])): ?>
+                    <div class="userImageWrapper">
+                        <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                    </div>
+                <?php else: ?>  
+                    <div class="mobileLoggedIn">
+                        <div class="userImageWrapper">
+                            <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                            <!-- <div class="userImage"> -->
+                            <!-- <div><img src=<?= $sessionImageURL;?> alt="default"></div> -->
+                            <div class="stars">
+                                <img class="" src="./public/images/star.png" alt="default">
+                                <img class="" src="./public/images/star.png" alt="default">
+                                <img class="" src="./public/images/star.png" alt="default">
+                                <img class="" src="./public/images/star.png" alt="default">
+                                <img class="" src="./public/images/star.png" alt="default">
                             </div>
-                        <?php 
-                        } else {
-                        ?>  
-                            <div class="mobileLoggedIn">
-                                <div class="userImageWrapper">
-                                    <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
-                                    <!-- <div class="userImage"> -->
-                                    <!-- <div><img src=<?= $sessionImageURL;?> alt="default"></div> -->
-                                    <div class="stars">
-                                        <img class="" src="./public/images/star.png" alt="default">
-                                        <img class="" src="./public/images/star.png" alt="default">
-                                        <img class="" src="./public/images/star.png" alt="default">
-                                        <img class="" src="./public/images/star.png" alt="default">
-                                        <img class="" src="./public/images/star.png" alt="default">
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="index.php?action=petPreview">
-                                        <?php echo $_SESSION['name'] ?>
-                                    </a> 
-                                </div>
-                                <div>
-                                    <i class="far fa-bell"></i>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                        </div>
+                        <div>
+                            <a href="index.php?action=petPreview">
+                                <?= $_SESSION['name']; ?>
+                            </a> 
+                        </div>
+                        <div>
+                            <i class="far fa-bell"></i>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 </div>
                 <div class="menu-btn"> 
-                        <div class="btn-line"></div> 
-                        <div class="btn-line"></div> 
-                        <div class="btn-line"></div>
+                    <div class="btn-line"></div> 
+                    <div class="btn-line"></div> 
+                    <div class="btn-line"></div>
                 </div> 
                 <div class="hoverWrapper">
                     <div class="menuItems">
-                        <?php
-                        if (!isset($_SESSION['id'])) {?>
-                            <p id="mobileLogInLink1"><a href="#">Sign In</a></p>
-                            <p id="mobileSignUpLink"><a href="#">Sign Up</a></p>
-                        <?php 
-                        } else {
-                        ?>
+                    <?php if (!isset($_SESSION['id'])): ?>
+                        <p id="mobileLogInLink1"><a href="#">Sign In</a></p>
+                        <p id="mobileSignUpLink"><a href="#">Sign Up</a></p>
+                    <?php else: ?>
                         <form id="signOutForm" method="POST">
                         </form>
                         <p><a href="#"  onclick="signAllOut()">Sign Out</a></p>
-
-                        <?php }
-                        ?>
+                    <?php endif; ?>
                         <p><a href="index.php?action=events">Events</a></p>
                         <p><a href="index.php?action=aboutUs">About Us</a></p>
                         <p><a href="index.php?action=partners">Partners</a></p>
                         <p><a href="index.php?action=contactPage">Contact</a></p>
                     </div>
                 </div>
-               
-                <!-- The following script controls menu animation on Click -->
-
-
-                <script> 
-                    // select dom items 
-                    const menuBtn =  
-                        document.querySelector(".menu-btn"); 
-                
-                    const hoverWrapper =  
-                        document.querySelector(".hoverWrapper"); 
-                
-                
-                    // Set the initial state of the menu 
-                    let showMenu = false; 
-                
-                    menuBtn.addEventListener("click", toggleMenu); 
-                
-                    function toggleMenu() { 
-                        if (!showMenu) { 
-                            menuBtn.classList.add("close"); 
-                            hoverWrapper.classList.add("show"); 
-                            showMenu = true; 
-                        } else { 
-                            menuBtn.classList.remove("close"); 
-                            hoverWrapper.classList.remove("show"); 
-                            showMenu = false; 
-                        } 
-                    } 
-
-                 
-                </script> 
             </div>
         </div> 
     </header>
 
-    <!-- Divs below are used for Google buttons -->
-    <div id="googleHome">
-        <div id='gSigninBut' class='g-signin2' data-onsuccess='onGoogleSignIn' style='position:absolute;top:-9999px;left:-9999px;'></div>
-    </div>
-
     <!-- TODO: Add Content -->
     <?= $content; ?>
 
-    <!-- FOOTER START -->
     <footer>
         <ul class="footer">
             <li>Home</li>
@@ -248,8 +194,35 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                 </a>
             </div>
         </div>
-    </footer>    
+    </footer>
+
+    <!-- NOTICE: Divs below are used for Google buttons -->
+    <div id="googleHome">
+        <div id='gSigninBut' class='g-signin2' data-onsuccess='onGoogleSignIn' style='position:absolute;top:-9999px;left:-9999px;'></div>
+    </div>
+
+    <!-- The following script controls menu animation on Click -->
+    <script>
+    {
+        let showMenu = false;   // Set the initial state of the menu 
+        const menuBtn = document.querySelector(".menu-btn"); 
+        const hoverWrapper = document.querySelector(".hoverWrapper"); 
+        
+        menuBtn.addEventListener("click", toggleMenu); 
     
+        function toggleMenu() { 
+            if (!showMenu) { 
+                menuBtn.classList.add("close"); 
+                hoverWrapper.classList.add("show"); 
+                showMenu = true; 
+            } else { 
+                menuBtn.classList.remove("close"); 
+                hoverWrapper.classList.remove("show"); 
+                showMenu = false; 
+            } 
+        } 
+    }
+    </script> 
     <script>
         function initGoogle(){
             const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
@@ -269,12 +242,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
     <script src="./public/js/signInUpModal.js"></script>
-    
-    
-
-
- 
-
 </body>
 
 </html>
