@@ -10,7 +10,6 @@ function onGoogleSignIn(googleUser) {
         if(signIn === true) attriValue = false;
         if(signUp === true) attriValue = true;
         var profile = googleUser.getBasicProfile();
-        // console.log("signIN",profile.getName());
         gRequestUserInfo(googleUser,attriValue);
     }
 
@@ -19,17 +18,14 @@ function onGoogleSignIn(googleUser) {
 
 // Sign out the user
 function googleSignOut() {
-    // console.log(gapi);
     var auth2;
     if(gapi){
         gapi.auth2.init();
         auth2 = gapi.auth2.getAuthInstance();
-        // console.log(auth2);
     }
     if(auth2){
         if(auth2.isSignedIn.get() == true){
             auth2.signOut().then(function () {
-                // console.log("disconnected");
             });
         }
         auth2.disconnect();
@@ -43,7 +39,7 @@ function googleSignOut() {
 
 
 function onFailure(error) {
-    // console.log(error);
+
 }
 
 
@@ -58,19 +54,13 @@ function gRequestUserInfo(gUser,signUp){
         form.querySelector("#googleEmail").value = profile.getEmail();
         form.querySelector("#googlePicture").value = profile.getImageUrl();
         form.querySelector("#googleUserId").value = profile.getId();
-
-            // console.log(temp);
-            // console.log("name is :", name);
         if (signUp) {
             //TODO: Direct to user profile page?????
             form.action = "index.php?action=googleSignUp";
-            // console.log('signUp!!');
      
         } else {
             //TODO: Direct to user profile page???? or current page???
             form.action = "index.php?action=googleSignIn";
-            // console.log('signIN!!');
-    
         }
         form.submit();
     }
@@ -79,9 +69,9 @@ function gRequestUserInfo(gUser,signUp){
 function signAllOut(){
 
     //sign out from google
-    // console.log("Google logging out");
+
     googleSignOut();
-    // console.log("Kakao logging out");
+
     logoutWithKakao();
 
     const form = document.querySelector("#signOutForm");
