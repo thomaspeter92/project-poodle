@@ -12,7 +12,9 @@ const loginWithKakao = (signUp) => {
                 form.querySelector("#kakaoNickname").value = nickname;
                 form.querySelector("#kakaoEmail").value = email;
                 form.querySelector("#kakaoid").value = id;
-                form.querySelector("#kakaoThumbnailURL").value = thumbnailURL;
+                if (thumbnailURL) {
+                    form.querySelector("#kakaoThumbnailURL").value = thumbnailURL;
+                }
                 (signUp) ? 
                     form.querySelector("#kakaoSignUp").value = true :
                     form.querySelector("#kakaoSignUp").value = false;

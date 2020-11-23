@@ -30,7 +30,7 @@ class MemberManager extends Manager{
     public function getMemberDataByEmail($email) {
         $email = htmlspecialchars($email);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, kakao, google FROM member WHERE email=:email";
+        $query = "SELECT id, name, kakao, google, profileImage FROM member WHERE email=:email";
         $response = $db->prepare($query);
         $response->bindParam('email', $email, PDO::PARAM_STR);
         $response->execute();
@@ -42,7 +42,7 @@ class MemberManager extends Manager{
     public function getMemberDataByID($id) {
         $id = htmlspecialchars($id);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, password, email, kakao, google FROM member WHERE id=:id";
+        $query = "SELECT id, name, password, email, kakao, google, profileImage FROM member WHERE id=:id";
         $response = $db->prepare($query);
         $response->bindParam('id', $id, PDO::PARAM_STR);
         $response->execute();
@@ -54,14 +54,17 @@ class MemberManager extends Manager{
     function addNewMember($params) {
         $name = htmlspecialchars($params["name"]);
         $password = htmlspecialchars($params["password"]);
-        $confirmPassword = htmlspecialchars($params["confirmpass"]);
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
+        $imageURL = $params["imageURL"];
         
-        if ($password != $confirmPassword){
-            return false;
+        if (empty($kakao) AND empty($google)) {
+            $confirmPassword = htmlspecialchars($params["confirmpass"]);
+            if ($password != $confirmPassword){
+                return false;
+            }
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
@@ -70,15 +73,23 @@ class MemberManager extends Manager{
             return false;
         }
        
+        //Save the image into the server with the URL
+        $imageFileName = NULL;
+        if (isset($imageURL)) {
+            $profileDir = "./private/profile/";
+            $imageFileName = FileUtil::downloadFileFromURL($imageURL, $profileDir);
+        }
+
         $db = $this->dbConnect();
-        $query = "INSERT INTO member(name, password, email, kakao, google) 
-                                VALUES(:name, :password, :email, :kakao, :google)";
+        $query = "INSERT INTO member(name, password, email, kakao, google, profileImage) 
+                                VALUES(:name, :password, :email, :kakao, :google, :profileImage)";
         $response = $db->prepare($query);
         $response->bindValue(":name", $name, PDO::PARAM_STR);
         $response->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
         $response->bindValue(":email", $email, PDO::PARAM_STR);
         $response->bindValue(":kakao", $kakao, PDO::PARAM_INT);
         $response->bindValue(":google", $google, PDO::PARAM_INT);
+        $response->bindValue(":profileImage", $imageFileName, PDO::PARAM_STR);
         $result = $response->execute();
         $response->closeCursor();
         return $result;
