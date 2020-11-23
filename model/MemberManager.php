@@ -69,7 +69,10 @@ class MemberManager extends Manager{
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return false;
         }
-        
+        if(empty($name)){
+            return false;
+        }
+       
         //Save the image into the server with the URL
         $imageFileName = NULL;
         if (isset($imageURL)) {

@@ -40,7 +40,6 @@ body{
 .modalSubDiv{
     box-shadow: 3px 3px 3px rgb(39, 39, 39);
 
-    /* background-color: #f5b657; */
     background-image: url("../images/wallpaper.jpeg");
     border-radius: 15px;
     position: relative;

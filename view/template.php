@@ -19,6 +19,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <!-- FONT LINKS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
 
+    
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Franco -->
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
@@ -43,22 +45,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
 <body>
     <header>
         <div class="headerWrapper">
-        <?php
-        if (!isset($_SESSION['id'])) { ?>
             <div id="headerLeft">
                 <a href="index.php?action=landing"><img src="./public/images/logoHeader.png"></a>
-                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
-        <?php
-        }else{
-        ?>
-            <div id="headerLeft">
-                <a href="index.php?action=petPreview"><img src="./public/images/logoHeader.png"></a>
-                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
-            </div>
-        <?php
-        }
-        ?>
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>
@@ -100,7 +89,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                             </div>
                             <div class="signOutWrapper">
                                 <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
-                                  
                             </div> 
                         <?php
                         }
@@ -111,9 +99,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         if (!isset($_SESSION['id'])) {?>
                             <div class="userImageWrapper">
                                 <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
-                            </div>
-                            <div class="mobileSignInWrapper">
-                                <a class="mobileSignIn" id="mobileLogInLink2" href="#">Sign In</a> 
                             </div>
                         <?php 
                         } else {
@@ -243,7 +228,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                     <span class="social icon-social-youtube-large">Youtube</span>
                 </a>
             </li>
-
             <!-- Meet the team link -->
         </ul>
         <p>
@@ -278,12 +262,19 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
             Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
         }
     </script>
+    <script src="./public/js/registrationCheck.js"></script>
     <script src="./public/js/formCheck.js"></script>
     <script src="./public/js/googlelogin.js"></script>
     <script src="./public/js/kakaologin.js"></script>
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
     <script src="./public/js/signInUpModal.js"></script>
+    
+    
+
+
+ 
+
 </body>
 
 </html>

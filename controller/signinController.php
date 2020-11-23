@@ -33,7 +33,6 @@ function registration()
 
 function logout()
 {
-
     session_unset();
     session_destroy();
     header("Location: index.php");
@@ -43,6 +42,13 @@ function createSession($id, $name, $imageURL) {
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
     $_SESSION['imageURL'] = $imageURL;
+}
+function emailCheck($email){
+    $manager = new MemberManager();
+    $memberCheck = $manager->getMemberDataByEmail($email);
+    if($memberCheck){
+        echo "true";
+    }
 }
 
 function signUpWith($memberData)
@@ -55,6 +61,7 @@ function signUpWith($memberData)
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     if ($memberDataFromDB) {
+        
         signInWith($memberData);
         
         //TODO: Show the user is already signed up with kakao
@@ -71,9 +78,10 @@ function signUpWith($memberData)
         $result = $manager->addNewMember($memberData);
         if ($result) {
             signInWith($memberData);
-        } else {
-            throw new Exception("Failed to add new member!!", 1004);
-        }
+        } 
+        // else {
+        //     throw new Exception("Failed to add new member!!", 1004);
+        // }
     }
 }
 

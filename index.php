@@ -1,4 +1,3 @@
-<!-- index.php -->
 <?php
 session_start();
 require("./controller/controller.php");
@@ -41,6 +40,11 @@ try {
         case "registration":
             registration();
             break;
+        case "emailCheck":
+            if(!empty($_REQUEST['email'])){
+                emailCheck($_REQUEST['email']);
+            }
+            break;
         case "registrationInput":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
                 $memberData = array(
@@ -63,9 +67,7 @@ try {
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
-                $file = $_FILES['photo'];
-                print_r($file);
-                // petAddEdit($_REQUEST);
+                petAddEdit($_REQUEST);
             } else {
 
             }
@@ -168,18 +170,25 @@ try {
             }
             break;
         case "showEventDetail" :
-            showEventDetail($_REQUEST['eventId']);
+            showEventDetail($_REQUEST);
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
-            showEventDetail($_REQUEST['eventId']);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);
             break;
-
-        case "loadSingleComment" :
-            loadSingleComment($_REQUEST['commentId']);
+        case "editEventComment" :
+            editEventComment($_REQUEST);
+            break;
+        case 'loadComments' :
+            loadComments($_REQUEST);
+            break;
+        case "attendEvent" :
+            attendEvent($_REQUEST);
+            break;
+        case "unattendEvent" :
+            attendEvent($_REQUEST);
             break;
 
         case "addEditEvent" :
