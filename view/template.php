@@ -43,22 +43,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
 <body>
     <header>
         <div class="headerWrapper">
-        <?php
-        if (!isset($_SESSION['id'])) { ?>
             <div id="headerLeft">
                 <a href="index.php?action=landing"><img src="./public/images/logoHeader.png"></a>
-                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
             </div>
-        <?php
-        }else{
-        ?>
-            <div id="headerLeft">
-                <a href="index.php?action=petPreview"><img src="./public/images/logoHeader.png"></a>
-                <!-- <img src="./public/images/dogLogo.png" alt="LOGO" height="40" width="40"> -->
-            </div>
-        <?php
-        }
-        ?>
             <div id="middleHeader">
   <!-- TO DO: ADD PAWPRINT ANIMATION FOR DESKTOP  -->
             </div>
