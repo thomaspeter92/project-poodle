@@ -117,7 +117,7 @@ p {
 </style>
 
 
-<form action="index.php" method="GET" id="addPetForm"  autocomplete="off" enctype="multipart/form-data">
+<form action="index.php" id="addPetForm"  autocomplete="off" enctype="multipart/form-data">
     <div>
         <p>
             <label for="name">*Name:</label><br>
@@ -165,6 +165,7 @@ p {
         <p>
             <input type="hidden" name="ownerId" value="<?= $_SESSION['id']; ?>">
             <input type="hidden" id="petId" name="petId" value="<?= isset($petId) ? $petId : null ;?>">
+            <input type="hidden" name="action" id="action" value="addEditPet">
         </p>
     </div>
 </form>

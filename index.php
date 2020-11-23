@@ -1,6 +1,8 @@
 <?php
 session_start();
 require("./controller/controller.php");
+// require("./controller/accountController.php");
+
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
 
@@ -65,9 +67,7 @@ try {
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
-                $file = $_FILES['photo'];
-                print_r($file);
-                // petAddEdit($_REQUEST);
+                petAddEdit($_REQUEST);
             } else {
 
             }
@@ -117,6 +117,7 @@ try {
             } else {
                 throw new Exception("Kakao Sign Up is failed", 1000);
             }
+            break;
         case "googleSignIn":
             $email = isset($_REQUEST['googleEmail']) ? $_REQUEST['googleEmail'] : NULL;
             $name = isset($_REQUEST['googleName']) ? $_REQUEST['googleName'] : NULL;
@@ -146,24 +147,57 @@ try {
             );
             signUpWith($memberData);
             break;
+        case "events":
+            showUpcomingEventsList();
+            break;
+        case "searchEvents";
+            $search = isset($_REQUEST["search"]) ? $_REQUEST["search"] : NULL;
+            $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
+            showSearchedEventsList($search, $option);
+            break;
+        case "accountView":
+            if(isset($_SESSION['id'])){
+                accountView($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
+        case "removeProfilePic":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            } else {
+                removeProPic($_SESSION['id']);
+            }
+            break;
         case "showEventDetail" :
-            showEventDetail($_REQUEST['eventId']);
+            showEventDetail($_REQUEST);
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
-            showEventDetail($_REQUEST['eventId']);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);
             break;
-
-        case "loadSingleComment" :
-            loadSingleComment($_REQUEST['commentId']);
+        case "editEventComment" :
+            editEventComment($_REQUEST);
             break;
+        case 'loadComments' :
+            loadComments($_REQUEST);
+            break;
+        case "attendEvent" :
+            attendEvent($_REQUEST);
+            break;
+        case "unattendEvent" :
+            attendEvent($_REQUEST);
+            break;
+
+        case "addEditEvent" :
+            addEditEvent();
+            break;
+            
         default:
             landing();
             break;
-
     }
 } catch (Exception $e) {
 

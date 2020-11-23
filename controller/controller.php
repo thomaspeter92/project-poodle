@@ -1,9 +1,13 @@
 <?php
 // This is for Controller functions.
+require_once("./util/FileUtil.php");
 require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
 require_once("./controller/signinController.php");
 require_once("./model/EventManager.php");
+require_once("./controller/signinController.php");
+require_once("./controller/eventsController.php");
+require_once("./controller/accountController.php");
 
 function landing()
 {
@@ -31,35 +35,20 @@ function displayAddEditInput($petId) {
 
 function petAddEdit($params) {
     $addEditManager = new PetProfileManager();
-    $addEditManager->addEditPet($params);
+    $success = $addEditManager->addEditPet($params);
+
+    // TO DO ADD ERROR MESSAGING 
+    if($success) {
+        echo 'success';
+    } else {
+        echo 'error';
+    }
 }
+
 
 function deletePet($petId) {
     $deleteManager = new PetProfileManager();
     $deleteManager->deletePet($petId);
-}
-
-function showEventDetail($eventId) {
-    $showEvent = new EventManager();
-    $event = $showEvent->getEventDetail($eventId);
-    $comments = $showEvent->loadComments($eventId);
-    require("./view/eventDetailedView.php");
-}
-
-function eventCommentPost($params) {
-    $commentPost = new EventManager();
-    $commentPost->commentPost($params);
-}
-
-function deleteEventComment($commentId) {
-    $deleteComment = new EventManager();
-    $deleteComment->commentDelete($commentId);
-}
-
-function loadSingleComment($commentId) {
-    $loadComment = new EventManager();
-    $comment = $loadComment->loadSingleComment($commentId);
-    require("./view/editEventCommentView.php");
 }
 
 function aboutUs(){
@@ -73,6 +62,17 @@ function showPartnersPage() {
 function contactPage(){
     require('./view/contactPageView.php');
 }
+
+function accountView($userID){
+    $manager = new MemberManager();
+    $memberDataFromDB = $manager->getMemberDataByID($userID);
+    require("./view/accountView.php");
+};
 function legalPage(){
     require('./view/legalPageView.php');
 }
+function addEditEvent(){
+    require('./view/addEditEventView.php');
+}
+
+

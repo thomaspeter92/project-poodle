@@ -53,9 +53,10 @@
 
     .hostPhoto {
         height: 50px;        
-        margin-right: 20px;
+        margin: 10px 20px 0 20px;
         clip-path: circle(50% at 50% 50%);
     }
+
 
     .eventDetailMainContent {
         display: flex;
@@ -106,6 +107,8 @@
 
     #guestList {
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .guestListItem {
@@ -114,8 +117,26 @@
         background-color: white;
         border-radius: 10px;
         margin: 5px 5px 0 0;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
     }
+
+    .guestListItem p{
+        color: #ff3864;
+        font-size: .8em;
+        font-weight: 600;
+    }
+
+    .guestListItem span {
+        color: grey;
+        font-weight: 500;
+        font-size: .7em;
+    }
+    
+
 
     #commentForm {
         margin-top: 50px;
@@ -208,21 +229,148 @@
         text-align: center;
     }
 
+    .attending {
+        background-color: #ff3864;
+    }
+
+    #eventFullButton {
+        background-color: lightgray;
+    }
+
+    #loadButtons {
+        display: flex;
+        justify-content: center;
+    }
+
+    #loadbuttons p {
+        margin: 10px;
+        font-size: .8em;
+    }
+
+    #showLess {
+        display: none;
+    }
+
+    /* CHANGES TO THE MODAL CSS */
+
+    .modalMainDiv{
+    z-index: 30;
+    position: relative;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+}
+
+.modalSubDiv{
+    background-image: none;
+    background-color: rgb(245, 245, 245);
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.modalDivContent {
+    margin: 0;
+    height: auto;
+    width: 90%;
+}
+
+.modalDivButtons{
+    position: initial;
+    height: auto;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modalDivButtons button{
+    margin: 0;
+    width: auto;
+    height: 50px;
+    margin-bottom: 0;
+    background-color: #72ddf7;
+	border-radius:42px;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:17px;
+	padding:13px 76px;
+    border-style: none;
+    /* box-shadow: 5px 10px 18px #acacac; */
+    text-align: center;
+}
+
+.modalButtonClose {
+    border: none;
+    background-color: transparent;
+    color: #ff3864;
+}
+
+.modalButton:hover {
+    background-color:#ff3864;
+}
+.modalButton:focus {
+    outline: none;
+}
+
+    #editInput {
+        width: 100%;
+        height: auto;
+        border: none;
+        resize: none;
+        border-radius: 50px;
+        padding: 20px;
+        margin: 35px 0 35px 0;
+    }
+
+    #editInput {
+        outline: none;
+    }
+
+
 </style>
 
 <?php $style = ob_get_contents();?>
 <?php ob_start();?>
+
+<?php   
+
+//CHECK IF CURRENT LOGGED IN USER IS ATTENDING THIS EVENT. 
+    foreach($guestList as $guest) {
+        if ($guest['guestId'] === $_SESSION['id']) {
+            $attending = true;
+            break;
+        } else {
+            $attending = false;
+        }
+    }
+?>
 
 <div id="wrapper">
 
     <div class=eventDetail>
         <div class="eventDetailHeader">
             <div id="eventHeaderContent">
-                <p><?= $event['dateCreate']; ?></p>
+                <p><?= $event['eventDate']; ?></p>
                 <h3><?= $event['name']; ?></h3>
                 <div id="headerContentExtra">
-                    <p><img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
-                    <button id="attendButton" class="submit">ATTEND</button>
+                    <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
+
+            
+                <?php 
+                //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
+                if ($guestCount >= $event['guestLimit'] && $attending == false) { ?> 
+                        <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php
+                    } else { ?>
+                        <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
+                   <?php } ?>
+
                 </div>
             </div>
         </div>
@@ -232,146 +380,106 @@
                 <img class="eventImage" src="./public/images/eventImages/eventImage<?= $event['picture']; ?>.jpg" />
                 <?= $event['description']; ?>
                 
-                <form action="index.php?action=eventCommentPost" method="POST" id="commentForm">
+                <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>
                     <div id="formContent">
-                        <img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$event['hostId'];?>.jpg"></img>
+                        <img class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
                         <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                         <textarea name="comment" id="comment" rows="1" placeholder="Leave a comment..."></textarea>
+                        <input type="hidden" name="action" value="eventCommentPost">
                         <button type="submit" class="submit">POST</button>
                     </div>
                 </form>
                 <div id="commentArea">
 
-                <?php foreach($comments as $comment):?>
-                    <div class="commentChunk">
-                        <p>
-                            <span>
-                                <img class="hostPhoto" src="./public/images/eventImages/hostPhoto<?=$comment['userId'];?>.jpg"></img><?=$comment['author'];?>
-                            </span>
-                            <span>
-                                <?=$comment['dateCreation'];?>
-                                <?php if ($comment['userId'] === $_SESSION['id']) { ?>
-                                <i class="fas fa-edit editComment" data-commentId="<?=$comment['commentId']; ?>"></i><i class="fas fa-trash-alt deleteComment" data-commentId="<?=$comment['commentId']; ?>"></i> <?php }; ?>
-                            </span>
-                        </p>
-                        <p><?=$comment['comment'];?></p>
-                    </div>
-                    <?php endforeach;?>
+                <?php include("eventCommentsView.php") ?>
 
                 </div>
+                <div id="loadButtons">
+                    <p id="loadMore">Show More <i class="fas fa-caret-down"></i></p>
+                    <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
+                </div>
+
             </section>
             <aside class="eventDetailSideContent">
                 <div id="eventInfo">
                     <div class="eventInfoChunk">
                         <i class="far fa-clock"></i> 
-                        <p><?= $event['dateCreate'];?></p>
+                        <p><?= $event['eventDate'];?></p>
                     </div>
                     <div class="eventInfoChunk">
                         <i class="fas fa-map-marker-alt"></i>
                         <p><?=$event['location']; ?></p>
                     </div>
+                    <div class="eventInfoChunk">
+                        <i class="fas fa-users"></i>
+                        <p>Guest Limit: <?=$event['guestLimit'] == 0 ? 'none' : $event['guestLimit']; ?></p>     
+                    </div>
                 </div>
                 <div id="map"><img src="./public/images/googleMapPreview.png" alt=""></div>
+                <h5>Guest List (<?= $guestCount ?>)</h5>
                 <div id="guestList">
-                    <h5>Guest List:</h5>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
-                    <div class="guestListItem">Guest</div>
+                    <?php foreach($guestList as $guest): ?>
+                    <div class="guestListItem">
+                        <img class="hostPhoto" src="./private/profile/<?=$guest['image'];?>"></img>
+                        <p><?= $guest['guestName'] ?><br><span>
+                        <?= $guest['guestId'] === $event['hostId'] ? '<strong>HOST</strong>' : 'Guest'; ?></span></p>
+                    </div>
+                    <?php endforeach;?>
                 </div>
+                
             </aside>
         </div>
+
         <div id="eventPreviews">
-            <div class="eventPreviewItem">Preview of other event here!</div>
-            <div class="eventPreviewItem">Preview of other event here!</div>
-            <div class="eventPreviewItem">Preview of other event here!</div>
-            <div class="eventPreviewItem">Preview of other event here!</div>
+        <?php foreach($eventList as $list): ?>
+
+            <div class="eventPreviewItem">
+                <p><?= $list->eventDate ?> </p>
+                <p><?=$list->name;?></p>
+                <p><?= $list->location; ?> </p>
+            </div>
+            
+        <?php endforeach;?>
+
         </div>
-        <!-- <div id=box>
-            <div class=insideBox>
-                <div id=circle></div>
-                <button>EVENTS</button>
-            </div>
-            <div class=insideBox>
-                <article id=boxArticle>
-                    <p>Toffee ∞</p>
-                    <p>Breed: Color: Age: Weight:</p>
-                </article>
-                <div class="starRating">
-                    <p>Friendliness:</p>
-                </div>
-                <div class="starRating">
-                    <p>Activity Level:</p>
-                </div>
-                <hr>
-                <p>"Lovely dog but needs lots of love and attention"</p>
-            </div>
-        </div> -->
     </div>
 </div>
 
 <script src="./public/js/Modal.js"></script>
 
 <script>
-
+{
+//FUNCTION TO SUBMIT COMMENTS TO THE DB
     let commentForm = document.querySelector('#commentForm');
     commentForm.addEventListener('submit', function(e) {
         e.preventDefault();
-
         let commentBox = document.querySelector('#comment');
         if(commentBox.value.length >= 3) {
             let xhr = new XMLHttpRequest();
             let params = new FormData(commentForm);
-            xhr.open("POST", "index.php?action=eventCommentPost");
-            xhr.send(params);
+            xhr.open("POST", "index.php");
 
-            //SHOULD I ONLY REFRESH THE COMMENTS AREA AND NOT FULL PAGE? ASK MARIE!
+            xhr.onload =  function() {
+
+                // ERROR MESSAGES HERE
+            }
+            xhr.send(params);
             location.reload();
         } else {
             commentBox.style.border = '1px solid red';
         }
     })
 
+// FUNCTION TO DELETE COMMENT FROM DB, SEND COMMENT ID AS FORM DATA. 
     let deleteCommentButton = document.querySelectorAll('.deleteComment');
     for (let i=0; i<deleteCommentButton.length; i++) {
         deleteCommentButton[i].addEventListener('click', function(e) {
             let commentId = e.target.getAttribute("data-commentId");
-            console.log(commentId)
             deleteComment(commentId);
         })
     }
-
-    let editCommentButton = document.querySelectorAll('.editComment');
-    for (let i=0; i<editCommentButton.length; i++) {
-        editCommentButton[i].addEventListener('click', function(e) {
-            let commentId = e.target.getAttribute("data-commentId");
-            console.log(commentId)
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", "index.php?action=loadSingleComment&commentId="+commentId);
-            xhr.onload = function() {
-                console.log(xhr.status)
-                if(xhr.status === 200) {
-                    let commentObj = {
-                        Update: editComment,
-                    }
-                    let editView = new Modal(xhr.responseText);
-                    editView.generate(commentObj, allowCancel=false);
-                }
-            }
-            xhr.send(null)
-        })
-    }
-
-    function editComment(commentId) {
-        
-    }
-
     function deleteComment (commentId){
         if (confirm('Are you sure you want to delete?')) { 
             let xhr = new XMLHttpRequest();
@@ -382,6 +490,119 @@
             location.reload();
         }
     }
+
+    //FUNCTION TO INSERT USER INTO GUEST LIST, USING USER ID AND EVENT ID
+    let attendButton = document.querySelector('#attendButton');
+    if (attendButton) {
+        attendButton.addEventListener('click', function() {
+            let eventId = attendButton.getAttribute("data-eventId");
+            let hostId = attendButton.getAttribute("data-hostId");
+            let guestId = attendButton.getAttribute("data-guestId");
+            let params = new FormData();
+            params.append("eventId",eventId);
+            params.append("hostId",hostId);
+            params.append("guestId",guestId);
+            if(attendButton.classList.contains('attending') && confirm('Confirm: unattend event!')) {
+                params.append("action",'unattendEvent');
+                this.textContent = "ATTEND";
+                this.classList.remove('attending');
+            } else {  
+                    params.append("action",'attendEvent');
+                    this.textContent = "ATTENDING";
+                    this.classList.add('attending');
+                }
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "index.php");
+            xhr.send(params);
+            location.reload();
+        })
+    }
+
+    //FUNCTION TO LOAD MORE/LESS COMMENTS.
+    var limit = 5;
+    let loadMore = document.querySelector('#loadMore') ;
+    loadMore.addEventListener('click', function() {
+        limit+= 5;
+        loadComments(limit);
+        showLess.style.display = 'initial';
+    })
+
+    let showLess = document.querySelector('#showLess')
+    showLess.addEventListener('click', function() {
+        limit = 5;
+        loadComments(limit);
+        showLess.style.display = 'none';
+    })
+    function loadComments(limit) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', `index.php?action=loadComments&eventId=1&limit=${limit}`);
+        xhr.onload = function () {
+            if (xhr.status == 200 ) {
+            let commentArea = document.querySelector('#commentArea');
+            commentArea.innerHTML = xhr.responseText;
+            editComments();
+            }
+        }
+        xhr.send(null);
+    }
+
+// FUNCTION/EVENT LISTENERS FOR EDITING COMMENT
+    function editComments() {
+    let editCommentButton = document.querySelectorAll('.editComment');
+    for (let i=0; i<editCommentButton.length; i++) {
+        editCommentButton[i].addEventListener('click', function(e) {
+            let commentId = e.target.getAttribute("data-commentId");
+            let comment = editCommentButton[i].parentElement.parentElement.parentElement.childNodes[3].textContent;
+            let editCommentInput = `<textarea rows="1" id="editInput">${comment}</textarea>`;
+            let editObj = {
+                    Update: function () {
+                        // editComment(commentId)
+                        let editInput = document.querySelector('#editInput')
+                        let newComment = editInput.value;
+                        if (newComment.trim().length < 3) {
+                            editInput.style.border = '1px solid red';
+                            return null;
+                        } else {
+                            let xhr = new XMLHttpRequest();
+                            let params = new FormData();
+                            params.append('action', 'editEventComment');
+                            params.append('commentId',commentId)
+                            params.append('newComment', newComment)
+                            xhr.open("POST", "index.php");
+                            xhr.onload = function () {
+                                // console.log(xhr.responseText)
+                            }
+                            xhr.send(params);
+                            location.reload();
+                        }
+                    }
+                }   
+            let editModal = new Modal(editCommentInput);
+            editModal.generate(editObj,allowCancel=false);
+        })
+    }}
+    editComments();
+}
+    // function editComment(commentId) {
+    //     let editInput = document.querySelector('#editInput')
+    //     let newComment = editInput.value;
+    //     if (newComment.trim().length < 3) {
+    //         editInput.style.border = '1px solid red';
+    //         return null;
+    //     } else {
+    //         let xhr = new XMLHttpRequest();
+    //         let params = new FormData();
+    //         params.append('action', 'editEventComment');
+    //         params.append('commentId',commentId)
+    //         params.append('newComment', newComment)
+    //         xhr.open("POST", "index.php");
+    //         xhr.onload = function () {
+    //             // console.log(xhr.responseText)
+    //         }
+    //         xhr.send(params);
+    //         location.reload();
+    //     }
+    // }
 
 
 

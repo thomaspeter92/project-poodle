@@ -1,5 +1,4 @@
 <?php
-$title = "Partners";
 $style = "<link rel='stylesheet' href='./public/css/partners.css'>";
 ob_start();
 ?>
