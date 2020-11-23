@@ -79,8 +79,6 @@ formCheck = () => {
         requiredInputs[i].addEventListener(`keyup`, function(){
             for(var j=0;j<requiredInputs.length;j++){
                 var inputLength = requiredInputs[j].value.length;
-                console.log(inputLength);
-                console.log
                 if(inputLength == 0){
                     requiredInputs[j].classList.remove(`blue`);
                     requiredInputs[j].classList.add(`red`);
