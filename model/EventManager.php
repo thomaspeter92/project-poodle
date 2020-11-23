@@ -98,14 +98,23 @@ require_once("Manager.php");
             return $event;
         }
 
-        public function loadGuests($eventId) {
+        public function loadGuests($params) {
+
+            $eventId = $params['eventId'];
+            $guestLimit = isset($params['limit']) ? $params['limit'] : 5;
+
             $db = $this->dbConnect();
-            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId");
+            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId LIMIT 0, :guestLimit");
             $req->bindParam(':eventId',$eventId, PDO::PARAM_INT);
+            $req->bindParam(':guestLimit', $guestLimit, PDO::PARAM_INT);
             $req->execute();
             $guestList = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();
             return $guestList;
+        }
+
+        public function getGuestId() {
+
         }
 
         public function commentPost($params) {
@@ -155,8 +164,11 @@ require_once("Manager.php");
                 $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId");
             }
             $req->bindParam(':guestId',$guestId,PDO::PARAM_INT);
-            $req->execute();
+            $success = $req->execute();
             $req->closeCursor();
+
+            echo !empty($success) ? 'success' : 'error';
+
         }
 
 
@@ -169,7 +181,6 @@ require_once("Manager.php");
             $req->bindParam(':commentId',$commentId,PDO::PARAM_INT);
             $req->execute();
             $req->closeCursor();
-            // echo $comment;
         }
 
 

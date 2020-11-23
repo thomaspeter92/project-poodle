@@ -1,11 +1,21 @@
 <?php ob_start();?>
-<link rel="stylesheet" href="./public/css/Modal.css"/>
 
 <style>
 
     #wrapper {
         background-color: rgb(245, 245, 245);
         width: 100vw;
+    }
+    a:link {
+        color: black;
+    }
+
+    a:visited {
+        color: black;    
+    }
+
+    a:hover {
+        text-decoration: underline;
     }
 
     .eventDetail {
@@ -14,13 +24,13 @@
         align-items: center;
         justify-content: space-between;
         width: 100vw;
-        padding-top: 100px;
         margin: auto;
         padding-bottom: 50px;
     }
 
     .eventDetailHeader {
         width: 100%;
+        padding-top: 100px;
         margin-bottom: 20px;
         background-color: white;
         border-bottom: 1px solid lightgray;
@@ -109,6 +119,7 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        /* position: relative; */
     }
 
     .guestListItem {
@@ -122,6 +133,7 @@
         justify-content: space-between;
         align-items: center;
         text-align: center;
+        position: relative;
     }
 
     .guestListItem p{
@@ -189,6 +201,7 @@
     .commentChunk > p:first-child {
         display: flex;
         justify-content: space-between;
+        position: relative;
     }
 
     .commentChunk > p:first-child .hostPhoto {
@@ -221,12 +234,23 @@
     }
 
     .eventPreviewItem {
-        width: 180px;
-        height: 120px;
-        background-color: #72ddf7;
+        width: 20%;
+        height: 150px;
+        background-color: white;
         border-radius: 10px;
-        color: white;
         text-align: center;
+    }
+
+    .eventPreviewItem p:first-child {
+        color: grey;
+        font-size: .7em;
+    }
+    .eventPreviewItem p:nth-child(2) {
+        font-weight: bold;
+    }
+
+    .eventPreviewItem p:nth-child(3) {
+        color: grey;
     }
 
     .attending {
@@ -235,6 +259,7 @@
 
     #eventFullButton {
         background-color: lightgray;
+        font-size: .7em;
     }
 
     #loadButtons {
@@ -248,6 +273,10 @@
     }
 
     #showLess {
+        display: none;
+    }
+
+    #showLessGuests {
         display: none;
     }
 
@@ -319,19 +348,35 @@
     outline: none;
 }
 
-    #editInput {
-        width: 100%;
-        height: auto;
-        border: none;
-        resize: none;
-        border-radius: 50px;
-        padding: 20px;
-        margin: 35px 0 35px 0;
-    }
+#editInput {
+    width: 100%;
+    height: auto;
+    border: none;
+    resize: none;
+    border-radius: 50px;
+    padding: 20px;
+    margin: 35px 0 35px 0;
+}
 
-    #editInput {
-        outline: none;
-    }
+#editInput {
+    outline: none;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(250, 250, 250, 0.7);
+  background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
+}
+
+#errorDisplay {
+    padding-top: 100px;
+}
+
 
 
 </style>
@@ -341,19 +386,25 @@
 
 <?php   
 
-//CHECK IF CURRENT LOGGED IN USER IS ATTENDING THIS EVENT. 
+//CHECK IF CURRENT LOGGED IN USER IS ATTENDING THIS EVENT.
+$attending = false;
+
+if ($_SESSION['id']) {
     foreach($guestList as $guest) {
+        echo $guest['guestId'];
         if ($guest['guestId'] === $_SESSION['id']) {
             $attending = true;
+            echo 'hey';
             break;
-        } else {
-            $attending = false;
         }
     }
+}
+echo ' ' . 'guest is: ' . $_SESSION['id'];
+
+//IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
+if($event) {
 ?>
-
 <div id="wrapper">
-
     <div class=eventDetail>
         <div class="eventDetailHeader">
             <div id="eventHeaderContent">
@@ -365,11 +416,15 @@
             
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
-                if ($guestCount >= $event['guestLimit'] && $attending == false) { ?> 
-                        <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php
-                    } else { ?>
-                        <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
-                   <?php } ?>
+                if (isset($_SESSION['id'])) {
+                    if ($guestCount >= $event['guestLimit'] && $attending == false) { ?> 
+                            <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php
+                        } else { ?>
+                            <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
+                    <?php }
+                } else {
+                    echo '<em>Sign in to Attend</em>';
+                }?>
 
                 </div>
             </div>
@@ -381,7 +436,10 @@
                 <?= $event['description']; ?>
                 
                 <form action="index.php" method="POST" id="commentForm">
-                    <h4>Discussion:</h4>
+                    <h4>Discussion:</h4>  <?= !isset($_SESSION['id']) ? '<em>*Sign In to Leave a Comment</em>' : '';?> 
+
+        <?php if (isset($_SESSION['id'])) {?>
+
                     <div id="formContent">
                         <img class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
@@ -390,17 +448,22 @@
                         <input type="hidden" name="action" value="eventCommentPost">
                         <button type="submit" class="submit">POST</button>
                     </div>
+
+        <?php } ?>
                 </form>
                 <div id="commentArea">
 
                 <?php include("eventCommentsView.php") ?>
 
                 </div>
-                <div id="loadButtons">
-                    <p id="loadMore">Show More <i class="fas fa-caret-down"></i></p>
-                    <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
-                </div>
-
+        <?php if (isset($_SESSION['id'])) { ?>
+                    <div id="loadButtons">
+                        <p id="loadMore">Show More <i class="fas fa-caret-down"></i></p>
+                        <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
+                    </div>
+        <?php } else { 
+                    echo '<p  style="text-align: center;"><em>Sign In to See More</em></p>' ; 
+        } ?>
             </section>
             <aside class="eventDetailSideContent">
                 <div id="eventInfo">
@@ -418,17 +481,14 @@
                     </div>
                 </div>
                 <div id="map"><img src="./public/images/googleMapPreview.png" alt=""></div>
-                <h5>Guest List (<?= $guestCount ?>)</h5>
+                <h5>Guest List (<?= $guestCount ?>)</h5><p id="guestCount" style="display: none;"><?= $guestCount ?></p>
                 <div id="guestList">
-                    <?php foreach($guestList as $guest): ?>
-                    <div class="guestListItem">
-                        <img class="hostPhoto" src="./private/profile/<?=$guest['image'];?>"></img>
-                        <p><?= $guest['guestName'] ?><br><span>
-                        <?= $guest['guestId'] === $event['hostId'] ? '<strong>HOST</strong>' : 'Guest'; ?></span></p>
-                    </div>
-                    <?php endforeach;?>
+                    <?php include("loadGuestsView.php") ?>
                 </div>
-                
+                <?php if ($guestCount > 5) { ?>
+                    <p id="loadMoreGuests" data-eventId="<?=$event['eventId']; ?>">Show more...</p>
+                    <p id="showLessGuests" data-eventId="<?=$event['eventId']; ?>">Show Less...</p>
+                <?php } ?>
             </aside>
         </div>
 
@@ -436,9 +496,9 @@
         <?php foreach($eventList as $list): ?>
 
             <div class="eventPreviewItem">
-                <p><?= $list->eventDate ?> </p>
-                <p><?=$list->name;?></p>
-                <p><?= $list->location; ?> </p>
+                <p><?= $list->eventDate ?></p>
+                <p><a href="index.php?action=showEventDetail&eventId=<?=$list->id;?>"><?=$list->name;?></a></p>
+                <p><?= $list->location; ?></p>
             </div>
             
         <?php endforeach;?>
@@ -447,7 +507,14 @@
     </div>
 </div>
 
-<script src="./public/js/Modal.js"></script>
+<!-- ERROR IF USER SEARCHES FOR AN INVALID EVENT!  -->
+<?php } else { ?>
+
+        <h3 id="errorDisplay">SORRY, EVENT NOT FOUND. PLEASE TRY AGAIN.</h3>
+
+<?php    } ?>
+        
+<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 {
@@ -513,8 +580,14 @@
                 }
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "index.php");
+            xhr.onload = function() {
+                if (xhr.responseText.trim() == 'success') {
+                    location.reload();
+                } else {
+                    alert('Oops, something went wrong. Please try again.')
+                }
+            }
             xhr.send(params);
-            location.reload();
         })
     }
 
@@ -534,8 +607,9 @@
         showLess.style.display = 'none';
     })
     function loadComments(limit) {
+        let eventId = attendButton.getAttribute("data-eventId");
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', `index.php?action=loadComments&eventId=1&limit=${limit}`);
+        xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
         xhr.onload = function () {
             if (xhr.status == 200 ) {
             let commentArea = document.querySelector('#commentArea');
@@ -546,6 +620,41 @@
         xhr.send(null);
     }
 
+// FUNCTION TO LOAD MORE GUEST LIST ITEMS.
+
+    var guestCount = document.querySelector('#guestCount');
+    var guestCounter = 5;
+    var loadMoreGuests = document.querySelector('#loadMoreGuests');
+
+    if (guestCount.textContent > 5) {
+        var eventId = loadMoreGuests.getAttribute("data-eventId");
+        loadMoreGuests.addEventListener('click', function() {
+            guestCounter+= 5;
+            loadGuests(guestCounter, eventId);
+            showLessGuests.style.display = 'initial';
+            console.log(guestCounter)
+        })
+        var showLessGuests = document.querySelector('#showLessGuests')
+        showLessGuests.addEventListener('click', function() {
+            guestCounter = 5;
+            loadGuests(guestCounter, eventId);
+            showLessGuests.style.display = 'none';
+        })
+    }
+
+    function loadGuests(guestCounter, eventId) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', `index.php?action=loadGuests&eventId=${eventId}&limit=${guestCounter}`);
+        xhr.onload = function () {
+            if (xhr.status == 200 ) {
+                let guestList = document.querySelector('#guestList');
+                guestList.innerHTML = xhr.responseText;
+                console.log(xhr.responseText)
+            }
+        }
+        xhr.send(null);
+    }
+    
 // FUNCTION/EVENT LISTENERS FOR EDITING COMMENT
     function editComments() {
     let editCommentButton = document.querySelectorAll('.editComment');
@@ -556,7 +665,6 @@
             let editCommentInput = `<textarea rows="1" id="editInput">${comment}</textarea>`;
             let editObj = {
                     Update: function () {
-                        // editComment(commentId)
                         let editInput = document.querySelector('#editInput')
                         let newComment = editInput.value;
                         if (newComment.trim().length < 3) {
@@ -583,27 +691,6 @@
     }}
     editComments();
 }
-    // function editComment(commentId) {
-    //     let editInput = document.querySelector('#editInput')
-    //     let newComment = editInput.value;
-    //     if (newComment.trim().length < 3) {
-    //         editInput.style.border = '1px solid red';
-    //         return null;
-    //     } else {
-    //         let xhr = new XMLHttpRequest();
-    //         let params = new FormData();
-    //         params.append('action', 'editEventComment');
-    //         params.append('commentId',commentId)
-    //         params.append('newComment', newComment)
-    //         xhr.open("POST", "index.php");
-    //         xhr.onload = function () {
-    //             // console.log(xhr.responseText)
-    //         }
-    //         xhr.send(params);
-    //         location.reload();
-    //     }
-    // }
-
 
 
 </script>

@@ -2,8 +2,8 @@
 ob_start();
 ?>
 <link rel="stylesheet" href="./public/css/landing.css">
-<!-- ************** CAROUSEL AREA ************* -->
 
+<!-- ************** CAROUSEL AREA ************* -->
 <div id="carousel">
     <img src="./public/images/dogCarousel4.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">

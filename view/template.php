@@ -16,8 +16,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <link rel="stylesheet" href="./public/css/Modal.css"/>
     <link rel="stylesheet" href="./public/css/login.css"/>
     <link rel="stylesheet" href="./public/css/form.css"/>
+
     <!-- FONT LINKS -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
+   
 
     
 

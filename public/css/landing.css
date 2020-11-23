@@ -1,9 +1,6 @@
 body {
-    font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
-    
 }
-
 
 /*********FOR THE CAROUSEL *********/
 #carousel {
@@ -566,6 +563,9 @@ body {
         background-image: url(../images/portraitDog5.jpg);
         background-size: cover;
     } */
+    .mobileCarousel{ 
+        display: initial;
+    }
 
     #carouselTextBox {
         display: none;
@@ -587,7 +587,7 @@ body {
     }
 
     .content5div p {
-        font-size: .5em;
+        font-size: 1em;
     }
 
     .content5div:nth-of-type(3) {
@@ -595,9 +595,20 @@ body {
         background-size: cover;    
     }
 
+    .content5div:nth-of-type(3) h5, .content5div:nth-of-type(3) p{
+        color: white;
+        font-weight: bold;
+    }
+
     .content5div:nth-of-type(7) {
         background-image: url(../images/dogWalk3.jpg);
         background-size: cover;    
+
+    }
+    .content5div:nth-of-type(7) h5, .content5div:nth-of-type(7) p{
+        color: white;
+        font-weight: bold;
+
     }
 
 
