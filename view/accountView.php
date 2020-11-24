@@ -168,6 +168,7 @@
     </div>
     <br>
     <div id="profilePicRemoved" hidden>You have removed your profile picture.<br></div>
+    <div id="notAnImage" hidden>File type must be .jpg or .png.<br></div>
     <div>First Name:</div>
     <input type="text" name="nameInput" id="nameInput" class="required" value="<?=$memberDataFromDB['name'] ?>">
     <br>

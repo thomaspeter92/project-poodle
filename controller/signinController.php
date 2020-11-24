@@ -109,8 +109,9 @@ function signInWith($memberData) {
                 $sessionImageURL = $memberData["imageURL"];
             }
         }
+        echo $sessionImageURL;
         createSession($sessionID, $sessionName, $sessionImageURL);
-        header("Location: index.php?action=petPreview");
+        // header("Location: index.php?action=petPreview");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
        

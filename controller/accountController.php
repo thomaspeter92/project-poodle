@@ -51,18 +51,21 @@ function checkChangeAccount($inputs, $image, $userID){
         $profileImageNameUnique = time().'_'.$profileImageNameNoSpace;
         $target = './private/profile/'.$profileImageNameUnique;
 
-        if (move_uploaded_file($image['file']['tmp_name'], $target)) {
-            $result = $manager->changeProfilePic($profileImageNameUnique, $userID);
-            if ($result) {
-                $_SESSION['imageURL'] = './private/profile/'.$profileImageNameUnique;
-                $result="success";
-            } else {
-                $result="failed";
-            }
+        if ($image['file']['type'] !== 'image/jpeg' OR  $image['file']['type'] !== 'image/png') {
+            $result="imageTypeFail";
         } else {
-            $result = "failed";
-        };
-
+            if (move_uploaded_file($image['file']['tmp_name'], $target)) {
+                $result = $manager->changeProfilePic($profileImageNameUnique, $userID);
+                if ($result) {
+                    $_SESSION['imageURL'] = './private/profile/'.$profileImageNameUnique;
+                    $result="success";
+                } else {
+                    $result="failed";
+                }
+            } else {
+                $result = "failed";
+            };
+        }
     };
 
     return $result;

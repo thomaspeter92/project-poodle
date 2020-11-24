@@ -367,13 +367,20 @@
             if (xhr.status === 200) {
                 response = xhr.responseText;
                 console.log(response);
-                accountEmpty = document.querySelector("#accountEmpty");
+                let accountEmpty = document.querySelector("#accountEmpty");
+                let notAnImage = document.querySelector('#notAnImage');
+
                 if (response.trim() == "emptyField") {
                     accountEmpty.removeAttribute("hidden");
+                    notAnImage.setAttribute("hidden", true);
                 }
                 if (response.trim() == "success") {
                     // turn reload off for testing
                     location.reload();
+                } 
+                if (response.trim() == 'imageTypeFail') {
+                    accountEmpty.setAttribute("hidden", true);
+                    notAnImage.removeAttribute("hidden");
                 }
 
             }
@@ -404,10 +411,11 @@
                     // Image Divs
                     let dropdownContent = document.querySelector('.dropdownContent')
                     let modalWindow = document.querySelector('.modalSubDiv');
-                    let imagePreview = document.querySelector('.imagePreview')
-                    let profilePicManage = document.querySelector('.profilePicManage')
+                    let imagePreview = document.querySelector('.imagePreview');
+                    let profilePicManage = document.querySelector('.profilePicManage');
                     let profilePic = document.querySelector('.profilePic');
-                    let profilePicRemoved = document.querySelector('#profilePicRemoved')
+                    let profilePicRemoved = document.querySelector('#profilePicRemoved');
+                    let notAnImage = document.querySelector('#notAnImage');
 
 
 
