@@ -46,7 +46,7 @@ function emailCheck($email){
     $manager = new MemberManager();
     $memberCheck = $manager->getMemberDataByEmail($email);
     if($memberCheck){
-        // echo "true";
+        echo "true";
     }
 }
 
