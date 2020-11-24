@@ -42,6 +42,7 @@ function createSession($id, $name, $imageURL) {
     $_SESSION['name'] = $name;
     $_SESSION['imageURL'] = $imageURL;
 }
+
 function emailCheck($email){
     $manager = new MemberManager();
     $memberCheck = $manager->getMemberDataByEmail($email);

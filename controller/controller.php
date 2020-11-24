@@ -28,6 +28,9 @@ function showPetPreview($ownerId){
     $manager = new MemberManager();
     // NEW CODE TO SHOw OWNER PROFILE PIC
     $profilePicURL = $manager->getProfilePic($ownerId);
+    //shows owners events
+    $loadUserEvents = new EventManager();
+    $usersEvents = $loadUserEvents->ownersEvents($ownerId);
     require("./view/previewPet.php");
 }
 
@@ -48,7 +51,6 @@ function petAddEdit($params) {
         echo 'error';
     }
 }
-
 
 function deletePet($petId) {
     $deleteManager = new PetProfileManager();
