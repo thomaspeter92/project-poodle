@@ -1,6 +1,7 @@
-<link rel="stylesheet" href="../public/css/Modal.css"/>
+
+<link rel="stylesheet" href="./public/css/Modal.css"/>
+<?php ob_start();?> 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
     #map{
         border: 2px solid black;
         border-radius: 10px;
@@ -62,7 +63,7 @@
     }
 </style>
 
-<?php ob_start();?>
+
 <div id="mapContainer">
     <div id="map"></div>
     <div id="calculateDistance">Calculate Distance<div id="distanceDiv"></div></div>
@@ -73,8 +74,18 @@
         
     </div>
 </div>
-<!-- <p><em>마커를 클릭해주세요!</em></p>  -->
-<script src="../public/js/Modal.js"></script>
+
+<!-- <p><em>마커를 클릭해주세요!</em></p> 
+
+function dynamicallyLoadScript(url) {
+    var script = document.createElement("script");  // create a script DOM node
+    script.src = url;  // set its src to the provided URL
+
+    document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+}
+
+ -->
+<script src="./public/js/Modal.js"></script>
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <!-- GEOCODER lat lon from address -->
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
@@ -82,6 +93,19 @@
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2">
 </script>
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=LIBRARY"></script> -->
+
+
+
+
+
+
+<!--****************************************************************************************************************************************************************************************************************************************************** -->
+<!--****************************************************************************************************************************************************************************************************************************************************** -->
+<!--****************************************************************************************************************************************************************************************************************************************************** -->
+
+
+
+
 
 <script>
     var stopByCounter = 1;
@@ -101,11 +125,7 @@
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 
-    
-    
-   
-
-    //클릭이벤트를 생성합니다 
+    //Stop by points
     var markerClickArray = Array();
     var markerInfo = "Stop by point";
     var startEndHandler = function startEnd(mouseEvent){
@@ -141,253 +161,6 @@
     }
 
     kakao.maps.event.addListener(map, 'click', startEndHandler);
-
-    
-        // 마커 위치를 클릭한 위치로 옮깁니다
-        // marker.setPosition(latlng);
-    
-    
-    
-
-
-
-    
-
-
-
-
-    
-    // 마커를 표시할 위치입니다 
-    // var position =  new kakao.maps.LatLng(33.450701, 126.570667);
-
-    // for(let i=0; i<locationData.length; i++){
-        
-    //     var geocoder = new kakao.maps.services.Geocoder();
-
-    //     // 주소로 좌표를 검색합니다
-    //     geocoder.addressSearch(locationData[i][0], function(result, status) {
-    //     // 정상적으로 검색이 완료됐으면 
-    //         if (status === kakao.maps.services.Status.OK) {
-    //             console.log("Adderess search worked!")
-    //             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-    //             console.log(coords);
-    //         } else{
-    //             // alert("We could not find the address you provided");
-    //         }
-    //     })
-    //     console.log(coords);
-    //     var marker = new kakao.maps.Marker({
-    //         position: coords,
-    //         map: map,
-    //         clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    //     });
-
-    //     var windowText = document.createElement("div");
-    //     windowText.innerHTML = '<div class="destination">(Destination '+(i+1)+' )</div>'+locationData[i][1];
-        
-    //     var infowindow = new kakao.maps.InfoWindow({
-    //         content : windowText,
-    //     });
-
-    //     infowindow.open(map, marker);  
-        
-
-    // }
-    
-    //setting up a bound for zoom in and zoom out of the map
-    // var points = [];
-    // for(let i=0; i<locationData.length; i++){
-        // var geocoder = new kakao.maps.services.Geocoder();
-        // geocoder.addressSearch(locationData[i][0], function(result, status) {
-        //     // 정상적으로 검색이 완료됐으면 
-        //     if (status === kakao.maps.services.Status.OK) {
-
-        //         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        //         points.push(coords);
-        //     } else{
-        //         // alert("We could not find the address you provided");
-        //     }
-        // })
-        
-    // }
-
-    // console.log(points);
-    // var bounds = new kakao.maps.LatLngBounds();
-    // for (let i = 0; i < points.length; i++) {
-    //     bounds.extend(points[i]);
-    // }
-    // console.log(bounds);
-    // map.setBounds(bounds);
-
-    // console.log(marker.getPosition());
-
-    // var titles = document.querySelectorAll(".infoWindow");
-    // var titleTexts = document.querySelectorAll(".infoText");
-    
-    // //Modal window for information on the location
-    // for(let i=0; i<titles.length; i++){
-    //     titles[i].addEventListener('click', function(e){
-    //         // e.target.style.height = "200px";
-    //         // for(let i=0; i<titleTexts.length; i++){
-    //         //     titleTexts[i].innerHTML = "";
-    //         // }
-    //         let modalPetObj = { }
-    //         let petView = new Modal(locationData[i][2]);
-    //         petView.generate(modalPetObj, allowCancel=false);
-    //         // titleTexts[i].innerHTML = '<div class="infoTextContents">'+locationData[i][3]+'</div>'
-    //     });
-    // }
-
-
-    /**
-     * New start
-     */
-    // var counter = 1;
-    
-    
-    
-    // functions parts
-    /**
-     * callback function for geoCoder
-     */
-    // var getCoords = function (result, status) {
-    //         // 정상적으로 검색이 완료됐으면 
-    //         if (status === kakao.maps.services.Status.OK) {
-    //             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-    //             // points.push(coords);
-    //     // console.log(points);
-    //     // createMarkersPoints(points);
-    //     var marker = new kakao.maps.Marker({
-    //             position: coords,
-    //             map: map,
-    //             clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    //         });
-    //     var infowindow = new kakao.maps.InfoWindow({
-    //                         content :"<"+(1)+">"+ locationData[1][2],
-    //                     });
-    //     console.log("count");
-    //     infowindow.open(map, marker);  
-        
-    //     bounds.extend(coords);
-    //     map.setBounds(bounds);
-    //             // points.push(coords);
-    //         } else{
-    //             // alert("We could not find the address you provided");
-    //         }
-    // };
-
-    // // traitement after addressSearch exec
-    // var points= Array();
-    // function useMyCoords(coords) {
-    //     // points.push(coords);
-    //     // console.log(points);
-    //     // createMarkersPoints(points);
-    //     var marker = new kakao.maps.Marker({
-    //             position: coords,
-    //             map: map,
-    //             clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    //         });
-    //     var infowindow = new kakao.maps.InfoWindow({
-    //                         content :"<"+(i+1)+">"+ locationData[i][2],
-    //                     });
-    //     console.log("count");
-    //     infowindow.open(map, marker);  
-    //     bounds.extend(coords);
-    //     map.setBounds(bounds);
-        
-    // }
-    // function createMarkersPoints(points) {
-        
-    //     for(let i=0; i<points.length; i++){
-    //         var marker = new kakao.maps.Marker({
-    //             position: coords,
-    //             map: map,
-    //             clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    //         });
-    //         var infowindow = new kakao.maps.InfoWindow({
-    //                             content :"<"+(i+1)+">"+ locationData[i][2],
-    //                         });
-    //         console.log("count");
-    //         infowindow.open(map, marker);  
-    //         bounds.extend(coords);
-    //     }
-    // }
-    
-    // for (let i = 0; i < points.length; i++) {
-        
-    // }
-    // console.log(bounds);
-    // map.setBounds(bounds);
-
-
-
-
-
-
-
-    // var geocoder = new kakao.maps.services.Geocoder();
-    // var counter = 1;
-    // var titles;
-    // for(let i=0; i<locationData.length; i++){
-    //     var vendor = document.createElement("div");
-    //     vendor.className="vendorElement";
-    //     vendor.textContent = "* "+locationData[i][0];
-    //     vendorList.appendChild(vendor);
-    //     var vendorArray = document.getElementsByClassName("vendorElement");
-    //     //console.log(vendorArray);
-    //     vendorArray[i].addEventListener('click', function(){
-    //         console.log("count-2");
-    //         geocoder.addressSearch(locationData[i][1], function (result, status) {
-    //             // 정상적으로 검색이 완료됐으면 
-    //             if (status === kakao.maps.services.Status.OK) {
-    //                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-    //                 // points.push(coords);
-    //                 // console.log(points);
-    //                 // createMarkersPoints(points);
-    //                 var marker = new kakao.maps.Marker({
-    //                         position: coords,
-    //                         map: map,
-    //                         clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    //                     });
-    //                 var infowindow = new kakao.maps.InfoWindow({
-    //                                     content :"<"+counter+">"+ locationData[i][2],
-    //                                 });
-    //                                 counter++
-    //                 console.log("count");
-    //                 infowindow.open(map, marker);  
-    //                 bounds.extend(coords);
-    //                 map.setBounds(bounds);
-
-
-
-    //                 // titleTexts = document.getElementsByClassName("infoText");
-    //                 //Modal window for information on the location
-    //                 titles = document.getElementsByClassName("infoWindow");
-    //                 console.log(titles);
-    //                 console.log("outside", titles[0]);
-    //                 for(let i=0; i<titles.length; i++){
-    //                     console.log('clickable');
-                        
-    //                     console.log(titles[i]);
-    //                     titles[i].addEventListener('click', function(e){
-    //                         // e.target.style.height = "200px";
-    //                         // for(let i=0; i<titleTexts.length; i++){
-    //                         //     titleTexts[i].innerHTML = "";
-    //                         // }
-    //                         let modalMapObj = { }
-    //                         let infoView = new Modal(locationData[i][3]);
-    //                         infoView.generate(modalMapObj, allowCancel=false);
-    //                         // titleTexts[i].innerHTML = '<div class="infoTextContents">'+locationData[i][3]+'</div>'
-    //                     });
-    //                 }
-    //                         // points.push(coords);
-    //             } else{
-    //                 // alert("We could not find the address you provided");
-    //             }
-    //         });  
-    //     })  
-    // }
-
 
     function getLatLonFromAddress(location) {
         var geocoder = new kakao.maps.services.Geocoder();
@@ -443,23 +216,38 @@
             }
         });
     }
+    
 
-    //creation of the maps
-    var locationData = [
-        ['더블유코딩','서울 용산구 한강대로40길 39-13 1층', '<div class="infoWindow" style="padding:5px;">Wcoding: <div class="infoText"></div> </div>','<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+'where Pet Venture was born!<div><a href="https://map.kakao.com/link/to/'+'Wcoding,' + '37.530750,' + '126.971979'+'">Directions</a></div>','<div>add</div>'],
-        ['르시앙블랑','서울 용산구 신흥로2길', '<div class="infoWindow" style="padding:5px;">Le Chien Blanc: <div class="infoText"></div> </div>','<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+'The greatest bakery in the world!<div><a href="https://map.kakao.com/link/to/'+'Le Chien Blanc,' + '37.530750,' + '126.971979'+'">Directions</a></div>','<div>add</div>'],
-        ['서울스테이션어썸스테이션','서울 용산구 한강대로 405', '<div class="infoWindow" style="padding:5px;">Seoul Station: <div class="infoText"></div> </div>','<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+'for no reason...<div><a href="https://map.kakao.com/link/to/'+'Seoul Station,' + '37.530750,' + '126.971979'+'">Directions</a></div>','<div>add</div>']
-    ]
+    //Grabbing vendor data 
+    var vendorData = Array();
+    var sponsorData = <?php echo $sponsors; ?>;
+    
+    for(let i=0; i<sponsorData.length; i++){
+        let vendorElement = Array();
+        let vendorName = sponsorData[i]['name'];
+        vendorElement.push(vendorName);
+        vendorElement.push(sponsorData[i]['address']);
+        vendorElement.push('<div class="infoWindow" style="padding:5px;">'+vendorName+'<div class="infoText"></div> </div>');
+        vendorElement.push('<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+sponsorData[i]['description']+'<div>');
+        vendorData.push(vendorElement);
+    }
+    
+
+    // var locationData = [
+    //     ['더블유코딩','서울 용산구 한강대로40길 39-13 1층', '<div class="infoWindow" style="padding:5px;">Wcoding: <div class="infoText"></div> </div>','<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+'where Pet Venture was born!<div><a href="https://map.kakao.com/link/to/'+'Wcoding,' + '37.530750,' + '126.971979'+'">Directions</a></div>'],
+    //     ['르시앙블랑','서울 용산구 신흥로2길', '<div class="infoWindow" style="padding:5px;">Le Chien Blanc: <div class="infoText"></div> </div>','<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+'The greatest bakery in the world!<div><a href="https://map.kakao.com/link/to/'+'Le Chien Blanc,' + '37.530750,' + '126.971979'+'">Directions</a></div>'],
+    //     ['서울스테이션어썸스테이션','서울 용산구 한강대로 405', '<div class="infoWindow" style="padding:5px;">Seoul Station: <div class="infoText"></div> </div>','<div id="roadview" style="width:100;height:50;"></div>'+'<div class="addButton">AddButton</div>'+'for no reason...<div><a href="https://map.kakao.com/link/to/'+'Seoul Station,' + '37.530750,' + '126.971979'+'">Directions</a></div>']
+    // ]
 
     let listVendor = Array();
     var addButtonMap = 'click';
     let counter = 1;
-    for(let i=0; i<locationData.length; i++){
-            let myLocation = locationData[i];
+    for(let i=0; i<vendorData.length; i++){
+            let myLocation = vendorData[i];
             let containerVendor = document.getElementById("vendorList");
             var vendor = document.createElement("div");
             vendor.className="vendorElement";
-            vendor.textContent = "* "+locationData[i][0];
+            vendor.textContent = "* "+vendorData[i][0];
             listVendor.push(containerVendor.appendChild(vendor));
             // vendor.addEventListener("click", function(){
                 
@@ -468,10 +256,7 @@
             // });  
     }
     
-
-
-
-
+    //Distance functionality 
     var distanceButton = document.getElementById("calculateDistance");
     var distanceDiv = document.getElementById("distanceDiv");
     var distanceLength = document.createElement("span");
@@ -483,23 +268,19 @@
             path: polyLineArray,
             strokeWeight: 2,
             strokeColor: 'red',
-            strokeOpacity: 0.6,
-            strokeStyle: 'shortdot'
+            strokeOpacity: 0.8,
+            strokeStyle: 'solid'
         });
         polyline.setMap(map);
         var polyLength = polyline.getLength(); 
-        distanceLength.textContent = "The total travel distance for this journey is "+Math.trunc(polyLength)+" m.";
+        distanceLength.textContent = "The total travel distance for this journey is "+Math.trunc(polyLength)+" m. and you can have "+(polyLength/12800)+" big macs after."
         distanceDiv.appendChild(distanceLength); 
 
     })
     
 
-
-
-
 </script>
 
 <?php $content = ob_get_clean();
-echo $content;
-//require("template.php");
+    require("template.php");
 ?>
