@@ -55,9 +55,14 @@ function legalPage(){
     require('./view/legalPageView.php');
 }
 
-function showMap($eventId){
+function showMap(){
     // echo $petId;
     $mapManager = new MapManager();
-    $event = $mapManager->getMap($eventId);
+    $sponsors = $mapManager->getSponsors();
     require("./view/mapViewTest.php");
+}
+
+function showMapDetail(){
+    
+    require("./view/mapViewDetail.php");
 }
