@@ -147,7 +147,8 @@ try {
             signUpWith($memberData);
             break;
         case "events":
-            showUpcomingEventsList();
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showUpcomingEventsList($sessionID);
             break;
         case "searchEvents";
             $search = isset($_REQUEST["search"]) ? $_REQUEST["search"] : NULL;
