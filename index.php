@@ -1,7 +1,6 @@
 <?php
 session_start();
 require("./controller/controller.php");
-// require("./controller/accountController.php");
 
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
@@ -18,7 +17,8 @@ try {
             break;
         case "petPreview":
             if(isset($_SESSION['id'])){
-                showPetPreview($_SESSION['id']);
+                // THIS ALSO SHOWS OWNER PROFILE PIC
+                showPetPreview($_SESSION['id']);    
             }else{
                 login();
             }
@@ -32,7 +32,7 @@ try {
         case "checkLogin":
             if (!empty($_REQUEST['emailLogin']) && !empty($_REQUEST['passwordLogin'])) {
                 checkLogin($_REQUEST);
-            } else {
+            }else {
                 header("Location: index.php?action=login&error=login");
             }
             break;
@@ -54,7 +54,7 @@ try {
                     "kakao" => 0, "google" => 0,
                 );
                 signUpWith($memberData);
-            } else {
+            }else {
                 header("Location: index.php?action=petPreview&error=incomplete");
             }
             break;
@@ -165,7 +165,8 @@ try {
             if(!isset($_SESSION['id'])){
                 header("Location: index.php?action=petPreview&error=notSignedIn");
             } else {
-                removeProPic($_SESSION['id']);
+                $result = removeProPic($_SESSION['id']);
+                echo $result;
             }
             break;
         case "showEventDetail" :

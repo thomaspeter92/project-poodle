@@ -66,11 +66,28 @@
     }
 
     .customFileUpload {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc;
     cursor: pointer;
     width:100px;
-    font-family: monsterRatRegular;
-    font-size: 14px;
+    font-family: monsterRatRegular; */
+    /* font-size: 14px; */
+    margin: 0;
+    width: auto;
+    /* height: 50px; */
+    margin-bottom: 0;
+    background-color: #72ddf7;
+    border-radius: 42px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 17px;
+    /* padding: 13px 76px; */
+    border-style: none;
+    box-shadow: 5px 10px 18px #acacac;
+    text-align: center;
+    }
+
+    .customFileUpload:hover {
+        background-color:#ff3864;
     }
 
     .accountForm {
@@ -79,10 +96,9 @@
     }
 
     .profilePicManage{
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
-        padding-top: 0px;
+        max-height:150px;
+        max-width:150px;
+        overflow: hidden;
     }
 
     
@@ -91,9 +107,9 @@
         /* transform: translate(-50%, -50%);
         left: 50%;
         top: 70%; */
-        background-color: #f1f1f1;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        /* background-color: #f1f1f1; */
+        /* min-width: 160px; */
+        /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
         z-index: 100;
         display:none;
     }
@@ -105,17 +121,18 @@
     }
 
     .imagePreview {
-        max-width:200px;
-        /* height:200px; */
         display: none;
-        border-radius: 50%;
+        max-height:150px;
+        max-width:150px;
+        overflow: hidden;
 
     }
 
     @media (max-device-width : 400px) {
         .accountForm .profilePic{
-        height: 100px;
-        width: 100px;
+            max-height:100px;
+            max-width:100px;
+            overflow: hidden;
         }
     }
 
@@ -131,7 +148,11 @@
 
 <br>
 <div class="accountForm">
-    <img class="profilePicManage" src="<?php if (isset($_SESSION['imageURL'])){ echo $_SESSION['imageURL']; } else { echo "./public/images/adminPlaceholder.png"; }; ?>" alt="Profile Pic">
+    <img class="profilePicManage" src="<?php if($memberDataFromDB['profileImage'] == NULL) { 
+                echo "./private/profile/defaultProfile.png"; 
+            } else { 
+                echo "./private/profile/".$memberDataFromDB['profileImage']; 
+            };?>" alt="Profile Pic">
     <img class="imagePreview" src="" alt="Image Preview">
     <div class="dropdown">
         <button class="imageDropbtn">Update Image</button>
@@ -146,10 +167,10 @@
     </div>
     <br>
     <div>First Name:</div>
-    <input type="text" name="nameInput" id="nameInput" value="<?=$memberDataFromDB['name'] ?>">
+    <input type="text" name="nameInput" id="nameInput" class="required" value="<?=$memberDataFromDB['name'] ?>">
     <br>
     <div>Email:</div>
-    <input type="text" name="emailInput" id="emailInput" value="<?=$memberDataFromDB['email'] ?>">
+    <input type="text" name="emailInput" id="emailInput" class="required email" value="<?=$memberDataFromDB['email'] ?>">
     <br>
     <br>
     <div id="accountEmpty" hidden>Cannot save blank name and email fields.</div>
@@ -160,23 +181,25 @@
     </div>
     <div class="changePW" hidden>
         <input type="hidden" name="action" value="changePW">
-        Current Password: <input type="text" name="currentPW" id="currentPW">
+        Current Password: <input type="text" name="currentPW" id="currentPW" class="required">
         <br>
         <br>
-        New Password: <input type="text" name="newPW" id="newPW">
+        New Password: <input type="text" name="newPW" id="newPW" class="required password"> 
         <br>
         <div class="needDiffPW" hidden>New Password Cannot be same as old Password</div>
         <br>
-        Confirm Password: <input type="text" name="confirmPW" id="confirmPW">
+        Confirm Password: <input type="text" name="confirmPW" id="confirmPW" class="confirmPassword required">
         <br>
         <br>
         <div class="failedPW" hidden>Incorrect Password</div>
-        <input type="button" id="changePWSubmit" value="Submit">
+        <button id="changePWSubmit">Submit</button>
+        <br>
+        <br>
         <button id="cancelPW">Keep Current Password</button>
     </div>
-    <div class="emptyPW" hidden>Fill out password form completely before submitting</div>
-    <div class="successPW" hidden>Password change successful</div>
-    <div class="matchPW" hidden>New password does not match the confirmed password.</div>
+    <div class="emptyPW" hidden><br>Fill out password form completely before submitting</div>
+    <div class="successPW" hidden><br>Password change successful</div>
+    <div class="matchPW" hidden><br>New password does not match the confirmed password.</div>
 </div>
 <br>
 <br>

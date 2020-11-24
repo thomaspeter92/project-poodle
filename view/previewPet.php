@@ -2,27 +2,38 @@
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 
 <style>
-    
-    body{
-        
-        font-family: 'Montserrat', sans-serif;
-        margin:0;
-        padding:0;
-        font-weight: bolder;
-       
+    .profilePageContent{
+        display: flex;
+        width: 100vw;
     }
 
-    #wrapper {
+    #petWrapper {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+        width: 75%;
     }
 
     #contentLeft {
         width: 90%;
     }
+    .desktopColumn{
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        text-align: center;
+        padding-left: 1em;  
 
+    }
+    .eventInfo{
+        box-shadow: 3px 3px 3px lightgrey;
+        border-radius: 15px;
+        background-color: rgba(128, 147, 241, 0.3);
+        padding: 1em;
+        margin-bottom: 1em;
+        color: black;
+    }
     .petListElement{
         height: 200px;
         width: 50%;
@@ -40,6 +51,7 @@
         margin-bottom: 10%;
         width: 40%;
         height: 80%;
+        font-size: 90%;
     }
 
     .petPreviewImage{
@@ -63,9 +75,7 @@
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
+    /* width: 200px; */
 }
     #addPetButton {
 	background-color: #72ddf7;
@@ -96,17 +106,46 @@
     }
 
 
+    /* .proPicContainer {
+
+    } */
+
     .profilePic {
-            height:100px;
-            width:100px;
+            max-height:100px;
+            max-width:100px;
+            overflow: hidden;
     }
 
     .modalDivContent .profilePic {
         padding-top:20px;
     }
+    @media (max-device-width : 1020px) {
+        .profilePageContent{
+            display: block;
+            justify-content: column;
+            width: 100vw;
+        }
+        .desktopColumn{
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            text-align: center;
+            padding-right: 1em;
 
+        }
+        .petPreviewImage{
+            margin-top: 8%;
+            border-radius: 5px;
+            width: 30% ;
+            height: 65%;
+        }
+        .petListElement{
+            width: 100vw;
+        }
+
+
+    }
     @media (max-device-width : 400px) {
-
         .petPreviewContents{
             margin-top: 4%;
             margin-bottom: 5%;
@@ -124,14 +163,20 @@
             font-size: 0.8em;
             height: 20%;
         }
-
         .petPreviewImage{
             margin-top: 8%;
             border-radius: 5px;
             width: 30% ;
             height: 65%;
         }
-
+        .petListElement{
+            width: 100vw;
+        }
+        #petWrapper{
+            display: flex;
+            align-items: center;
+            width: 100vw;
+        }
 }
 
 </style>
@@ -144,33 +189,55 @@
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <br><br><br><br><br><br><br><br>
 
-<div class="accountWrapper">
-    <div class="accountBox">
-        <img class="profilePic" src="<?php if (isset($_SESSION['imageURL'])){ echo $_SESSION['imageURL']; } else { echo "./public/images/adminPlaceholder.png"; }; ?>" alt="Profile Pic">
-        <p><?= $_SESSION['name'];?></p>
-        <p class="manageAccount">Manage Account</p>
-    </div>
-</div>
-
-<div id="wrapper">
-    <div id="contentLeft">
-        <?php foreach($petPreviews as $preview):?>
-            <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                <div class="petPreviewContents">
-                    <p>NAME <?=" : ".$preview['name'];?></p>
-                    <p>BREED <?=" : ".$preview['breed'];?></p>
-                    <p>AGE <?=" : ".$preview['age']." years";?></p>
-                    <p>COLOR <?=" : ".$preview['color'];?></p>
+<div class="profilePageContent">
+    <div class="desktopColumn">
+        <div class="accountWrapper">
+            <div class="accountBox">
+                <div class="proPicContainer">
+                    <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
+                        echo "./private/profile/defaultProfile.png"; 
+                    } else { 
+                        echo "./private/profile/".$profilePicURL['profileImage']; 
+                    };?>" alt="Profile Pic">
                 </div>
-                <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
+                <p><?= $_SESSION['name'];?></p>
+                <button class="manageAccount">Manage Account</button>
             </div>
-        <?php endforeach;?>
+        </div>
+        <!-- Events Section -->
+        <div class="myEventsWrapper">
+            <p><?= $_SESSION['name'];?>'s Events</p>
+            <?php foreach($usersEvents as $eventsPreview):?>
+                <a href="https://localhost/index.php?action=showEventDetail&eventId="+<?php $eventsPreview['id'];?>>
+                    <div class="eventInfo">
+                        <p><?= $eventsPreview['name'];?></p>
+                        <p><?= $eventsPreview['eventDate'];?></p>
+                        <p><?= $eventsPreview['location'];?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
-<!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-<button id="addPetButton"> Add a Pet!</button>
-</div>
 
-<script src="./public/js/Modal.js"></script>
+    <div id="petWrapper">
+        <div id="contentLeft">
+            <?php foreach($petPreviews as $preview):?>
+                <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                    <div class="petPreviewContents">
+                        <p>NAME <?=" : ".$preview['name'];?></p>
+                        <p>BREED <?=" : ".$preview['breed'];?></p>
+                        <p>AGE <?=" : ".$preview['age']." years";?></p>
+                        <p>COLOR <?=" : ".$preview['color'];?></p>
+                    </div>
+                    <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
+                </div>
+            <?php endforeach;?>
+        </div>
+    <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+    <button id="addPetButton"> Add a Pet!</button>
+    </div>
+</div>
+<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 // DELETE PET FUNCTION, PULLS PET ID AND ERASES FROM DB
@@ -332,7 +399,8 @@
                     let dropdownContent = document.querySelector('.dropdownContent')
                     let modalWindow = document.querySelector('.modalSubDiv');
                     let imagePreview = document.querySelector('.imagePreview')
-                    let profilePic = document.querySelector('.profilePicManage')
+                    let profilePicManage = document.querySelector('.profilePicManage')
+                    let profilePic = document.querySelector('.profilePic');
 
 
 
@@ -357,7 +425,7 @@
                             const reader = new FileReader();
 
                             imagePreview.style.display = "block";
-                            profilePic.style.display = "none"
+                            profilePicManage.style.display = "none";
 
                             reader.addEventListener("load", function() {
                                 imagePreview.setAttribute("src", this.result);
@@ -366,21 +434,35 @@
                             reader.readAsDataURL(file);
                         } else {
                             imagePreview.style.display = "none";
-                            profilePic.style.display = "block";
+                            profilePicManage.style.display = "block";
                             previewImage.setAttribute("src", "");
                         }
                     })
 
                     // REMOVE PROFILE PICTURE
-                    imageDropBtn.addEventListener("click", event => {
-                        const xhr = new XMLHttpRequest();
+                    imgRemove.addEventListener("click", function () {
+                        console.log("clicked");
+                        let xhr = new XMLHttpRequest();
+                        
                         xhr.open('GET', 'index.php?action=removeProfilePic');
-                        xhr.addEventListener("load", () => {
-                            if (xhr.status === 200) {
-                            
+                        console.log(xhr);
+                        xhr.onload = function () {
+                            if(xhr.status === 200){
+                                let response = xhr.responseText;
+                                console.log(response);
+                                if (response.trim() == "success") {
+                                    profilePic.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    imagePreview.style.display = "none";
+                                    profilePicManage.style.display = "block";
+                                } else {
+                                    alert("remove failed.");
+                                }
+                            } else {
+                                alert("remove failed.");
                             }
+                        }
                         xhr.send(null);
-                        });
                     });
 
 
@@ -398,7 +480,7 @@
                     let cancelBtn = document.querySelector(".modalCancel")
                     let emptyPW = document.querySelector(".emptyPW");
                     let matchPW = document.querySelector(".matchPW")
-
+                    let accountForm = document.querySelector(".accountForm")
 
                     // PW Inputs
                     let currentInput = document.querySelector("#currentPW");
@@ -414,6 +496,7 @@
                         successPW.setAttribute("hidden", true);
                         cancelBtn.setAttribute("hidden", true);
                         emptyPW.setAttribute("hidden", true);
+                        accountForm.setAttribute("hidden", true);
                     });
 
                     cancelPW.addEventListener('click', event => {
@@ -428,6 +511,7 @@
                         failedPW.setAttribute("hidden", true);
                         emptyPW.setAttribute("hidden", true);
                         cancelBtn.removeAttribute("hidden");
+                        accountForm.removeAttribute("hidden");
                     });
 
                     const pwSubmitButton = document.querySelector("#changePWSubmit");
@@ -494,6 +578,7 @@
                         });
                         xhr.send(params);
                     });
+                    new FormCheck().formCheck();// Marie ugly way of calling
 
                 }
 

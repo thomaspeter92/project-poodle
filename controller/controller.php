@@ -18,12 +18,19 @@ function showPetProfile($petId){
     // echo $petId;
     $petProfileManager = new PetProfileManager();
     $petProfile = $petProfileManager->getPetProfile($petId);
+
     require("./view/petProfileView.php");
 }
 function showPetPreview($ownerId){
     // echo $petId;
     $previewManager = new PetProfileManager();
     $petPreviews = $previewManager->getPreview($ownerId);
+    $manager = new MemberManager();
+    // NEW CODE TO SHOw OWNER PROFILE PIC
+    $profilePicURL = $manager->getProfilePic($ownerId);
+    //shows owners events
+    $loadUserEvents = new EventManager();
+    $usersEvents = $loadUserEvents->ownersEvents($ownerId);
     require("./view/previewPet.php");
 }
 
@@ -44,7 +51,6 @@ function petAddEdit($params) {
         echo 'error';
     }
 }
-
 
 function deletePet($petId) {
     $deleteManager = new PetProfileManager();
@@ -74,5 +80,4 @@ function legalPage(){
 function addEditEvent(){
     require('./view/addEditEventView.php');
 }
-
 

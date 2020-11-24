@@ -75,7 +75,15 @@ function checkChangeAccount($inputs, $image, $userID){
 
 function removeProPic($userID){
     $manager = new MemberManager();
-    $manager->removeProfilePic($userID);
-    unset($_SESSION['imageURL']);
+    $result = $manager->removeProfilePic($userID);
+    if ($result) {
+        $result = "success";
+    }   else {
+        $result = "failed";
+    }
+    return $result;
 }
+
+
+
 ?>

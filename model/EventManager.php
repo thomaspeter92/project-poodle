@@ -213,4 +213,15 @@ require_once("Manager.php");
             $req->closeCursor();  
         }
 
+        //used to display user's events on their profile page
+        public function ownersEvents($ownerId){
+            $db = $this->dbConnect();
+            $req = $db->prepare("SELECT id, name, eventDate, location, imageName, hostId FROM event WHERE hostId = :id");
+            // $req = $db->prepare("SELECT g.name, g.eventDate, g.location, g.imageName, g.hostId FROM event g INNER JOIN member m ON g.hostId = m.id WHERE g.hostId = :id");
+            $req->bindParam(':id',$ownerId, PDO::PARAM_INT);
+            $req->execute();
+            $usersEvents =$req->fetchAll(PDO::FETCH_ASSOC);
+            $req->closeCursor();
+            return $usersEvents;
+        }   
     }

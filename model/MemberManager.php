@@ -58,7 +58,7 @@ class MemberManager extends Manager{
         $email = htmlspecialchars($params["email"]);
         $kakao = htmlspecialchars($params["kakao"]);
         $google = htmlspecialchars($params["google"]);
-        $imageURL = $params["imageURL"];
+        $imageURL = isset($params["imageURL"]) ? $params["imageURL"] : NULL;
         
         if (empty($kakao) AND empty($google)) {
             $confirmPassword = htmlspecialchars($params["confirmpass"]);
@@ -79,7 +79,7 @@ class MemberManager extends Manager{
             $profileDir = "./private/profile/";
             $imageFileName = FileUtil::downloadFileFromURL($imageURL, $profileDir);
         }
-
+        
         $db = $this->dbConnect();
         $query = "INSERT INTO member(name, password, email, kakao, google, profileImage) 
                                 VALUES(:name, :password, :email, :kakao, :google, :profileImage)";
@@ -146,13 +146,22 @@ class MemberManager extends Manager{
 
     function removeProfilePic($userID) {
         $db = $this->dbConnect();
-        $query = "UPDATE member SET profileImage = :profileImage WHERE id = :userID";
+        $query = "UPDATE member SET profileImage = NULL WHERE id = $userID";
         $response = $db->prepare($query);
-            $response->bindValue(":profileImage", "NULL", PDO::PARAM_STR);
-            $response->bindValue(":userID", $userID, PDO::PARAM_INT);
             $result = $response->execute();
             $response->closeCursor();
-    
+            
             return $result;
+    }
+
+    function getProfilePic($userID) {
+        $db = $this->dbConnect();
+        $query = "SELECT profileImage FROM member WHERE id = $userID";
+        $response = $db->prepare($query);
+            $response->execute();
+            $profilePicURL = $response->fetch(PDO::FETCH_ASSOC);
+            $response->closeCursor();
+
+            return $profilePicURL;
     }
 }
