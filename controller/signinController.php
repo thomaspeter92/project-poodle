@@ -15,12 +15,16 @@ function checkLogin($params)
         $memberDataFromDB = $loginManager->getMemberDataByEmail($emailLogin);
 
         if ($memberDataFromDB) {
-            $memberDataFromDB["id"];
-            $memberDataFromDB["name"];
-            createSession($memberDataFromDB["id"],$memberDataFromDB["name"],"");
-            header("Location: index.php");
+            createSessionByMemberDB($memberDataFromDB);
+            header("Location: index.php?action=petPreview");
         } else {
-        // header("Location: index.php?action=login&error=login");
+            //TODO: It is not valid email. You haven't signed up yet. 
+           
+            //TODO: It is not valid email. You haven't signed up yet. ;
+            // echo "<script> signAllOut(); </script>";
+            // throw new Exception("Failed to sign in!!", 1007);
+    
+            // header("Location: index.php?action=login&error=notSignedUp");
         }
     }
 }
@@ -95,21 +99,7 @@ function signInWith($memberData) {
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     
     if ($memberDataFromDB) {
-        if (empty($memberDataFromDB["id"]) or empty($memberDataFromDB["name"])) {
-            throw new Exception("Sign in is failed!", 1006);
-        }
-        $profileImageDir = "./private/profile/";
-        $sessionID = $memberDataFromDB["id"];
-        $sessionName = isset($memberDataFromDB["name"]) ? 
-                        $memberDataFromDB["name"] : $memberData["name"];
-        if (isset($memberDataFromDB["profileImage"])) {
-            $sessionImageURL = $profileImageDir.$memberDataFromDB["profileImage"];
-        } else {
-            if (isset($memberData["imageURL"])) {
-                $sessionImageURL = $memberData["imageURL"];
-            }
-        }
-        createSession($sessionID, $sessionName, $sessionImageURL);
+        createSessionByMemberDB($memberDataFromDB);
         header("Location: index.php?action=petPreview");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
@@ -122,3 +112,20 @@ function signInWith($memberData) {
     }
 }
 
+function createSessionByMemberData($memberDataFromDB) {
+    if (empty($memberDataFromDB["id"]) or empty($memberDataFromDB["name"])) {
+        throw new Exception("Sign in is failed!", 1006);
+    }
+    $profileImageDir = "./private/profile/";
+    $sessionID = $memberDataFromDB["id"];
+    $sessionName = isset($memberDataFromDB["name"]) ? 
+                    $memberDataFromDB["name"] : $memberData["name"];
+    if (isset($memberDataFromDB["profileImage"])) {
+        $sessionImageURL = $profileImageDir.$memberDataFromDB["profileImage"];
+    } else {
+        if (isset($memberData["imageURL"])) {
+            $sessionImageURL = $memberData["imageURL"];
+        }
+    }
+    createSession($sessionID, $sessionName, $sessionImageURL);
+}
