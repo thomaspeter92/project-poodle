@@ -109,7 +109,6 @@ function signInWith($memberData) {
                 $sessionImageURL = $memberData["imageURL"];
             }
         }
-        echo $sessionImageURL;
         createSession($sessionID, $sessionName, $sessionImageURL);
         // header("Location: index.php?action=petPreview");
     } else {
