@@ -14,7 +14,7 @@ function getGuestCountOfEvent($eventId) {
     $manager = new EventManager();
     return $manager->getMembersCountBy($eventId);
 }
-function showUpcomingEventsList() {
+function showUpcomingEventsList($sessionID) {
     $manager = new EventManager();
     $events = $manager->getUpcomingEvents();
     if ($events) {

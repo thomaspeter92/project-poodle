@@ -14,10 +14,12 @@ ob_start();
             <option value="thisWeekend">This weekend</option>
             <option value="nextWeek">Next week</option>
         </select>
+    <?php if (isset($sessionID)): ?>
         <div id="addButton">
             <button class="button fullText">Add a Event</button>
             <button class="button shortText">+</button>
         </div>
+    <?php endif; ?>
     </div>
     <div id="eventsList">
         <?php require("./view/eventsList.php"); ?>
