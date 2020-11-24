@@ -212,7 +212,10 @@ try {
             break;
             
         case "requestMap":
-            showMap($_REQUEST['eventId']);
+            showMap();
+            break;
+        case "requestMapDetail":
+            showMapDetail();
             break;
         default:
             landing();

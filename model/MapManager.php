@@ -19,4 +19,13 @@ require_once("Manager.php");
             // }
              
         }
+
+        public function getSponsors() {
+            $db = $this-> dbConnect();
+            $req = $db->prepare("SELECT name, address, description FROM sponsors ");
+            $req->execute(array());
+            $sponsors = $req->fetchAll(PDO::FETCH_ASSOC);
+            $req->closeCursor();
+            return json_encode($sponsors);
+        }
     }
