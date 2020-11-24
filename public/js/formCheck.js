@@ -4,7 +4,8 @@ formCheck = () => {
     var password = document.querySelector(`.password`); 
     var confirmPassword = document.querySelector(`.confirmPassword`);
     var email = document.querySelector(`.email`);
-    var requiredInput = document.querySelector(`.required`);
+    var requiredInputs = document.querySelectorAll(`.required`);    
+    
 
     if(confirmPassword){
         confirmPassword.addEventListener(`keyup`, function(){
@@ -60,7 +61,6 @@ formCheck = () => {
 
     if(email){
         email.addEventListener(`keyup`, function(){
-            // console.log(email.value);
             var emailVerify = emailRegex.test(email.value);
             if(emailVerify == true){
                 email.classList.remove(`red`);
@@ -73,20 +73,22 @@ formCheck = () => {
       
     }
 
-    //empty input check
-    if(requiredInput){
-        requiredInput.addEventListener(`keyup`, function(){
-            // console.log(requiredInput);
-            if(requiredInput.value.length > 0){
-                requiredInput.classList.remove(`red`);
-                requiredInput.classList.add(`blue`);
-            }else{
-                requiredInput.classList.remove(`blue`);
-                requiredInput.classList.add(`red`);
+    //making sure required input fields are not empty
+    for(var i=0;i<requiredInputs.length;i++){
+        requiredInputs[i].addEventListener(`keyup`, function(){
+            for(var j=0;j<requiredInputs.length;j++){
+                var inputLength = requiredInputs[j].value.length;
+                if(inputLength = 0){
+                    requiredInputs[j].classList.remove(`blue`);
+                    requiredInputs[j].classList.add(`red`);
+                }else{
+                    requiredInputs[j].classList.remove(`red`);
+                    requiredInputs[j].classList.add(`blue`);
+                    }
             }
         });
+        
     }
-   
    
     var signUpButton = document.querySelector('.subSection>#subscribe');
     if(signUpButton){

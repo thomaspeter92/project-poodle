@@ -44,7 +44,7 @@ function checkChangeAccount($inputs, $image, $userID){
     };
 
     // echo "account controller";
-    // print_r($image);
+   
     // echo getcwd();
 
     if(empty($image)) {

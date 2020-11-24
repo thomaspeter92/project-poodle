@@ -188,7 +188,7 @@
 <button id="addPetButton"> Add a Pet!</button>
 </div>
 
-<script src="./public/js/Modal.js"></script>
+<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 // DELETE PET FUNCTION, PULLS PET ID AND ERASES FROM DB
@@ -300,10 +300,6 @@
         const imgInput = document.querySelector("#imageInput");
         const file = imgInput.files[0];
 
-        // console.log(nameInput);
-        // console.log(emailInput);
-        // console.log(file);
-
         const url = "./controller/changeAccountController.php";
         const params = new FormData();
 
@@ -316,13 +312,11 @@
         xhr.addEventListener("load", () => {
             if (xhr.status === 200) {
                 response = xhr.responseText;
-                console.log(response);
                 accountEmpty = document.querySelector("#accountEmpty");
                 if (response.trim() == "emptyField") {
                     accountEmpty.removeAttribute("hidden");
                 }
                 if (response.trim() == "success") {
-                    // console.log("success");
                     // turn reload off for testing
                     location.reload();
                 }
@@ -534,7 +528,6 @@
                             }
                         });
                         xhr.send(params);
-                        // console.log(params);
                     });
                     new FormCheck().formCheck();// Marie ugly way of calling
 

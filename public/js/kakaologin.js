@@ -12,7 +12,9 @@ const loginWithKakao = (signUp) => {
                 form.querySelector("#kakaoNickname").value = nickname;
                 form.querySelector("#kakaoEmail").value = email;
                 form.querySelector("#kakaoid").value = id;
-                form.querySelector("#kakaoThumbnailURL").value = thumbnailURL;
+                if (thumbnailURL) {
+                    form.querySelector("#kakaoThumbnailURL").value = thumbnailURL;
+                }
                 (signUp) ? 
                     form.querySelector("#kakaoSignUp").value = true :
                     form.querySelector("#kakaoSignUp").value = false;
@@ -22,8 +24,8 @@ const loginWithKakao = (signUp) => {
             });
         },
         fail: function(err) {
-            console.log("Login Failed!!");
-            console.log(error);
+            // console.log("Login Failed!!");
+            // console.log(error);
         },
     });
 };
@@ -40,8 +42,8 @@ const requestUserInfo = (callback) => {
             callback(id, nickname, email, thumbnailURL);
         },
         fail: function(error) {
-            console.log("[requestUserInfo]");
-            console.log(error);
+            // console.log("[requestUserInfo]");
+            // console.log(error);
         }
     });
 };
@@ -50,13 +52,13 @@ function logoutWithKakao (){
     //Franco
     if (Kakao){
         if (!Kakao.Auth.getAccessToken()) {
-            console.log("[logoutWithKakao]");
+            // console.log("[logoutWithKakao]");
             // alert("Not logged in");
             return;
         }
         Kakao.Auth.logout(() => {
-            console.log("[logoutWithKakao]");
-            console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+            // console.log("[logoutWithKakao]");
+            // console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
         });
     } //Franco
 }
@@ -66,12 +68,12 @@ const disconnectWithKakao = () => {
     Kakao.API.request({
         url: "/v1/user/unlink",
         success: function(response) {
-            console.log("[disconnectWithKakao]");
-            console.log(response);
+            // console.log("[disconnectWithKakao]");
+            // console.log(response);
         },
         fail: function(error) {
-            console.log("[disconnectWithKakao][Error]");
-            console.log(error);
+            // console.log("[disconnectWithKakao][Error]");
+            // console.log(error);
         }
     });
 };

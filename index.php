@@ -12,7 +12,6 @@ try {
             landing();
             break;
         case "petprofile":
-            // print_r($_POST['petId']);
             // isThatReallyMyDog($_SESSION['id', $_REQUEST['petid'])
             showPetProfile($_REQUEST['petid']);
             break;
@@ -33,12 +32,17 @@ try {
         case "checkLogin":
             if (!empty($_REQUEST['emailLogin']) && !empty($_REQUEST['passwordLogin'])) {
                 checkLogin($_REQUEST);
-            } else {
+            }else {
                 header("Location: index.php?action=login&error=login");
             }
             break;
         case "registration":
             registration();
+            break;
+        case "emailCheck":
+            if(!empty($_REQUEST['email'])){
+                emailCheck($_REQUEST['email']);
+            }
             break;
         case "registrationInput":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
@@ -50,7 +54,7 @@ try {
                     "kakao" => 0, "google" => 0,
                 );
                 signUpWith($memberData);
-            } else {
+            }else {
                 header("Location: index.php?action=petPreview&error=incomplete");
             }
             break;

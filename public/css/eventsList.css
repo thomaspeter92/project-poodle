@@ -100,7 +100,7 @@ section>div:first-child {
 }
 .item>div {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
 }
 .item>.imgContainer {
     width: 200px;
@@ -135,36 +135,47 @@ section>div:first-child {
 }
 
 /* Attendees */
-.item .attendees {
+.item>.content>.attendees {
     /* background-color: blue; */
-    position: relative;
-    height: 20px;
+    height: 34px;
+    padding: 0;
 }
 .item .attendees>div {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 22px;
+}
+.item .attendees .whiteCircle {
     background-color: white;
     width: 34px;
+    height: 34px;
     border-radius: 17px;
-    position: absolute;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.item .attendees>.hostImg {
+.item .attendees .profileImg:nth-child(1) {
+    z-index: 3;
 }
-.item .attendees>.firstImg {
-    left: 25px;
+.item .attendees .profileImg:nth-child(2) {
+    z-index: 2;
 }
-.item .attendees>.secondImg {
-    left: 50px;
+.item .attendees .profileImg:nth-child(3) {
+    z-index: 1;
+}
+.item .whiteCircle>img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
 }
 .item .attendees>.guestCount {
-    left: 85px;
-    top: 5px;
     font-family: "monsterRatRegular", sans-serif;
     font-size: 0.8em;
     color: gray;
-}
-.item .attendees>div>img {
-    width: 30px;
-    border-radius: 15px;
+    
+    width: 34px;
+    padding: 5px;
+    text-align: center;
 }

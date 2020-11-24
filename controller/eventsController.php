@@ -61,3 +61,9 @@ function attendEvent($params) {
     $eventAttend->attendEventSend($params);
 }
 
+function getGuestProfileImagesOfEvent($eventId, $limit=NULL) {
+    $manager = new EventManager();
+    $guests = $manager->getMemberProfileImagesBy($eventId, $limit);
+
+    return $guests; 
+}
