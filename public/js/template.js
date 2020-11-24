@@ -13,6 +13,7 @@ function adjustFooter() {
         body.style.height = "100vh";
         footer.style.position = "absolute";
         footer.style.bottom = 0;
+        footer.style.width = "100%";
     } else if (footerTop < contentBottom) {
         body.removeAttribute("style");
         footer.removeAttribute("style");
@@ -30,6 +31,7 @@ function adjustFooter() {
         body.style.position = "relative";
         footer.style.position = "absolute";
         footer.style.bottom = 0;
+        footer.style.width = "100%";
     }
 
     window.addEventListener("resize", () => {
