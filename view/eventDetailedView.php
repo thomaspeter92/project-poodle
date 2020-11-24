@@ -118,6 +118,9 @@
         font-size: 1.5em;
         color: #ff3864
     }
+    #mapDisplay h5 {
+        margin-bottom: 10px;
+    }
 
     #guestList {
         width: 100%;
@@ -576,7 +579,7 @@ if($event) {
                         <p>Guest Limit: <?=$event['guestLimit'] == 0 ? 'none' : $event['guestLimit']; ?></p>     
                     </div>
                 </div>
-                <div id="mapDisplay"> <?php include("mapViewTest.php"); ?></div>
+                <div id="mapDisplay"> <h5>Itinerary:</h5> <?php include("mapViewDetail.php"); ?></div>
                 <h5>Guest List (<?= $guestCount ?>)</h5><p id="guestCount" style="display: none;"><?= $guestCount ?></p>
                 <div id="guestList">
                     <?php include("loadGuestsView.php") ?>
@@ -613,6 +616,8 @@ if($event) {
 <?php    } ?>
         
 <!-- <script src="./public/js/Modal.js"></script> -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2">
+</script>
 
 <script>
 
@@ -792,7 +797,47 @@ if($event) {
     }}
     editComments();
 
+// ************* MAP FUNCTIONS ************
+    var itin = <?= $event['itinerary'] ?>
+    var viewListArray = [[37.530750,126.971979],[37.540522437037716, 126.98675092518866],[37.55397916880342, 126.97248154788045]]
 
+    var bounds = new kakao.maps.LatLngBounds();
+    var routeArray = Array();
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.530750,126.971979), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다 
+    // var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+    // 마커를 생성합니다
+    for(let i=0; i<itin.length; i++){
+        var coords = new kakao.maps.LatLng(itin[i]['Ma'],itin[i]['La']);
+        console.log(coords)
+        routeArray.push(coords);
+        var marker = new kakao.maps.Marker({
+            position: coords
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+        bounds.extend(coords);
+        map.setBounds(bounds);
+    }
+
+    var polyline = new kakao.maps.Polyline({
+            map: map,
+            path: routeArray,
+            strokeWeight: 2,
+            strokeColor: 'red',
+            strokeOpacity: 0.8,
+            strokeStyle: 'solid'
+        });
+    polyline.setMap(map);
 
 </script>
 
