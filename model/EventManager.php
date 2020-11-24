@@ -182,9 +182,10 @@ require_once("Manager.php");
             }
              
         }
-        public function updateEventDetails($newEvent){
+        public function updateEventDetails($newEvent, $photoData){
             $db = $this->dbConnect();
           
+
             if(empty($newEvent['eventId'])){
                 $req = $db->prepare("INSERT INTO event (name, eventDate, location, itinerary , description, hostId, expiryDate, rating, guestLimit, imageName, dateCreated) VALUES (:name, :eventDateTime, :location, :itinerary , :description, :hostId, :expiryDateTime, :rating, :guestLimit, :imageName, NOW())");
                 $update=false;
@@ -199,8 +200,11 @@ require_once("Manager.php");
             $location ="Seoul Korea";
             $description = htmlspecialchars($newEvent['eventDescription']);//
             $hostId = htmlspecialchars($newEvent['hostId']);//
-            $imageName = "1";
+            // $imageName = "1";
+            $imageName = !empty($photoData['eventPicture']) ? htmlspecialchars($photoData['eventPicture']) : $newEvent['eventPicture'];
             $rating = 3;
+    // print_r($photoData);
+    // print_r($newEvent);
             $guestLimit = htmlspecialchars($newEvent['eventGuestLimit']);//
             $itinerary  = $newEvent['itinerary'];//
             // $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
@@ -223,6 +227,7 @@ require_once("Manager.php");
             $req->bindParam(':rating',$rating,PDO::PARAM_INT);
             $req->bindParam(':guestLimit',$guestLimit,PDO::PARAM_INT);
             $req->bindParam(':itinerary',$itinerary ,PDO::PARAM_STR);
+            $req->bindParam(':imageName',$imageName,PDO::PARAM_STR);
 
             $result = $req->execute();
             $req->closeCursor();  

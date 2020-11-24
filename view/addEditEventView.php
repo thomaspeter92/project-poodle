@@ -172,7 +172,7 @@
 
 </style>
 
-<form action="index.php" id="formAddEditEvent" method="POST">
+<form action="index.php" id="formAddEditEvent" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="action" value="updateEventDetails">
     <div id="stepEventHeader">
         <div id="lblStepIndicator">Step 1</div>
@@ -238,8 +238,13 @@
             <!-- Choose picture for event -->
             <p>Choose a picture to load regarding the event. The picture can give an idea to other members what to expect for the event </p>
             <div id="eventPictureContainer">
-                <button class="loginButton">Choose picture file</button>
-                <input type="hidden" id="eventPicture" name="eventPicture" value='1'>
+                <!-- <button class="loginButton">Choose picture file</button>
+                <input type="hidden" id="eventPicture" name="eventPicture" value='1'> -->
+
+                <label for="file" style="border: 1px solid grey">Choose picture file:</label>
+                <input type="file" id="file" name="file" style="display: none;" >
+                <input type="hidden" name="eventPicture" id="eventPicture" value="<?= isset($eventEditDetails['imageName']) ? $eventEditDetails['imageName'] : '' ?>">
+
                 <!-- TODO Value of picture to  be changed -->
                 <div id="eventPictureFrame"></div>
             </div>
