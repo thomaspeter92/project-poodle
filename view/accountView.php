@@ -96,9 +96,10 @@
     }
 
     .profilePicManage{
-        max-height:150px;
-        max-width:150px;
+        width: 150px;
+        height: 150px;
         overflow: hidden;
+        border-radius: 50%;
     }
 
     
@@ -122,10 +123,10 @@
 
     .imagePreview {
         display: none;
-        max-height:150px;
-        max-width:150px;
+        width: 150px;
+        height: 150px;
         overflow: hidden;
-
+        border-radius: 50%;
     }
 
     @media (max-device-width : 400px) {

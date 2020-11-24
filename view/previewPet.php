@@ -2,27 +2,38 @@
 <link rel="stylesheet" href="./public/css/Modal.css"/>
 
 <style>
-    
-    body{
-        
-        font-family: 'Montserrat', sans-serif;
-        margin:0;
-        padding:0;
-        font-weight: bolder;
-       
+    .profilePageContent{
+        display: flex;
+        width: 100vw;
     }
 
-    #wrapper {
+    #petWrapper {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+        width: 75%;
     }
 
     #contentLeft {
         width: 90%;
     }
+    .desktopColumn{
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        text-align: center;
+        padding-left: 1em;  
 
+    }
+    .eventInfo{
+        box-shadow: 3px 3px 3px lightgrey;
+        border-radius: 15px;
+        background-color: rgba(128, 147, 241, 0.3);
+        padding: 1em;
+        margin-bottom: 1em;
+        color: black;
+    }
     .petListElement{
         height: 200px;
         width: 50%;
@@ -40,6 +51,7 @@
         margin-bottom: 10%;
         width: 40%;
         height: 80%;
+        font-size: 90%;
     }
 
     .petPreviewImage{
@@ -63,9 +75,7 @@
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
+    /* width: 200px; */
 }
     #addPetButton {
 	background-color: #72ddf7;
@@ -101,17 +111,42 @@
     } */
 
     .profilePic {
-            max-height:100px;
-            max-width:100px;
-            overflow: hidden;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
     }
 
     .modalDivContent .profilePic {
         padding-top:20px;
     }
+    @media (max-device-width : 1020px) {
+        .profilePageContent{
+            display: block;
+            justify-content: column;
+            width: 100vw;
+        }
+        .desktopColumn{
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            text-align: center;
+            padding-right: 1em;
 
+        }
+        .petPreviewImage{
+            margin-top: 8%;
+            border-radius: 5px;
+            width: 30% ;
+            height: 65%;
+        }
+        .petListElement{
+            width: 100vw;
+        }
+
+
+    }
     @media (max-device-width : 400px) {
-
         .petPreviewContents{
             margin-top: 4%;
             margin-bottom: 5%;
@@ -129,14 +164,20 @@
             font-size: 0.8em;
             height: 20%;
         }
-
         .petPreviewImage{
             margin-top: 8%;
             border-radius: 5px;
             width: 30% ;
             height: 65%;
         }
-
+        .petListElement{
+            width: 100vw;
+        }
+        #petWrapper{
+            display: flex;
+            align-items: center;
+            width: 100vw;
+        }
 }
 
 </style>
@@ -149,45 +190,54 @@
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <br><br><br><br><br><br><br><br>
 
-
-<div class="desktopColumn">
-    <div class="accountWrapper">
-        <div class="accountBox">
-            <div class="proPicContainer">
-                <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
-                    echo "./private/profile/defaultProfile.png"; 
-                } else { 
-                    echo "./private/profile/".$profilePicURL['profileImage']; 
-                };?>" alt="Profile Pic">
+<div class="profilePageContent">
+    <div class="desktopColumn">
+        <div class="accountWrapper">
+            <div class="accountBox">
+                <div class="proPicContainer">
+                    <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
+                        echo "./private/profile/defaultProfile.png"; 
+                    } else { 
+                        echo "./private/profile/".$profilePicURL['profileImage']; 
+                    };?>" alt="Profile Pic">
+                </div>
+                <p><?= $_SESSION['name'];?></p>
+                <button class="manageAccount">Manage Account</button>
             </div>
-            <p><?= $_SESSION['name'];?></p>
-            <button class="manageAccount">Manage Account</button>
+        </div>
+        <!-- Events Section -->
+        <div class="myEventsWrapper">
+            <p><?= $_SESSION['name'];?>'s Events</p>
+            <?php foreach($usersEvents as $eventsPreview):?>
+                <a href="https://localhost/index.php?action=showEventDetail&eventId="+<?php $eventsPreview['id'];?>>
+                    <div class="eventInfo">
+                        <p><?= $eventsPreview['name'];?></p>
+                        <p><?= $eventsPreview['eventDate'];?></p>
+                        <p><?= $eventsPreview['location'];?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
-    <!-- Events Section -->
-    <div class="myEventsWrapper">
-        Events Go Here
-    </div>
-</div>
 
-<div id="wrapper">
-    <div id="contentLeft">
-        <?php foreach($petPreviews as $preview):?>
-            <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                <div class="petPreviewContents">
-                    <p>NAME <?=" : ".$preview['name'];?></p>
-                    <p>BREED <?=" : ".$preview['breed'];?></p>
-                    <p>AGE <?=" : ".$preview['age']." years";?></p>
-                    <p>COLOR <?=" : ".$preview['color'];?></p>
+    <div id="petWrapper">
+        <div id="contentLeft">
+            <?php foreach($petPreviews as $preview):?>
+                <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                    <div class="petPreviewContents">
+                        <p>NAME <?=" : ".$preview['name'];?></p>
+                        <p>BREED <?=" : ".$preview['breed'];?></p>
+                        <p>AGE <?=" : ".$preview['age']." years";?></p>
+                        <p>COLOR <?=" : ".$preview['color'];?></p>
+                    </div>
+                    <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
                 </div>
-                <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
-            </div>
-        <?php endforeach;?>
+            <?php endforeach;?>
+        </div>
+    <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+    <button id="addPetButton"> Add a Pet!</button>
     </div>
-<!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-<button id="addPetButton"> Add a Pet!</button>
 </div>
-
 <!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
@@ -407,11 +457,15 @@
                                 let response = xhr.responseText;
                                 console.log(response);
                                 if (response.trim() == "success") {
+                                    userImage = document.querySelectorAll(".userImage")
                                     profilePic.setAttribute("src", "./private/profile/defaultProfile.png");
                                     profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
                                     imagePreview.style.display = "none";
                                     profilePicManage.style.display = "block";
                                     profilePicRemoved.removeAttribute("hidden");
+                                    userImage.forEach((item) => {
+                                        item.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    })
                                 } else {
                                     alert("remove failed.");
                                 }

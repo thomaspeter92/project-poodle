@@ -67,3 +67,4 @@ function getGuestProfileImagesOfEvent($eventId, $limit=NULL) {
 
     return $guests; 
 }
+

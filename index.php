@@ -18,7 +18,7 @@ try {
         case "petPreview":
             if(isset($_SESSION['id'])){
                 // THIS ALSO SHOWS OWNER PROFILE PIC
-                showPetPreview($_SESSION['id']);
+                showPetPreview($_SESSION['id']);    
             }else{
                 header("Location: index.php?action=login&error=login");
             }

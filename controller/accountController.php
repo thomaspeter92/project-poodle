@@ -74,6 +74,7 @@ function removeProPic($userID){
     $result = $manager->removeProfilePic($userID);
     if ($result) {
         $result = "success";
+        $_SESSION['imageURL'] = "./private/profile/defaultProfile.png";
     }   else {
         $result = "failed";
     }
