@@ -90,7 +90,11 @@ require_once("Manager.php");
         
         public function getEventDetail($eventId) {
             $db = $this->dbconnect();
+<<<<<<< HEAD
             $req = $db->prepare("SELECT e.id eventId, e.name name, e.location location, e.itinerary itinerary, e.description description, e.imageName picture, e.hostId hostId, e.guestLimit guestLimit, m.name hostName, m.profileImage image, DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+=======
+            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.imageName imageName, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+>>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
             $event =$req->fetch(PDO::FETCH_ASSOC);
@@ -199,34 +203,88 @@ require_once("Manager.php");
 
 
 
-        public function addEditEvent($newEvent){
+        public function getEventEditDetails($eventId){
+            
+            //Retrieving pet's profile from the database
+            $db = $this-> dbConnect();
+            $req = $db->prepare("SELECT name, eventDate, location, itinerary , description, hostId, imageName, expiryDate, guestLimit FROM event WHERE id = ?");
+            //bindparam
+            $req -> execute(array($eventId));
+            $eventDetails = $req -> fetch(PDO::FETCH_ASSOC);
+            $req -> closeCursor();
+            // print_r($profiles);
+            if($_SESSION["id"]===$eventDetails["hostId"]){
+                return $eventDetails;
+            } else{
+                return false;
+            }
+             
+        }
+        public function updateEventDetails($newEvent, $photoData){
             $db = $this->dbConnect();
+          
 
             if(empty($newEvent['eventId'])){
-                $req = $db->prepare("INSERT INTO event (name, eventDate, location, description, hostId, picture, expiryDate, rating, guestLimit, dateCreated) VALUES (:name, :eventDate, :location, :description, :hostId,  :picture, :expiryDate, :rating, :guestLimit, :dateCreated)");
-
+                $req = $db->prepare("INSERT INTO event (name, eventDate, location, itinerary , description, hostId, expiryDate, rating, guestLimit, imageName, dateCreated) VALUES (:name, :eventDateTime, :location, :itinerary , :description, :hostId, :expiryDateTime, :rating, :guestLimit, :imageName, NOW())");
+                $update=false;
             }else {
-                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDate, location = :location, description = :description, hostId = :hostId, picture = :picture, expiryDate = :expiryDate, rating = :rating, guestLimit = :guestLimit, dateCreated = :dateCreated WHERE id = :eventId");
-                $req->bindParam(':eventId', $newEvent['eventId'], PDO::PARAM_INT);
+                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDateTime, location = :location, itinerary  = :itinerary , description = :description, hostId = :hostId,  expiryDate = :expiryDateTime, rating = :rating, guestLimit = :guestLimit, imageName = :imageName WHERE id = :eventId ");
+                
+                $req->bindValue(':eventId', htmlspecialchars($newEvent['eventId']), PDO::PARAM_INT);
+                $update=true;
+
             }
-            $name = htmlspecialchars($newEvent['name']);
-            $eventDate = htmlspecialchars($newEvent['eventDate']);
-            $eventTime = htmlspecialchars($newEvent['eventTime']);
-            $location = htmlspecialchars($newEvent['location']);
-            $description = htmlspecialchars($newEvent['description']);
-            $hostId = htmlspecialchars($newEvent['hostId']);
-            $picture = htmlspecialchars($newEvent['picture']);
-            $expiryDate = htmlspecialchars($newEvent['expiryDate']);
-            $expiryTime = htmlspecialchars($newEvent['expiryTime']);
-            $rating = htmlspecialchars($newEvent['rating']);
-            $guestLimit = htmlspecialchars($newEvent['guestLimit']);
-            $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
+            $name = htmlspecialchars($newEvent['eventName']);//
+            $location ="Seoul Korea";
+            $description = htmlspecialchars($newEvent['eventDescription']);//
+            $hostId = htmlspecialchars($newEvent['hostId']);//
+            // $imageName = "1";
+            $imageName = !empty($photoData['eventPicture']) ? htmlspecialchars($photoData['eventPicture']) : $newEvent['eventPicture'];
+            $rating = 3;
+    // print_r($photoData);
+    // print_r($newEvent);
+            $guestLimit = htmlspecialchars($newEvent['eventGuestLimit']);//
+            $itinerary  = $newEvent['itinerary'];//
+            // $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
+
+            // Combine the date and time into datetime object
+            $eventDate = new DateTime(strip_tags($newEvent['eventDate']));//
+            $eventTime = new DateTime(strip_tags($newEvent['eventTime']));//
+            $expiryDate = new DateTime(strip_tags($newEvent['eventExpiryDate']));//
+            $expiryTime = new DateTime(strip_tags($newEvent['eventExpiryTime']));//
+            $eventDateTime = new DateTime($eventDate->format('Y-m-d').' '.$eventTime->format('H:i:s'));
+            $expiryDateTime = new DateTime($expiryDate->format('Y-m-d').' '.$expiryTime->format('H:i:s'));
 
             $req->bindParam(':name',$name,PDO::PARAM_STR);
-            $req->bindParam(':eventDate',$eventDate,PDO::PARAM_STR);
-           
-            // $req->execute();
+            $req->bindValue(':eventDateTime',$eventDateTime->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+            $req->bindValue(':expiryDateTime',$expiryDateTime->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+            $req->bindParam(':location',$location,PDO::PARAM_STR);
+            $req->bindParam(':description',$description,PDO::PARAM_STR);
+            $req->bindParam(':hostId',$hostId,PDO::PARAM_INT);
+            $req->bindParam(':imageName',$imageName,PDO::PARAM_STR);
+            $req->bindParam(':rating',$rating,PDO::PARAM_INT);
+            $req->bindParam(':guestLimit',$guestLimit,PDO::PARAM_INT);
+            $req->bindParam(':itinerary',$itinerary ,PDO::PARAM_STR);
+            $req->bindParam(':imageName',$imageName,PDO::PARAM_STR);
+
+            $result = $req->execute();
             $req->closeCursor();  
+            if($result) {
+                $resp = $update ? htmlspecialchars($newEvent['eventId']) : $db->lastInsertId();
+                return $resp;
+            }else{
+                return NULL;}
+
+        }
+
+        public function deleteEvent($eventId) {
+            $db = $this->dbConnect();
+
+            $req = $db->prepare("DELETE FROM event WHERE id = :eventId");
+            $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
+
+            $req->execute();
+            $req->closeCursor();
         }
 
     }

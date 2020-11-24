@@ -15,8 +15,6 @@ function checkLogin($params)
         $memberDataFromDB = $loginManager->getMemberDataByEmail($emailLogin);
 
         if ($memberDataFromDB) {
-            $memberDataFromDB["id"];
-            $memberDataFromDB["name"];
             createSession($memberDataFromDB["id"],$memberDataFromDB["name"],"");
             header("Location: index.php");
         } else {

@@ -1,4 +1,8 @@
 <?php ob_start();?>
+<<<<<<< HEAD
+=======
+<!-- <link rel="stylesheet" href="./public/css/Modal.css"/> -->
+>>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
 
 <style>
 
@@ -468,6 +472,10 @@
 }
 
 
+    /* Franco */
+    #editEvent:hover, .deleteEvent:hover{
+        cursor: pointer;
+    }
 </style>
 
 <?php $style = ob_get_contents();?>
@@ -496,6 +504,7 @@ $eventPassed = $eventTime < $currentTime ? true : false;
 //IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
 if($event) {
 ?>
+
 <div id="wrapper">
     <div class=eventDetail>
         <div class="eventDetailHeader">
@@ -504,7 +513,10 @@ if($event) {
                 <h3><?= $event['name']; ?></h3>
                 <div id="headerContentExtra">
                     <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
-
+                    <!-- Franco -->
+                    <?php if ($event['hostId'] === $_SESSION['id']) { ?>
+                        <i id="editEvent" class="fas fa-edit" data-eventid="<?=$event['eventId'];?>"></i><i class="fas fa-trash-alt deleteEvent" data-eventid="<?=$event['eventId']; ?>"></i> <?php }; ?>
+                    <!-- Franco -->
             
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
@@ -529,9 +541,14 @@ if($event) {
 
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
+<<<<<<< HEAD
                 <h4 id="aboutEvent">About this Event: </h4>
                 <img class="eventImage" src="./public/images/eventImages/eventImage<?= $event['picture']; ?>.jpg" />
                 <?= nl2br($event['description']); ?>
+=======
+                <img class="eventImage" src="./private/event/<?= $event['imageName']; ?>" />
+                <?= $event['description']; ?>
+>>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
                 
                 <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>  <?= !isset($_SESSION['id']) ? '<em>*Sign In to Leave a Comment</em>' : '';?> 
@@ -606,6 +623,10 @@ if($event) {
         </div>
         <a id="seeAllEvents" href="index.php?action=events">See All</a>
     </div>
+    <!-- Franco -->
+    <form id="eventDeleteForm" method="POST" action="index.php?action=deleteEvent">
+        <input type="hidden" id="eventId" name="eventId" value="<?=$event['eventId'];?>">
+    </form>
 </div>
 
 <!-- ERROR IF USER SEARCHES FOR AN INVALID EVENT!  -->
@@ -618,9 +639,9 @@ if($event) {
 <!-- <script src="./public/js/Modal.js"></script> -->
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2">
 </script>
-
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
+<script src="./public/js/event.js"></script>
 <script>
-
 //FUNCTION TO SUBMIT COMMENTS TO THE DB
     let commentForm = document.querySelector('#commentForm');
     commentForm.addEventListener('submit', function(e) {
@@ -726,6 +747,7 @@ if($event) {
         }
     }
 
+<<<<<<< HEAD
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
     var guestCount = document.querySelector('#guestCount');
     var guestCounter = 5;
@@ -838,6 +860,35 @@ if($event) {
             strokeStyle: 'solid'
         });
     polyline.setMap(map);
+=======
+    let deleteEventButton = document.querySelector('.deleteEvent');
+    if (deleteEventButton){
+        deleteEventButton.addEventListener('click', function(e) {
+            // let eventId = e.target.getAttribute("data-eventId");
+            deleteEvent();
+        });
+    }
+
+    function deleteEvent (){
+        if (confirm('Are you sure you want to delete?')) { 
+            let deleteFormEle = document.getElementById("eventDeleteForm");
+            deleteFormEle.submit();
+        }
+    }
+
+    // function editEvent (eventId){
+
+    //     createAddEditEventModal(eventId);
+    // }
+
+    let editEventButton = document.getElementById('editEvent');
+    if (editEventButton){
+        editEventButton.addEventListener('click', function(e) {
+            let eventId = e.target.getAttribute("data-eventid");
+            createAddEditEventModal(eventId);
+        });
+    }
+>>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
 
 </script>
 

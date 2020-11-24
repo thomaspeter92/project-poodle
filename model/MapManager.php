@@ -6,7 +6,7 @@ require_once("Manager.php");
             
             
             $db = $this-> dbConnect();
-            // $req = $db->prepare("FROM petProfile WHERE id = ?");
+            $req = $db->prepare("FROM petProfile WHERE id = ?");
             //bindparam
             $req -> execute(array($eventId));
             $event = $req -> fetch(PDO::FETCH_ASSOC);
