@@ -541,14 +541,9 @@ if($event) {
 
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
-<<<<<<< HEAD
                 <h4 id="aboutEvent">About this Event: </h4>
                 <img class="eventImage" src="./public/images/eventImages/eventImage<?= $event['picture']; ?>.jpg" />
                 <?= nl2br($event['description']); ?>
-=======
-                <img class="eventImage" src="./private/event/<?= $event['imageName']; ?>" />
-                <?= $event['description']; ?>
->>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
                 
                 <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>  <?= !isset($_SESSION['id']) ? '<em>*Sign In to Leave a Comment</em>' : '';?> 
@@ -747,7 +742,6 @@ if($event) {
         }
     }
 
-<<<<<<< HEAD
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
     var guestCount = document.querySelector('#guestCount');
     var guestCounter = 5;
@@ -860,7 +854,6 @@ if($event) {
             strokeStyle: 'solid'
         });
     polyline.setMap(map);
-=======
     let deleteEventButton = document.querySelector('.deleteEvent');
     if (deleteEventButton){
         deleteEventButton.addEventListener('click', function(e) {
@@ -888,7 +881,6 @@ if($event) {
             createAddEditEventModal(eventId);
         });
     }
->>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
 
 </script>
 

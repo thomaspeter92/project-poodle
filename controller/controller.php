@@ -96,16 +96,11 @@ function accountView($userID){
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByID($userID);
     require("./view/accountView.php");
-};
+}
 function legalPage(){
     require('./view/legalPageView.php');
 }
-<<<<<<< HEAD
-function addEditEvent(){
-    require('./view/addEditEventView.php');
-}
 
-=======
 function displayAddEditEvent($eventId){
     if(!empty($eventId)){
         $eventManager = new EventManager();
@@ -167,7 +162,6 @@ function deleteEvent($eventId) {
 
 
 
->>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
 function showMap(){
     // echo $petId;
     $mapManager = new MapManager();

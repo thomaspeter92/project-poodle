@@ -90,11 +90,7 @@ require_once("Manager.php");
         
         public function getEventDetail($eventId) {
             $db = $this->dbconnect();
-<<<<<<< HEAD
             $req = $db->prepare("SELECT e.id eventId, e.name name, e.location location, e.itinerary itinerary, e.description description, e.imageName picture, e.hostId hostId, e.guestLimit guestLimit, m.name hostName, m.profileImage image, DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
-=======
-            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.imageName imageName, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
->>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
             $event =$req->fetch(PDO::FETCH_ASSOC);
