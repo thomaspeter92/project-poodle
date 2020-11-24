@@ -42,7 +42,7 @@ class MemberManager extends Manager{
     public function getMemberDataByID($id) {
         $id = htmlspecialchars($id);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, password, email, kakao, google FROM member WHERE id=:id";
+        $query = "SELECT id, name, password, email, kakao, google, profileImage FROM member WHERE id=:id";
         $response = $db->prepare($query);
         $response->bindParam('id', $id, PDO::PARAM_STR);
         $response->execute();
@@ -137,13 +137,22 @@ class MemberManager extends Manager{
 
     function removeProfilePic($userID) {
         $db = $this->dbConnect();
-        $query = "UPDATE member SET profileImage = :profileImage WHERE id = :userID";
+        $query = "UPDATE member SET profileImage = NULL WHERE id = $userID";
         $response = $db->prepare($query);
-            $response->bindValue(":profileImage", "NULL", PDO::PARAM_STR);
-            $response->bindValue(":userID", $userID, PDO::PARAM_INT);
             $result = $response->execute();
             $response->closeCursor();
-    
+            
             return $result;
+    }
+
+    function getProfilePic($userID) {
+        $db = $this->dbConnect();
+        $query = "SELECT profileImage FROM member WHERE id = $userID";
+        $response = $db->prepare($query);
+            $response->execute();
+            $profilePicURL = $response->fetch(PDO::FETCH_ASSOC);
+            $response->closeCursor();
+
+            return $profilePicURL;
     }
 }

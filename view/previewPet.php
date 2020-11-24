@@ -96,9 +96,14 @@
     }
 
 
+    /* .proPicContainer {
+
+    } */
+
     .profilePic {
-            height:100px;
-            width:100px;
+            max-height:100px;
+            max-width:100px;
+            overflow: hidden;
     }
 
     .modalDivContent .profilePic {
@@ -144,11 +149,24 @@
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <br><br><br><br><br><br><br><br>
 
-<div class="accountWrapper">
-    <div class="accountBox">
-        <img class="profilePic" src="<?php if (isset($_SESSION['imageURL'])){ echo $_SESSION['imageURL']; } else { echo "./public/images/adminPlaceholder.png"; }; ?>" alt="Profile Pic">
-        <p><?= $_SESSION['name'];?></p>
-        <p class="manageAccount">Manage Account</p>
+
+<div class="desktopColumn">
+    <div class="accountWrapper">
+        <div class="accountBox">
+            <div class="proPicContainer">
+                <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
+                    echo "./private/profile/defaultProfile.png"; 
+                } else { 
+                    echo "./private/profile/".$profilePicURL['profileImage']; 
+                };?>" alt="Profile Pic">
+            </div>
+            <p><?= $_SESSION['name'];?></p>
+            <button class="manageAccount">Manage Account</button>
+        </div>
+    </div>
+    <!-- Events Section -->
+    <div class="myEventsWrapper">
+        Events Go Here
     </div>
 </div>
 
@@ -338,7 +356,8 @@
                     let dropdownContent = document.querySelector('.dropdownContent')
                     let modalWindow = document.querySelector('.modalSubDiv');
                     let imagePreview = document.querySelector('.imagePreview')
-                    let profilePic = document.querySelector('.profilePicManage')
+                    let profilePicManage = document.querySelector('.profilePicManage')
+                    let profilePic = document.querySelector('.profilePic');
 
 
 
@@ -363,7 +382,7 @@
                             const reader = new FileReader();
 
                             imagePreview.style.display = "block";
-                            profilePic.style.display = "none"
+                            profilePicManage.style.display = "none";
 
                             reader.addEventListener("load", function() {
                                 imagePreview.setAttribute("src", this.result);
@@ -372,21 +391,35 @@
                             reader.readAsDataURL(file);
                         } else {
                             imagePreview.style.display = "none";
-                            profilePic.style.display = "block";
+                            profilePicManage.style.display = "block";
                             previewImage.setAttribute("src", "");
                         }
                     })
 
                     // REMOVE PROFILE PICTURE
-                    imageDropBtn.addEventListener("click", event => {
-                        const xhr = new XMLHttpRequest();
+                    imgRemove.addEventListener("click", function () {
+                        console.log("clicked");
+                        let xhr = new XMLHttpRequest();
+                        
                         xhr.open('GET', 'index.php?action=removeProfilePic');
-                        xhr.addEventListener("load", () => {
-                            if (xhr.status === 200) {
-                            
+                        console.log(xhr);
+                        xhr.onload = function () {
+                            if(xhr.status === 200){
+                                let response = xhr.responseText;
+                                console.log(response);
+                                if (response.trim() == "success") {
+                                    profilePic.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    imagePreview.style.display = "none";
+                                    profilePicManage.style.display = "block";
+                                } else {
+                                    alert("remove failed.");
+                                }
+                            } else {
+                                alert("remove failed.");
                             }
+                        }
                         xhr.send(null);
-                        });
                     });
 
 

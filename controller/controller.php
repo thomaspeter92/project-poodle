@@ -17,12 +17,16 @@ function showPetProfile($petId){
     // echo $petId;
     $petProfileManager = new PetProfileManager();
     $petProfile = $petProfileManager->getPetProfile($petId);
+
     require("./view/petProfileView.php");
 }
 function showPetPreview($ownerId){
     // echo $petId;
     $previewManager = new PetProfileManager();
     $petPreviews = $previewManager->getPreview($ownerId);
+    $manager = new MemberManager();
+    // NEW CODE TO SHOw OWNER PROFILE PIC
+    $profilePicURL = $manager->getProfilePic($ownerId);
     require("./view/previewPet.php");
 }
 
@@ -73,5 +77,4 @@ function legalPage(){
 function addEditEvent(){
     require('./view/addEditEventView.php');
 }
-
 

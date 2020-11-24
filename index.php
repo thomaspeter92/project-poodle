@@ -1,7 +1,6 @@
 <?php
 session_start();
 require("./controller/controller.php");
-// require("./controller/accountController.php");
 
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
@@ -19,6 +18,7 @@ try {
             break;
         case "petPreview":
             if(isset($_SESSION['id'])){
+                // THIS ALSO SHOWS OWNER PROFILE PIC
                 showPetPreview($_SESSION['id']);
             }else{
                 login();
@@ -161,7 +161,8 @@ try {
             if(!isset($_SESSION['id'])){
                 header("Location: index.php?action=petPreview&error=notSignedIn");
             } else {
-                removeProPic($_SESSION['id']);
+                $result = removeProPic($_SESSION['id']);
+                echo $result;
             }
             break;
         case "showEventDetail" :
