@@ -295,23 +295,28 @@
     // --------------------------ACCOUNT FUNCTIONS---------------------------------
 
     function saveAccountChanges () {
+        console.log("clicked");
         const nameInput = document.querySelector("#nameInput").value;
         const emailInput = document.querySelector("#emailInput").value;
         const imgInput = document.querySelector("#imageInput");
         const file = imgInput.files[0];
 
-        const url = "./controller/changeAccountController.php";
+        const url = "index.php?action=checkChangeAccount";
         const params = new FormData();
 
         params.append("nameInput", nameInput);
         params.append("emailInput", emailInput);
         params.append("file", file);
 
+        // console.log(params);
+
         const xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         xhr.addEventListener("load", () => {
+            // console.log(xhr.status)
             if (xhr.status === 200) {
                 response = xhr.responseText;
+                console.log(response);
                 accountEmpty = document.querySelector("#accountEmpty");
                 if (response.trim() == "emptyField") {
                     accountEmpty.removeAttribute("hidden");
@@ -352,6 +357,7 @@
                     let imagePreview = document.querySelector('.imagePreview')
                     let profilePicManage = document.querySelector('.profilePicManage')
                     let profilePic = document.querySelector('.profilePic');
+                    let profilePicRemoved = document.querySelector('#profilePicRemoved')
 
 
 
@@ -359,6 +365,7 @@
                     imageDropBtn.addEventListener("click", event => {
                         event.stopPropagation();
                         document.querySelector(".dropdownContent").classList.toggle("show");
+                        profilePicRemoved.setAttribute("hidden", true);
                         // dropdownContent.setAttribute("hidden", true);
                     })
 
@@ -392,11 +399,9 @@
 
                     // REMOVE PROFILE PICTURE
                     imgRemove.addEventListener("click", function () {
-                        console.log("clicked");
                         let xhr = new XMLHttpRequest();
                         
                         xhr.open('GET', 'index.php?action=removeProfilePic');
-                        console.log(xhr);
                         xhr.onload = function () {
                             if(xhr.status === 200){
                                 let response = xhr.responseText;
@@ -406,6 +411,7 @@
                                     profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
                                     imagePreview.style.display = "none";
                                     profilePicManage.style.display = "block";
+                                    profilePicRemoved.removeAttribute("hidden");
                                 } else {
                                     alert("remove failed.");
                                 }
@@ -428,10 +434,10 @@
                     let successPW = document.querySelector(".successPW");
                     let needDiffPW = document.querySelector(".needDiffPW");
                     let failedPW = document.querySelector(".failedPW");
-                    let cancelBtn = document.querySelector(".modalCancel")
+                    let cancelBtn = document.querySelector(".modalCancel");
                     let emptyPW = document.querySelector(".emptyPW");
-                    let matchPW = document.querySelector(".matchPW")
-                    let accountForm = document.querySelector(".accountForm")
+                    let matchPW = document.querySelector(".matchPW");
+                    let accountForm = document.querySelector(".accountForm");
 
                     // PW Inputs
                     let currentInput = document.querySelector("#currentPW");
@@ -471,7 +477,7 @@
                         const confirmPW = document.querySelector("#confirmPW").value;
                         const newPW = document.querySelector("#newPW").value;
 
-                        const url = "./controller/changePWController.php";
+                        const url = "index.php?action=checkChangePassword";
                         // Send URL through index PHP
                         const params = new FormData();
                         params.append("currentPW", currentPW);
@@ -486,7 +492,7 @@
                                 if (response.trim() == "emptyPW") {
                                     emptyPW.removeAttribute("hidden"); 
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                     matchPW.setAttribute("hidden", true);
                                 }
@@ -494,7 +500,7 @@
                                     matchPW.removeAttribute("hidden"); 
                                     emptyPW.setAttribute("hidden", true); 
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                 }
                                 if (response.trim() == "success") {
@@ -506,9 +512,10 @@
                                     confirmInput.value = "";
                                     successPW.removeAttribute("hidden");
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                     matchPW.setAttribute("hidden", true);
+                                    accountForm.removeAttribute("hidden");
                                 } 
                                 if (response.trim() == "needDiffPW") {
                                     currentInput.value = "";
@@ -529,6 +536,30 @@
                         });
                         xhr.send(params);
                     });
+
+                    let deleteAccountBtn = document.querySelector('#deleteAccountBtn');
+                    deleteAccountBtn.addEventListener("click", function () {
+                        if (confirm("Are you sure you want to delete your account?")) {
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'index.php?action=deleteAccountCheck');
+                            xhr.addEventListener("load", () => {
+                                if (xhr.status === 200) {
+                                    response = xhr.responseText;
+                                    if (response.trim() == "success"){
+                                        window.location.replace("index.php?action=landing&account=deleted");
+                                    } else {
+                                        alert("Delete account Failed at DB")
+                                    }
+
+                                } else {
+                                    alert("Ajax Failed")
+                                }
+                            })
+                            xhr.send(null);
+                        } else {
+                            return null;
+                        }
+                    })
                     new FormCheck().formCheck();// Marie ugly way of calling
 
                 }
@@ -536,6 +567,8 @@
             }
             xhr.send(null);
         })
+
+        
     })
 
 

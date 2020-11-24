@@ -3,7 +3,16 @@ ob_start();
 ?>
 <link rel="stylesheet" href="./public/css/landing.css">
 <!-- ************** CAROUSEL AREA ************* -->
-
+<?php
+if (isset($_GET['account'])) {
+    if ($_GET['account'] == "deleted") { ?>
+    <div id="accountDeletedMsg">Your Account Has Been Deleted!</div>
+    <?php
+    } else {
+        return null;
+    }
+}
+?>
 <div id="carousel">
     <img src="./public/images/dogCarousel4.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">

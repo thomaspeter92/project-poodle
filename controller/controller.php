@@ -25,8 +25,8 @@ function showPetPreview($ownerId){
     // echo $petId;
     $previewManager = new PetProfileManager();
     $petPreviews = $previewManager->getPreview($ownerId);
+    // NEW CODE TO SHOW OWNER PROFILE PIC
     $manager = new MemberManager();
-    // NEW CODE TO SHOw OWNER PROFILE PIC
     $profilePicURL = $manager->getProfilePic($ownerId);
     require("./view/previewPet.php");
 }

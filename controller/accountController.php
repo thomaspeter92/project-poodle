@@ -43,17 +43,13 @@ function checkChangeAccount($inputs, $image, $userID){
         }
     };
 
-    // echo "account controller";
-   
-    // echo getcwd();
-
     if(empty($image)) {
         $result = "success";
     } else {
         $profileImageName = $image['file']['name'];
         $profileImageNameNoSpace = str_replace(' ', '', $profileImageName);
         $profileImageNameUnique = time().'_'.$profileImageNameNoSpace;
-        $target = '../private/profile/'.$profileImageNameUnique;
+        $target = './private/profile/'.$profileImageNameUnique;
 
         if (move_uploaded_file($image['file']['tmp_name'], $target)) {
             $result = $manager->changeProfilePic($profileImageNameUnique, $userID);
@@ -84,6 +80,17 @@ function removeProPic($userID){
     return $result;
 }
 
+function deleteAccountCheck($userID){
+    $manager = new MemberManager();
+    $result = $manager->deleteAccount($userID);
+    if ($result) {
+        $result = "success";
+        session_destroy();
+    }   else {
+        $result = "failed";
+    }
+    return $result;
+}
 
 
 ?>

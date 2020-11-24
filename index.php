@@ -20,11 +20,8 @@ try {
                 // THIS ALSO SHOWS OWNER PROFILE PIC
                 showPetPreview($_SESSION['id']);
             }else{
-                login();
+                header("Location: index.php?action=login&error=login");
             }
-            
-            //We have to check if it also works with our cookies 
-            
             break;
         case "login":
             login();
@@ -161,11 +158,44 @@ try {
                 login();
             }
             break;
+        case "checkChangeAccount":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            }
+            else if (empty($_REQUEST['nameInput']) || empty($_REQUEST['emailInput'])) {
+                $result = "emptyField";
+            } else {
+                $result = checkChangeAccount($_REQUEST, $_FILES, $_SESSION['id']);
+            }
+            echo $result;
+            break;
+        case "checkChangePassword":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            }
+            else if (empty($_REQUEST['currentPW']) || empty($_REQUEST['newPW']) || empty($_REQUEST['confirmPW'])) {
+                $result = "emptyPW";
+            } else if($_REQUEST['newPW'] !== $_REQUEST['confirmPW']) {
+                $result = "matchPW";
+            } else {
+                $result = checkChangePW($_REQUEST, $_SESSION['id']);
+            }
+            
+            echo $result;
+            break;
         case "removeProfilePic":
             if(!isset($_SESSION['id'])){
                 header("Location: index.php?action=petPreview&error=notSignedIn");
             } else {
                 $result = removeProPic($_SESSION['id']);
+                echo $result;
+            }
+            break;
+        case "deleteAccountCheck":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            } else {
+                $result = deleteAccountCheck($_SESSION['id']);
                 echo $result;
             }
             break;

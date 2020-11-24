@@ -60,9 +60,10 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                             <a href="index.php?action=contactPage">Contact</a>
                         </div>
                         <?php
-                        if (!isset($_SESSION['id'])) {?>
+                        if (!isset($_SESSION['id'])) {
+                        ?>
                             
-                            <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                            <div><img class="userImage" src="<?=$sessionImageURL?>" alt="Profile Pic"></div>
                             <div>
                             <a id="desktopLogInLink" href="#">Sign In</a>
                             <a id="desktopSignUpLink" href='#' class="headerSignUp">Sign Up</a> 
@@ -71,7 +72,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         } else {
                         ?>
                             <div class="userImageWrapper">
-                                <div><img class="userImage" src="./public/images/adminPlaceholder.png" alt="default"></div>
+                                <div><img class="userImage" src="<?=$sessionImageURL?>" alt="default"></div>
                                 <!-- <div><i class="fas fa-star"></i></div> -->
                                 <div class="stars">
                                     <img class="" src="./public/images/star.png" alt="default">
@@ -98,16 +99,16 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <?php
                         if (!isset($_SESSION['id'])) {?>
                             <div class="userImageWrapper">
-                                <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                                <img class="userImage" src="<?=$sessionImageURL;?>" alt="default">
                             </div>
                         <?php 
                         } else {
                         ?>  
                             <div class="mobileLoggedIn">
                                 <div class="userImageWrapper">
-                                    <img class="userImage" src="./public/images/adminPlaceholder.png" alt="default">
+                                    <img class="userImage" src="<?=$sessionImageURL;?>" alt="default">
                                     <!-- <div class="userImage"> -->
-                                    <!-- <div><img src=<?= $sessionImageURL;?> alt="default"></div> -->
+                                    <!-- <div><img src=<?=$sessionImageURL;?> alt="default"></div> -->
                                     <div class="stars">
                                         <img class="" src="./public/images/star.png" alt="default">
                                         <img class="" src="./public/images/star.png" alt="default">

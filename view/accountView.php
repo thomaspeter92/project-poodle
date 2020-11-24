@@ -166,6 +166,7 @@
         </div>
     </div>
     <br>
+    <div id="profilePicRemoved" hidden>You have removed your profile picture.<br></div>
     <div>First Name:</div>
     <input type="text" name="nameInput" id="nameInput" class="required" value="<?=$memberDataFromDB['name'] ?>">
     <br>
@@ -201,5 +202,9 @@
     <div class="successPW" hidden><br>Password change successful</div>
     <div class="matchPW" hidden><br>New password does not match the confirmed password.</div>
 </div>
+<br>
+<br>
+<button id="deleteAccountBtn">Delete Account</button>
+
 <br>
 <br>

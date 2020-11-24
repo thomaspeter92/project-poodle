@@ -164,4 +164,15 @@ class MemberManager extends Manager{
 
             return $profilePicURL;
     }
+
+    function deleteAccount($userID) {
+        $db = $this->dbConnect();
+        $req = $db->prepare("DELETE FROM member WHERE id = $userID");
+        $req->bindParam(':petId',$petId,PDO::PARAM_INT);
+
+        $result = $req->execute();
+        $req->closeCursor();
+
+        return $result;
+    }
 }
