@@ -200,7 +200,8 @@ try {
                 "eventExpiryTime" => $_REQUEST['eventExpiryTime'],
                 "eventDescription" => $_REQUEST['eventDescription'],
                 "hostId" => $_SESSION['id'],
-                "eventId" => $_REQUEST['eventId']);
+                "eventId" => $_REQUEST['eventId'],
+                "itenary" => $_REQUEST['itenary']);
 
                 addEditEventDetails($eventData);
             }
@@ -210,6 +211,9 @@ try {
             showUpcomingEventsList();
             break;
             
+        case "requestMap":
+            showMap($_REQUEST['eventId']);
+            break;
         default:
             landing();
             break;

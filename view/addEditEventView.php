@@ -116,7 +116,7 @@
     }
 /* Style for maps */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-    #map{
+    #map2{
         border: 2px solid black;
         border-radius: 10px;
         margin-top: 1%;
@@ -179,22 +179,10 @@
         <progress id= "stepIndicator" value="33" max="100" ></progress>
     </div>
     <div id="stepEventSection">
-        <div id="eventStep4">
-            <!-- Choose location for event -->
-            <p>Choose location to hold the event</p>
-            <!-- <div id="eventMap"></div> -->
-            <div class='subSection2'>
-             <label for=""></label>
-                <div id="mapContainer">
-                    <div id="map"></div>
-                    <div id="vendorList">
-                    </div>
-                </div>
-        </div>
 
-        </div>
         <div id="eventStep1">
-            <div class='subSection2'>
+
+        <div class='subSection2'>
                 <div>
                     <label for="eventName" class="formCol2">Name of event :</label> 
                     <input type="text" name="eventName" id="eventName" class="loginInput" value="<?=isset($eventEditDetails['name']) ? $eventEditDetails['name'] : ""; ?>" required>
@@ -203,18 +191,12 @@
                     <label for="eventGuestLimit" class="formCol2">Guest limit :</label> 
                     <input type="number" name="eventGuestLimit" id="eventGuestLimit" class="loginInput" value="<?=isset($eventEditDetails['guestLimit']) ? $eventEditDetails['guestLimit'] : ""; ?>">
                 </div>
-<!-- 
-                <div id="mapContainer">
-                <div id="map"></div>
-                <div id="vendorList">
-                </div>
-            </div> -->
 
             </div>
             <fieldset class="subSection2">
                 <legend>Enter date and time when the event is happening</legend>
                 <div>
-                    <?php if (isset($eventEditDetails['eventDate'])){
+                <?php if (isset($eventEditDetails['eventDate'])){
                         $dateObj = new DateTime($eventEditDetails['eventDate']);
                         $eventDate = $dateObj->format('Y-m-d');
                         $eventTime = $dateObj->format('H:i:s');
@@ -243,7 +225,8 @@
                     <label for="eventExpiryTime" class="formCol2">Last time :</label> 
                     <input type="time" name="eventExpiryTime" id="eventExpiryTime" class="loginInput" value="<?=isset($eventEditDetails['expiryDate']) ? $expiryTime : ''; ?>">
                 </div>
-            </fieldset>
+            </fieldset> 
+
         </div>
         <div  id="eventStep2">
             <div>
@@ -261,6 +244,20 @@
                 <div id="eventPictureFrame"></div>
             </div>
         </div>
+        <div id="eventStep4">
+
+            <p>Choose location to hold the event</p>
+            <div id="mapContainer">
+                <div id="map2"></div>
+                <div id="calculateDistance">Calculate Distance<div id="distanceDiv"></div></div>
+                <div id="distanceDiv"></div>
+                <div id="locationList"></div>
+                <br><br><br>
+                <div id="vendorList">
+                </div>
+            </div> 
+
+        </div>
     </div>
     <div id="stepEventFooter">
         <div id="eventSpaceLeft">
@@ -274,5 +271,7 @@
         </div>
         <input type="hidden" name="hostId" value="<?= $_SESSION['id']; ?>">
         <input type="hidden"  name="eventId" value="<?= isset($eventId) ? $eventId : null ;?>">
+        <input id="itenary" type="hidden" name="itenary" value="<?= isset($eventEditDetails['itenary']) ? $eventEditDetails['itenary'] : '' ?>">
+    
     </div>
 </form>

@@ -237,7 +237,7 @@
 
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
-                <img class="eventImage" src="./public/images/eventImages/eventImage<?= $event['picture']; ?>.jpg" />
+                <img class="eventImage" src="./private/event/<?= $event['imageName']; ?>" />
                 <?= $event['description']; ?>
                 
                 <form action="index.php?action=eventCommentPost" method="POST" id="commentForm">

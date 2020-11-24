@@ -87,7 +87,7 @@ require_once("Manager.php");
         public function getEventDetail($eventId) {
 
             $db = $this->dbconnect();
-            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.picture picture, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+            $req = $db->prepare("SELECT e.id eventId, e.name name, e.eventDate eventDate, e.location location, e.description description, e.imageName imageName, e.hostId hostId, m.name hostName FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
 
@@ -169,7 +169,7 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, eventDate, location, description, hostId, picture, expiryDate, guestLimit FROM event WHERE id = ?");
+            $req = $db->prepare("SELECT name, eventDate, location, itenary, description, hostId, imageName, expiryDate, guestLimit FROM event WHERE id = ?");
             //bindparam
             $req -> execute(array($eventId));
             $eventDetails = $req -> fetch(PDO::FETCH_ASSOC);
@@ -186,25 +186,23 @@ require_once("Manager.php");
             $db = $this->dbConnect();
           
             if(empty($newEvent['eventId'])){
-                $req = $db->prepare("INSERT INTO event (name, eventDate, location, description, hostId, picture, expiryDate, rating, guestLimit, dateCreated) VALUES (:name, :eventDateTime, :location, :description, :hostId,  :picture, :expiryDateTime, :rating, :guestLimit, NOW())");
+                $req = $db->prepare("INSERT INTO event (name, eventDate, location, itenary, description, hostId, expiryDate, rating, guestLimit, imageName, dateCreated) VALUES (:name, :eventDateTime, :location, :itenary, :description, :hostId, :expiryDateTime, :rating, :guestLimit, :imageName, NOW())");
                 $update=false;
             }else {
-                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDateTime, location = :location, description = :description, hostId = :hostId, picture = :picture, expiryDate = :expiryDateTime, rating = :rating, guestLimit = :guestLimit  WHERE id = :eventId ");
+                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDateTime, location = :location, itenary = :itenary, description = :description, hostId = :hostId,  expiryDate = :expiryDateTime, rating = :rating, guestLimit = :guestLimit, imageName = :imageName WHERE id = :eventId ");
                 
                 $req->bindValue(':eventId', htmlspecialchars($newEvent['eventId']), PDO::PARAM_INT);
                 $update=true;
 
             }
             $name = htmlspecialchars($newEvent['eventName']);//
-            // $location = htmlspecialchars($newEvent['location']);
-            $location ="Long Lat";
+            $location ="Seoul Korea";
             $description = htmlspecialchars($newEvent['eventDescription']);//
             $hostId = htmlspecialchars($newEvent['hostId']);//
-            // $picture = htmlspecialchars($newEvent['eventPicture']);
-            $picture = 1;
-            // $rating = htmlspecialchars($newEvent['rating']);
+            $imageName = "1";
             $rating = 3;
             $guestLimit = htmlspecialchars($newEvent['eventGuestLimit']);//
+            $itenary = $newEvent['itenary'];//
             // $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
 
             // Combine the date and time into datetime object
@@ -221,9 +219,10 @@ require_once("Manager.php");
             $req->bindParam(':location',$location,PDO::PARAM_STR);
             $req->bindParam(':description',$description,PDO::PARAM_STR);
             $req->bindParam(':hostId',$hostId,PDO::PARAM_INT);
-            $req->bindParam(':picture',$picture,PDO::PARAM_INT);
+            $req->bindParam(':imageName',$imageName,PDO::PARAM_STR);
             $req->bindParam(':rating',$rating,PDO::PARAM_INT);
             $req->bindParam(':guestLimit',$guestLimit,PDO::PARAM_INT);
+            $req->bindParam(':itenary',$itenary,PDO::PARAM_STR);
 
             $result = $req->execute();
             $req->closeCursor();  
