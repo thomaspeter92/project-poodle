@@ -271,7 +271,7 @@
         </div>
         <input type="hidden" name="hostId" value="<?= $_SESSION['id']; ?>">
         <input type="hidden"  name="eventId" value="<?= isset($eventId) ? $eventId : null ;?>">
-        <input id="itenary" type="hidden" name="itenary" value="<?= isset($eventEditDetails['itenary']) ? $eventEditDetails['itenary'] : '' ?>">
+        <input id="itinerary" type="hidden" name="itinerary" value="<?= isset($eventEditDetails['itinerary']) ? $eventEditDetails['itinerary'] : '' ?>">
     
     </div>
 </form>

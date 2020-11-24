@@ -201,7 +201,7 @@ try {
                 "eventDescription" => $_REQUEST['eventDescription'],
                 "hostId" => $_SESSION['id'],
                 "eventId" => $_REQUEST['eventId'],
-                "itenary" => $_REQUEST['itenary']);
+                "itinerary" => $_REQUEST['itinerary']);
 
                 addEditEventDetails($eventData);
             }

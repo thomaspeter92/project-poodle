@@ -33,8 +33,8 @@ const createAddEditEventModal = (id) =>{
 
             if (eventForm) {
                 eventForm.addEventListener("submit", function(){
-                    var eventItenaryEle = document.getElementById("itenary");
-                     eventItenaryEle.value = JSON.stringify(polyLineArray);
+                    var eventItineraryEle  = document.getElementById("itinerary");
+                    eventItineraryEle.value = JSON.stringify(polyLineArray);
                     
                 });  
             }

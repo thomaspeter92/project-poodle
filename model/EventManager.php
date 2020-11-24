@@ -169,7 +169,7 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, eventDate, location, itenary, description, hostId, imageName, expiryDate, guestLimit FROM event WHERE id = ?");
+            $req = $db->prepare("SELECT name, eventDate, location, itinerary , description, hostId, imageName, expiryDate, guestLimit FROM event WHERE id = ?");
             //bindparam
             $req -> execute(array($eventId));
             $eventDetails = $req -> fetch(PDO::FETCH_ASSOC);
@@ -186,10 +186,10 @@ require_once("Manager.php");
             $db = $this->dbConnect();
           
             if(empty($newEvent['eventId'])){
-                $req = $db->prepare("INSERT INTO event (name, eventDate, location, itenary, description, hostId, expiryDate, rating, guestLimit, imageName, dateCreated) VALUES (:name, :eventDateTime, :location, :itenary, :description, :hostId, :expiryDateTime, :rating, :guestLimit, :imageName, NOW())");
+                $req = $db->prepare("INSERT INTO event (name, eventDate, location, itinerary , description, hostId, expiryDate, rating, guestLimit, imageName, dateCreated) VALUES (:name, :eventDateTime, :location, :itinerary , :description, :hostId, :expiryDateTime, :rating, :guestLimit, :imageName, NOW())");
                 $update=false;
             }else {
-                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDateTime, location = :location, itenary = :itenary, description = :description, hostId = :hostId,  expiryDate = :expiryDateTime, rating = :rating, guestLimit = :guestLimit, imageName = :imageName WHERE id = :eventId ");
+                $req = $db->prepare("UPDATE event SET name = :name, eventDate = :eventDateTime, location = :location, itinerary  = :itinerary , description = :description, hostId = :hostId,  expiryDate = :expiryDateTime, rating = :rating, guestLimit = :guestLimit, imageName = :imageName WHERE id = :eventId ");
                 
                 $req->bindValue(':eventId', htmlspecialchars($newEvent['eventId']), PDO::PARAM_INT);
                 $update=true;
@@ -202,7 +202,7 @@ require_once("Manager.php");
             $imageName = "1";
             $rating = 3;
             $guestLimit = htmlspecialchars($newEvent['eventGuestLimit']);//
-            $itenary = $newEvent['itenary'];//
+            $itinerary  = $newEvent['itinerary'];//
             // $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
 
             // Combine the date and time into datetime object
@@ -222,7 +222,7 @@ require_once("Manager.php");
             $req->bindParam(':imageName',$imageName,PDO::PARAM_STR);
             $req->bindParam(':rating',$rating,PDO::PARAM_INT);
             $req->bindParam(':guestLimit',$guestLimit,PDO::PARAM_INT);
-            $req->bindParam(':itenary',$itenary,PDO::PARAM_STR);
+            $req->bindParam(':itinerary',$itinerary ,PDO::PARAM_STR);
 
             $result = $req->execute();
             $req->closeCursor();  
