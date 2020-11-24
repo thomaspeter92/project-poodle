@@ -164,7 +164,7 @@ try {
             }
             break;
         case "showEventDetail" :
-            showEventDetail($_REQUEST);
+            isset($_REQUEST['eventId']) ? showEventDetail($_REQUEST) : landing();
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);

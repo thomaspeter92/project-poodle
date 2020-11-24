@@ -1,7 +1,8 @@
 
 
 <style>
-    .petProfile{
+
+.petProfile{
         display: flex;
     }
 
@@ -58,6 +59,7 @@
         <img class="petProfileImage" src="./private/pet/<?=$petProfile['photo']?>" />
     </div>
 </div>
+
 
 
 <?php }else{

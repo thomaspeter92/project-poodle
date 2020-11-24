@@ -62,9 +62,14 @@
     }
 
     .hostPhoto {
-        height: 50px;        
+        height: 50px;
+        width: 50px;        
         margin: 10px 20px 0 20px;
         clip-path: circle(50% at 50% 50%);
+        background-position: center;
+        background-size: cover;
+        overflow: hidden;
+        object-fit: cover;
     }
 
 
@@ -80,7 +85,9 @@
     }
 
     .eventDetailSideContent {
-        width: 34%;
+        width: 32%;
+        margin-left: 15px;
+
     }
 
     .eventImage {
@@ -88,9 +95,6 @@
         margin-bottom: 20px;
     }
 
-    #map img {
-        width: 100%;
-    }
 
     #eventInfo {
         background-color: white;
@@ -119,7 +123,6 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        /* position: relative; */
     }
 
     .guestListItem {
@@ -206,11 +209,14 @@
 
     .commentChunk > p:first-child .hostPhoto {
         height: 25px;
+        width: 25px;
         margin: 0 5px 0 0;
     }
 
     .commentChunk > p:first-child > span:first-child {
         font-weight: 600;
+        display: flex;
+        align-items: center;
     }
     .commentChunk > p:first-child > span:nth-child(2) {
         color: lightslategrey;
@@ -242,7 +248,7 @@
     }
 
     .eventPreviewItem p:first-child {
-        color: grey;
+        color: #ff3864;
         font-size: .7em;
     }
     .eventPreviewItem p:nth-child(2) {
@@ -279,20 +285,58 @@
     #showLessGuests {
         display: none;
     }
+    #editInput {
+        width: 100%;
+        height: auto;
+        border: none;
+        resize: none;
+        border-radius: 50px;
+        padding: 20px;
+        margin: 10px 0 0 0;
+}
 
-    /* CHANGES TO THE MODAL CSS */
+    #editInput {
+        outline: none;
+}
+
+    .overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background-color: rgba(250, 250, 250, 0.7);
+        border-radius: 10px;
+        background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
+}
+
+    #errorDisplay {
+        padding-top: 100px;
+}
+
+    #aboutEvent {
+        display: none;
+}
+
+#seeAllEvents {
+    margin-top: 15px;
+    color: #ff3864;
+}
+
+    /********************** CHANGES TO THE MODAL CSS **********************/
 
     .modalMainDiv{
-    z-index: 30;
-    position: relative;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 30;
+        z-index: 30;
+        position: relative;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 30;
 }
 
 .modalSubDiv{
@@ -306,7 +350,7 @@
     justify-content: space-evenly;
 }
 
-.modalDivContent {
+.modalSubDiv > .modalDivContent {
     margin: 0;
     height: auto;
     width: 90%;
@@ -316,7 +360,7 @@
     position: initial;
     height: auto;
     width: 100%;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .modalDivButtons button{
@@ -331,7 +375,6 @@
 	font-size:17px;
 	padding:13px 76px;
     border-style: none;
-    /* box-shadow: 5px 10px 18px #acacac; */
     text-align: center;
 }
 
@@ -348,35 +391,78 @@
     outline: none;
 }
 
-#editInput {
-    width: 100%;
-    height: auto;
-    border: none;
-    resize: none;
-    border-radius: 50px;
-    padding: 20px;
-    margin: 35px 0 35px 0;
-}
 
-#editInput {
-    outline: none;
-}
 
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  background-color: rgba(250, 250, 250, 0.7);
-  background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
-}
+@media (max-width: 450px) {
 
-#errorDisplay {
-    padding-top: 100px;
-}
+    .eventDetailMainContent {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .eventDetailSideContent {
+        width: 100%;
+        margin: auto;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .eventDetailDescription {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    #aboutEvent {
+        display: inherit;
+    }
+    #eventInfo {
+        width: auto;
+        display: flex;
+    }
+    .eventInfoChunk {
+        flex-direction: column;
+    }
+    #eventPreviews {
+        flex-direction: column;
+    }
+    .eventPreviewItem {
+        width: 70%;
+        margin-bottom: 10px;
+    }
+    .commentChunk {
+        width: 70%;
+        margin: auto;
+        margin-bottom: 10px;    
 
+    }
+    .commentChunk > p:first-child {
+        flex-direction: column;
+        align-items: center;
+    }
+    .commentChunk > p:first-child > span:first-child {
+        margin-bottom: 10px;
+    }
+    #authorPhoto {
+        display: none;
+    }
+
+    #map {
+        width: 90%;
+    }
+    .submit {
+        width: auto;
+        font-size: .6em;
+    }
+
+    .modalMainDiv > .modalSubDiv {
+        width: 70%;
+    }
+
+    .modalDivButtons button{
+        width: auto;
+        padding: 10px;
+    }
+
+}
 
 
 </style>
@@ -389,17 +475,20 @@
 //CHECK IF CURRENT LOGGED IN USER IS ATTENDING THIS EVENT.
 $attending = false;
 
-if ($_SESSION['id']) {
-    foreach($guestList as $guest) {
-        echo $guest['guestId'];
-        if ($guest['guestId'] === $_SESSION['id']) {
+if (isset($_SESSION['id'])) {
+    foreach($guestIdList as $guestId) {
+        if ($guestId['guestId'] === $_SESSION['id']) {
             $attending = true;
-            echo 'hey';
             break;
         }
     }
 }
-echo ' ' . 'guest is: ' . $_SESSION['id'];
+
+//CHECKING FOR OLD EVENTS TO DISABLE ATTEND FUNCTION
+$eventTime = strtotime($event['eventDate']);
+$currentTime = time();
+$eventPassed = $eventTime < $currentTime ? true : false;
+
 
 //IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
 if($event) {
@@ -416,24 +505,30 @@ if($event) {
             
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
-                if (isset($_SESSION['id'])) {
-                    if ($guestCount >= $event['guestLimit'] && $attending == false) { ?> 
-                            <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php
-                        } else { ?>
-                            <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
-                    <?php }
+                if ($eventPassed == false) {
+                    if (isset($_SESSION['id'])) {
+                            if ($event['guestLimit'] != 0 && $guestCount >= $event['guestLimit'] && $attending == false) { ?>
+                                    <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php 
+                            } else { ?>
+                                <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
+                        <?php }
+                    } else {
+                        echo '<em>Sign in to Attend</em>';
+                    }
                 } else {
-                    echo '<em>Sign in to Attend</em>';
-                }?>
+                    echo '<em>This event has now passed.</em>';
+                }
 
+                ?>
                 </div>
             </div>
         </div>
 
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
+                <h4 id="aboutEvent">About this Event: </h4>
                 <img class="eventImage" src="./public/images/eventImages/eventImage<?= $event['picture']; ?>.jpg" />
-                <?= $event['description']; ?>
+                <?= nl2br($event['description']); ?>
                 
                 <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>  <?= !isset($_SESSION['id']) ? '<em>*Sign In to Leave a Comment</em>' : '';?> 
@@ -441,7 +536,7 @@ if($event) {
         <?php if (isset($_SESSION['id'])) {?>
 
                     <div id="formContent">
-                        <img class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
+                        <img id="authorPhoto" class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
                         <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                         <textarea name="comment" id="comment" rows="1" placeholder="Leave a comment..."></textarea>
@@ -451,19 +546,20 @@ if($event) {
 
         <?php } ?>
                 </form>
-                <div id="commentArea">
+                <div id="commentArea" data-commentCount="<?= count($commentsCount); ?>">
 
                 <?php include("eventCommentsView.php") ?>
 
                 </div>
-        <?php if (isset($_SESSION['id'])) { ?>
-                    <div id="loadButtons">
-                        <p id="loadMore">Show More <i class="fas fa-caret-down"></i></p>
-                        <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
-                    </div>
-        <?php } else { 
+        <?php if (isset($_SESSION['id'])) { 
+                    if  (count($commentsCount) > 5) {  ?>
+                        <div id="loadButtons">
+                            <p id="loadMore" data-eventId="<?= $event['eventId'];?>">Show More <i class="fas fa-caret-down"></i></p>
+                            <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
+                        </div>  <?php }    
+                } else { 
                     echo '<p  style="text-align: center;"><em>Sign In to See More</em></p>' ; 
-        } ?>
+                } ?>
             </section>
             <aside class="eventDetailSideContent">
                 <div id="eventInfo">
@@ -480,7 +576,7 @@ if($event) {
                         <p>Guest Limit: <?=$event['guestLimit'] == 0 ? 'none' : $event['guestLimit']; ?></p>     
                     </div>
                 </div>
-                <div id="map"><img src="./public/images/googleMapPreview.png" alt=""></div>
+                <div id="mapDisplay"> <?php include("mapViewTest.php"); ?></div>
                 <h5>Guest List (<?= $guestCount ?>)</h5><p id="guestCount" style="display: none;"><?= $guestCount ?></p>
                 <div id="guestList">
                     <?php include("loadGuestsView.php") ?>
@@ -492,6 +588,7 @@ if($event) {
             </aside>
         </div>
 
+        <h5>More Events Like This One:</h5>
         <div id="eventPreviews">
         <?php foreach($eventList as $list): ?>
 
@@ -504,6 +601,7 @@ if($event) {
         <?php endforeach;?>
 
         </div>
+        <a id="seeAllEvents" href="index.php?action=events">See All</a>
     </div>
 </div>
 
@@ -517,7 +615,7 @@ if($event) {
 <!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
-{
+
 //FUNCTION TO SUBMIT COMMENTS TO THE DB
     let commentForm = document.querySelector('#commentForm');
     commentForm.addEventListener('submit', function(e) {
@@ -593,35 +691,37 @@ if($event) {
 
     //FUNCTION TO LOAD MORE/LESS COMMENTS.
     var limit = 5;
-    let loadMore = document.querySelector('#loadMore') ;
-    loadMore.addEventListener('click', function() {
-        limit+= 5;
-        loadComments(limit);
-        showLess.style.display = 'initial';
-    })
+    let loadMore = document.querySelector('#loadMore');
+    let commentCount = document.querySelector('#commentArea').getAttribute("data-commentCount");
+    if (commentCount > 5) {
+        loadMore.addEventListener('click', function() {
+            limit+= 5;
+            loadComments(limit);
+            showLess.style.display = 'initial';
+        })
 
-    let showLess = document.querySelector('#showLess')
-    showLess.addEventListener('click', function() {
-        limit = 5;
-        loadComments(limit);
-        showLess.style.display = 'none';
-    })
-    function loadComments(limit) {
-        let eventId = attendButton.getAttribute("data-eventId");
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
-        xhr.onload = function () {
-            if (xhr.status == 200 ) {
-            let commentArea = document.querySelector('#commentArea');
-            commentArea.innerHTML = xhr.responseText;
-            editComments();
+        let showLess = document.querySelector('#showLess')
+        showLess.addEventListener('click', function() {
+            limit = 5;
+            loadComments(limit);
+            showLess.style.display = 'none';
+        })
+        function loadComments(limit) {
+            let eventId = loadMore.getAttribute("data-eventId");
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
+            xhr.onload = function () {
+                if (xhr.status == 200 ) {
+                let commentArea = document.querySelector('#commentArea');
+                commentArea.innerHTML = xhr.responseText;
+                editComments();
+                }
             }
+            xhr.send(null);
         }
-        xhr.send(null);
     }
 
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
-
     var guestCount = document.querySelector('#guestCount');
     var guestCounter = 5;
     var loadMoreGuests = document.querySelector('#loadMoreGuests');
@@ -660,6 +760,7 @@ if($event) {
     let editCommentButton = document.querySelectorAll('.editComment');
     for (let i=0; i<editCommentButton.length; i++) {
         editCommentButton[i].addEventListener('click', function(e) {
+            console.log('hello')
             let commentId = e.target.getAttribute("data-commentId");
             let comment = editCommentButton[i].parentElement.parentElement.parentElement.childNodes[3].textContent;
             let editCommentInput = `<textarea rows="1" id="editInput">${comment}</textarea>`;
@@ -690,7 +791,7 @@ if($event) {
         })
     }}
     editComments();
-}
+
 
 
 </script>

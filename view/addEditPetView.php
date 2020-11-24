@@ -144,19 +144,19 @@ p {
         <div>
             <p>
                 <label for="name">*Name:</label><br>
-                <input type="text" id="name" name="name" value="<?=$petProfile['name']; ?>" required>
+                <input class="required" type="text" id="name" name="name" value="<?=$petProfile['name']; ?>" required>
             </p>
             <p>
                 <label for="type">*Type:</label><br>
-                <input type="text" id="type" name="type" value="<?=$petProfile['type']; ?>"required>
+                <input class="required" type="text" id="type" name="type" value="<?=$petProfile['type']; ?>"required>
             </p>
             <p>
                 <label for="breed">*Breed:</label><br>
-                <input type="text" id="breed" name="breed" value="<?=$petProfile['breed']; ?>"required>
+                <input class="required" type="text" id="breed" name="breed" value="<?=$petProfile['breed']; ?>"required>
             </p>
             <p>
                 <label for="age">*Age:</label><br>
-                <input type="number" id="age" name="age" value="<?=$petProfile['age']; ?>"required>
+                <input class="required" type="number" id="age" name="age" value="<?=$petProfile['age']; ?>"required>
             </p>
             <p>
                 <label for="gender" id="genderLabel">*Gender:</label><br>

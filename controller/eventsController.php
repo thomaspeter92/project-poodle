@@ -31,6 +31,8 @@ function showEventDetail($params) {
     $event = $showEvent->getEventDetail($params['eventId']);
     $comments = $showEvent->loadComments($params);
     $eventList = $showEvent->getUpcomingEvents(NULL, NULL, 4);
+    $guestIdList = $showEvent->getGuestId($params['eventId']);
+    $commentsCount = $showEvent->countComments(($params['eventId']));
     require("./view/eventDetailedView.php");
 }
 

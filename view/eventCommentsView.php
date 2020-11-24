@@ -5,7 +5,7 @@
             <?php    if (isset($_SESSION['id'])) { ?>
                 <img class="hostPhoto" src="./private/profile/<?=$comment['image'];?>"></img><?=$comment['author'];?>
             <?php  } else {
-                echo 'Private Member said:';
+                echo 'Private Member:';
             } ?>
             </span>
             <span>
