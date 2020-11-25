@@ -1,7 +1,12 @@
 <?php ob_start();?>
-<link rel="stylesheet" href="./public/css/Modal.css"/>
 
 <style>
+    
+    body{
+        margin:0;
+        padding:0;
+    }
+           
     .profilePageContent{
         display: flex;
         width: 100vw;
@@ -229,14 +234,13 @@
                         <p>BREED <?=" : ".$preview['breed'];?></p>
                         <p>AGE <?=" : ".$preview['age']." years";?></p>
                         <p>COLOR <?=" : ".$preview['color'];?></p>
+                        <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
                     </div>
-                    <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
                 </div>
             <?php endforeach;?>
         </div>
     <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
     <button id="addPetButton"> Add a Pet!</button>
-    </div>
 </div>
 <!-- <script src="./public/js/Modal.js"></script> -->
 
@@ -260,25 +264,43 @@
         let petType = document.querySelector('#type');
         let petBreed = document.querySelector('#breed');
         let petAge = document.querySelector('#age');
+        let genderButtons = document.querySelectorAll('input[name="gender"]')
+        let genderLabel = document.querySelector('#genderLabel')
+        let selectedValue;
+            for (button of genderButtons) {
+                if (button.checked) {
+                    selectedValue = button.value;
+                    break;
+                }
+            }
         
-        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0) {
+        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0 || selectedValue == null) {
             petName.value.length < 2 ? petName.style.borderColor = 'red' : petName.style.borderColor = 'lightgrey'
             petType.value.length < 2 ? petType.style.borderColor = 'red' : petType.style.borderColor = 'lightgrey' ;
             petBreed.value.length < 2 ? petBreed.style.borderColor = 'red' : petBreed.style.borderColor = 'lightgrey' ;
             parseInt(petAge.value) < 0 || petAge.value === '' ? petAge.style.borderColor = 'red' : petAge.style.borderColor = 'lightgrey' ;
+            selectedValue == null ? genderLabel.style.color = 'red' : genderLabel.style.color = 'lightgrey';
             return null;
         } else {
             let xhr = new XMLHttpRequest();
             let addPetForm = document.querySelector('#addPetForm');
             let params = new FormData(addPetForm);
             xhr.open("POST", "index.php");
-            xhr.onload = function() {}
+            xhr.onload = function() {
+                console.log(xhr.responseText)
+                if (xhr.responseText.trim() === 'success') {
+                    location.reload();
+                } else if (xhr.responseText.trim() === 'fileError') {
+                    let fileError = document.querySelector('#fileError');
+                    fileError.style.display = 'inherit';
+                } else {
+                    let errorMsg = document.querySelector('#formError')
+                    errorMsg.style.display = 'inherit';
+                }
+            }
 
             // TO-DO: ADD ERROR MESSAGING UPON FAILURE TO POST TO DB
-
             xhr.send(params);
-            location.reload();
-
         }
     }
 // FUNCTION TO DISPLAY THE INPUT IN A MODAL
@@ -326,10 +348,10 @@
             xhr.onload = function () {
                 if(xhr.status == 200){
                     let modalPetObj = {
-                        edit : function () {
+                        EDIT : function () {
                             addEditFormDisplay(petId);
                         },
-                        delete : function() {
+                        DELETE : function() {
                             delPet(petId);
                         },
                     }
@@ -643,8 +665,6 @@
 
         
     })
-
-
 
 
 </script>

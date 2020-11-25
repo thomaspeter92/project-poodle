@@ -200,7 +200,7 @@ try {
             }
             break;
         case "showEventDetail" :
-            showEventDetail($_REQUEST);
+            isset($_REQUEST['eventId']) ? showEventDetail($_REQUEST) : landing();
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
@@ -220,11 +220,45 @@ try {
         case "unattendEvent" :
             attendEvent($_REQUEST);
             break;
-
         case "addEditEvent" :
-            addEditEvent();
+            displayAddEditEvent(!empty($_REQUEST['eventId']) ? $_REQUEST['eventId'] : '');
+
             break;
-            
+
+        case "updateEventDetails" :
+            // updateEventDetails($eventId = isset($_REQUEST['eventId']) ? $_REQUEST['eventId'] : "" );
+
+            if (!empty($_REQUEST['eventName']) && !empty($_REQUEST['eventGuestLimit']) && !empty($_REQUEST['eventDate']) && !empty($_REQUEST['eventTime']) && !empty($_REQUEST['eventExpiryDate']) && !empty($_REQUEST['eventExpiryTime']) && !empty($_REQUEST['eventDescription'])) {
+                $eventData = array(
+                "eventName" => $_REQUEST['eventName'],
+                "eventGuestLimit" => $_REQUEST['eventGuestLimit'],
+                "eventDate" => $_REQUEST['eventDate'],
+                "eventTime" => $_REQUEST['eventTime'],
+                "eventExpiryDate" => $_REQUEST['eventExpiryDate'],
+                "eventExpiryTime" => $_REQUEST['eventExpiryTime'],
+                "eventDescription" => $_REQUEST['eventDescription'],
+                "hostId" => $_SESSION['id'],
+                "eventId" => $_REQUEST['eventId'],
+                "itinerary" => $_REQUEST['itinerary'],
+                "eventPicture" => $_REQUEST['eventPicture']);
+
+                addEditEventDetails($eventData);
+            }
+            break;
+        case "deleteEvent" :
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            deleteEvent($_REQUEST['eventId']);
+            showUpcomingEventsList($sessionID);
+            break;
+        case "loadGuests" :
+            loadGuests($_REQUEST);
+            break;                  
+        case "requestMap":
+            showMap();
+            break;
+        case "requestMapDetail":
+            showMapDetail();
+            break;
         default:
             landing();
             break;
