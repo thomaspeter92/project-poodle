@@ -424,6 +424,7 @@
                         event.stopPropagation();
                         document.querySelector(".dropdownContent").classList.toggle("show");
                         profilePicRemoved.setAttribute("hidden", true);
+                        notAnImage.setAttribute("hidden", true);
                         // dropdownContent.setAttribute("hidden", true);
                     })
 
@@ -438,20 +439,30 @@
                         const file = this.files[0];
 
                         if(file) {
-                            const reader = new FileReader();
+                            console.log(file);
+                            if (file['type'] == 'image/jpeg' || file['type'] == 'image/png') {
+                                const reader = new FileReader();
 
-                            imagePreview.style.display = "block";
-                            profilePicManage.style.display = "none";
+                                imagePreview.style.display = "block";
+                                profilePicManage.style.display = "none";
 
-                            reader.addEventListener("load", function() {
-                                imagePreview.setAttribute("src", this.result);
-                            });
+                                reader.addEventListener("load", function() {
+                                    imagePreview.setAttribute("src", this.result);
+                                });
 
-                            reader.readAsDataURL(file);
+                                reader.readAsDataURL(file);
+                            } else {
+                                notAnImage.removeAttribute("hidden");
+                                profilePicManage.style.display = "block";
+                                imagePreview.setAttribute("src", "");
+                                imagePreview.style.display = "none";
+                            }    
                         } else {
+                            console.log('nothing')
                             imagePreview.style.display = "none";
                             profilePicManage.style.display = "block";
-                            previewImage.setAttribute("src", "");
+                            imagePreview.setAttribute("src", "");
+                            notAnImage.setAttribute("hidden", true);
                         }
                     })
 

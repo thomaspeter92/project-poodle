@@ -80,8 +80,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                     <div>
                         <a id="mobileLogin" href="index.php?action=petPreview"><?= $_SESSION['name']; ?></a>
                     </div>
-                    <div>
+                    <div class="notifications">
                         <i class="far fa-bell"></i>
+                        <span id="notificationNumber">1</span>
                     </div>
                     <div class="signOutWrapper">
                         <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
@@ -110,8 +111,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                                 <?= $_SESSION['name']; ?>
                             </a> 
                         </div>
-                        <div>
+                        <div class="notifications">
                             <i class="far fa-bell"></i>
+                            <span id="notificationNumber">1</span>
                         </div>
                     </div>
                 <?php endif; ?>

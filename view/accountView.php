@@ -53,6 +53,10 @@
         color: green;
     }
 
+    .fail {
+        color:red;
+    }
+
     .failedPW {
         color: red;
     }
@@ -167,8 +171,8 @@
         </div>
     </div>
     <br>
-    <div id="profilePicRemoved" hidden>You have removed your profile picture.<br></div>
-    <div id="notAnImage" hidden>File type must be .jpg or .png.<br></div>
+    <div class="fail" id="profilePicRemoved" hidden>You have removed your profile picture.<br></div>
+    <div class="fail" id="notAnImage" hidden>File type must be .jpg or .png.<br></div>
     <div>First Name:</div>
     <input type="text" name="nameInput" id="nameInput" class="required" value="<?=$memberDataFromDB['name'] ?>">
     <br>
@@ -176,7 +180,7 @@
     <input type="text" name="emailInput" id="emailInput" class="required email" value="<?=$memberDataFromDB['email'] ?>">
     <br>
     <br>
-    <div id="accountEmpty" hidden>Cannot save blank name and email fields.</div>
+    <div class="fail" id="accountEmpty" hidden>Cannot save blank name and email fields.</div>
 </div>
 <div class="passwordSection">
     <div class="passwordDefault">
@@ -189,20 +193,20 @@
         <br>
         New Password: <input type="text" name="newPW" id="newPW" class="required password"> 
         <br>
-        <div class="needDiffPW" hidden>New Password Cannot be same as old Password</div>
+        <div class="needDiffPW fail" hidden>New Password Cannot be same as old Password</div>
         <br>
         Confirm Password: <input type="text" name="confirmPW" id="confirmPW" class="confirmPassword required">
         <br>
         <br>
-        <div class="failedPW" hidden>Incorrect Password</div>
+        <div class="failedPW fail" hidden>Incorrect Password</div>
         <button id="changePWSubmit">Submit</button>
         <br>
         <br>
         <button id="cancelPW">Keep Current Password</button>
     </div>
-    <div class="emptyPW" hidden><br>Fill out password form completely before submitting</div>
+    <div class="emptyPW fail" hidden><br>Fill out password form completely before submitting</div>
     <div class="successPW" hidden><br>Password change successful</div>
-    <div class="matchPW" hidden><br>New password does not match the confirmed password.</div>
+    <div class="matchPW fail" hidden><br>New password does not match the confirmed password.</div>
 </div>
 <br>
 <br>
