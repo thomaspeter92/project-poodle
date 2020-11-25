@@ -1,6 +1,6 @@
 <?php
 //TODO: Default image URL
-$DEFAULT_IMAGE_URL = "./private/profile/defaultProfile.png";
+$DEFAULT_IMAGE_URL = "./private/defaultProfile.png";
 $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
 
 // TODO: Use $style for additional css

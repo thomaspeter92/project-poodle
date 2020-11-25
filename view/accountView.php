@@ -154,7 +154,7 @@
 <br>
 <div class="accountForm">
     <img class="profilePicManage" src="<?php if($memberDataFromDB['profileImage'] == NULL) { 
-                echo "./private/profile/defaultProfile.png"; 
+                echo "./private/defaultProfile.png"; 
             } else { 
                 echo "./private/profile/".$memberDataFromDB['profileImage']; 
             };?>" alt="Profile Pic">
