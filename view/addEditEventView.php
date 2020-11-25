@@ -243,7 +243,7 @@
 
                 <label for="file" style="border: 1px solid grey">Choose picture file:</label>
                 <input type="file" id="file" name="file" style="display: none;" >
-                <input type="hidden" name="eventPicture" id="eventPicture" value="<?= $eventEditDetails['imageName'] ?>">
+                <input type="hidden" name="eventPicture" id="eventPicture" value="<?= isset($eventEditDetails['imageName']) ? $eventEditDetails['imageName'] : '' ;?>">
 
                 <!-- TODO Value of picture to  be changed -->
                 <div id="eventPictureFrame"></div>

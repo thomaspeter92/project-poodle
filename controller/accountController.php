@@ -79,7 +79,7 @@ function removeProPic($userID){
         $result = "success";
         $currentImgURL = $_SESSION['imageURL'];
         unlink($currentImgURL);
-        $_SESSION['imageURL'] = "./private/profile/defaultProfile.png";
+        $_SESSION['imageURL'] = "./private/defaultProfile.png";
     }   else {
         $result = "failed";
     }

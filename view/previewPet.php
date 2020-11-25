@@ -201,7 +201,7 @@
             <div class="accountBox">
                 <div class="proPicContainer">
                     <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
-                        echo "./private/profile/defaultProfile.png"; 
+                        echo "./private/defaultProfile.png"; 
                     } else { 
                         echo "./private/profile/".$profilePicURL['profileImage']; 
                     };?>" alt="Profile Pic">
@@ -499,13 +499,13 @@
                                 console.log(response);
                                 if (response.trim() == "success") {
                                     userImage = document.querySelectorAll(".userImage")
-                                    profilePic.setAttribute("src", "./private/profile/defaultProfile.png");
-                                    profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    profilePic.setAttribute("src", "./private/defaultProfile.png");
+                                    profilePicManage.setAttribute("src", "./private/defaultProfile.png");
                                     imagePreview.style.display = "none";
                                     profilePicManage.style.display = "block";
                                     profilePicRemoved.removeAttribute("hidden");
                                     userImage.forEach((item) => {
-                                        item.setAttribute("src", "./private/profile/defaultProfile.png");
+                                        item.setAttribute("src", "./private/defaultProfile.png");
                                     })
                                 } else {
                                     alert("remove failed.");
