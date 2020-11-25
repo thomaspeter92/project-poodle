@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ARTest</title>
+        <!-- Initialize the viewport -->
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    
+        <!-- Load the required dependencies: A-frame and AR.js -->
+        <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+  
+    </head>
+    <body style="margin : 0px; overflow: hidden;">
+        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+        <a-marker type="pattern" preset="pattern" url="pattern-markerFinal.patt">
+            <!-- <a-box position='0 0.5 0' color="red"></a-box> -->
+            <a-entity
+            position="0 0 0" 
+            rotation="1 0 0"
+            scale="1 1 1"
+            gltf-model="cute_pug_waffles/scene.gltf"
+            ></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+        </a-scene>
+
+
+
+        <script>
+            let marker =  document.querySelector("a-scene");
+            console.log(marker);
+            marker.addEventListener("click", function(){
+                alert("hello");
+            })
+
+
+        </script>
+    </body>
+</html>
