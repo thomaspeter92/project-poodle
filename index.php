@@ -246,8 +246,9 @@ try {
             }
             break;
         case "deleteEvent" :
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
             deleteEvent($_REQUEST['eventId']);
-            showUpcomingEventsList();
+            showUpcomingEventsList($sessionID);
             break;
         case "loadGuests" :
             loadGuests($_REQUEST);
