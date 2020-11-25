@@ -142,14 +142,17 @@ function addEditEventDetails($params){
             return null;
         }
     }
+   
     $photoData = array (
-        "eventPicture" => isset($fileNameNew) ? $fileNameNew : '' ,
+        "eventPicture" => isset($fileNameNew) ? $fileNameNew : NULL ,
     );
 
     $eventId = $eventManager->updateEventDetails($params, $photoData);
+
     if($eventId){
         //display the details of newly added or edited event
-        showEventDetail($eventId);
+
+        header("Location: index.php?action=showEventDetail&eventId=".$eventId);
     }else{
         echo "Event details were not saved properly";
     }

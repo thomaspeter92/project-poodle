@@ -176,36 +176,54 @@ ob_start();
 </div>
 
 <div id="content5" class="content">
-        <div class="content5div">
-            <h5>Introducing New Ways to Meet Friends and Enjoy Time With Your Pets...</h5>
-        </div>
-        <div class="content5div">
+    <div class="content5div">
+        <h5>Introducing New Ways to Meet Friends and Enjoy Time With Your Pets...</h5>
+    </div>
+    <div class="content5div theCard">
+        <div class="theFront">
             <h5>Browse Events Nearby</h5>
             <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
-        <div class="content5div">
-            <h5>Moniter Pets With Ease</h5>
+        <div class="theBack">
+        </div>
+    </div>
+    <div class="content5div theCard">
+        <div class="theFront">
+            <h5>Manage Your Pets With Ease</h5>
             <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
-        <div class="content5div">
+        <div class="theBack">
+            <img src="./public/images/eventsView.png" alt="">
         </div>
-        <div class="content5div">
-            <h5>Arrange Play Dates</h5>
+    </div>
+    <div class="content5div">
+    </div>
+    <div class="content5div">
+        <div class="theFront">
+            <h5>Interact with Other Owners</h5>
             <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
-        <div class="content5div">
+        <div class="theBack">Back of the card</div>
+    </div>
+    <div class="content5div theCard">
+        <div class="theFront">
             <h5>Find Walkers and Sitters</h5>
             <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
-        <div class="content5div">
-        <h5>Share Content With Others</h5>
+        <div class="theBack">Back of the card</div>
+    </div>
+    <div class="content5div theCard">
+        <div class="theFront">
+        <h5>Browse Pet-Friendly Businesses</h5>
             <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
+        <div class="theBack">Back of the card</div>
+    </div>
 </div>
 
 

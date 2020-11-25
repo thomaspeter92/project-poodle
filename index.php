@@ -203,7 +203,8 @@ try {
                 "eventDescription" => $_REQUEST['eventDescription'],
                 "hostId" => $_SESSION['id'],
                 "eventId" => $_REQUEST['eventId'],
-                "itinerary" => $_REQUEST['itinerary']);
+                "itinerary" => $_REQUEST['itinerary'],
+                "eventPicture" => $_REQUEST['eventPicture']);
 
                 addEditEventDetails($eventData);
             }

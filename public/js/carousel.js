@@ -43,17 +43,14 @@
         }
     }
 
-    //This functon is currently not in use. Will keep it for potential future use. 
-    // function contentReveal() {
-    //     let innerContent = this.childNodes[3];
-    //     innerContent.classList.contains('content3reveal') ? innerContent.classList.remove('content3reveal') : innerContent.classList.add('content3reveal');
-    //     this.classList.contains('content3selected') ? this.classList.remove('content3selected') : this.classList.add('content3selected');
-    // }
-
-
     //Function to add and remove classes on mouseover event. 
     function mouseOverElevate(e) {
         this.classList.contains('content5divMouseOver') ? this.classList.remove('content5divMouseOver') : this.classList.add('content5divMouseOver');
+    }
+
+    function cardFlip() {
+        let card = this.parentElement.parentElement;
+        card.classList.contains('cardFlip') ? card.classList.remove('cardFlip') : card.classList.add('cardFlip');
     }
 
 
@@ -62,11 +59,15 @@
 
     window.addEventListener('scroll', scrollAppear);
 
+    var arrowBalls = document.querySelectorAll('.arrowBall');
+    for(let i = 0; i < arrowBalls.length; i++) {
+        arrowBalls[i].addEventListener('click', cardFlip);
+    }
 
     const carouselImages = document.querySelectorAll('.carouselImg');
     const nextImageDelay = 4000;
     let imageCounter = 0;
-    if(carouselImages[imageCounter] ) {
+    if(carouselImages[imageCounter]) {
         carouselImages[imageCounter].style.opacity = 1;
         setInterval(nextImage, nextImageDelay);
     }
@@ -88,9 +89,9 @@
     }
 
     let content5div = document.querySelectorAll('.content5div');
-    for (let i = 1; i<content5div.length; i++) {
-        content5div[i].addEventListener('mouseenter', mouseOverElevate)
-        content5div[i].addEventListener('mouseleave', mouseOverElevate) 
-    }
+    // for (let i = 1; i<content5div.length; i++) {
+    //     content5div[i].addEventListener('mouseenter', mouseOverElevate)
+    //     content5div[i].addEventListener('mouseleave', mouseOverElevate) 
+    // }
 
 }

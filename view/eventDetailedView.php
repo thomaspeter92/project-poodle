@@ -1,8 +1,4 @@
 <?php ob_start();?>
-<<<<<<< HEAD
-=======
-<!-- <link rel="stylesheet" href="./public/css/Modal.css"/> -->
->>>>>>> 056e77ac22ea2c2372ba4ac9251ea7c3fdcec320
 
 <style>
 
@@ -48,6 +44,7 @@
 
     #eventHeaderContent h3 {
         font-size: 2em;
+        margin-right: 10px;
     }
 
     #eventHeaderContent>p {
@@ -65,6 +62,15 @@
         align-items: center;
     }
 
+    #eventName {
+        display: flex;
+        align-items: center;
+    }
+
+    #eventName i {
+        color: #ff3864;
+        padding-right: 5px;
+    }
     .hostPhoto {
         height: 50px;
         width: 50px;        
@@ -75,6 +81,8 @@
         overflow: hidden;
         object-fit: cover;
     }
+
+
 
 
     .eventDetailMainContent {
@@ -111,6 +119,8 @@
         width: 50%;
         margin: 10px;
     }
+
+
 
     .eventInfoChunk p {
         margin-left: 20px;
@@ -510,12 +520,15 @@ if($event) {
         <div class="eventDetailHeader">
             <div id="eventHeaderContent">
                 <p><?= $event['eventDate']; ?></p>
-                <h3><?= $event['name']; ?></h3>
+                <div id="eventName">
+                    <h3><?= $event['name']; ?></h3>
+                    <?php if (isset($_SESSION['id']) && $event['hostId'] === $_SESSION['id']) { ?>
+                            <i id="editEvent" class="fas fa-edit" data-eventid="<?=$event['eventId'];?>"></i><i class="fas fa-trash-alt deleteEvent" data-eventid="<?=$event['eventId']; ?>"></i> <?php }; ?>
+                </div>
                 <div id="headerContentExtra">
                     <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
                     <!-- Franco -->
-                    <?php if ($event['hostId'] === $_SESSION['id']) { ?>
-                        <i id="editEvent" class="fas fa-edit" data-eventid="<?=$event['eventId'];?>"></i><i class="fas fa-trash-alt deleteEvent" data-eventid="<?=$event['eventId']; ?>"></i> <?php }; ?>
+                    
                     <!-- Franco -->
             
                 <?php 
@@ -542,7 +555,7 @@ if($event) {
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
-                <img class="eventImage" src="./public/images/eventImages/eventImage<?= $event['picture']; ?>.jpg" />
+                <img class="eventImage" src="./private/event/<?= $event['picture']; ?>" />
                 <?= nl2br($event['description']); ?>
                 
                 <form action="index.php" method="POST" id="commentForm">
@@ -632,9 +645,12 @@ if($event) {
 <?php    } ?>
         
 <!-- <script src="./public/js/Modal.js"></script> -->
+
+
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
+
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2">
 </script>
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
 <script src="./public/js/event.js"></script>
 <script>
 //FUNCTION TO SUBMIT COMMENTS TO THE DB
@@ -714,7 +730,7 @@ if($event) {
     var limit = 5;
     let loadMore = document.querySelector('#loadMore');
     let commentCount = document.querySelector('#commentArea').getAttribute("data-commentCount");
-    if (commentCount > 5) {
+    if (commentCount > 5 && commentCount == true) {
         loadMore.addEventListener('click', function() {
             limit+= 5;
             loadComments(limit);
@@ -815,7 +831,7 @@ if($event) {
 
 // ************* MAP FUNCTIONS ************
     var itin = <?= $event['itinerary'] ?>
-    var viewListArray = [[37.530750,126.971979],[37.540522437037716, 126.98675092518866],[37.55397916880342, 126.97248154788045]]
+    // var viewListArray = [[37.530750,126.971979],[37.540522437037716, 126.98675092518866],[37.55397916880342, 126.97248154788045]]
 
     var bounds = new kakao.maps.LatLngBounds();
     var routeArray = Array();
@@ -854,6 +870,7 @@ if($event) {
             strokeStyle: 'solid'
         });
     polyline.setMap(map);
+
     let deleteEventButton = document.querySelector('.deleteEvent');
     if (deleteEventButton){
         deleteEventButton.addEventListener('click', function(e) {

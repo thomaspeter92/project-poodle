@@ -267,6 +267,7 @@ require_once("Manager.php");
             $req->closeCursor();  
             if($result) {
                 $resp = $update ? htmlspecialchars($newEvent['eventId']) : $db->lastInsertId();
+                echo $resp;
                 return $resp;
             }else{
                 return NULL;}
