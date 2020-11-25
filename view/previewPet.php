@@ -234,9 +234,9 @@
                         <p>BREED <?=" : ".$preview['breed'];?></p>
                         <p>AGE <?=" : ".$preview['age']." years";?></p>
                         <p>COLOR <?=" : ".$preview['color'];?></p>
+                        <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
                     </div>
                 </div>
-                <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
             <?php endforeach;?>
         </div>
     <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
