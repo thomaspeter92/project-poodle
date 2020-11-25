@@ -93,7 +93,7 @@ function signInWith($memberData) {
     
     if ($memberDataFromDB) {
         createSessionByMemberDB($memberDataFromDB);
-        // header("Location: index.php?action=petPreview");
+        header("Location: index.php?action=petPreview");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. ;
         // header("Location: index.php?action=login&error=notSignedUp");
