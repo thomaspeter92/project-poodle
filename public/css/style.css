@@ -393,9 +393,7 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         display: inline-block;
         vertical-align: top;
     } */
-    .desktopWrapper{
-        /* font-family: "monsterRatRegular"; */
-    } 
+   
     .desktopWrapper>ul {
         text-align: right;
         /* margin-right: 20px; */
@@ -475,10 +473,8 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         0 41.8px 33.4px rgba(0, 0, 0, 0.086),
         0 100px 80px rgba(0, 0, 0, 0.12);
 }
-.topContent{
-    /* font-family: "monsterRatRegular"; */
- 
-}
+
+
 .topContent>div, .topContent>a>div{
     display: flex;
     flex-direction: column;
