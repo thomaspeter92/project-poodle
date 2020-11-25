@@ -14,7 +14,7 @@ function getGuestCountOfEvent($eventId) {
     $manager = new EventManager();
     return $manager->getMembersCountBy($eventId);
 }
-function showUpcomingEventsList() {
+function showUpcomingEventsList($sessionID) {
     $manager = new EventManager();
     $events = $manager->getUpcomingEvents();
     if ($events) {
@@ -68,5 +68,12 @@ function loadGuests($params) {
     $guestList =  $loadGuests->loadGuests($params);
     $event = $loadGuests->getEventDetail($params['eventId']);
     require('./view/loadGuestsView.php');
+}
+
+function getGuestProfileImagesOfEvent($eventId, $limit=NULL) {
+    $manager = new EventManager();
+    $guests = $manager->getMemberProfileImagesBy($eventId, $limit);
+
+    return $guests; 
 }
 

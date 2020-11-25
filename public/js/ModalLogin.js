@@ -72,7 +72,6 @@ class ModalLogin extends Modal{
     }
 
     addExternalButton(parentElementId,childElementId,attributeValue){
-        console.log(parentElementId);
         let tmpElement = document.querySelector(childElementId);
 
         let parentElement = document.querySelector(parentElementId);

@@ -11,7 +11,7 @@ require_once("Manager.php");
 
 
             $db = $this->dbconnect();
-            $query = "SELECT e.id, e.name, e.location, m.name AS hostName, 
+            $query = "SELECT e.id, e.name, e.location, e.imageName, m.name AS hostName, 
                         DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
                         FROM event AS e
                         JOIN member AS m
@@ -76,12 +76,21 @@ require_once("Manager.php");
             return $count->guestCount;
         }
 
-        public function getMembersBy($eventId) {
+        public function getMemberProfileImagesBy($eventId, $limit) {
             //TODO: Get members profile images by eventId, first should be the host
             $db = $this->dbconnect();
-            $query = "";
+            $query = "SELECT m.profileImage FROM member AS m
+                        JOIN eventAttend AS ea
+                        ON m.id = ea.guestId
+                        WHERE ea.eventId = :eventId";
+            if ($limit) {
+                $query .= " LIMIT 0, :limit";
+            }
             $req = $db->prepare($query);
             $req->bindValue(":eventId", $eventId, PDO::PARAM_INT);
+            if ($limit) {
+                $req->bindValue(":limit", $limit, PDO::PARAM_INT);
+            }
             $req->execute();
             $events = $req->fetchAll(PDO::FETCH_OBJ);
             $req->closeCursor();
@@ -284,4 +293,15 @@ require_once("Manager.php");
             $req->closeCursor();
         }
 
+        //used to display user's events on their profile page
+        public function ownersEvents($ownerId){
+            $db = $this->dbConnect();
+            $req = $db->prepare("SELECT id, name, eventDate, location, imageName, hostId FROM event WHERE hostId = :id");
+            // $req = $db->prepare("SELECT g.name, g.eventDate, g.location, g.imageName, g.hostId FROM event g INNER JOIN member m ON g.hostId = m.id WHERE g.hostId = :id");
+            $req->bindParam(':id',$ownerId, PDO::PARAM_INT);
+            $req->execute();
+            $usersEvents =$req->fetchAll(PDO::FETCH_ASSOC);
+            $req->closeCursor();
+            return $usersEvents;
+        }   
     }

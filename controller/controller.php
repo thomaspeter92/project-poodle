@@ -1,8 +1,9 @@
 <?php
 // This is for Controller functions.
+require_once("./util/FileUtil.php");
 require_once('./model/MemberManager.php');
 require_once("./model/PetProfileManager.php");
-require_once("./model/PreviewManager.php");
+require_once("./controller/signinController.php");
 require_once("./model/EventManager.php");
 require_once("./controller/signinController.php");
 require_once("./controller/eventsController.php");
@@ -18,12 +19,19 @@ function showPetProfile($petId){
     // echo $petId;
     $petProfileManager = new PetProfileManager();
     $petProfile = $petProfileManager->getPetProfile($petId);
+
     require("./view/petProfileView.php");
 }
 function showPetPreview($ownerId){
     // echo $petId;
     $previewManager = new PetProfileManager();
     $petPreviews = $previewManager->getPreview($ownerId);
+    // NEW CODE TO SHOW OWNER PROFILE PIC
+    $manager = new MemberManager();
+    $profilePicURL = $manager->getProfilePic($ownerId);
+    //shows owners events
+    $loadUserEvents = new EventManager();
+    $usersEvents = $loadUserEvents->ownersEvents($ownerId);
     require("./view/previewPet.php");
 }
 
@@ -73,7 +81,6 @@ function petAddEdit($params) {
     
     echo !empty($success) ? 'success' : 'error';
 }
-
 
 function deletePet($petId) {
     $deleteManager = new PetProfileManager();

@@ -2,7 +2,7 @@
     <div id="SignUpMain">
         <div class = "registerDiv">
         
-            <form method="POST" action="index.php" autocomplete="off" id='formSignUp' onsubmit="return new FormCheck().formCheck();">
+            <form method="POST" action="index.php" autocomplete="off" id='formSignUp'>
 
                 <input type="hidden" name="action" value="registrationInput" required>
                 <div class='subSection'>
@@ -17,12 +17,12 @@
                     <label for="confirmpass" class="form_col">Confirm password :</label>
                     <input type="password" name="confirmpass" class="loginInput confirmPassword" id="confirmpass" required>
                 </div>
-                <div class='subSection'>
+                <div class='subSection emailSection'>
                     <label for="email" class="form_col">Email :</label>
-                    <input type="text" name="email" id="email" class="loginInput email" required>
+                    <input type="text" name="email" id="email" class="loginInput email" required><br/>
                 </div>
                 <div class='subSection'>
-                <input type="submit" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
+                <input type="button" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
                 </div>
             </form>
             <div class="thirdParty">

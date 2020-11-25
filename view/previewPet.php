@@ -4,20 +4,41 @@
     
     body{
         margin:0;
-        padding:0;       
+        padding:0;
+    }
+           
+    .profilePageContent{
+        display: flex;
+        width: 100vw;
     }
 
-    #wrapper {
+    #petWrapper {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+        width: 75%;
     }
 
     #contentLeft {
         width: 90%;
     }
+    .desktopColumn{
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        text-align: center;
+        padding-left: 1em;  
 
+    }
+    .eventInfo{
+        box-shadow: 3px 3px 3px lightgrey;
+        border-radius: 15px;
+        background-color: rgba(128, 147, 241, 0.3);
+        padding: 1em;
+        margin-bottom: 1em;
+        color: black;
+    }
     .petListElement{
         height: 200px;
         width: 50%;
@@ -35,6 +56,7 @@
         margin-bottom: 10%;
         width: 40%;
         height: 80%;
+        font-size: 90%;
     }
 
     .petPreviewImage{
@@ -58,9 +80,7 @@
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
+    /* width: 200px; */
 }
     #addPetButton {
 	background-color: #72ddf7;
@@ -91,17 +111,47 @@
     }
 
 
+    /* .proPicContainer {
+
+    } */
+
     .profilePic {
-            height:100px;
-            width:100px;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
     }
 
     .modalDivContent .profilePic {
         padding-top:20px;
     }
+    @media (max-device-width : 1020px) {
+        .profilePageContent{
+            display: block;
+            justify-content: column;
+            width: 100vw;
+        }
+        .desktopColumn{
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            text-align: center;
+            padding-right: 1em;
 
+        }
+        .petPreviewImage{
+            margin-top: 8%;
+            border-radius: 5px;
+            width: 30% ;
+            height: 65%;
+        }
+        .petListElement{
+            width: 100vw;
+        }
+
+
+    }
     @media (max-device-width : 400px) {
-
         .petPreviewContents{
             margin-top: 4%;
             margin-bottom: 5%;
@@ -119,14 +169,20 @@
             font-size: 0.8em;
             height: 20%;
         }
-
         .petPreviewImage{
             margin-top: 8%;
             border-radius: 5px;
             width: 30% ;
             height: 65%;
         }
-
+        .petListElement{
+            width: 100vw;
+        }
+        #petWrapper{
+            display: flex;
+            align-items: center;
+            width: 100vw;
+        }
 }
 
 </style>
@@ -139,32 +195,53 @@
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <br><br><br><br><br><br><br><br>
 
-<div class="accountWrapper">
-    <div class="accountBox">
-        <img class="profilePic" src="<?php if (isset($_SESSION['imageURL'])){ echo $_SESSION['imageURL']; } else { echo "./public/images/adminPlaceholder.png"; }; ?>" alt="Profile Pic">
-        <p><?= $_SESSION['name'];?></p>
-        <p class="manageAccount">Manage Account</p>
+<div class="profilePageContent">
+    <div class="desktopColumn">
+        <div class="accountWrapper">
+            <div class="accountBox">
+                <div class="proPicContainer">
+                    <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
+                        echo "./private/profile/defaultProfile.png"; 
+                    } else { 
+                        echo "./private/profile/".$profilePicURL['profileImage']; 
+                    };?>" alt="Profile Pic">
+                </div>
+                <p><?= $_SESSION['name'];?></p>
+                <button class="manageAccount">Manage Account</button>
+            </div>
+        </div>
+        <!-- Events Section -->
+        <div class="myEventsWrapper">
+            <p><?= $_SESSION['name'];?>'s Events</p>
+            <?php foreach($usersEvents as $eventsPreview):?>
+                <a href="https://localhost/index.php?action=showEventDetail&eventId="+<?php $eventsPreview['id'];?>>
+                    <div class="eventInfo">
+                        <p><?= $eventsPreview['name'];?></p>
+                        <p><?= $eventsPreview['eventDate'];?></p>
+                        <p><?= $eventsPreview['location'];?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
 
-<div id="wrapper">
-    <div id="contentLeft">
-        <?php foreach($petPreviews as $preview):?>
-            <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                <div class="petPreviewContents">
-                    <p>NAME <?=" : ".$preview['name'];?></p>
-                    <p>BREED <?=" : ".$preview['breed'];?></p>
-                    <p>AGE <?=" : ".$preview['age']." years";?></p>
-                    <p>COLOR <?=" : ".$preview['color'];?></p>
+    <div id="petWrapper">
+        <div id="contentLeft">
+            <?php foreach($petPreviews as $preview):?>
+                <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                    <div class="petPreviewContents">
+                        <p>NAME <?=" : ".$preview['name'];?></p>
+                        <p>BREED <?=" : ".$preview['breed'];?></p>
+                        <p>AGE <?=" : ".$preview['age']." years";?></p>
+                        <p>COLOR <?=" : ".$preview['color'];?></p>
+                    </div>
                 </div>
                 <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
-            </div>
-        <?php endforeach;?>
-    </div>
-<!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-<button id="addPetButton"> Add a Pet!</button>
+            <?php endforeach;?>
+        </div>
+    <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+    <button id="addPetButton"> Add a Pet!</button>
 </div>
-
 <!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
@@ -290,36 +367,42 @@
     // --------------------------ACCOUNT FUNCTIONS---------------------------------
 
     function saveAccountChanges () {
+        console.log("clicked");
         const nameInput = document.querySelector("#nameInput").value;
         const emailInput = document.querySelector("#emailInput").value;
         const imgInput = document.querySelector("#imageInput");
         const file = imgInput.files[0];
 
-        // console.log(nameInput);
-        // console.log(emailInput);
-        // console.log(file);
-
-        const url = "./controller/changeAccountController.php";
+        const url = "index.php?action=checkChangeAccount";
         const params = new FormData();
 
         params.append("nameInput", nameInput);
         params.append("emailInput", emailInput);
         params.append("file", file);
 
+        // console.log(params);
+
         const xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         xhr.addEventListener("load", () => {
+            // console.log(xhr.status)
             if (xhr.status === 200) {
                 response = xhr.responseText;
                 console.log(response);
-                accountEmpty = document.querySelector("#accountEmpty");
+                let accountEmpty = document.querySelector("#accountEmpty");
+                let notAnImage = document.querySelector('#notAnImage');
+
                 if (response.trim() == "emptyField") {
                     accountEmpty.removeAttribute("hidden");
+                    notAnImage.setAttribute("hidden", true);
                 }
                 if (response.trim() == "success") {
-                    // console.log("success");
                     // turn reload off for testing
                     location.reload();
+                } 
+                if (response.trim() == 'imageTypeFail') {
+                    accountEmpty.setAttribute("hidden", true);
+                    notAnImage.removeAttribute("hidden");
                 }
 
             }
@@ -350,8 +433,11 @@
                     // Image Divs
                     let dropdownContent = document.querySelector('.dropdownContent')
                     let modalWindow = document.querySelector('.modalSubDiv');
-                    let imagePreview = document.querySelector('.imagePreview')
-                    let profilePic = document.querySelector('.profilePicManage')
+                    let imagePreview = document.querySelector('.imagePreview');
+                    let profilePicManage = document.querySelector('.profilePicManage');
+                    let profilePic = document.querySelector('.profilePic');
+                    let profilePicRemoved = document.querySelector('#profilePicRemoved');
+                    let notAnImage = document.querySelector('#notAnImage');
 
 
 
@@ -359,6 +445,7 @@
                     imageDropBtn.addEventListener("click", event => {
                         event.stopPropagation();
                         document.querySelector(".dropdownContent").classList.toggle("show");
+                        profilePicRemoved.setAttribute("hidden", true);
                         // dropdownContent.setAttribute("hidden", true);
                     })
 
@@ -376,7 +463,7 @@
                             const reader = new FileReader();
 
                             imagePreview.style.display = "block";
-                            profilePic.style.display = "none"
+                            profilePicManage.style.display = "none";
 
                             reader.addEventListener("load", function() {
                                 imagePreview.setAttribute("src", this.result);
@@ -385,21 +472,38 @@
                             reader.readAsDataURL(file);
                         } else {
                             imagePreview.style.display = "none";
-                            profilePic.style.display = "block";
+                            profilePicManage.style.display = "block";
                             previewImage.setAttribute("src", "");
                         }
                     })
 
                     // REMOVE PROFILE PICTURE
-                    imageDropBtn.addEventListener("click", event => {
-                        const xhr = new XMLHttpRequest();
+                    imgRemove.addEventListener("click", function () {
+                        let xhr = new XMLHttpRequest();
+                        
                         xhr.open('GET', 'index.php?action=removeProfilePic');
-                        xhr.addEventListener("load", () => {
-                            if (xhr.status === 200) {
-                            
+                        xhr.onload = function () {
+                            if(xhr.status === 200){
+                                let response = xhr.responseText;
+                                console.log(response);
+                                if (response.trim() == "success") {
+                                    userImage = document.querySelectorAll(".userImage")
+                                    profilePic.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    imagePreview.style.display = "none";
+                                    profilePicManage.style.display = "block";
+                                    profilePicRemoved.removeAttribute("hidden");
+                                    userImage.forEach((item) => {
+                                        item.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    })
+                                } else {
+                                    alert("remove failed.");
+                                }
+                            } else {
+                                alert("remove failed.");
                             }
+                        }
                         xhr.send(null);
-                        });
                     });
 
 
@@ -414,10 +518,10 @@
                     let successPW = document.querySelector(".successPW");
                     let needDiffPW = document.querySelector(".needDiffPW");
                     let failedPW = document.querySelector(".failedPW");
-                    let cancelBtn = document.querySelector(".modalCancel")
+                    let cancelBtn = document.querySelector(".modalCancel");
                     let emptyPW = document.querySelector(".emptyPW");
-                    let matchPW = document.querySelector(".matchPW")
-
+                    let matchPW = document.querySelector(".matchPW");
+                    let accountForm = document.querySelector(".accountForm");
 
                     // PW Inputs
                     let currentInput = document.querySelector("#currentPW");
@@ -433,6 +537,7 @@
                         successPW.setAttribute("hidden", true);
                         cancelBtn.setAttribute("hidden", true);
                         emptyPW.setAttribute("hidden", true);
+                        accountForm.setAttribute("hidden", true);
                     });
 
                     cancelPW.addEventListener('click', event => {
@@ -447,6 +552,7 @@
                         failedPW.setAttribute("hidden", true);
                         emptyPW.setAttribute("hidden", true);
                         cancelBtn.removeAttribute("hidden");
+                        accountForm.removeAttribute("hidden");
                     });
 
                     const pwSubmitButton = document.querySelector("#changePWSubmit");
@@ -455,7 +561,7 @@
                         const confirmPW = document.querySelector("#confirmPW").value;
                         const newPW = document.querySelector("#newPW").value;
 
-                        const url = "./controller/changePWController.php";
+                        const url = "index.php?action=checkChangePassword";
                         // Send URL through index PHP
                         const params = new FormData();
                         params.append("currentPW", currentPW);
@@ -470,7 +576,7 @@
                                 if (response.trim() == "emptyPW") {
                                     emptyPW.removeAttribute("hidden"); 
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                     matchPW.setAttribute("hidden", true);
                                 }
@@ -478,7 +584,7 @@
                                     matchPW.removeAttribute("hidden"); 
                                     emptyPW.setAttribute("hidden", true); 
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                 }
                                 if (response.trim() == "success") {
@@ -490,9 +596,10 @@
                                     confirmInput.value = "";
                                     successPW.removeAttribute("hidden");
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                     matchPW.setAttribute("hidden", true);
+                                    accountForm.removeAttribute("hidden");
                                 } 
                                 if (response.trim() == "needDiffPW") {
                                     currentInput.value = "";
@@ -512,14 +619,40 @@
                             }
                         });
                         xhr.send(params);
-                        // console.log(params);
                     });
+
+                    let deleteAccountBtn = document.querySelector('#deleteAccountBtn');
+                    deleteAccountBtn.addEventListener("click", function () {
+                        if (confirm("Are you sure you want to delete your account?")) {
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'index.php?action=deleteAccountCheck');
+                            xhr.addEventListener("load", () => {
+                                if (xhr.status === 200) {
+                                    response = xhr.responseText;
+                                    if (response.trim() == "success"){
+                                        window.location.replace("index.php?action=landing&account=deleted");
+                                    } else {
+                                        alert("Delete account Failed at DB")
+                                    }
+
+                                } else {
+                                    alert("Ajax Failed")
+                                }
+                            })
+                            xhr.send(null);
+                        } else {
+                            return null;
+                        }
+                    })
+                    new FormCheck().formCheck();// Marie ugly way of calling
 
                 }
 
             }
             xhr.send(null);
         })
+
+        
     })
 
 

@@ -2,7 +2,6 @@
 session_start();
 require("./controller/controller.php");
 
-
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "landing";
 
 
@@ -12,19 +11,16 @@ try {
             landing();
             break;
         case "petprofile":
-            // print_r($_POST['petId']);
             // isThatReallyMyDog($_SESSION['id', $_REQUEST['petid'])
             showPetProfile($_REQUEST['petid']);
             break;
         case "petPreview":
             if(isset($_SESSION['id'])){
-                showPetPreview($_SESSION['id']);
+                // THIS ALSO SHOWS OWNER PROFILE PIC
+                showPetPreview($_SESSION['id']);    
             }else{
-                login();
+                header("Location: index.php?action=login&error=login");
             }
-            
-            //We have to check if it also works with our cookies 
-            
             break;
         case "login":
             login();
@@ -32,12 +28,17 @@ try {
         case "checkLogin":
             if (!empty($_REQUEST['emailLogin']) && !empty($_REQUEST['passwordLogin'])) {
                 checkLogin($_REQUEST);
-            } else {
+            }else {
                 header("Location: index.php?action=login&error=login");
             }
             break;
         case "registration":
             registration();
+            break;
+        case "emailCheck":
+            if(!empty($_REQUEST['email'])){
+                emailCheck($_REQUEST['email']);
+            }
             break;
         case "registrationInput":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
@@ -49,7 +50,7 @@ try {
                     "kakao" => 0, "google" => 0,
                 );
                 signUpWith($memberData);
-            } else {
+            }else {
                 header("Location: index.php?action=petPreview&error=incomplete");
             }
             break;
@@ -142,7 +143,8 @@ try {
             signUpWith($memberData);
             break;
         case "events":
-            showUpcomingEventsList();
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showUpcomingEventsList($sessionID);
             break;
         case "searchEvents";
             $search = isset($_REQUEST["search"]) ? $_REQUEST["search"] : NULL;
@@ -156,11 +158,45 @@ try {
                 login();
             }
             break;
+        case "checkChangeAccount":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            }
+            else if (empty($_REQUEST['nameInput']) || empty($_REQUEST['emailInput'])) {
+                $result = "emptyField";
+            } else {
+                $result = checkChangeAccount($_REQUEST, $_FILES, $_SESSION['id']);
+            }
+            echo $result;
+            break;
+        case "checkChangePassword":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            }
+            else if (empty($_REQUEST['currentPW']) || empty($_REQUEST['newPW']) || empty($_REQUEST['confirmPW'])) {
+                $result = "emptyPW";
+            } else if($_REQUEST['newPW'] !== $_REQUEST['confirmPW']) {
+                $result = "matchPW";
+            } else {
+                $result = checkChangePW($_REQUEST, $_SESSION['id']);
+            }
+            
+            echo $result;
+            break;
         case "removeProfilePic":
             if(!isset($_SESSION['id'])){
                 header("Location: index.php?action=petPreview&error=notSignedIn");
             } else {
-                removeProPic($_SESSION['id']);
+                $result = removeProPic($_SESSION['id']);
+                echo $result;
+            }
+            break;
+        case "deleteAccountCheck":
+            if(!isset($_SESSION['id'])){
+                header("Location: index.php?action=petPreview&error=notSignedIn");
+            } else {
+                $result = deleteAccountCheck($_SESSION['id']);
+                echo $result;
             }
             break;
         case "showEventDetail" :
