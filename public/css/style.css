@@ -474,7 +474,6 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
         0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
-
 .topContent>div, .topContent>a>div{
     display: flex;
     flex-direction: column;
