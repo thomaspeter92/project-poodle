@@ -89,9 +89,9 @@
     }
 
     let content5div = document.querySelectorAll('.content5div');
-    // for (let i = 1; i<content5div.length; i++) {
-    //     content5div[i].addEventListener('mouseenter', mouseOverElevate)
-    //     content5div[i].addEventListener('mouseleave', mouseOverElevate) 
-    // }
+    for (let i = 1; i<content5div.length; i++) {
+        content5div[i].addEventListener('mouseenter', mouseOverElevate)
+        content5div[i].addEventListener('mouseleave', mouseOverElevate) 
+    }
 
 }

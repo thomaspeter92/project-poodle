@@ -195,6 +195,7 @@ if (isset($_GET['account'])) {
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
         <div class="theBack">
+            <img src="./public/images/eventsView.png" alt="">
         </div>
     </div>
     <div class="content5div theCard">
@@ -204,7 +205,7 @@ if (isset($_GET['account'])) {
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
         <div class="theBack">
-            <img src="./public/images/eventsView.png" alt="">
+            <img src="./public/images/editPetView.png" alt="">
         </div>
     </div>
     <div class="content5div">

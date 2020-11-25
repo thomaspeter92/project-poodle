@@ -528,7 +528,7 @@ if($event) {
                 <div id="headerContentExtra">
                     <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
                     <!-- Franco -->
-                    
+                    <?=$event['image'] ?>
                     <!-- Franco -->
             
                 <?php 
