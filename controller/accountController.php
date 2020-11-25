@@ -98,5 +98,14 @@ function deleteAccountCheck($userID){
     return $result;
 }
 
-
+function checkNotifications($userID) {
+    $manager = new NotificationManager();
+    $result = $manager->getNotifications($userID);
+    if($result) {
+        $result = "success";
+    }   else {
+        $result = "failed";
+    }
+    return $result;
+}
 ?>
