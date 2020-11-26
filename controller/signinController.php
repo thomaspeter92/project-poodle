@@ -6,6 +6,7 @@ function login()
 
 function checkLogin($params)
 {
+    $result = array("isAuthenticated" => FALSE);
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
     if ($status) {
@@ -14,12 +15,10 @@ function checkLogin($params)
 
         if ($memberDataFromDB) {
             createSessionByMemberDB($memberDataFromDB);
-            header("Location: index.php?action=petPreview");
-        } else {
-            //TODO: It is not valid email. You haven't signed up yet. ;
-            // header("Location: index.php?action=login&error=notSignedUp");
+            $result["isAuthenticated"] = TRUE;
         }
     }
+    echo json_encode($result);
 }
 
 function registration()

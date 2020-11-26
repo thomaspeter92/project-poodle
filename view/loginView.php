@@ -11,6 +11,9 @@
                     <input type="password" name="passwordLogin" id="passwordLogin" class="loginInput required" required>
                 </div>
                 <div class='subSection'>
+                    <span class="warning">Please enter a correct email and password.</span>
+                </div>
+                <div class='subSection'>
                     <button type="submit" name="connect" id="connect" class='loginButton submitButton'>Sign In</button>
                 </div>
             </form>            

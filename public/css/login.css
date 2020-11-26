@@ -161,6 +161,12 @@
         outline: none;
     }
 
+    .warning {
+        display: none;
+        color: red;
+        font-size: 0.8em;
+    }
+
     @media (max-width: 900px) {
         .modalSubDiv{
             width:80%;

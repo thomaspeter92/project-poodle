@@ -236,6 +236,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
             Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
         }
     </script>
+    <script src="./public/js/common.js"></script>
     <script src="./public/js/template.js"></script>
     <script src="./public/js/registrationCheck.js"></script>
     <script src="./public/js/formCheck.js"></script>
