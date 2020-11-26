@@ -4,23 +4,6 @@ function login()
     require('./view/loginView.php');
 }
 
-function checkLogin($params)
-{
-    $result = array("isAuthenticated" => FALSE);
-    $loginManager = new MemberManager();
-    $status = $loginManager->checkLogin($params);
-    if ($status) {
-        $emailLogin = addslashes(htmlspecialchars((htmlentities(trim($params['emailLogin']))))); 
-        $memberDataFromDB = $loginManager->getMemberDataByEmail($emailLogin);
-
-        if ($memberDataFromDB) {
-            createSessionByMemberDB($memberDataFromDB);
-            $result["isAuthenticated"] = TRUE;
-        }
-    }
-    echo json_encode($result);
-}
-
 function registration()
 {
     require('./view/registrationView.php');
@@ -45,6 +28,24 @@ function emailCheck($email){
     if($memberCheck){
         echo "true";
     }
+}
+
+function checkLogin($params)
+{
+    $result = array("isAuthenticated" => FALSE);
+
+    $loginManager = new MemberManager();
+    $status = $loginManager->checkLogin($params);
+    if ($status) {
+        $emailLogin = addslashes(htmlspecialchars((htmlentities(trim($params['emailLogin']))))); 
+        $memberDataFromDB = $loginManager->getMemberDataByEmail($emailLogin);
+
+        if ($memberDataFromDB) {
+            createSessionByMemberDB($memberDataFromDB);
+            $result["isAuthenticated"] = TRUE;
+        }
+    }
+    echo json_encode($result);
 }
 
 function signUpWith($memberData)
@@ -86,17 +87,16 @@ function signInWith($memberData) {
         throw new Exception("Sign in is failed!", 1005);
     }
     $email = $memberData["email"];
+    $result = array("isAuthenticated" => FALSE);
 
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     
     if ($memberDataFromDB) {
         createSessionByMemberDB($memberDataFromDB);
-        header("Location: index.php?action=petPreview");
-    } else {
-        //TODO: It is not valid email. You haven't signed up yet. ;
-        // header("Location: index.php?action=login&error=notSignedUp");
+        $result["isAuthenticated"] = TRUE;
     }
+    echo json_encode($result);
 }
 
 function createSessionByMemberDB($memberDataFromDB) {

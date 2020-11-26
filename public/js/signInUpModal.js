@@ -1,3 +1,4 @@
+
 const createSignUpModal = () =>{
    
     //Close the menu
@@ -19,7 +20,7 @@ const createSignUpModal = () =>{
 
              const kakaoSignUpBtn = document.querySelector("#kakaoSignUp");
              if (kakaoSignUpBtn) {
-                 kakaoSignUpBtn.addEventListener("click", () => loginWithKakao(true));
+                 kakaoSignUpBtn.addEventListener("click", () => signInWithKakao(true));
              }
              const regLoginBtn = document.querySelector("#regLogin");
              if (regLoginBtn) {
@@ -64,7 +65,7 @@ const createSignInModal = () =>{
 
             const kakaoLoginBtn = document.querySelector("#kakaoLogin");
             if (kakaoLoginBtn) {
-                kakaoLoginBtn.addEventListener("click", () => loginWithKakao(false));
+                kakaoLoginBtn.addEventListener("click", () => signInWithKakao(false));
             }
 
             const loginRegisterBtn = document.querySelector("#logRegister");
@@ -104,25 +105,20 @@ const signIn = (e) => {
         formData.append("emailLogin", emailLogin.value);
         formData.append("passwordLogin", passwordLogin.value);
 
-        const url = "index.php";
+        //TODO: Remove duplicate codes - signInUpModal.js
+        const failedMsg = "Please enter a correct email and password.";
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
+        xhr.open("POST", "index.php");
         xhr.addEventListener("load", () => {
-            console.log(xhr.status);
             if (xhr.status === 200) {
                 if (IsValidJSONString(xhr.responseText)) {
                     const result = JSON.parse(xhr.responseText);
-                    if (result.isAuthenticated) {
-                        window.href = "index.php?action=petPreview";
-                    } else {
-                        showErrorForSigin("Please enter a correct email and password.");    
-                    }
-                } else {    //Error - result is not JSON string
-                    showErrorForSigin("Please try it again.");
-                }
-            } else {    //Error - about response
-                showErrorForSigin("Please try it again.");
-            }
+                    if (result.isAuthenticated) window.href = "index.php?action=petPreview";
+                    else showErrorForSigin(failedMsg);
+                } 
+                else showErrorForSigin("Please try it again."); //Error - result is not JSON string    
+            } 
+            else showErrorForSigin("Please try it again."); //Error - about response
         });
         xhr.send(formData);
     } else {    //Error - emailLogin or passwordLogin is not existed
@@ -136,6 +132,193 @@ const showErrorForSigin = (msg) => {
     warningSpan.innerHTML = msg;
     warningSpan.style.display = "inline";
 };
+
+const signAllOut = () => {
+    googleSignOut();
+    signOutWithKakao();
+
+    const form = document.querySelector("#signOutForm");
+    form.action = "index.php?action=logout";
+    form.submit();
+};
+
+/******************** Google ***********************/
+/**
+ * This function is invoked by <div id='gSigninBut'>
+ * IMPORTANT: onGoogleSignIn is not invoked if it changes to arrow function
+ * @param {*} googleUser 
+ */
+function onGoogleSignIn(googleUser) {
+    signInWithGoogle(googleUser);
+}
+
+const signInWithGoogle = (googleUser) => {
+    console.log("signInWithGoogle");
+    var auth2 = gapi.auth2.getAuthInstance();
+	if (auth2.isSignedIn.get()) {
+        var googleBtn = document.querySelector("#gSigninBut");
+        if(googleBtn){
+            var signIn = googleBtn.classList.contains("signin");
+            var signUp = googleBtn.classList.contains("signup");
+            var attriValue;
+            if(signIn === true) attriValue = false;
+            if(signUp === true) attriValue = true;
+            gRequestUserInfo(googleUser,attriValue);
+        }
+    }
+}
+
+const gRequestUserInfo = (gUser,signUp) => {
+    var profile = gUser.getBasicProfile();
+    const form = document.querySelector("#googleForm");
+    if(form){
+        var temp = profile.getName().trim().split(" ");
+        var name = temp[0];
+        
+        const formData = new FormData();
+        (signUp) ?
+            formData.append("action", "googleSignUp") :
+            formData.append("action", "googleSignIn");
+        formData.append("googleName", name);
+        formData.append("googleEmail", profile.getEmail());
+        formData.append("googleUserId", profile.getId());
+        //TODO: test if the image is not set
+        formData.append("googlePicture", profile.getImageUrl());
+
+        const failedMsg = "Your Google account is not signed up yet. Please sign up first.";
+        //TODO: Remove duplicate codes
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "index.php");
+        xhr.addEventListener("load", () => {
+            if (xhr.status === 200) {
+                if (IsValidJSONString(xhr.responseText)) {
+                    const result = JSON.parse(xhr.responseText);
+                    if (result.isAuthenticated) window.href = "index.php?action=petPreview";
+                    else failGoogleSignIn(failedMsg);
+                } 
+                else failGoogleSignIn("Please try it again."); //Error - result is not JSON string    
+            } 
+            else failGoogleSignIn("Please try it again."); //Error - about response
+        });
+        xhr.send(formData);
+    }
+};
+
+const googleSignOut = () => {
+    var auth2;
+    if(gapi){
+        gapi.auth2.init();
+        auth2 = gapi.auth2.getAuthInstance();
+    }
+    if(auth2){
+        if(auth2.isSignedIn.get() == true){
+            auth2.signOut().then(function () {
+            });
+        }
+        auth2.disconnect();
+    }
+};
+
+const failGoogleSignIn = (erroMsg) => {
+    showErrorForSigin(erroMsg);
+    googleSignOut();
+};
+/***************************************************/
+
+/********************* Kakao ***********************/
+function initKakao(){
+    Kakao.cleanup();
+    Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
+}
+
+const signInWithKakao = (signUp) => {
+    Kakao.Auth.loginForm({
+        success: (authObj) => {
+            requestUserInfo((id, nickname, email, thumbnailURL) => {
+                const formData = new FormData();
+                formData.append("action", "kakaoLogin");
+                (signUp) ? 
+                    formData.append("kakaoSignUp", "true") :
+                    formData.append("kakaoSignUp", "false");
+                formData.append("kakaoNickname", nickname);
+                formData.append("kakaoEmail", email);
+                formData.append("kakaoid", id);
+                if (thumbnailURL) {
+                    formData.append("kakaoThumbnailURL", thumbnailURL);
+                }
+
+                const failedMsg = "Your Kakao account is not signed up yet. Please sign up first.";
+                
+                //TODO: Remove duplicate codes
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "index.php");
+                xhr.addEventListener("load", () => {
+                    if (xhr.status === 200) {
+                        if (IsValidJSONString(xhr.responseText)) {
+                            const result = JSON.parse(xhr.responseText);
+                            if (result.isAuthenticated) window.href = "index.php?action=petPreview";
+                            else failKakaoSignIn(failedMsg);
+                        } 
+                        else failKakaoSignIn("Please try it again."); //Error - result is not JSON string    
+                    } 
+                    else failKakaoSignIn("Please try it again."); //Error - about response
+                });
+                xhr.send(formData);
+            });
+        },
+        fail: (err) => {
+            failKakaoSignIn("Please try it again.");
+        },
+    });
+};
+
+const requestUserInfo = (callback) => {
+    Kakao.API.request({
+        url: '/v2/user/me',
+        success: (response) => {
+            const id = response.id;
+            const nickname = response.properties.nickname;
+            const email = response.kakao_account.email;
+            const thumbnailURL = response.properties.thumbnail_image;
+            callback(id, nickname, email, thumbnailURL);
+        },
+        fail: (error) => {
+            showErrorForSigin("Please try it again.");
+        }
+    });
+};
+
+const failKakaoSignIn = (erroMsg) => {
+    showErrorForSigin(erroMsg);
+    signOutWithKakao();
+};
+
+const signOutWithKakao = () => {
+    if (Kakao){
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.Auth.logout(() => {
+            });
+        }
+    }
+};
+
+// For deleting account of Poodle
+const disconnectWithKakao = () => {
+    Kakao.API.request({
+        url: "/v1/user/unlink",
+        success: function(response) {
+            // console.log("[disconnectWithKakao]");
+            // console.log(response);
+        },
+        fail: function(error) {
+            // console.log("[disconnectWithKakao][Error]");
+            // console.log(error);
+        }
+    });
+};
+/***************************************************/
+
+initKakao();
 
 var dSignUpBut =  document.querySelector("#desktopSignUpLink");
 if (dSignUpBut) {

@@ -1,7 +1,6 @@
 
 
 function onGoogleSignIn(googleUser) {
-
     var googleBtn = document.querySelector("#gSigninBut");
     if(googleBtn){
         var signIn = googleBtn.classList.contains("signin");
@@ -12,7 +11,6 @@ function onGoogleSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         gRequestUserInfo(googleUser,attriValue);
     }
-
 }
 
 
@@ -72,7 +70,7 @@ function signAllOut(){
 
     googleSignOut();
 
-    logoutWithKakao();
+    signOutWithKakao();
 
     const form = document.querySelector("#signOutForm");
     form.action = "index.php?action=logout";

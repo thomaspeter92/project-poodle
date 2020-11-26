@@ -22,9 +22,8 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Franco -->
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <!-- <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script>  -->
-    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script> 
-    <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
+    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script>  -->
+    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
     <?= isset($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
@@ -228,20 +227,14 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
         function initGoogle(){
             const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
             gapi.load('auth2', function() {
-            gapi.auth2.init({client_id:CLIENT_ID});
-                });
-        }
-
-        function initKakao(){
-            Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
+                gapi.auth2.init({client_id:CLIENT_ID});
+            });
         }
     </script>
     <script src="./public/js/common.js"></script>
     <script src="./public/js/template.js"></script>
     <script src="./public/js/registrationCheck.js"></script>
     <script src="./public/js/formCheck.js"></script>
-    <script src="./public/js/googlelogin.js"></script>
-    <script src="./public/js/kakaologin.js"></script>
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
     <script src="./public/js/signInUpModal.js"></script>

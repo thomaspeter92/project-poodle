@@ -36,8 +36,9 @@
         </div>
     </div>
     <!-- <script src="./projectPoodle/public/js/formCheck.js"></script> -->
-    <?php require("kakaoForm.php"); ?>
-    <?php require("googleForm.php"); ?>
-  
+    <!-- TODO: Delete - They are not needed now -->
+    <!-- <?php require("kakaoForm.php"); ?> -->
+    <!-- <?php require("googleForm.php"); ?> -->
+
 
 
