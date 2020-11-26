@@ -51,7 +51,7 @@ function checkChangeAccount($inputs, $image, $userID){
         $profileImageNameUnique = time().'_'.$profileImageNameNoSpace;
         $target = './private/profile/'.$profileImageNameUnique;
 
-        if ($image['file']['type'] !== 'image/jpeg' OR  $image['file']['type'] !== 'image/png') {
+        if ($image['file']['type'] !== 'image/jpeg' AND $image['file']['type'] !== 'image/png') {
             $result="imageTypeFail";
         } else {
             if (move_uploaded_file($image['file']['tmp_name'], $target)) {
@@ -79,7 +79,7 @@ function removeProPic($userID){
         $result = "success";
         $currentImgURL = $_SESSION['imageURL'];
         unlink($currentImgURL);
-        $_SESSION['imageURL'] = "./private/profile/defaultProfile.png";
+        $_SESSION['imageURL'] = "./private/defaultProfile.png";
     }   else {
         $result = "failed";
     }
