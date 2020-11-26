@@ -20,10 +20,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <!-- FONT LINKS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <!-- Franco -->
-    <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script>  -->
-    <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
     <?= isset($style) ? $style : ""; ?>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
@@ -193,11 +189,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
         </div>
     </footer>
 
-    <!-- NOTICE: Divs below are used for Google buttons -->
-    <div id="googleHome">
-        <div id='gSigninBut' class='g-signin2' data-onsuccess='onGoogleSignIn' style='position:absolute;top:-9999px;left:-9999px;'></div>
-    </div>
-
     <!-- NOTICE: tempContainer is for getting viewport height -->
     <div id="tempContainer"></div>
 
@@ -223,14 +214,6 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
         } 
     }
     </script> 
-    <script>
-        function initGoogle(){
-            const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
-            gapi.load('auth2', function() {
-                gapi.auth2.init({client_id:CLIENT_ID});
-            });
-        }
-    </script>
     <script src="./public/js/common.js"></script>
     <script src="./public/js/template.js"></script>
     <script src="./public/js/registrationCheck.js"></script>

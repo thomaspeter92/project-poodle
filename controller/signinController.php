@@ -1,16 +1,13 @@
 <?php
-function login()
-{
+function login() {
     require('./view/loginView.php');
 }
 
-function registration()
-{
+function registration() {
     require('./view/registrationView.php');
 }
 
-function logout()
-{
+function logout() {
     session_unset();
     session_destroy();
     header("Location: index.php");
@@ -22,17 +19,8 @@ function createSession($id, $name, $imageURL) {
     $_SESSION['imageURL'] = $imageURL;
 }
 
-function emailCheck($email){
-    $manager = new MemberManager();
-    $memberCheck = $manager->getMemberDataByEmail($email);
-    if($memberCheck){
-        echo "true";
-    }
-}
-
-function checkLogin($params)
-{
-    $result = array("isAuthenticated" => FALSE);
+function checkLogin($params) {
+    $result = array("signedIn" => FALSE);
 
     $loginManager = new MemberManager();
     $status = $loginManager->checkLogin($params);
@@ -42,14 +30,13 @@ function checkLogin($params)
 
         if ($memberDataFromDB) {
             createSessionByMemberDB($memberDataFromDB);
-            $result["isAuthenticated"] = TRUE;
+            $result["signedIn"] = TRUE;
         }
     }
     echo json_encode($result);
 }
 
-function signUpWith($memberData)
-{
+function signUpWith($memberData) {
     if (empty($memberData["email"])) {
         throw new Exception("Sign up is failed!", 1000);
     }
@@ -58,11 +45,8 @@ function signUpWith($memberData)
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     if ($memberDataFromDB) {
-        
-        signInWith($memberData);
-        
-        //TODO: Show the user is already signed up with kakao
-        
+        $result = array("alreaySignedUp" => TRUE);
+        echo json_encode($result);
     } else {
         if (empty($memberData["name"]) 
          or empty($memberData["password"]) 
@@ -74,27 +58,29 @@ function signUpWith($memberData)
 
         $result = $manager->addNewMember($memberData);
         if ($result) {
-            signInWith($memberData);
-        } 
-        else {
+            signInWith($memberData, TRUE);
+        } else {
             throw new Exception("Failed to add new member!!", 1004);
         }
     }
 }
 
-function signInWith($memberData) {
+function signInWith($memberData, $signedUp=FALSE) {
     if (empty($memberData["email"])) {
         throw new Exception("Sign in is failed!", 1005);
     }
     $email = $memberData["email"];
-    $result = array("isAuthenticated" => FALSE);
+    $result = array("signedIn" => FALSE);
 
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     
     if ($memberDataFromDB) {
         createSessionByMemberDB($memberDataFromDB);
-        $result["isAuthenticated"] = TRUE;
+        $result["signedIn"] = TRUE;
+        if ($signedUp) {
+            $result["signedUp"] = TRUE;
+        }
     }
     echo json_encode($result);
 }

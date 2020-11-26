@@ -1,3 +1,6 @@
+    <style type="text/css">
+        
+    </style>
     <div id="SignInMain">
         <div class = "registerDiv">
             <form method="POST" action="index.php" autocomplete="off" id='formSignIn'>
@@ -19,7 +22,14 @@
             </form>            
             <div class='thirdParty'>
                 <div><span>OR</span></div>
-                <div id='thirdPartyGoogle1'></div>
+                <div id='thirdPartyGoogle1'>
+                    <div id="gSignInWrapper">
+                        <div id="googleCustomBtn" class="customGPlusSignIn signin">
+                            <span class="icon"></span>
+                            <span class="buttonText">Google</span>
+                        </div>
+                    </div>
+                </div>
 
                 <div id='thirdPartyKakao1'>
                     <div class="buttonK" id="kakaoLogin">
@@ -35,10 +45,6 @@
 
         </div>
     </div>
-    <!-- <script src="./projectPoodle/public/js/formCheck.js"></script> -->
-    <!-- TODO: Delete - They are not needed now -->
-    <!-- <?php require("kakaoForm.php"); ?> -->
-    <!-- <?php require("googleForm.php"); ?> -->
 
 
 

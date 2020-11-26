@@ -35,12 +35,7 @@ try {
         case "registration":
             registration();
             break;
-        case "emailCheck":
-            if(!empty($_REQUEST['email'])){
-                emailCheck($_REQUEST['email']);
-            }
-            break;
-        case "registrationInput":
+        case "signUp":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
                 $memberData = array(
                     "name" => $_REQUEST['username'],
@@ -82,7 +77,7 @@ try {
         case "legalPage":
             legalPage();
             break;
-        case "kakaoLogin":
+        case "kakaoSignIn":
             $kakaoSignUp = isset($_REQUEST["kakaoSignUp"]) ? $_REQUEST["kakaoSignUp"] : NULL;
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
