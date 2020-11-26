@@ -527,9 +527,7 @@ if($event) {
                 </div>
                 <div id="headerContentExtra">
                     <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
-                    <!-- Franco -->
-                    
-                    <!-- Franco -->
+
             
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)

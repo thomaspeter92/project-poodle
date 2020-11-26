@@ -37,7 +37,7 @@
     }
  
     #eventSpaceMiddle{
-        width:45%
+        width:40%
     }
     .eventButton{
         margin: auto;
@@ -87,7 +87,7 @@
     }
 
     #eventPictureFrame{
-        width:100%;
+        width:80%;
         height:90%;
         border:1px solid black;
         margin-top:5px;
@@ -113,6 +113,12 @@
     #stepIndicator{
         width:98%;
         margin-left:5px;
+    }
+
+    #eventImage{
+        display:block;
+        width:100%;
+        height:100%;
     }
 /* Style for maps */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -161,6 +167,8 @@
         padding: 3px 0;
 
     }
+
+ 
     /* .modalSubDiv{
         width: 30%;
         height: 30%;
@@ -241,24 +249,24 @@
                 <!-- <button class="loginButton">Choose picture file</button>
                 <input type="hidden" id="eventPicture" name="eventPicture" value='1'> -->
 
-                <label for="file" style="border: 1px solid grey">Choose picture file:</label>
-                <input type="file" id="file" name="file" style="display: none;" >
+                <label for="file" style="border: 1px solid grey; cursor: pointer">Choose picture file:</label>
+                <input type="file" id="file" name="file" accept="image/jpeg, image/png" style="display: none; " >
                 <input type="hidden" name="eventPicture" id="eventPicture" value="<?= isset($eventEditDetails['imageName']) ? $eventEditDetails['imageName'] : '' ;?>">
 
                 <!-- TODO Value of picture to  be changed -->
-                <div id="eventPictureFrame"></div>
+                <div id="eventPictureFrame"><img id="eventImage" alt="picture"></div>
             </div>
         </div>
         <div id="eventStep4">
 
             <p>Choose location to hold the event</p>
-            <div id="mapContainer">
+            <div id="mapContainer2">
                 <div id="map2"></div>
-                <div id="calculateDistance">Calculate Distance<div id="distanceDiv"></div></div>
-                <div id="distanceDiv"></div>
-                <div id="locationList"></div>
+                <div id="calculateDistance2">Calculate Distance<div id="distanceDiv2"></div></div>
+                <div id="distanceDiv2"></div>
+                <div id="locationList2"></div>
                 <br><br><br>
-                <div id="vendorList">
+                <div id="vendorList2">
                 </div>
             </div> 
 

@@ -18,6 +18,7 @@ try {
             if(isset($_SESSION['id'])){
                 // THIS ALSO SHOWS OWNER PROFILE PIC
                 showPetPreview($_SESSION['id']);    
+
             }else{
                 header("Location: index.php?action=login&error=login");
             }
@@ -59,6 +60,7 @@ try {
             break;
         case "addEditInput":
             displayAddEditInput(!empty($_REQUEST['petId']) ? $_REQUEST['petId'] : '');
+  
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {

@@ -41,9 +41,10 @@ const createAddEditEventModal = (id) =>{
 
 
             startMap(polyLineArray);
+            displayPicture();
             showEventStep("eventStep1");
             recommendExpiryDateTime();
-
+            
         }
     }
      xhr.send(null);
@@ -172,119 +173,6 @@ function addMinutes(date, minutes){
 
 
 
-
-// Functions for the mapping
-// var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-// var mapOption = { 
-//         center: new kakao.maps.LatLng(37.530767, 126.971937), // 지도의 중심좌표
-//         level: 3 // 지도의 확대 레벨
-//     };
-
-// var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-// var bounds = new kakao.maps.LatLngBounds();
-// functions parts
-/**
- * callback function for geoCoder
- */
-var getCoords = function (result, status) {
-        // 정상적으로 검색이 완료됐으면 
-        if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            // points.push(coords);
-    // createMarkersPoints(points);
-    var marker = new kakao.maps.Marker({
-            position: coords,
-            map: map,
-            clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-        });
-    var infowindow = new kakao.maps.InfoWindow({
-                        content :"<"+(1)+">"+ locationData[1][2],
-                    });
-    infowindow.open(map, marker);  
-    bounds.extend(coords);
-    map.setBounds(bounds);
-            // points.push(coords);
-        } else{
-            // alert("We could not find the address you provided");
-        }
-};
-
-    // traitement after addressSearch exec
-//  var points= Array();
-
-    function useMyCoords(coords) {
-        // points.push(coords);
-        // createMarkersPoints(points);
-        var marker = new kakao.maps.Marker({
-                position: coords,
-                map: map,
-                clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-            });
-        var infowindow = new kakao.maps.InfoWindow({
-                            content :"<"+(i+1)+">"+ locationData[i][2],
-                        });
-        infowindow.open(map, marker);  
-        bounds.extend(coords);
-        map.setBounds(bounds);
-        
-    }
-
-
-function getLatLonFromAddress(location) {
-    var geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(location[1], function (result, status) {
-        // 정상적으로 검색이 완료됐으면 
-        if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            var marker = new kakao.maps.Marker({
-                            position: coords,
-                            map: map,
-                            clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-                        });
-            // var location4 = location[4];
-            var infowindow = new kakao.maps.InfoWindow({
-                                content :"<"+counter+">"+location[2],
-                            });
-            // location4.addEventListener('click', function(){
-            //     polyLineArray.push(coords);
-            // })
-            infowindow.open(map, marker);  
-            // polyLineArray.push(coords);
-            bounds.extend(coords);
-            map.setBounds(bounds);
-            let titles = document.getElementsByClassName("infoWindow");
-            titles[titles.length-1].addEventListener('click', function(e){
-                let modalMapObj = { }
-                let infoView = new Modal(location[3]);
-                infoView.generate(modalMapObj, allowCancel=false);
-                var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
-                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
-                roadviewClient.getNearestPanoId(coords, 50, function(panoId) {
-                    roadview.setPanoId(panoId, coords); //panoId와 중심좌표를 통해 로드뷰 실행
-                });
-                var addButton = document.getElementsByClassName("addButton");
-                addButton[0].addEventListener('click', function(){
-                    polyLineArray.push(coords);
-                    var destination = document.createElement("div");
-                    destination.textContent = location[0];
-                    var dash = document.createElement("div");
-                    dash.textContent = "************";
-                    locationList.appendChild(destination);
-                    locationList.appendChild(dash);
-                    console.log(polyLineArray);
-                })
-            });
-              
-            counter++;
-
-            
-        } else{
-            // alert("We could not find the address you provided");
-        }
-    });
-}
-
 var startEndHandler = function startEnd(mouseEvent){
     // 클릭한 위도, 경도 정보를 가져옵니다   
     var latlng = mouseEvent.latLng; 
@@ -319,7 +207,7 @@ var startEndHandler = function startEnd(mouseEvent){
 
 function startMap(polyLineArray){
     var stopByCounter = 1;
-    var locationList = document.getElementById("locationList");
+    var locationList = document.getElementById("locationList2");
     var bounds = new kakao.maps.LatLngBounds();
     // var polyLineArray = Array();
     var mapContainer = document.getElementById('map2'); // 지도를 표시할 div 
@@ -386,7 +274,7 @@ function startMap(polyLineArray){
     let counter = 1;
     for(let i=0; i<locationData.length; i++){
             let myLocation = locationData[i];
-            let containerVendor = document.getElementById("vendorList");
+            let containerVendor = document.getElementById("vendorList2");
             var vendor = document.createElement("div");
             vendor.className="vendorElement";
             vendor.textContent = "* "+locationData[i][0];
@@ -457,8 +345,8 @@ function startMap(polyLineArray){
     }
 
 
-    var distanceButton = document.getElementById("calculateDistance");
-    var distanceDiv = document.getElementById("distanceDiv");
+    var distanceButton = document.getElementById("calculateDistance2");
+    var distanceDiv = document.getElementById("distanceDiv2");
     var distanceLength = document.createElement("span");
     
     distanceButton.addEventListener('click', function(){
@@ -478,5 +366,19 @@ function startMap(polyLineArray){
     
         })
 
+}
 
+function displayPicture(){
+
+    var picInput = document.getElementById('eventPicture');
+    var image = document.getElementById('eventImage');
+    if(picInput.value){
+        image.src = "./private/event/"+picInput.value;
+    }
+
+    document.getElementById('file').onchange = function (e) {
+         
+         image.src = URL.createObjectURL(e.target.files[0]);
+
+    };
 }

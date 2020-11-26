@@ -36,9 +36,13 @@ function showPetPreview($ownerId){
 }
 
 function displayAddEditInput($petId) {
-    $petProfileManager = new PetProfileManager();
-    $petProfile = $petProfileManager->getPetProfile($petId);
+    //Franco
+    if(!empty($petId)){
+        $petProfileManager = new PetProfileManager();
+        $petProfile = $petProfileManager->getPetProfile($petId);
+    }
     require("./view/addEditPetView.php");
+
 }
 
 function petAddEdit($params) {
