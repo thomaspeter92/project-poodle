@@ -40,9 +40,7 @@
         text-align: center;
     }
 
-    .ModalCancelDiv {
-            /* position:absolute; */
-        }
+
     .modalCancel {
         position: absolute;
         right: 10%;

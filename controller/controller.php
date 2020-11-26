@@ -2,6 +2,7 @@
 // This is for Controller functions.
 require_once("./util/FileUtil.php");
 require_once('./model/MemberManager.php');
+require_once("./model/NotificationManager.php");
 require_once("./model/PetProfileManager.php");
 require_once("./controller/signinController.php");
 require_once("./model/EventManager.php");

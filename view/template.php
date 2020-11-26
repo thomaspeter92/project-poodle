@@ -3,6 +3,9 @@
 $DEFAULT_IMAGE_URL = "./private/defaultProfile.png";
 $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
 
+// $notificationManager = new NotificationManager();
+
+
 // TODO: Use $style for additional css
 // $style = NULL;
 ?>
