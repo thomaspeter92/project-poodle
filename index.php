@@ -259,6 +259,9 @@ try {
         case "requestMapDetail":
             showMapDetail();
             break;
+        case "collectPoints":
+            viewCollectPoints();
+            break; 
         default:
             landing();
             break;

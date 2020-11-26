@@ -32,7 +32,8 @@ function showEventDetail($params) {
     $comments = $showEvent->loadComments($params);
     $eventList = $showEvent->getUpcomingEvents(NULL, NULL, 4);
     $guestIdList = $showEvent->getGuestId($params['eventId']);
-    $commentsCount = $showEvent->countComments(($params['eventId']));
+    $commentsCount = $showEvent->countComments($params['eventId']);
+    $profilePic = $showEvent->getProfilePic($_SESSION['id']);
     require("./view/eventDetailedView.php");
 }
 

@@ -183,3 +183,9 @@ function showMapDetail(){
     
     require("./view/mapViewDetail.php");
 }
+
+function viewCollectPoints() {
+    require("./view/rewardARview.php");
+}
+
+

@@ -206,6 +206,16 @@ require_once("Manager.php");
             $req->closeCursor();
         }
 
+        public function getProfilePic($userId) {
+            $db = $this-> dbConnect();
+            $req = $db->prepare("SELECT profileImage FROM member WHERE id =  :userId");
+            $req->bindParam(':userId',$userId,PDO::PARAM_INT);
+            $req->execute();
+            $profileImage = $req->fetch(PDO::FETCH_ASSOC);
+            $req -> closeCursor();
+            return $profileImage;
+        }
+
 
 
         public function getEventEditDetails($eventId){

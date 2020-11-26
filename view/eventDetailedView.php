@@ -564,7 +564,7 @@ if($event) {
         <?php if (isset($_SESSION['id'])) {?>
 
                     <div id="formContent">
-                        <img id="authorPhoto" class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
+                        <img id="authorPhoto" class="hostPhoto" src="./private/profile/<?=$profilePic['profileImage'] ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
                         <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                         <textarea name="comment" id="comment" rows="1" placeholder="Leave a comment..."></textarea>
