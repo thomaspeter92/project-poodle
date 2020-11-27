@@ -81,13 +81,15 @@ function addEditEvent(){
     require('./view/addEditEventView.php');
 }
 
-function addPoints($userID){
+function checkPoints($userID){
     $manager = new MemberManager;
-    $manager->addPoints($userID);
-}
-
-function congrats(){
-    require('./view/congratsView.php');
+    $pointsCheck = $manager->checkPoints($userID);
+    if($pointsCheck){
+        header('Location: https://localhost/index.php?action=claimed');
+    }else{
+        $manager->addPoints($userID);
+        header('Location:./index.php?action=coupon');
+    }
 }
 
 function coupon(){

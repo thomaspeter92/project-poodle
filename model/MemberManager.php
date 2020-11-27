@@ -164,8 +164,7 @@ class MemberManager extends Manager{
 
         return $profilePicURL;
     }
-
-    function addPoints($userID){
+    function checkPoints($userID){
         $db = $this->dbConnect();
         $query = "SELECT points FROM member WHERE id = $userID";
         $response = $db->prepare($query);
@@ -173,26 +172,14 @@ class MemberManager extends Manager{
         $points = $response->fetch(PDO::FETCH_ASSOC);
         $response->closeCursor();
         $currentPoints = $points['points'];
-        
-        if($currentPoints == NULL){
+        return $currentPoints;
+    }
+    function addPoints($userID){
             $db = $this->dbConnect();
             $query = "UPDATE member SET points = 5 WHERE id = $userID";
             $response = $db->prepare($query);
             $response->execute();
             $response->closeCursor();
-            header('Location:https://localhost/index.php?action=congrats');
-        }else{
-            // $newPoints = ($currentPoints+5);
-            // // echo $newPoints;
-            // $db = $this->dbConnect();
-            // $query = "UPDATE member SET points = ? WHERE id = $userID";
-            // $response = $db->prepare($query);
-            // $response->bindParam(1, $newPoints, PDO::PARAM_INT);
-            // $response->execute();
-            // $response->closeCursor();
-            header('Location: https://localhost/index.php?action=claimed');
-            
-        }
-       
     }
+
 }

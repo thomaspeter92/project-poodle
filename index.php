@@ -194,10 +194,7 @@ try {
             addEditEvent();
             break;
         case "addPoints":
-            addPoints($_SESSION['id']);
-            break;
-        case "congrats":
-            congrats();
+            checkPoints($_SESSION['id']);
             break;
         case "coupon":
             coupon();
