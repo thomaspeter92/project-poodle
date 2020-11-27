@@ -19,11 +19,11 @@
         <a-marker type="pattern" preset="pattern" url="pattern-markerFinal.patt" emitevents="true" cursor="rayOrigin: mouse" id="marker">
         <!-- <a-box position='0 0.5 0' color="red">
         </a-box> -->
-            <a-entity gltf-model="pichu_model/scene.gltf"
-                    scale="2 2 2" 
+            <a-entity gltf-model="cute_pug_waffles/scene.gltf"
+                    scale="1 1 1" 
                     position="0 0 0"
-                    rotation="0 0 0"
-                    animation="property: rotation; to:0 360 0; loop: true; dur: 10000; easing: linear;"
+                    rotation="0 -90 90"
+                    animation="property: rotation; to:360 -90 90; loop: true; dur: 10000; easing: linear;"
                     id="model"
                     >
             </a-entity>
