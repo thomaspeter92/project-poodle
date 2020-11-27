@@ -1,5 +1,8 @@
 
-
+/**
+ * This function 
+ * @param {*} googleUser 
+ */
 function onGoogleSignIn(googleUser) {
 
     var googleBtn = document.querySelector("#gSigninBut");

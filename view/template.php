@@ -25,7 +25,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Franco -->
     <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <!-- <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script>  -->
+
     <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script> 
     <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
     <?= isset($style) ? $style : ""; ?>

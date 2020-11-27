@@ -156,12 +156,11 @@ function addRecommendedDateTime(){
         let dd=String(recommendedDateTime.getDate()).padStart(2,'0');
         let mm = String(recommendedDateTime.getMonth()+1).padStart(2,'0');
         let yyyy = recommendedDateTime.getFullYear();
-        let hh = String(recommendedDateTime.getHours());
+        let hh = String(recommendedDateTime.getHours()).padStart(2,'0');
         let min = String(recommendedDateTime.getMinutes()).padStart(2,'0');;
         
         let recommendedDate = yyyy + '-' + mm +'-'+ dd;
         let recommendedTime = hh+":"+min;
-
          expiryDateEle.value = recommendedDate;
          expiryTimeEle.value = recommendedTime;
     }
