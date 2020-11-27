@@ -27,10 +27,22 @@ function checkLogin($params) {
     if ($status) {
         $emailLogin = addslashes(htmlspecialchars((htmlentities(trim($params['emailLogin']))))); 
         $memberDataFromDB = $loginManager->getMemberDataByEmail($emailLogin);
-
+        
         if ($memberDataFromDB) {
-            createSessionByMemberDB($memberDataFromDB);
-            $result["signedIn"] = TRUE;
+            $singedIn = TRUE;
+            if ($memberDataFromDB["google"]) {
+                $singedIn = FALSE;
+            }
+            if ($memberDataFromDB["kakao"]) {
+                $singedIn = FALSE;
+            }
+            $result["google"] = intval($memberDataFromDB["google"]);
+            $result["kakao"] = intval($memberDataFromDB["kakao"]);
+            $result["signedIn"] = $singedIn;
+            
+            if ($singedIn) {
+                createSessionByMemberDB($memberDataFromDB);
+            }
         }
     }
     echo json_encode($result);
@@ -77,10 +89,22 @@ function signInWith($memberData, $signedUp=FALSE) {
     
     if ($memberDataFromDB) {
         createSessionByMemberDB($memberDataFromDB);
-        $result["signedIn"] = TRUE;
+        $singedIn = TRUE;
+
         if ($signedUp) {
             $result["signedUp"] = TRUE;
         }
+        if ($memberData["google"] != $memberDataFromDB["google"]
+            or $memberData["kakao"] != $memberDataFromDB["kakao"]) {
+            $result["google"] = intval($memberDataFromDB["google"]);
+            $result["kakao"] = intval($memberDataFromDB["kakao"]);
+            $singedIn = FALSE;
+        }
+        $result["signedIn"] = $singedIn;
+
+        if ($singedIn) {
+            createSessionByMemberDB($memberDataFromDB);
+        }   
     }
     echo json_encode($result);
 }

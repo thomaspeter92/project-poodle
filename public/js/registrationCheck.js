@@ -153,7 +153,6 @@ class RegistrationCheck{
             xhr.open(`POST`, `index.php`);
             xhr.addEventListener("load", () => {
                 if (xhr.status === 200) {
-                    alert(xhr.responseText);
                     if (IsValidJSONString(xhr.responseText)) {
                         const result = JSON.parse(xhr.responseText);
                         if (result.signedIn) {

@@ -93,8 +93,6 @@ const closeModal = () => {
 };
 
 const initGoogle = () => {
-    console.log("initGoogle");
-    
     loadScript(GOOGLE_SCRIPT_ID, GOOGLE_URL, () => {
         gapi.load('auth2', function(){
             auth2 = gapi.auth2.init({
@@ -158,17 +156,17 @@ const signIn = (e) => {
         formData.append("passwordLogin", passwordLogin.value);
 
         //TODO: Remove duplicate codes - signInUpModal.js
-        const failedMsg = "Please enter a correct email and password.";
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "index.php");
         xhr.addEventListener("load", () => {
             if (xhr.status === 200) {
+                console.log(xhr.responseText);
                 if (IsValidJSONString(xhr.responseText)) {
                     const result = JSON.parse(xhr.responseText);
-                    if (result.signedIn) {
-                        window.location.href = "index.php?action=petPreview";
-                    }
-                    else showErrorForSignIn(failedMsg);
+                    if (result.signedIn) window.location.href = "index.php?action=petPreview";
+                    else if (result.google) showErrorForSignIn("You account has been signed up with Google.");
+                    else if (result.kakao) showErrorForSignIn("You account has been signed up with Kakao.");
+                    else showErrorForSignIn("Please enter a correct email and password.");
                 } 
                 else showErrorForSignIn("Please try it again."); //Error - result is not JSON string    
             } 
@@ -215,7 +213,6 @@ const gRequestUserInfo = (gUser,signUp) => {
     //TODO: test if the image is not set
     formData.append("googlePicture", profile.getImageUrl());
 
-    const failedMsg = "Your Google account is not signed up yet. Please sign up first.";
     //TODO: Remove duplicate codes
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "index.php");
@@ -223,12 +220,15 @@ const gRequestUserInfo = (gUser,signUp) => {
         if (xhr.status === 200) {
             if (IsValidJSONString(xhr.responseText)) {
                 const result = JSON.parse(xhr.responseText);
+                console.log(xhr.responseText);
                 if (result.signedIn) {
                     if (result.signedUp)
                         alert("Thank you for joining us!!!");
                     window.location.href = "index.php?action=petPreview";
                 }
-                else failGoogleSignIn(failedMsg);
+                else if (result.kakao) failGoogleSignIn("You account has been signed up with Kakao.");
+                else if (!result.google && !result.kakao) failGoogleSignIn("You account has not been signed up with Google.");
+                else failGoogleSignIn("Your Google account is not signed up yet. Please sign up first.");
             } 
             else failGoogleSignIn("Please try it again."); //Error - result is not JSON string    
         } 
@@ -241,7 +241,7 @@ const googleSignOut = () => {
     if(gapi){
         const auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-            console.log("signedOut!!!!");
+            // console.log("signedOut!!!!");
             
         });
         auth2.disconnect();
@@ -271,13 +271,12 @@ const signInWithKakao = (signUp) => {
                     formData.append("kakaoThumbnailURL", thumbnailURL);
                 }
 
-                const failedMsg = "Your Kakao account is not signed up yet. Please sign up first.";
-                
                 //TODO: Remove duplicate codes
                 const xhr = new XMLHttpRequest();
                 xhr.open("POST", "index.php");
                 xhr.addEventListener("load", () => {
                     if (xhr.status === 200) {
+                        console.log(xhr.responseText);
                         if (IsValidJSONString(xhr.responseText)) {
                             const result = JSON.parse(xhr.responseText);
                             if (result.signedIn) {
@@ -285,7 +284,9 @@ const signInWithKakao = (signUp) => {
                                     alert("Thank you for joining us!!!");
                                 window.location.href = "index.php?action=petPreview";
                             }
-                            else failKakaoSignIn(failedMsg);
+                            else if (result.google) failKakaoSignIn("You account has been signed up with Google.");
+                            else if (!result.google && !result.kakao) failKakaoSignIn("You account has not been signed up with Kakao.");
+                            else failKakaoSignIn("Your Kakao account is not signed up yet. Please sign up first.");
                         } 
                         else failKakaoSignIn("Please try it again."); //Error - result is not JSON string    
                     } 
