@@ -88,12 +88,11 @@ function signInWith($memberData, $signedUp=FALSE) {
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     
     if ($memberDataFromDB) {
-        createSessionByMemberDB($memberDataFromDB);
-        $singedIn = TRUE;
-
         if ($signedUp) {
             $result["signedUp"] = TRUE;
         }
+        
+        $singedIn = TRUE;
         if ($memberData["google"] != $memberDataFromDB["google"]
             or $memberData["kakao"] != $memberDataFromDB["kakao"]) {
             $result["google"] = intval($memberDataFromDB["google"]);

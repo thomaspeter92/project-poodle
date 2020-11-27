@@ -128,8 +128,22 @@ const signAllOut = () => {
 
 const showErrorForSignIn = (msg) => {
     const warningSpan = document.querySelector("#formSignIn .warning");
-    warningSpan.innerHTML = msg;
-    warningSpan.style.display = "inline";
+    if (warningSpan) {
+        warningSpan.innerHTML = msg;
+        warningSpan.style.display = "inline";
+    } else {
+        var oldEmailError = document.querySelector('.emailError');
+        if(oldEmailError){
+            oldEmailError.remove();
+        }
+        var emailError = document.createElement('p');
+        emailError.className = "emailError";
+        emailError.style= "text-align: center; color: #FF3864; font-size: .5em;";
+        var emailErrorText = document.createTextNode('The email is already signed up, please sign in.');
+        var form = document.querySelector('form');
+        emailError.appendChild(emailErrorText);
+        form.insertBefore(emailError, form.lastChild);
+    }
 };
 
 /******************** Normal Sign-in ***********************/
@@ -226,9 +240,13 @@ const gRequestUserInfo = (gUser,signUp) => {
                         alert("Thank you for joining us!!!");
                     window.location.href = "index.php?action=petPreview";
                 }
-                else if (result.kakao) failGoogleSignIn("You account has been signed up with Kakao.");
-                else if (!result.google && !result.kakao) failGoogleSignIn("You account has not been signed up with Google.");
-                else failGoogleSignIn("Your Google account is not signed up yet. Please sign up first.");
+                if (result.alreadySignedUp) {
+                    failGoogleSignIn("You account has been already signed up. Please try to sign in.");
+                } else {
+                    if (result.kakao) failGoogleSignIn("You account has been signed up with Kakao.");
+                    else if (!result.google && !result.kakao) failGoogleSignIn("You account has not been signed up with Google.");
+                    else failGoogleSignIn("Your Google account is not signed up yet. Please sign up first.");
+                }
             } 
             else failGoogleSignIn("Please try it again."); //Error - result is not JSON string    
         } 
@@ -283,10 +301,15 @@ const signInWithKakao = (signUp) => {
                                 if (result.signedUp)
                                     alert("Thank you for joining us!!!");
                                 window.location.href = "index.php?action=petPreview";
+                            } else {
+                                if (result.alreadySignedUp) {
+                                    failKakaoSignIn("You account has been already signed up. Please try to sign in.");
+                                } else {
+                                    if (result.google) failKakaoSignIn("You account has been signed up with Google.");
+                                    else if (!result.google && !result.kakao) failKakaoSignIn("You account has not been signed up with Kakao.");
+                                    else failKakaoSignIn("Your Kakao account is not signed up yet. Please sign up first.");
+                                }
                             }
-                            else if (result.google) failKakaoSignIn("You account has been signed up with Google.");
-                            else if (!result.google && !result.kakao) failKakaoSignIn("You account has not been signed up with Kakao.");
-                            else failKakaoSignIn("Your Kakao account is not signed up yet. Please sign up first.");
                         } 
                         else failKakaoSignIn("Please try it again."); //Error - result is not JSON string    
                     } 
