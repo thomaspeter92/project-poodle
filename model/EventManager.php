@@ -182,10 +182,11 @@ require_once("Manager.php");
             $guestId = $params['guestId'];
             if ($params['action'] == 'attendEvent') {
                 $req = $db->prepare("INSERT INTO eventAttend (eventId, guestId) VALUES (:eventId, :guestId)");
-                $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
+                
             } else if ($params['action'] == 'unattendEvent') {
-                $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId");
+                $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId AND eventId = :eventId");
             }
+            $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
             $req->bindParam(':guestId',$guestId,PDO::PARAM_INT);
             $success = $req->execute();
             $req->closeCursor();
@@ -246,8 +247,7 @@ require_once("Manager.php");
             // $imageName = "1";
             $imageName = !empty($photoData['eventPicture']) ? htmlspecialchars($photoData['eventPicture']) : $newEvent['eventPicture'];
             $rating = 3;
-    // print_r($photoData);
-    // print_r($newEvent);
+
             $guestLimit = htmlspecialchars($newEvent['eventGuestLimit']);//
             $itinerary  = $newEvent['itinerary'];//
             // $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created

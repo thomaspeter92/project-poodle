@@ -144,47 +144,48 @@ p {
         <div>
             <p>
                 <label for="name">*Name:</label><br>
-                <input class="required" type="text" id="name" name="name" value="<?=$petProfile['name']; ?>" required>
+                <!-- <input class="required" type="text" id="name" name="name" value="<?=$petProfile['name']; ?>" required> -->
+                <input class="required" type="text" id="name" name="name" value="<?= isset($petProfile['name']) ? $petProfile['name'] : ''; ?>" required>
             </p>
             <p>
                 <label for="type">*Type:</label><br>
-                <input class="required" type="text" id="type" name="type" value="<?=$petProfile['type']; ?>"required>
+                <input class="required" type="text" id="type" name="type" value="<?=isset($petProfile['type']) ? $petProfile['type'] : ''; ?>"required>
             </p>
             <p>
                 <label for="breed">*Breed:</label><br>
-                <input class="required" type="text" id="breed" name="breed" value="<?=$petProfile['breed']; ?>"required>
+                <input class="required" type="text" id="breed" name="breed" value="<?=isset($petProfile['breed']) ? $petProfile['breed'] : ''; ?>"required>
             </p>
             <p>
                 <label for="age">*Age:</label><br>
-                <input class="required" type="number" id="age" name="age" value="<?=$petProfile['age']; ?>"required>
+                <input class="required" type="number" id="age" name="age" value="<?=isset($petProfile['age']) ? $petProfile['age'] : ''; ?>"required>
             </p>
             <p>
                 <label for="gender" id="genderLabel">*Gender:</label><br>
-                <input type="radio" id="male" name="gender" value="male" <?= $petProfile['gender'] == "male" ? 'checked' : ''; ?> >Male
-                <input type="radio" id="female" name="gender" value="female" <?= $petProfile['gender'] == "female" ? 'checked' : ''; ?>>Female
+                <input type="radio" id="male" name="gender" value="male" <?=isset($petProfile['gender']) ? ($petProfile['gender'] == "male" ? 'checked' : '') : ''; ?> >Male
+                <input type="radio" id="female" name="gender" value="female" <?= isset($petProfile['gender']) ? ($petProfile['gender'] == "female" ? 'checked' : '') : ''; ?>>Female
             </p>
         </div>
         <div>
             <p>
                 <label for="weight">Weight(kg):</label><br>
-                <input type="number" id="weight" name="weight" value="<?=$petProfile['weight']; ?>">
+                <input type="number" id="weight" name="weight" value="<?=isset($petProfile['weight']) ? $petProfile['weight'] : ''; ?>">
             </p>
             <p>
                 <label for="color">Color:</label><br>
-                <input type="text" id="color" name="color" value=<?=$petProfile['color']?>>
+                <input type="text" id="color" name="color" value="<?=isset($petProfile['color']) ? $petProfile['color'] : '';?>">
             </p>
             <p>          
                 <label for="friendliness">Friendliness:</label><br>
-                <input type="range" id="friendliness" name="friendliness" min="0" max="5" value="<?=$petProfile['friendliness']; ?>">
+                <input type="range" id="friendliness" name="friendliness" min="0" max="5" value="<?=isset($petProfile['friendliness']) ? $petProfile['friendliness'] : ''; ?>">
             </p>
             <p>
                 <label for="activityLevel">Activity Level:</label><br>
-                <input type="range" id="activityLevel" name="activityLevel" min="0" max="5" value="<?=$petProfile['activityLevel']; ?>">        
+                <input type="range" id="activityLevel" name="activityLevel" min="0" max="5" value="<?=isset($petProfile['activityLevel']) ? $petProfile['activityLevel'] :''; ?>">        
             </p>
             <p>
                 <label for="file" style="border: 1px solid grey">Click here to upload an image:</label>
                 <input type="file" id="file" name="file" style="display: none;" >
-                <input type="hidden" name="photo" id="photo" value="<?=$petProfile['photo']?>">
+                <input type="hidden" name="photo" id="photo" value="<?=isset($petProfile['photo']) ? $petProfile['photo'] : '' ?>">
             </p>
             <p>
                 <input type="hidden" name="ownerId" value="<?= $_SESSION['id']; ?>">
@@ -193,7 +194,7 @@ p {
             </p>
         </div>
     </div>    
-    <textarea name="description" id="description" cols="30" rows="3" placeholder="Please provide a short description of your pet..."><?= $petProfile['description']?></textarea>
+    <textarea name="description" id="description" cols="30" rows="3" placeholder="Please provide a short description of your pet..."><?= isset($petProfile['description']) ? $petProfile['description'] : ''?></textarea>
 </form>
 <p>* indicates a required field.</p>
 <p id="fileError" class="errorMsg">* error uploading file, check size and file type.</p>
