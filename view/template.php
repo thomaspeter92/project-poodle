@@ -146,7 +146,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                         <form id="signOutForm" method="POST">
                         </form>
                         <p><a href="#"  onclick="signAllOut()">Sign Out</a></p>
-
+                        <p><a href="https://localhost/ArTest/captionAR.php">AR</a></p>
                         <?php }
                         ?>
                         <p><a href="index.php?action=events">Events</a></p>

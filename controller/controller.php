@@ -81,3 +81,23 @@ function addEditEvent(){
     require('./view/addEditEventView.php');
 }
 
+function addPoints($userID){
+    $manager = new MemberManager;
+    $manager->addPoints($userID);
+}
+
+function congrats(){
+    require('./view/congratsView.php');
+}
+
+function coupon(){
+    require('./view/couponView.php');
+}
+
+function pleaseLogin(){
+    require('./view/pleaseLogInView.php');
+}
+
+function claimed(){
+    require('./view/claimedView.php');
+}

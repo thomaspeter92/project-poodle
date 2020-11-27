@@ -30,7 +30,7 @@ class MemberManager extends Manager{
     public function getMemberDataByEmail($email) {
         $email = htmlspecialchars($email);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, kakao, google, profileImage FROM member WHERE email=:email";
+        $query = "SELECT id, name, kakao, google, profileImage, points FROM member WHERE email=:email";
         $response = $db->prepare($query);
         $response->bindParam('email', $email, PDO::PARAM_STR);
         $response->execute();
@@ -148,20 +148,51 @@ class MemberManager extends Manager{
         $db = $this->dbConnect();
         $query = "UPDATE member SET profileImage = NULL WHERE id = $userID";
         $response = $db->prepare($query);
-            $result = $response->execute();
-            $response->closeCursor();
-            
-            return $result;
-    }
+        $result = $response->execute();
+        $response->closeCursor();
+        
+        return $result;
+}
 
     function getProfilePic($userID) {
         $db = $this->dbConnect();
         $query = "SELECT profileImage FROM member WHERE id = $userID";
         $response = $db->prepare($query);
-            $response->execute();
-            $profilePicURL = $response->fetch(PDO::FETCH_ASSOC);
-            $response->closeCursor();
+        $response->execute();
+        $profilePicURL = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
 
-            return $profilePicURL;
+        return $profilePicURL;
+    }
+
+    function addPoints($userID){
+        $db = $this->dbConnect();
+        $query = "SELECT points FROM member WHERE id = $userID";
+        $response = $db->prepare($query);
+        $response->execute();
+        $points = $response->fetch(PDO::FETCH_ASSOC);
+        $response->closeCursor();
+        $currentPoints = $points['points'];
+        
+        if($currentPoints == NULL){
+            $db = $this->dbConnect();
+            $query = "UPDATE member SET points = 5 WHERE id = $userID";
+            $response = $db->prepare($query);
+            $response->execute();
+            $response->closeCursor();
+            header('Location:https://localhost/index.php?action=congrats');
+        }else{
+            // $newPoints = ($currentPoints+5);
+            // // echo $newPoints;
+            // $db = $this->dbConnect();
+            // $query = "UPDATE member SET points = ? WHERE id = $userID";
+            // $response = $db->prepare($query);
+            // $response->bindParam(1, $newPoints, PDO::PARAM_INT);
+            // $response->execute();
+            // $response->closeCursor();
+            header('Location: https://localhost/index.php?action=claimed');
+            
+        }
+       
     }
 }

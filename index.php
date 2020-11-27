@@ -190,11 +190,24 @@ try {
         case "unattendEvent" :
             attendEvent($_REQUEST);
             break;
-
         case "addEditEvent" :
             addEditEvent();
             break;
-            
+        case "addPoints":
+            addPoints($_SESSION['id']);
+            break;
+        case "congrats":
+            congrats();
+            break;
+        case "coupon":
+            coupon();
+            break;
+        case "pleaseLogIn":
+            pleaseLogIn();
+            break;
+        case "claimed":
+            claimed();
+            break;
         default:
             landing();
             break;

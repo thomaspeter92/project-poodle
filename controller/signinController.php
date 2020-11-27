@@ -17,7 +17,7 @@ function checkLogin($params)
         if ($memberDataFromDB) {
             $memberDataFromDB["id"];
             $memberDataFromDB["name"];
-            createSession($memberDataFromDB["id"],$memberDataFromDB["name"],"");
+            createSession($memberDataFromDB["id"],$memberDataFromDB["name"], "", "");
             header("Location: index.php");
         } else {
         // header("Location: index.php?action=login&error=login");
@@ -37,10 +37,11 @@ function logout()
     header("Location: index.php");
 }
 
-function createSession($id, $name, $imageURL) {
+function createSession($id, $name, $imageURL, $points) {
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
     $_SESSION['imageURL'] = $imageURL;
+    $_SESSION['points'] = $points;
 }
 
 function emailCheck($email){
@@ -109,7 +110,8 @@ function signInWith($memberData) {
                 $sessionImageURL = $memberData["imageURL"];
             }
         }
-        createSession($sessionID, $sessionName, $sessionImageURL);
+        $sessionPoints = $memberDataFromDB['points'];
+        createSession($sessionID, $sessionName, $sessionImageURL, "");
         header("Location: index.php?action=petPreview");
     } else {
         //TODO: It is not valid email. You haven't signed up yet. 
