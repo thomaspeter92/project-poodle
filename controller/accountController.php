@@ -43,30 +43,29 @@ function checkChangeAccount($inputs, $image, $userID){
         }
     };
 
-    // echo "account controller";
-   
-    // echo getcwd();
-
     if(empty($image)) {
         $result = "success";
     } else {
         $profileImageName = $image['file']['name'];
         $profileImageNameNoSpace = str_replace(' ', '', $profileImageName);
         $profileImageNameUnique = time().'_'.$profileImageNameNoSpace;
-        $target = '../private/profile/'.$profileImageNameUnique;
+        $target = './private/profile/'.$profileImageNameUnique;
 
-        if (move_uploaded_file($image['file']['tmp_name'], $target)) {
-            $result = $manager->changeProfilePic($profileImageNameUnique, $userID);
-            if ($result) {
-                $_SESSION['imageURL'] = './private/profile/'.$profileImageNameUnique;
-                $result="success";
-            } else {
-                $result="failed";
-            }
+        if ($image['file']['type'] !== 'image/jpeg' AND $image['file']['type'] !== 'image/png') {
+            $result="imageTypeFail";
         } else {
-            $result = "failed";
-        };
-
+            if (move_uploaded_file($image['file']['tmp_name'], $target)) {
+                $result = $manager->changeProfilePic($profileImageNameUnique, $userID);
+                if ($result) {
+                    $_SESSION['imageURL'] = './private/profile/'.$profileImageNameUnique;
+                    $result="success";
+                } else {
+                    $result="failed";
+                }
+            } else {
+                $result = "failed";
+            };
+        }
     };
 
     return $result;
@@ -78,12 +77,26 @@ function removeProPic($userID){
     $result = $manager->removeProfilePic($userID);
     if ($result) {
         $result = "success";
+        $currentImgURL = $_SESSION['imageURL'];
+        unlink($currentImgURL);
+        $_SESSION['imageURL'] = "./private/defaultProfile.png";
     }   else {
         $result = "failed";
     }
     return $result;
 }
 
+function deleteAccountCheck($userID){
+    $manager = new MemberManager();
+    $result = $manager->deleteAccount($userID);
+    if ($result) {
+        $result = "success";
+        session_destroy();
+    }   else {
+        $result = "failed";
+    }
+    return $result;
+}
 
 
 ?>

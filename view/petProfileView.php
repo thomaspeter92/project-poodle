@@ -1,7 +1,8 @@
 
 
 <style>
-    .petProfile{
+
+.petProfile{
         display: flex;
     }
 
@@ -55,9 +56,10 @@
         <p><span>"</span><strong><?=htmlspecialchars($petProfile['activityLevel']);?></strong><span>"</span></p>
     </div>
     <div class="petProfileImageDiv">
-        <img class="petProfileImage" src="./public/images/testImage<?=$petProfile['photo']?>.jpg" />
+        <img class="petProfileImage" src="./private/pet/<?=$petProfile['photo']?>" />
     </div>
 </div>
+
 
 
 <?php }else{

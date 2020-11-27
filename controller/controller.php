@@ -2,12 +2,14 @@
 // This is for Controller functions.
 require_once("./util/FileUtil.php");
 require_once('./model/MemberManager.php');
+require_once("./model/NotificationManager.php");
 require_once("./model/PetProfileManager.php");
 require_once("./controller/signinController.php");
 require_once("./model/EventManager.php");
 require_once("./controller/signinController.php");
 require_once("./controller/eventsController.php");
 require_once("./controller/accountController.php");
+require_once("./model/MapManager.php");
 
 function landing()
 {
@@ -25,8 +27,8 @@ function showPetPreview($ownerId){
     // echo $petId;
     $previewManager = new PetProfileManager();
     $petPreviews = $previewManager->getPreview($ownerId);
+    // NEW CODE TO SHOW OWNER PROFILE PIC
     $manager = new MemberManager();
-    // NEW CODE TO SHOw OWNER PROFILE PIC
     $profilePicURL = $manager->getProfilePic($ownerId);
     //shows owners events
     $loadUserEvents = new EventManager();
@@ -42,14 +44,43 @@ function displayAddEditInput($petId) {
 
 function petAddEdit($params) {
     $addEditManager = new PetProfileManager();
-    $success = $addEditManager->addEditPet($params);
 
-    // TO DO ADD ERROR MESSAGING 
-    if($success) {
-        echo 'success';
-    } else {
-        echo 'error';
+    if ($_FILES['file']['size'] !== 0) {
+        $fileName = $_FILES['file']['name'];
+        $fileTmpName = $_FILES['file']['tmp_name'];
+        $fileSize = $_FILES['file']['size'];
+        $fileError = $_FILES['file']['error'];
+        $fileType = $_FILES['file']['type'];
+        $fileExt = explode('.',$fileName);
+        $fileActualExt = strtolower(end($fileExt));
+        $allowed = array('jpg', 'jpeg', 'png');
+        if (in_array($fileActualExt,$allowed)) {
+            if ($fileError === 0) {
+                if($fileSize < 1000000) {
+                    $fileNameNew = uniqid('',true) . '.' . $fileActualExt;
+                    $fileDestination = './private/pet/' . $fileNameNew;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    // $addEditManager->updateImage($params['petId'], $fileNameNew);
+                } else {
+                    echo "fileError";
+                    return null;
+                }
+            } else {
+                echo "fileError";
+                return null;
+
+            }
+        } else {
+            echo "fileError";
+            return null;
+        }
     }
+    $photoData = array (
+        "photo" => isset($fileNameNew) ? $fileNameNew : '' ,
+    );
+    $success = $addEditManager->addEditPet($params, $photoData);
+    
+    echo !empty($success) ? 'success' : 'error';
 }
 
 function deletePet($petId) {
@@ -73,11 +104,16 @@ function accountView($userID){
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByID($userID);
     require("./view/accountView.php");
-};
+}
 function legalPage(){
     require('./view/legalPageView.php');
 }
-function addEditEvent(){
+
+function displayAddEditEvent($eventId){
+    if(!empty($eventId)){
+        $eventManager = new EventManager();
+        $eventEditDetails = $eventManager->getEventEditDetails($eventId);
+    }
     require('./view/addEditEventView.php');
 }
 
@@ -85,10 +121,10 @@ function checkPoints($userID){
     $manager = new MemberManager;
     $pointsCheck = $manager->checkPoints($userID);
     if($pointsCheck){
-        header('Location: https://localhost/index.php?action=claimed');
+        header('Location: ./index.php?action=claimed');
     }else{
         $manager->addPoints($userID);
-        header('Location:./index.php?action=coupon');
+        header('Location: ./index.php?action=coupon');
     }
 }
 
@@ -102,4 +138,71 @@ function pleaseLogin(){
 
 function claimed(){
     require('./view/claimedView.php');
+}
+function addEditEventDetails($params){
+    $eventManager = new EventManager();
+
+    if ($_FILES['file']['size'] !== 0) {
+        $fileName = $_FILES['file']['name'];
+        $fileTmpName = $_FILES['file']['tmp_name'];
+        $fileSize = $_FILES['file']['size'];
+        $fileError = $_FILES['file']['error'];
+        $fileType = $_FILES['file']['type'];
+        $fileExt = explode('.',$fileName);
+        $fileActualExt = strtolower(end($fileExt));
+        $allowed = array('jpg', 'jpeg', 'png');
+        if (in_array($fileActualExt,$allowed)) {
+            if ($fileError === 0) {
+                if($fileSize < 5000000) {
+                    $fileNameNew = uniqid('',true) . '.' . $fileActualExt;
+                    $fileDestination = './private/event/' . $fileNameNew;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    // $addEditManager->updateImage($params['petId'], $fileNameNew);
+                } else {
+                    echo "fileError";
+                    return null;
+                }
+            } else {
+                echo "fileError";
+                return null;
+
+            }
+        } else {
+            echo "fileError";
+            return null;
+        }
+    }
+   
+    $photoData = array (
+        "eventPicture" => isset($fileNameNew) ? $fileNameNew : NULL ,
+    );
+
+    $eventId = $eventManager->updateEventDetails($params, $photoData);
+
+    if($eventId){
+        //display the details of newly added or edited event
+
+        header("Location: index.php?action=showEventDetail&eventId=".$eventId);
+    }else{
+        echo "Event details were not saved properly";
+    }
+}
+
+function deleteEvent($eventId) {
+    $eventManager = new EventManager();
+    $eventManager->deleteEvent($eventId);
+}
+
+
+
+function showMap(){
+    // echo $petId;
+    $mapManager = new MapManager();
+    $sponsors = $mapManager->getSponsors();
+    require("./view/mapViewTest.php");
+}
+
+function showMapDetail(){
+    
+    require("./view/mapViewDetail.php");
 }

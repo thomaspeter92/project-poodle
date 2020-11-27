@@ -1,7 +1,12 @@
 <?php ob_start();?>
-<link rel="stylesheet" href="./public/css/Modal.css"/>
 
 <style>
+    
+    body{
+        margin:0;
+        padding:0;
+    }
+           
     .profilePageContent{
         display: flex;
         width: 100vw;
@@ -111,9 +116,10 @@
     } */
 
     .profilePic {
-            max-height:100px;
-            max-width:100px;
-            overflow: hidden;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
     }
 
     .modalDivContent .profilePic {
@@ -195,7 +201,7 @@
             <div class="accountBox">
                 <div class="proPicContainer">
                     <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
-                        echo "./private/profile/defaultProfile.png"; 
+                        echo "./private/defaultProfile.png"; 
                     } else { 
                         echo "./private/profile/".$profilePicURL['profileImage']; 
                     };?>" alt="Profile Pic">
@@ -240,14 +246,13 @@
                         <p>BREED <?=" : ".$preview['breed'];?></p>
                         <p>AGE <?=" : ".$preview['age']." years";?></p>
                         <p>COLOR <?=" : ".$preview['color'];?></p>
+                        <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
                     </div>
-                    <img class="petPreviewImage" src="./public/images/testImage<?=$preview['photo']?>.jpg" />
                 </div>
             <?php endforeach;?>
         </div>
     <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
     <button id="addPetButton"> Add a Pet!</button>
-    </div>
 </div>
 <!-- <script src="./public/js/Modal.js"></script> -->
 
@@ -271,25 +276,43 @@
         let petType = document.querySelector('#type');
         let petBreed = document.querySelector('#breed');
         let petAge = document.querySelector('#age');
+        let genderButtons = document.querySelectorAll('input[name="gender"]')
+        let genderLabel = document.querySelector('#genderLabel')
+        let selectedValue;
+            for (button of genderButtons) {
+                if (button.checked) {
+                    selectedValue = button.value;
+                    break;
+                }
+            }
         
-        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0) {
+        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0 || selectedValue == null) {
             petName.value.length < 2 ? petName.style.borderColor = 'red' : petName.style.borderColor = 'lightgrey'
             petType.value.length < 2 ? petType.style.borderColor = 'red' : petType.style.borderColor = 'lightgrey' ;
             petBreed.value.length < 2 ? petBreed.style.borderColor = 'red' : petBreed.style.borderColor = 'lightgrey' ;
             parseInt(petAge.value) < 0 || petAge.value === '' ? petAge.style.borderColor = 'red' : petAge.style.borderColor = 'lightgrey' ;
+            selectedValue == null ? genderLabel.style.color = 'red' : genderLabel.style.color = 'lightgrey';
             return null;
         } else {
             let xhr = new XMLHttpRequest();
             let addPetForm = document.querySelector('#addPetForm');
             let params = new FormData(addPetForm);
             xhr.open("POST", "index.php");
-            xhr.onload = function() {}
+            xhr.onload = function() {
+                console.log(xhr.responseText)
+                if (xhr.responseText.trim() === 'success') {
+                    location.reload();
+                } else if (xhr.responseText.trim() === 'fileError') {
+                    let fileError = document.querySelector('#fileError');
+                    fileError.style.display = 'inherit';
+                } else {
+                    let errorMsg = document.querySelector('#formError')
+                    errorMsg.style.display = 'inherit';
+                }
+            }
 
             // TO-DO: ADD ERROR MESSAGING UPON FAILURE TO POST TO DB
-
             xhr.send(params);
-            location.reload();
-
         }
     }
 // FUNCTION TO DISPLAY THE INPUT IN A MODAL
@@ -337,10 +360,10 @@
             xhr.onload = function () {
                 if(xhr.status == 200){
                     let modalPetObj = {
-                        edit : function () {
+                        EDIT : function () {
                             addEditFormDisplay(petId);
                         },
-                        delete : function() {
+                        DELETE : function() {
                             delPet(petId);
                         },
                     }
@@ -356,30 +379,42 @@
     // --------------------------ACCOUNT FUNCTIONS---------------------------------
 
     function saveAccountChanges () {
+        console.log("clicked");
         const nameInput = document.querySelector("#nameInput").value;
         const emailInput = document.querySelector("#emailInput").value;
         const imgInput = document.querySelector("#imageInput");
         const file = imgInput.files[0];
 
-        const url = "./controller/changeAccountController.php";
+        const url = "index.php?action=checkChangeAccount";
         const params = new FormData();
 
         params.append("nameInput", nameInput);
         params.append("emailInput", emailInput);
         params.append("file", file);
 
+        // console.log(params);
+
         const xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         xhr.addEventListener("load", () => {
+            // console.log(xhr.status)
             if (xhr.status === 200) {
                 response = xhr.responseText;
-                accountEmpty = document.querySelector("#accountEmpty");
+                console.log(response);
+                let accountEmpty = document.querySelector("#accountEmpty");
+                let notAnImage = document.querySelector('#notAnImage');
+
                 if (response.trim() == "emptyField") {
                     accountEmpty.removeAttribute("hidden");
+                    notAnImage.setAttribute("hidden", true);
                 }
                 if (response.trim() == "success") {
                     // turn reload off for testing
                     location.reload();
+                } 
+                if (response.trim() == 'imageTypeFail') {
+                    accountEmpty.setAttribute("hidden", true);
+                    notAnImage.removeAttribute("hidden");
                 }
 
             }
@@ -410,9 +445,11 @@
                     // Image Divs
                     let dropdownContent = document.querySelector('.dropdownContent')
                     let modalWindow = document.querySelector('.modalSubDiv');
-                    let imagePreview = document.querySelector('.imagePreview')
-                    let profilePicManage = document.querySelector('.profilePicManage')
+                    let imagePreview = document.querySelector('.imagePreview');
+                    let profilePicManage = document.querySelector('.profilePicManage');
                     let profilePic = document.querySelector('.profilePic');
+                    let profilePicRemoved = document.querySelector('#profilePicRemoved');
+                    let notAnImage = document.querySelector('#notAnImage');
 
 
 
@@ -420,6 +457,8 @@
                     imageDropBtn.addEventListener("click", event => {
                         event.stopPropagation();
                         document.querySelector(".dropdownContent").classList.toggle("show");
+                        profilePicRemoved.setAttribute("hidden", true);
+                        notAnImage.setAttribute("hidden", true);
                         // dropdownContent.setAttribute("hidden", true);
                     })
 
@@ -434,39 +473,52 @@
                         const file = this.files[0];
 
                         if(file) {
-                            const reader = new FileReader();
+                            console.log(file);
+                            if (file['type'] == 'image/jpeg' || file['type'] == 'image/png') {
+                                const reader = new FileReader();
 
-                            imagePreview.style.display = "block";
-                            profilePicManage.style.display = "none";
+                                imagePreview.style.display = "block";
+                                profilePicManage.style.display = "none";
 
-                            reader.addEventListener("load", function() {
-                                imagePreview.setAttribute("src", this.result);
-                            });
+                                reader.addEventListener("load", function() {
+                                    imagePreview.setAttribute("src", this.result);
+                                });
 
-                            reader.readAsDataURL(file);
+                                reader.readAsDataURL(file);
+                            } else {
+                                notAnImage.removeAttribute("hidden");
+                                profilePicManage.style.display = "block";
+                                imagePreview.setAttribute("src", "");
+                                imagePreview.style.display = "none";
+                            }    
                         } else {
+                            console.log('nothing')
                             imagePreview.style.display = "none";
                             profilePicManage.style.display = "block";
-                            previewImage.setAttribute("src", "");
+                            imagePreview.setAttribute("src", "");
+                            notAnImage.setAttribute("hidden", true);
                         }
                     })
 
                     // REMOVE PROFILE PICTURE
                     imgRemove.addEventListener("click", function () {
-                        console.log("clicked");
                         let xhr = new XMLHttpRequest();
                         
                         xhr.open('GET', 'index.php?action=removeProfilePic');
-                        console.log(xhr);
                         xhr.onload = function () {
                             if(xhr.status === 200){
                                 let response = xhr.responseText;
                                 console.log(response);
                                 if (response.trim() == "success") {
-                                    profilePic.setAttribute("src", "./private/profile/defaultProfile.png");
-                                    profilePicManage.setAttribute("src", "./private/profile/defaultProfile.png");
+                                    userImage = document.querySelectorAll(".userImage")
+                                    profilePic.setAttribute("src", "./private/defaultProfile.png");
+                                    profilePicManage.setAttribute("src", "./private/defaultProfile.png");
                                     imagePreview.style.display = "none";
                                     profilePicManage.style.display = "block";
+                                    profilePicRemoved.removeAttribute("hidden");
+                                    userImage.forEach((item) => {
+                                        item.setAttribute("src", "./private/defaultProfile.png");
+                                    })
                                 } else {
                                     alert("remove failed.");
                                 }
@@ -489,10 +541,10 @@
                     let successPW = document.querySelector(".successPW");
                     let needDiffPW = document.querySelector(".needDiffPW");
                     let failedPW = document.querySelector(".failedPW");
-                    let cancelBtn = document.querySelector(".modalCancel")
+                    let cancelBtn = document.querySelector(".modalCancel");
                     let emptyPW = document.querySelector(".emptyPW");
-                    let matchPW = document.querySelector(".matchPW")
-                    let accountForm = document.querySelector(".accountForm")
+                    let matchPW = document.querySelector(".matchPW");
+                    let accountForm = document.querySelector(".accountForm");
 
                     // PW Inputs
                     let currentInput = document.querySelector("#currentPW");
@@ -532,7 +584,7 @@
                         const confirmPW = document.querySelector("#confirmPW").value;
                         const newPW = document.querySelector("#newPW").value;
 
-                        const url = "./controller/changePWController.php";
+                        const url = "index.php?action=checkChangePassword";
                         // Send URL through index PHP
                         const params = new FormData();
                         params.append("currentPW", currentPW);
@@ -547,7 +599,7 @@
                                 if (response.trim() == "emptyPW") {
                                     emptyPW.removeAttribute("hidden"); 
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                     matchPW.setAttribute("hidden", true);
                                 }
@@ -555,7 +607,7 @@
                                     matchPW.removeAttribute("hidden"); 
                                     emptyPW.setAttribute("hidden", true); 
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                 }
                                 if (response.trim() == "success") {
@@ -567,9 +619,10 @@
                                     confirmInput.value = "";
                                     successPW.removeAttribute("hidden");
                                     needDiffPW.setAttribute("hidden", true);
-                                    failed.setAttribute("hidden", true);
+                                    failedPW.setAttribute("hidden", true);
                                     emptyPW.setAttribute("hidden", true);
                                     matchPW.setAttribute("hidden", true);
+                                    accountForm.removeAttribute("hidden");
                                 } 
                                 if (response.trim() == "needDiffPW") {
                                     currentInput.value = "";
@@ -590,6 +643,30 @@
                         });
                         xhr.send(params);
                     });
+
+                    let deleteAccountBtn = document.querySelector('#deleteAccountBtn');
+                    deleteAccountBtn.addEventListener("click", function () {
+                        if (confirm("Are you sure you want to delete your account?")) {
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'index.php?action=deleteAccountCheck');
+                            xhr.addEventListener("load", () => {
+                                if (xhr.status === 200) {
+                                    response = xhr.responseText;
+                                    if (response.trim() == "success"){
+                                        window.location.replace("index.php?action=landing&account=deleted");
+                                    } else {
+                                        alert("Delete account Failed at DB")
+                                    }
+
+                                } else {
+                                    alert("Ajax Failed")
+                                }
+                            })
+                            xhr.send(null);
+                        } else {
+                            return null;
+                        }
+                    })
                     new FormCheck().formCheck();// Marie ugly way of calling
 
                 }
@@ -597,9 +674,9 @@
             }
             xhr.send(null);
         })
+
+        
     })
-
-
 
 
 </script>

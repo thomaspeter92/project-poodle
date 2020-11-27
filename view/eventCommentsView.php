@@ -2,12 +2,17 @@
     <div class="commentChunk">
         <p>
             <span>
+            <?php    if (isset($_SESSION['id'])) { ?>
                 <img class="hostPhoto" src="./private/profile/<?=$comment['image'];?>"></img><?=$comment['author'];?>
+            <?php  } else {
+                echo 'Private Member:';
+            } ?>
             </span>
             <span>
                 <?=$comment['dateCreation'];?>
-                <?php if ($comment['userId'] === $_SESSION['id']) { ?>
-                <i class="fas fa-edit editComment" data-commentId="<?=$comment['commentId']; ?>"></i><i class="fas fa-trash-alt deleteComment" data-commentId="<?=$comment['commentId']; ?>"></i> <?php }; ?>
+                <?php if (isset($_SESSION['id']) && $comment['userId'] === $_SESSION['id']) { ?>
+                    <i class="fas fa-edit editComment" data-commentId="<?=$comment['commentId']; ?>"></i><i class="fas fa-trash-alt deleteComment" data-commentId="<?=$comment['commentId']; ?>"></i> 
+                <?php }; ?>
             </span>
         </p>
         <p><?=$comment['comment'];?></p>
