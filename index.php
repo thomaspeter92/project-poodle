@@ -254,17 +254,17 @@ try {
         case "requestMapDetail":
             showMapDetail();
             break;
-        case "addPoints":
+        case "checkPoints":
             checkPoints($_SESSION['id']);
+            break;
+        case "claimed":
+            claimed();
             break;
         case "coupon":
             coupon();
             break;
         case "pleaseLogIn":
             pleaseLogIn();
-            break;
-        case "claimed":
-            claimed();
             break;
         default:
             landing();

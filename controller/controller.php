@@ -127,18 +127,16 @@ function checkPoints($userID){
         header('Location: ./index.php?action=coupon');
     }
 }
-
+function claimed(){
+    require('./view/claimedView.php');
+}
 function coupon(){
     require('./view/couponView.php');
 }
-
 function pleaseLogin(){
     require('./view/pleaseLogInView.php');
 }
 
-function claimed(){
-    require('./view/claimedView.php');
-}
 function addEditEventDetails($params){
     $eventManager = new EventManager();
 

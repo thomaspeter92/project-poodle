@@ -36,7 +36,7 @@
         let scene =  document.querySelector("a-scene");
         var formData = new FormData();
         scene.addEventListener("click", function(formData){ 
-            window.location.href = "https://localhost/index.php?action=addPoints";
+            window.location.href = "../index.php?action=checkPoints";
             // window.location.href = "https://localhost/index.php?action=coupon";
 
         });
@@ -46,5 +46,5 @@
 </body>
 </html>
 <?php }else{ 
-    header('Location:https://localhost/index.php?action=pleaseLogIn ');
+    header('Location: ../index.php?action=pleaseLogIn ');
  } ?>
