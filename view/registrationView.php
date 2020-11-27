@@ -31,7 +31,7 @@
                     <div id="gSignInWrapper">
                         <div id="googleCustomBtn" class="customGPlusSignIn signup">
                             <span class="icon"></span>
-                            <span class="buttonText">Google</span>
+                            <span class="buttonText">Sign In</span>
                         </div>
                     </div>
                 </div>

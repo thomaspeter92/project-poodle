@@ -174,7 +174,6 @@ const signIn = (e) => {
         xhr.open("POST", "index.php");
         xhr.addEventListener("load", () => {
             if (xhr.status === 200) {
-                console.log(xhr.responseText);
                 if (IsValidJSONString(xhr.responseText)) {
                     const result = JSON.parse(xhr.responseText);
                     if (result.signedIn) window.location.href = "index.php?action=petPreview";
@@ -234,7 +233,6 @@ const gRequestUserInfo = (gUser,signUp) => {
         if (xhr.status === 200) {
             if (IsValidJSONString(xhr.responseText)) {
                 const result = JSON.parse(xhr.responseText);
-                console.log(xhr.responseText);
                 if (result.signedIn) {
                     if (result.signedUp)
                         alert("Thank you for joining us!!!");
@@ -259,7 +257,6 @@ const googleSignOut = () => {
     if(gapi){
         const auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-            // console.log("signedOut!!!!");
             
         });
         auth2.disconnect();
@@ -294,7 +291,6 @@ const signInWithKakao = (signUp) => {
                 xhr.open("POST", "index.php");
                 xhr.addEventListener("load", () => {
                     if (xhr.status === 200) {
-                        console.log(xhr.responseText);
                         if (IsValidJSONString(xhr.responseText)) {
                             const result = JSON.parse(xhr.responseText);
                             if (result.signedIn) {
@@ -359,12 +355,8 @@ const disconnectWithKakao = () => {
     Kakao.API.request({
         url: "/v1/user/unlink",
         success: function(response) {
-            // console.log("[disconnectWithKakao]");
-            // console.log(response);
         },
         fail: function(error) {
-            // console.log("[disconnectWithKakao][Error]");
-            // console.log(error);
         }
     });
 };
