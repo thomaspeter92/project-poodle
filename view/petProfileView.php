@@ -40,7 +40,7 @@
 
 </style>
 
-<?php if($petProfile != false){ ?>
+<?php if($petProfile != false): ?>
 
 <div class=petProfile>
     <div class="petProfileMainContent">
@@ -59,12 +59,10 @@
         <img class="petProfileImage" src="./private/pet/<?=$petProfile['photo']?>" />
     </div>
 </div>
-
-
-
-<?php }else{
+<?php 
+else:
     echo "We are not able to find your pet information";
-}
+endif;
 ?>
 
 

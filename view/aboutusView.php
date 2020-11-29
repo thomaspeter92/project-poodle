@@ -1,10 +1,11 @@
 <?php $title= "About Us"?>
 <?php ob_start();?>
-<br><br><br><br>
 
 <style>
 
-
+.emptyHeader {
+    height: 65px;
+}
 #img {
     height: 100%;
     left: 50%;
@@ -108,7 +109,7 @@
 }
 
 </style>
-
+<div class="emptyHeader"></div>
 <div class="container">
     <img id="img" class="bg" src="./public/images/aboutUsDesktop.jpg" alt="">
     <div class="textBlock">
