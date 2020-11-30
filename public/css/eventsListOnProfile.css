@@ -1,0 +1,79 @@
+section {
+    width: 100%;
+}
+
+/* Empty box for the area of header */
+section>div:first-child {
+    height: 65px;
+}
+
+#myEventsWrapper>div:first-child {
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+#myEventsWrapper .selected {
+    border-bottom: 5px solid #FF3864; /* #72ddf7 */
+}
+
+/* No Events */
+.noEvents {
+    font-family: "monsterRatBold", sans-serif;
+    padding: 40px;
+    padding-top: 20px;
+}
+.noEventsSub {
+    font-family: "monsterRatRegular", sans-serif;
+    padding: 0 40px;
+    padding-bottom: 20px;
+}
+
+/* Event Item */
+.item {
+    border-top: 1px solid #d3d3d3;
+    padding: 0px;
+    cursor: pointer;
+    display: flex;
+}
+.item>.imgContainer {
+    width: 150px;
+    height: 100px;
+    margin-right: 0px;
+    border-radius: 10px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+.item>.imgContainer>img {
+    border-radius: 10px;
+    max-width: 100%; 
+    max-height: 100%;
+    /* object-fit: contain;  */
+    
+}
+
+@media screen and (max-width: 750px) {
+    .item>.imgContainer {
+        display: none;
+    }
+}
+
+.item>.content>div {
+    padding-bottom: 10px;
+}
+.item>.content>.date {
+    color: #393E41;
+    font-size: 0.9em;
+    font-family: "monsterRatBold", sans-serif;
+}
+.item>.content>.title {
+    font-family: "monsterRatBold", sans-serif;
+}
+.item>.content>.host {
+    color: gray;
+    font-size: 0.8em;
+    font-family: "monsterRatRegular", sans-serif;
+}
+

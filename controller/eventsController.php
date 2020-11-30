@@ -20,6 +20,18 @@ function showUpcomingEventsList($sessionID) {
     require('./view/eventsListView.php');
 }
 
+function showMyEventsList($hostId) {
+    $manager = new EventManager();
+    $events = $manager->ownersEvents($hostId);
+    require("./view/eventsListOnProfile.php");
+}
+
+function showMyAttendingEventsList($userId) {
+    $manager = new EventManager();
+    $events = $manager->getAttendingEvents($userId);
+    require("./view/eventsListOnProfile.php");
+}
+
 function showEventDetail($params) {
     $showEvent = new EventManager();
     $guestList = $showEvent->loadGuests($params);

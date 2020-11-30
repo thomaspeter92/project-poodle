@@ -148,6 +148,14 @@ try {
             $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
             showSearchedEventsList($search, $option);
             break;
+        case "myEvents":
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showMyEventsList($sessionID);
+            break;
+        case "attendingEvents":
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showMyAttendingEventsList($sessionID);
+            break;
         case "accountView":
             if(isset($_SESSION['id'])){
                 accountView($_SESSION['id']);

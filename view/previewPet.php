@@ -1,5 +1,5 @@
 <?php ob_start();?>
-
+<link rel="stylesheet" href="./public/css/eventsListOnProfile.css">
 <style>
     
     body{
@@ -17,7 +17,7 @@
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        width: 75%;
+        width: 65%;
     }
 
     #contentLeft {
@@ -26,19 +26,19 @@
     .desktopColumn{
         display: flex;
         flex-direction: column;
-        width: 25%;
+        width: 35%;
         text-align: center;
         padding-left: 1em;  
 
     }
-    .eventInfo{
+    /* .eventInfo{
         box-shadow: 3px 3px 3px lightgrey;
         border-radius: 15px;
         background-color: rgba(128, 147, 241, 0.3);
         padding: 1em;
         margin-bottom: 1em;
         color: black;
-    }
+    } */
     .petListElement{
         height: 200px;
         width: 50%;
@@ -70,18 +70,18 @@
         margin-top: 15%;
     }
 
-.accountWrapper {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    .accountWrapper {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-.accountBox {
-    border-style: ridge;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    /* width: 200px; */
-}
+    .accountBox {
+        border-style: ridge;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        /* width: 200px; */
+    }
     #addPetButton {
 	background-color: #72ddf7;
 	border-radius:42px;
@@ -193,58 +193,56 @@
 <?php ob_start();?>
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
-<br><br><br><br><br><br><br><br>
-
-<div class="profilePageContent">
-    <div class="desktopColumn">
-        <div class="accountWrapper">
-            <div class="accountBox">
-                <div class="proPicContainer">
-                    <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
-                        echo "./private/defaultProfile.png"; 
-                    } else { 
-                        echo "./private/profile/".$profilePicURL['profileImage']; 
-                    };?>" alt="Profile Pic">
+<section>
+    <div></div>
+    <div class="profilePageContent">
+        <div class="desktopColumn">
+            <div class="accountWrapper">
+                <div class="accountBox">
+                    <div class="proPicContainer">
+                        <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
+                            echo "./private/defaultProfile.png"; 
+                        } else { 
+                            echo "./private/profile/".$profilePicURL['profileImage']; 
+                        };?>" alt="Profile Pic">
+                    </div>
+                    <p><?= $_SESSION['name'];?></p>
+                    <button class="manageAccount">Manage Account</button>
                 </div>
-                <p><?= $_SESSION['name'];?></p>
-                <button class="manageAccount">Manage Account</button>
+            </div>
+            <!-- Events Section -->
+            <div id="myEventsWrapper">
+                <div>
+                    <div id="myEvents">My Events</div>
+                    <div id="attendingEvents" class="1 2 3 4 5">Atteding Events</div>
+                </div>
+                <div id="eventsList">
+                    <?php require("./view/eventsListOnProfile.php"); ?>
+                </div>
             </div>
         </div>
-        <!-- Events Section -->
-        <div class="myEventsWrapper">
-            <p><?= $_SESSION['name'];?>'s Events</p>
-            <?php foreach($usersEvents as $eventsPreview):?>
-                <a href="https://localhost/index.php?action=showEventDetail&eventId=<?php echo $eventsPreview['id'];?>">
-                    <div class="eventInfo">
-                        <p><?= $eventsPreview['name'];?></p>
-                        <p><?= $eventsPreview['eventDate'];?></p>
-                        <p><?= $eventsPreview['location'];?></p>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
 
-    <div id="petWrapper">
-        <div id="contentLeft">
-            <?php foreach($petPreviews as $preview):?>
-                <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                    <div class="petPreviewContents">
-                        <p>NAME <?=" : ".$preview['name'];?></p>
-                        <p>BREED <?=" : ".$preview['breed'];?></p>
-                        <p>AGE <?=" : ".$preview['age']." years";?></p>
-                        <p>COLOR <?=" : ".$preview['color'];?></p>
-                        <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
+        <div id="petWrapper">
+            <div id="contentLeft">
+                <?php foreach($petPreviews as $preview):?>
+                    <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                        <div class="petPreviewContents">
+                            <p>NAME <?=" : ".$preview['name'];?></p>
+                            <p>BREED <?=" : ".$preview['breed'];?></p>
+                            <p>AGE <?=" : ".$preview['age']." years";?></p>
+                            <p>COLOR <?=" : ".$preview['color'];?></p>
+                            <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
+                        </div>
                     </div>
-                </div>
-            <?php endforeach;?>
-        </div>
-    <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-    <button id="addPetButton"> Add a Pet!</button>
-</div>
-<!-- <script src="./public/js/Modal.js"></script> -->
+                <?php endforeach;?>
+            </div>
+        <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+        <button id="addPetButton"> Add a Pet!</button>
+    </div>
+</section>
 
 <script>
+{
 // DELETE PET FUNCTION, PULLS PET ID AND ERASES FROM DB
     function delPet (petId){
         if (confirm('Are you sure you want to delete?')) { 
@@ -645,7 +643,6 @@
                                     } else {
                                         alert("Delete account Failed at DB")
                                     }
-
                                 } else {
                                     alert("Ajax Failed")
                                 }
@@ -662,11 +659,72 @@
             }
             xhr.send(null);
         })
-
-        
     })
 
+    /********* Events List ***********/ 
+    const myEventsBtn = document.querySelector("#myEvents");
+    myEventsBtn.addEventListener("click", () => loadMyEvents());
 
+    const attendingEventsBtn = document.querySelector("#attendingEvents");
+    attendingEventsBtn.addEventListener("click", () => loadAttendingEvents());
+
+    const setItemsEventListener = () => {
+        const items = document.querySelectorAll(".item");
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                const eventId = item.querySelector(".eventId").value;
+                if (eventId) {
+                    const url = `index.php?action=showEventDetail&eventId=${eventId}`;
+                    window.location.href = url;
+                }
+            });
+        });
+    };
+
+    const updateEventsList = (htmlEventsList) => {
+        const eventsList = document.querySelector("#eventsList");
+        if (eventsList) {
+            eventsList.innerHTML = htmlEventsList;
+            adjustFooter();
+            setItemsEventListener();
+        } else {
+            //TODO: Error: loading my events failed!!!");
+            alert("Error: loading my events failed!!!");
+        }
+    };
+
+    const loadEvents = (url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.addEventListener("load", () => {
+            if (xhr.status === 200) {
+                updateEventsList(xhr.responseText);
+            } else {
+                //TODO: Error: loading events failed!!!");
+                alert("Error: loading events failed!!!");
+            }
+        });
+        xhr.send();
+    };
+
+    const loadMyEvents = () => {
+        const url = "index.php?action=myEvents";
+        loadEvents(url);
+        
+        myEventsBtn.className = "selected";
+        attendingEventsBtn.classList.remove(...attendingEventsBtn.classList);
+    };
+
+    const loadAttendingEvents = () => {
+        const url = "index.php?action=attendingEvents";
+        loadEvents(url);
+        
+        attendingEventsBtn.className = "selected";
+        myEventsBtn.classList.remove(...myEventsBtn.classList);
+    };
+
+    loadMyEvents();
+}
 </script>
 <?php $content = ob_get_clean();
 require("template.php");

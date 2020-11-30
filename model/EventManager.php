@@ -63,6 +63,44 @@ require_once("Manager.php");
             return $events;
         }
 
+        //used to display user's events on their profile page
+        public function ownersEvents($ownerId){
+            $db = $this->dbconnect();
+            // $req = $db->prepare("SELECT id, name, eventDate, location, imageName, hostId FROM event WHERE hostId = :ownerId");
+            // $req = $db->prepare("SELECT g.name, g.eventDate, g.location, g.imageName, g.hostId FROM event g INNER JOIN member m ON g.hostId = m.id WHERE g.hostId = :id");
+            $query = "SELECT e.id, e.name, e.location, e.imageName, m.name AS hostName, 
+                        DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
+                        FROM event AS e
+                        JOIN member AS m
+                        ON e.hostId = m.id
+                        WHERE e.hostId = :ownerId";
+            $req = $db->prepare($query);
+            $req->bindParam(':ownerId',$ownerId, PDO::PARAM_INT);
+            $req->execute();
+            $usersEvents =$req->fetchAll(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $usersEvents;
+        }
+
+        //used to display user's events on their profile page
+        public function getAttendingEvents($userId){
+            $db = $this->dbconnect();
+            $query = "SELECT e.id, e.name, e.location, e.imageName, m.name AS hostName, 
+                        DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
+                        FROM eventAttend AS ea
+                        JOIN event AS e
+                        ON e.id = ea.eventId
+                        JOIN member AS m
+                        ON m.id = ea.guestId
+                        WHERE ea.guestId = :userId AND e.hostId != :userId";
+            $req = $db->prepare($query);
+            $req->bindParam(':userId',$userId, PDO::PARAM_INT);
+            $req->execute();
+            $usersEvents =$req->fetchAll(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $usersEvents;
+        }   
+
         public function getMembersCountBy($eventId) {
             $db = $this->dbconnect();
             $query = "SELECT COUNT(*) AS guestCount
@@ -292,16 +330,4 @@ require_once("Manager.php");
             $req->execute();
             $req->closeCursor();
         }
-
-        //used to display user's events on their profile page
-        public function ownersEvents($ownerId){
-            $db = $this->dbConnect();
-            $req = $db->prepare("SELECT id, name, eventDate, location, imageName, hostId FROM event WHERE hostId = :id");
-            // $req = $db->prepare("SELECT g.name, g.eventDate, g.location, g.imageName, g.hostId FROM event g INNER JOIN member m ON g.hostId = m.id WHERE g.hostId = :id");
-            $req->bindParam(':id',$ownerId, PDO::PARAM_INT);
-            $req->execute();
-            $usersEvents =$req->fetchAll(PDO::FETCH_ASSOC);
-            $req->closeCursor();
-            return $usersEvents;
-        }   
     }
