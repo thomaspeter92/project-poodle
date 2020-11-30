@@ -762,7 +762,7 @@ if($event) {
             editComments();
             deleteComment();
             let comments = document.querySelectorAll('.commentChunk');
-            comments.length == commentCount ? console.log('hehehe') : '';
+            comments.length == commentCount ? loadMore.style.display ='none' : loadMore.style.display ='initial';
             }
         }
         xhr.send(null);
@@ -772,6 +772,7 @@ if($event) {
     var guestCount = document.querySelector('#guestCount');
     var guestCounter = 5;
     var loadMoreGuests = document.querySelector('#loadMoreGuests');
+    var guests = document.querySelectorAll('.guestListItem')
 
     if (guestCount.textContent > 5) {
         var eventId = loadMoreGuests.getAttribute("data-eventId");
@@ -796,7 +797,7 @@ if($event) {
             if (xhr.status == 200 ) {
                 let guestList = document.querySelector('#guestList');
                 guestList.innerHTML = xhr.responseText;
-                console.log(xhr.responseText)
+                // guests.length == guestCount ? loadMoreGuests.style.display ='none' : loadMoreGuests.style.display ='initial';
             }
         }
         xhr.send(null);
