@@ -204,6 +204,7 @@ try {
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
+            postNotification($_REQUEST);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);
@@ -259,9 +260,6 @@ try {
         case "requestMapDetail":
             showMapDetail();
             break;
-        case "collectPoints":
-            viewCollectPoints();
-            break; 
         default:
             landing();
             break;

@@ -82,9 +82,6 @@
         object-fit: cover;
     }
 
-
-
-
     .eventDetailMainContent {
         display: flex;
         justify-content: space-between;
@@ -463,8 +460,12 @@
     }
 
     #map {
-        width: 90%;
+        width: 100%;
     }
+    #mapDisplay {
+        width: 100%;
+    }
+
     .submit {
         width: auto;
         font-size: .6em;
@@ -480,7 +481,6 @@
     }
 
 }
-
 
     /* Franco */
     #editEvent:hover, .deleteEvent:hover{
@@ -526,9 +526,8 @@ if($event) {
                             <i id="editEvent" class="fas fa-edit" data-eventid="<?=$event['eventId'];?>"></i><i class="fas fa-trash-alt deleteEvent" data-eventid="<?=$event['eventId']; ?>"></i> <?php }; ?>
                 </div>
                 <div id="headerContentExtra">
-                    <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
+                    <p><img class="hostPhoto" src="./private/profile/<?= !empty($event['image']) ?$event['image'] : 'defaultProfile.png' ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
                     <!-- Franco -->
-                    <?=$event['image'] ?>
                     <!-- Franco -->
             
                 <?php 
@@ -555,7 +554,7 @@ if($event) {
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
-                <img class="eventImage" src="./private/event/<?= $event['picture']; ?>" />
+                <img class="eventImage" src="./private/event/<?=!empty($event['picture']) ? $event['picture'] : 'default.png' ?>" />
                 <?= nl2br($event['description']); ?>
                 
                 <form action="index.php" method="POST" id="commentForm">
@@ -564,17 +563,22 @@ if($event) {
         <?php if (isset($_SESSION['id'])) {?>
 
                     <div id="formContent">
-                        <img id="authorPhoto" class="hostPhoto" src="./private/profile/<?=$profilePic['profileImage'] ?>"></img>
+                        <img id="authorPhoto" class="hostPhoto" src="./private/profile/<?=!empty($profilePic['profileImage']) ? $profilePic['profileImage'] : 'defaultProfile.png' ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
                         <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                         <textarea name="comment" id="comment" rows="1" placeholder="Leave a comment..."></textarea>
                         <input type="hidden" name="action" value="eventCommentPost">
                         <button type="submit" class="submit">POST</button>
+                        <!-- ADDED PARAMS FOR NOTIFICATION -->
+                        <input type="hidden" name="authorName" value="<?= $_SESSION['name'] ?>">
+                        <input type="hidden" name="hostId" value="<?= $event['hostId'] ?>">
+                        <input type="hidden" name="eventName" value="<?= $event['name'] ?>">
+
                     </div>
 
         <?php } ?>
                 </form>
-                <div id="commentArea" data-commentCount="<?= count($commentsCount); ?>">
+                <div id="commentArea" data-commentCount="<?= count($commentsCount);?>" data-eventId="<?= $event['eventId'];?>">
 
                 <?php include("eventCommentsView.php") ?>
 
@@ -658,40 +662,42 @@ if($event) {
     commentForm.addEventListener('submit', function(e) {
         e.preventDefault();
         let commentBox = document.querySelector('#comment');
-        if(commentBox.value.length >= 3) {
+        if(commentBox.value.length >= 2) {
             let xhr = new XMLHttpRequest();
             let params = new FormData(commentForm);
             xhr.open("POST", "index.php");
-
             xhr.onload =  function() {
-
+                loadComments(limit);
                 // ERROR MESSAGES HERE
+                
             }
             xhr.send(params);
-            location.reload();
         } else {
             commentBox.style.border = '1px solid red';
         }
     })
 
 // FUNCTION TO DELETE COMMENT FROM DB, SEND COMMENT ID AS FORM DATA. 
-    let deleteCommentButton = document.querySelectorAll('.deleteComment');
-    for (let i=0; i<deleteCommentButton.length; i++) {
-        deleteCommentButton[i].addEventListener('click', function(e) {
-            let commentId = e.target.getAttribute("data-commentId");
-            deleteComment(commentId);
-        })
-    }
-    function deleteComment (commentId){
-        if (confirm('Are you sure you want to delete?')) { 
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "index.php?action=deleteEventComment");
-            let params = new FormData();
-            params.append("commentId",commentId);
-            xhr.send(params);
-            location.reload();
+    function deleteComment() {
+        let deleteCommentButton = document.querySelectorAll('.deleteComment');
+        if (deleteCommentButton) {
+            for (let i=0; i<deleteCommentButton.length; i++) {
+                deleteCommentButton[i].addEventListener('click', function(e) {
+                    let commentId = e.target.getAttribute("data-commentId");
+                    if (confirm('Are you sure you want to delete?')) { 
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "index.php?action=deleteEventComment");
+                        let params = new FormData();
+                        params.append("commentId",commentId);
+                        xhr.send(params);
+                        loadComments(limit)
+                    }
+                })
+            }
         }
     }
+    deleteComment();
+
 
     //FUNCTION TO INSERT USER INTO GUEST LIST, USING USER ID AND EVENT ID
     let attendButton = document.querySelector('#attendButton');
@@ -730,7 +736,7 @@ if($event) {
     var limit = 5;
     let loadMore = document.querySelector('#loadMore');
     let commentCount = document.querySelector('#commentArea').getAttribute("data-commentCount");
-    if (commentCount > 5 && commentCount == true) {
+    if (commentCount > 5 && loadMore) {
         loadMore.addEventListener('click', function() {
             limit+= 5;
             loadComments(limit);
@@ -743,19 +749,23 @@ if($event) {
             loadComments(limit);
             showLess.style.display = 'none';
         })
-        function loadComments(limit) {
-            let eventId = loadMore.getAttribute("data-eventId");
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
-            xhr.onload = function () {
-                if (xhr.status == 200 ) {
-                let commentArea = document.querySelector('#commentArea');
-                commentArea.innerHTML = xhr.responseText;
-                editComments();
-                }
+    }
+
+    function loadComments(limit) {
+        let commentArea = document.querySelector('#commentArea');
+        let eventId = commentArea.getAttribute("data-eventId");
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
+        xhr.onload = function () {
+            if (xhr.status == 200 ) {
+            commentArea.innerHTML = xhr.responseText;
+            editComments();
+            deleteComment();
+            let comments = document.querySelectorAll('.commentChunk');
+            comments.length == commentCount ? console.log('hehehe') : '';
             }
-            xhr.send(null);
         }
+        xhr.send(null);
     }
 
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
@@ -797,7 +807,6 @@ if($event) {
     let editCommentButton = document.querySelectorAll('.editComment');
     for (let i=0; i<editCommentButton.length; i++) {
         editCommentButton[i].addEventListener('click', function(e) {
-            console.log('hello')
             let commentId = e.target.getAttribute("data-commentId");
             let comment = editCommentButton[i].parentElement.parentElement.parentElement.childNodes[3].textContent;
             let editCommentInput = `<textarea rows="1" id="editInput">${comment}</textarea>`;

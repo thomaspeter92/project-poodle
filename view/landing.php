@@ -191,7 +191,7 @@ if (isset($_GET['account'])) {
     <div class="content5div theCard">
         <div class="theFront">
             <h5>Browse Events Nearby</h5>
-            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <p>See what events are upcoming in your area, and communicate with other attendees!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
         <div class="theBack">
@@ -201,7 +201,7 @@ if (isset($_GET['account'])) {
     <div class="content5div theCard">
         <div class="theFront">
             <h5>Manage Your Pets With Ease</h5>
-            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <p>Add and modify your pets easily with our pet management system!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
         <div class="theBack">

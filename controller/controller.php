@@ -185,8 +185,10 @@ function showMapDetail(){
     require("./view/mapViewDetail.php");
 }
 
-function viewCollectPoints() {
-    require("./view/rewardARview.php");
+function postNotification($params) {
+    $commentNotification = new NotificationManager();
+    $notification = array("eventId"=>$params['eventId'], "author"=>$params['authorName'], "eventName"=>$params['eventName'], "hostId"=>$params['hostId']);
+    $commentNotification->commentPostNotification($notification);
+    
 }
-
 

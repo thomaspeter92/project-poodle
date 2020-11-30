@@ -33,13 +33,15 @@ function showEventDetail($params) {
     $eventList = $showEvent->getUpcomingEvents(NULL, NULL, 4);
     $guestIdList = $showEvent->getGuestId($params['eventId']);
     $commentsCount = $showEvent->countComments($params['eventId']);
-    $profilePic = $showEvent->getProfilePic($_SESSION['id']);
+    isset($_SESSION['id']) ? $profilePic = $showEvent->getProfilePic($_SESSION['id']) : null;
     require("./view/eventDetailedView.php");
 }
 
 function eventCommentPost($params) {
     $commentPost = new EventManager();
     $commentPost->commentPost($params);
+    // $comments = $commentPost->loadComments($params);
+    // require('./view/eventCommentsView.php');
 }
 
 function deleteEventComment($commentId) {

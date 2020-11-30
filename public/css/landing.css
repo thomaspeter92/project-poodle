@@ -407,6 +407,7 @@ body {
 }
 .cardFlip{
     transform: rotateY(180deg);
+
     /* background-color: transparent; */
 }
 
@@ -599,11 +600,7 @@ body {
 
 @media (max-width: 450px) {
 
-    /* #carousel {
-        height: 80vh;
-        background-image: url(../images/portraitDog5.jpg);
-        background-size: cover;
-    } */
+    
     .mobileCarousel{ 
         display: initial;
     }
@@ -630,8 +627,6 @@ body {
     .content5div p {
         font-size: 1em;
     }
-
-
 }
 
 

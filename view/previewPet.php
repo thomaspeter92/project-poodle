@@ -15,7 +15,7 @@
     #petWrapper {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
         width: 75%;
     }
@@ -226,6 +226,8 @@
     </div>
 
     <div id="petWrapper">
+        <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+    <button id="addPetButton"> Add a Pet!</button>
         <div id="contentLeft">
             <?php foreach($petPreviews as $preview):?>
                 <div class = "petListElement" data-petId="<?=$preview['id']?>">
@@ -239,8 +241,7 @@
                 </div>
             <?php endforeach;?>
         </div>
-    <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-    <button id="addPetButton"> Add a Pet!</button>
+    </div>
 </div>
 <!-- <script src="./public/js/Modal.js"></script> -->
 
@@ -312,12 +313,31 @@
             xhr.open('GET', 'index.php?action=addEditInput');
         }
         xhr.onload = function () {
-            if(xhr.status == 200){
+            if(xhr.status == 200) {
                 let modalPetObj = {
                     Submit : addEditPet,
                 }
+
                 let petView = new Modal(xhr.responseText);
                 petView.generate(modalPetObj, allowCancel=false);
+                new FormCheck().formCheck(3);// Marie ugly way of calling
+                let photoInput = document.querySelector('#file');
+                let petPhoto = document.querySelector('#imagePreview')
+                photoInput.addEventListener("change",  function() {
+                        const file = this.files[0];
+                        if(file) {
+                            if (file['type'] == 'image/jpeg' || file['type'] == 'image/png' || file['type'] == 'image/jpg') {
+                                const reader = new FileReader();
+                                reader.addEventListener("load", function() {
+                                    petPhoto.setAttribute("src", this.result);
+                                });
+                                reader.readAsDataURL(file);
+                            } else {
+                                let fileError = document.querySelector('#fileError');
+                                fileError.style.display = 'inherit';
+                            }
+                        }
+                })
             }
         }
         xhr.send(null);
@@ -356,8 +376,10 @@
                         },
                     }
                     let petView = new Modal(xhr.responseText);
-                    petView.generate(modalPetObj, allowCancel=true);
+                    petView.generate(modalPetObj, allowCancel=false);
                 }
+
+
             }
             xhr.send(null);
         
@@ -404,7 +426,7 @@
                     accountEmpty.setAttribute("hidden", true);
                     notAnImage.removeAttribute("hidden");
                 }
-
+                    
             }
         })
         xhr.send(params);
