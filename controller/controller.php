@@ -81,3 +81,6 @@ function addEditEvent(){
     require('./view/addEditEventView.php');
 }
 
+function stars(){
+    require('./view/starsView.php');
+}

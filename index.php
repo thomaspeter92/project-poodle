@@ -194,7 +194,9 @@ try {
         case "addEditEvent" :
             addEditEvent();
             break;
-            
+        case "stars":
+            stars();
+            break; 
         default:
             landing();
             break;
