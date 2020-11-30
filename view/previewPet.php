@@ -222,6 +222,21 @@
                 </div>
             </div>
         </div>
+        <!-- Events Section -->
+        <div class="myEventsWrapper">
+            <p><?= $_SESSION['name'];?>'s Events</p>
+            <?php foreach($usersEvents as $eventsPreview):?>
+                <a href="https://localhost/index.php?action=showEventDetail&eventId=<?php echo $eventsPreview['id'];?>">
+                    <div class="eventInfo">
+                        <p><?= $eventsPreview['name'];?></p>
+                        <p><?= $eventsPreview['eventDate'];?></p>
+                        <p><?= $eventsPreview['location'];?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+    
+        </div>
+    </div>
 
         <div id="petWrapper">
             <div id="contentLeft">

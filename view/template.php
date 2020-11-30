@@ -128,6 +128,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAUL
                         <form id="signOutForm" method="POST">
                         </form>
                         <p><a href="#"  onclick="signAllOut()">Sign Out</a></p>
+                        <p><a href="./ArTest/captionAR.php">AR</a></p>
                     <?php endif; ?>
                         <p><a href="index.php?action=events">Events</a></p>
                         <p><a href="index.php?action=aboutUs">About Us</a></p>
