@@ -13,44 +13,21 @@ class ModalLogin extends Modal{
         }
     }
 
-    generate ( buttonId, parentButtonId){
+    generate(callbackCloseModal){
         let modalLoginMainDiv = document.createElement("div");
         modalLoginMainDiv.className="modalLoginMainDiv";
 
-        modalLoginMainDiv.addEventListener('click', function(){
-            //Hide google button in body
-            let butDiv = document.querySelector(buttonId);
-            let newParentDiv = document.querySelector(parentButtonId);
-            let orphanButDiv =butDiv.parentNode.removeChild(butDiv);
-            let attachedButDiv = newParentDiv.appendChild(orphanButDiv);
-            attachedButDiv.style.position = "absolute";
-            attachedButDiv.style.top = "-9999px";
-            attachedButDiv.style.left = "-9999px";
-            document.body.removeChild(modalLoginMainDiv);
-        })
-
         let modalSubDiv = document.createElement("div");
         modalSubDiv.className="modalSubDiv";
-
         modalSubDiv.addEventListener('click', function(e){
             e.stopPropagation();
         })
 
         let modalButtonClose = document.createElement("button");
         modalButtonClose.className="modalButtonClose";
-
         modalButtonClose.innerHTML="<i class='fas fa-times'></i>";
-
         modalButtonClose.addEventListener('click', function(){
-         
-            //Hide google button in body
-            let butDiv = document.querySelector(buttonId);
-            let newParentDiv = document.querySelector(parentButtonId);
-            let orphanButDiv =butDiv.parentNode.removeChild(butDiv);
-            let attachedButDiv = newParentDiv.appendChild(orphanButDiv);
-            attachedButDiv.style.position = "absolute";
-            attachedButDiv.style.top = "-9999px";
-            attachedButDiv.style.left = "-9999px";
+            callbackCloseModal();
             document.body.removeChild(modalLoginMainDiv);
         })
 

@@ -14,23 +14,21 @@ function getGuestCountOfEvent($eventId) {
     $manager = new EventManager();
     return $manager->getMembersCountBy($eventId);
 }
-function showUpcomingEventsList() {
+function showUpcomingEventsList($sessionID) {
     $manager = new EventManager();
-    $events = $manager->getUpcomingEvents();
-    if ($events) {
-        require('./view/eventsListView.php');
-    } else {
-        throw new Exception("Failed to show upcoming events!!", 2000);
-    }
+    $events = $manager->getUpcomingEvents();    
+    require('./view/eventsListView.php');
 }
 
 function showEventDetail($params) {
     $showEvent = new EventManager();
-    $guestList = $showEvent->loadGuests($params['eventId']);
+    $guestList = $showEvent->loadGuests($params);
     $guestCount = $showEvent->getMembersCountBy($params['eventId']);
     $event = $showEvent->getEventDetail($params['eventId']);
     $comments = $showEvent->loadComments($params);
-    $eventList = $showEvent->getUpcomingEvents(NULL, NULL, 5);
+    $eventList = $showEvent->getUpcomingEvents(NULL, NULL, 4);
+    $guestIdList = $showEvent->getGuestId($params['eventId']);
+    $commentsCount = $showEvent->countComments(($params['eventId']));
     require("./view/eventDetailedView.php");
 }
 
@@ -58,7 +56,14 @@ function editEventComment($params) {
 
 function attendEvent($params) {
     $eventAttend = new EventManager();
-    $eventAttend->attendEventSend($params);
+    $success = $eventAttend->attendEventSend($params);
+}
+
+function loadGuests($params) {
+    $loadGuests = new EventManager();
+    $guestList =  $loadGuests->loadGuests($params);
+    $event = $loadGuests->getEventDetail($params['eventId']);
+    require('./view/loadGuestsView.php');
 }
 
 function getGuestProfileImagesOfEvent($eventId, $limit=NULL) {

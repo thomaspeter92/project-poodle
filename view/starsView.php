@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php $title= "contactPage"?>
 <?php ob_start(); ?>
 <style>
@@ -130,3 +131,7 @@ console.log(starValue);
 $content = ob_get_clean();
 require("template.php");
 ?>
+=======
+<!-- https://www.youtube.com/watch?v=EnU0DSdvF_c&ab_channel=AdnanAfzal -->
+<!-- ^ possibly a useful tutorial -->
+>>>>>>> 4368db9be844caa0f1e2c212acb61eb0ab2c2917

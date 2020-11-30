@@ -22,13 +22,18 @@
                     <input type="text" name="email" id="email" class="loginInput email" required><br/>
                 </div>
                 <div class='subSection'>
-                <input type="button" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
+                <input type="submit" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
                 </div>
             </form>
             <div class="thirdParty">
                 <div id='thirdPartyGoogle2'>
                     <div class='divText'>Sign up with Google :</div>
-  
+                    <div id="gSignInWrapper">
+                        <div id="googleCustomBtn" class="customGPlusSignIn signup">
+                            <span class="icon"></span>
+                            <span class="buttonText">Google</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div id='thirdPartyKakao2'>
@@ -46,5 +51,4 @@
         </div>
     </div>
 
-    <?php require("kakaoForm.php"); ?>
-    <?php require("googleForm.php"); ?>
+    
