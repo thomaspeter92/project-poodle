@@ -191,55 +191,57 @@
 
 <?php $style = ob_get_contents();?>
 
-<?php ob_start();?>
+<?php 
+$profileImageURL = isset($profilePicURL['profileImage']) ? 
+                        "./private/profile/".$profilePicURL['profileImage'] :
+                        "./private/defaultProfile.png"; 
+ob_start();
+?>
 
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <section>
     <div></div>
-    <div class="profilePageContent">
-        <div class="desktopColumn">
-            <div class="accountWrapper">
-                <div class="accountBox">
-                    <div class="proPicContainer">
-                        <img class="profilePic" src="<?php if($profilePicURL['profileImage'] == NULL) { 
-                            echo "./private/defaultProfile.png"; 
-                        } else { 
-                            echo "./private/profile/".$profilePicURL['profileImage']; 
-                        };?>" alt="Profile Pic">
+    <div id="mainContainer">
+        <div class="profilePageContent">
+            <div class="desktopColumn">
+                <div class="accountWrapper">
+                    <div class="accountBox">
+                        <div class="proPicContainer">
+                            <img class="profilePic" src="<?= $profileImageURL;?>" alt="Profile Pic">
+                        </div>
+                        <p><?= $_SESSION['name'];?></p>
+                        <button class="manageAccount">Manage Account</button>
                     </div>
-                    <p><?= $_SESSION['name'];?></p>
-                    <button class="manageAccount">Manage Account</button>
+                </div>
+                <!-- Events Section -->
+                <div id="myEventsWrapper">
+                    <div>
+                        <div id="myEvents">My Events</div>
+                        <div id="attendingEvents">Atteding Events</div>
+                    </div>
+                    <div id="eventsList">
+                        <?php require("./view/eventsListOnProfile.php"); ?>
+                    </div>
                 </div>
             </div>
-            <!-- Events Section -->
-            <div id="myEventsWrapper">
-                <div>
-                    <div id="myEvents">My Events</div>
-                    <div id="attendingEvents" class="1 2 3 4 5">Atteding Events</div>
-                </div>
-                <div id="eventsList">
-                    <?php require("./view/eventsListOnProfile.php"); ?>
+            <div id="petWrapper">
+                <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+                <button id="addPetButton"> Add a Pet!</button>
+                <div id="contentLeft">
+                    <?php foreach($petPreviews as $preview):?>
+                        <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                            <div class="petPreviewContents">
+                                <p>NAME <?=" : ".$preview['name'];?></p>
+                                <p>BREED <?=" : ".$preview['breed'];?></p>
+                                <p>AGE <?=" : ".$preview['age']." years";?></p>
+                                <p>COLOR <?=" : ".$preview['color'];?></p>
+                                <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
+                            </div>
+                        </div>
+                    <?php endforeach;?>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="petWrapper">
-        <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-    <button id="addPetButton"> Add a Pet!</button>
-        <div id="contentLeft">
-            <?php foreach($petPreviews as $preview):?>
-                <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                    <div class="petPreviewContents">
-                        <p>NAME <?=" : ".$preview['name'];?></p>
-                        <p>BREED <?=" : ".$preview['breed'];?></p>
-                        <p>AGE <?=" : ".$preview['age']." years";?></p>
-                        <p>COLOR <?=" : ".$preview['color'];?></p>
-                        <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
-                    </div>
-                </div>
-            <?php endforeach;?>
-        </div>
-    </div>
 </div>
 <!-- <script src="./public/js/Modal.js"></script> -->
 

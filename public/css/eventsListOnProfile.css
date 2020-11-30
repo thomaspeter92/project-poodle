@@ -13,10 +13,12 @@ section>div:first-child {
     height: 30px;
     margin-bottom: 10px;
 }
-
 #myEventsWrapper .selected {
     border-bottom: 5px solid #FF3864; /* #72ddf7 */
     font-family: "MontserratBold", sans-serif;
+}
+#myEvents, #attendingEvents {
+    cursor: pointer;
 }
 
 /* No Events */
@@ -62,14 +64,6 @@ section>div:first-child {
     }
 }
 
-/* .item>.content {
-    display: flex;
-    flex-direction: column;
-
-} */
-.item>.content>div {
-    padding-bottom: 0px;
-}
 .item .content {
     display: flex;
 }
