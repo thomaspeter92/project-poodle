@@ -15,7 +15,7 @@
     #petWrapper {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
         width: 65%;
     }
@@ -222,40 +222,26 @@
                 </div>
             </div>
         </div>
-        <!-- Events Section -->
-        <div class="myEventsWrapper">
-            <p><?= $_SESSION['name'];?>'s Events</p>
-            <?php foreach($usersEvents as $eventsPreview):?>
-                <a href="https://localhost/index.php?action=showEventDetail&eventId=<?php echo $eventsPreview['id'];?>">
-                    <div class="eventInfo">
-                        <p><?= $eventsPreview['name'];?></p>
-                        <p><?= $eventsPreview['eventDate'];?></p>
-                        <p><?= $eventsPreview['location'];?></p>
+    </div>
+    <div id="petWrapper">
+        <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
+    <button id="addPetButton"> Add a Pet!</button>
+        <div id="contentLeft">
+            <?php foreach($petPreviews as $preview):?>
+                <div class = "petListElement" data-petId="<?=$preview['id']?>">
+                    <div class="petPreviewContents">
+                        <p>NAME <?=" : ".$preview['name'];?></p>
+                        <p>BREED <?=" : ".$preview['breed'];?></p>
+                        <p>AGE <?=" : ".$preview['age']." years";?></p>
+                        <p>COLOR <?=" : ".$preview['color'];?></p>
+                        <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
                     </div>
-                </a>
-            <?php endforeach; ?>
-    
+                </div>
+            <?php endforeach;?>
         </div>
     </div>
-
-        <div id="petWrapper">
-            <div id="contentLeft">
-                <?php foreach($petPreviews as $preview):?>
-                    <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                        <div class="petPreviewContents">
-                            <p>NAME <?=" : ".$preview['name'];?></p>
-                            <p>BREED <?=" : ".$preview['breed'];?></p>
-                            <p>AGE <?=" : ".$preview['age']." years";?></p>
-                            <p>COLOR <?=" : ".$preview['color'];?></p>
-                            <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
-                        </div>
-                    </div>
-                <?php endforeach;?>
-            </div>
-        <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-        <button id="addPetButton"> Add a Pet!</button>
-    </div>
-</section>
+</div>
+<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 {
@@ -326,12 +312,31 @@
             xhr.open('GET', 'index.php?action=addEditInput');
         }
         xhr.onload = function () {
-            if(xhr.status == 200){
+            if(xhr.status == 200) {
                 let modalPetObj = {
                     Submit : addEditPet,
                 }
+
                 let petView = new Modal(xhr.responseText);
                 petView.generate(modalPetObj, allowCancel=false);
+                new FormCheck().formCheck(3);// Marie ugly way of calling
+                let photoInput = document.querySelector('#file');
+                let petPhoto = document.querySelector('#imagePreview')
+                photoInput.addEventListener("change",  function() {
+                        const file = this.files[0];
+                        if(file) {
+                            if (file['type'] == 'image/jpeg' || file['type'] == 'image/png' || file['type'] == 'image/jpg') {
+                                const reader = new FileReader();
+                                reader.addEventListener("load", function() {
+                                    petPhoto.setAttribute("src", this.result);
+                                });
+                                reader.readAsDataURL(file);
+                            } else {
+                                let fileError = document.querySelector('#fileError');
+                                fileError.style.display = 'inherit';
+                            }
+                        }
+                })
             }
         }
         xhr.send(null);
@@ -370,8 +375,10 @@
                         },
                     }
                     let petView = new Modal(xhr.responseText);
-                    petView.generate(modalPetObj, allowCancel=true);
+                    petView.generate(modalPetObj, allowCancel=false);
                 }
+
+
             }
             xhr.send(null);
         
@@ -418,7 +425,7 @@
                     accountEmpty.setAttribute("hidden", true);
                     notAnImage.removeAttribute("hidden");
                 }
-
+                    
             }
         })
         xhr.send(params);

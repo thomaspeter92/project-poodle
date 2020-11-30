@@ -4,19 +4,14 @@ form {
     width: 100%;
     height: 90%;
     text-align: center;
-    /* display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0;
-    padding: 0; */
 }
 #formInner {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
-    margin: 0;
+    align-items: flex-start;
+    margin-top: 30px;
     padding: 0;
 }
 
@@ -122,17 +117,39 @@ p {
     color: red;
     text-align: center;
 }
+#uploadButton {
+        background-color: #72ddf7;
+        border-style: none;
+        color: white;
+        border-radius:42px;
+        height: 30px;
+        padding: 5px;
+        font-size: .7em;
+
+}
+
+#imagePreview {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+}
 
 @media (max-width: 500px) {
     .modalSubDiv {
         width: 80%;
-        height: 95%;
+        height: 70%;
         justify-content: space-around;
+        overflow-y: scroll;
     }
 
-    form {
+    #formInner {
         flex-direction: column;
-        justify-content: space-around;
+        align-items: center;
+    }
+    #formInner div {
+        width: 100%;
     }
 }
 
@@ -144,48 +161,49 @@ p {
         <div>
             <p>
                 <label for="name">*Name:</label><br>
-                <!-- <input class="required" type="text" id="name" name="name" value="<?=$petProfile['name']; ?>" required> -->
-                <input class="required" type="text" id="name" name="name" value="<?= isset($petProfile['name']) ? $petProfile['name'] : ''; ?>" required>
+                <input class="required" type="text" id="name" name="name" value="<?=!empty($petProfile['name']) ? $petProfile['name'] : '' ?>" required>
             </p>
             <p>
                 <label for="type">*Type:</label><br>
-                <input class="required" type="text" id="type" name="type" value="<?=isset($petProfile['type']) ? $petProfile['type'] : ''; ?>"required>
+                <input class="required" type="text" id="type" name="type" value="<?=!empty($petProfile['type']) ? $petProfile['type'] : '' ?>"required>
             </p>
             <p>
                 <label for="breed">*Breed:</label><br>
-                <input class="required" type="text" id="breed" name="breed" value="<?=isset($petProfile['breed']) ? $petProfile['breed'] : ''; ?>"required>
+                <input class="required" type="text" id="breed" name="breed" value="<?=!empty($petProfile['breed']) ? $petProfile['breed'] : '' ?>"required>
             </p>
             <p>
                 <label for="age">*Age:</label><br>
-                <input class="required" type="number" id="age" name="age" value="<?=isset($petProfile['age']) ? $petProfile['age'] : ''; ?>"required>
+                <input type="number" id="age" name="age" value="<?=!empty($petProfile['age']) ? $petProfile['age'] : '' ?>"required>
             </p>
             <p>
                 <label for="gender" id="genderLabel">*Gender:</label><br>
                 <input type="radio" id="male" name="gender" value="male" <?=isset($petProfile['gender']) ? ($petProfile['gender'] == "male" ? 'checked' : '') : ''; ?> >Male
                 <input type="radio" id="female" name="gender" value="female" <?= isset($petProfile['gender']) ? ($petProfile['gender'] == "female" ? 'checked' : '') : ''; ?>>Female
             </p>
+            <textarea name="description" id="description" cols="30" rows="3" placeholder="Please provide a short description of your pet..."><?=!empty($petProfile['description']) ? $petProfile['description'] : '' ?></textarea>
         </div>
         <div>
             <p>
                 <label for="weight">Weight(kg):</label><br>
-                <input type="number" id="weight" name="weight" value="<?=isset($petProfile['weight']) ? $petProfile['weight'] : ''; ?>">
+                <input type="number" id="weight" name="weight" value="<?=!empty($petProfile['weight']) ? $petProfile['weight'] : '' ?>">
             </p>
             <p>
                 <label for="color">Color:</label><br>
-                <input type="text" id="color" name="color" value="<?=isset($petProfile['color']) ? $petProfile['color'] : '';?>">
+                <input type="text" id="color" name="color" value=<?=!empty($petProfile['color']) ? $petProfile['color'] : '' ?>>
             </p>
             <p>          
                 <label for="friendliness">Friendliness:</label><br>
-                <input type="range" id="friendliness" name="friendliness" min="0" max="5" value="<?=isset($petProfile['friendliness']) ? $petProfile['friendliness'] : ''; ?>">
+                <input type="range" id="friendliness" name="friendliness" min="0" max="5" value="<?=!empty($petProfile['friendliness']) ? $petProfile['friendliness'] : '' ?>">
             </p>
             <p>
                 <label for="activityLevel">Activity Level:</label><br>
-                <input type="range" id="activityLevel" name="activityLevel" min="0" max="5" value="<?=isset($petProfile['activityLevel']) ? $petProfile['activityLevel'] :''; ?>">        
+                <input type="range" id="activityLevel" name="activityLevel" min="0" max="5" value="<?=!empty($petProfile['activityLevel']) ? $petProfile['activityLevel'] : '' ?>">
             </p>
             <p>
-                <label for="file" style="border: 1px solid grey">Click here to upload an image:</label>
-                <input type="file" id="file" name="file" style="display: none;" >
-                <input type="hidden" name="photo" id="photo" value="<?=isset($petProfile['photo']) ? $petProfile['photo'] : '' ?>">
+                <img src="./private/pet/<?=!empty($petProfile['photo']) ? $petProfile['photo'] : 'default.png' ?>" id="imagePreview"></img>
+                <label for="file" id="uploadButton">UPLOAD IMAGE</label>
+                <input type="file" id="file" name="file" style="display: none;"><br><br>
+                <input type="hidden" name="photo" id="photo" value="<?=!empty($petProfile['photo']) ? $petProfile['photo'] : '' ?>">
             </p>
             <p>
                 <input type="hidden" name="ownerId" value="<?= $_SESSION['id']; ?>">
@@ -193,8 +211,7 @@ p {
                 <input type="hidden" name="action" id="action" value="addEditPet">
             </p>
         </div>
-    </div>    
-    <textarea name="description" id="description" cols="30" rows="3" placeholder="Please provide a short description of your pet..."><?= isset($petProfile['description']) ? $petProfile['description'] : ''?></textarea>
+    </div>
 </form>
 <p>* indicates a required field.</p>
 <p id="fileError" class="errorMsg">* error uploading file, check size and file type.</p>

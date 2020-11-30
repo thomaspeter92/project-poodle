@@ -209,6 +209,7 @@ try {
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
+            postNotification($_REQUEST);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);

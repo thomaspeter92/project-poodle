@@ -108,14 +108,6 @@ function legalPage(){
     require('./view/legalPageView.php');
 }
 
-function displayAddEditEvent($eventId){
-    if(!empty($eventId)){
-        $eventManager = new EventManager();
-        $eventEditDetails = $eventManager->getEventEditDetails($eventId);
-    }
-    require('./view/addEditEventView.php');
-}
-
 function checkPoints($userID){
     $manager = new MemberManager;
     $pointsCheck = $manager->checkPoints($userID);
@@ -136,59 +128,67 @@ function pleaseLogin(){
     require('./view/pleaseLogInView.php');
 }
 
-function addEditEventDetails($params){
-    $eventManager = new EventManager();
+//TODO: Delete commented codes? - 
+// function displayAddEditEvent($eventId){
+//     if(!empty($eventId)){
+//         $eventManager = new EventManager();
+//         $eventEditDetails = $eventManager->getEventEditDetails($eventId);
+//     }
+//     require('./view/addEditEventView.php');
+// }
+// function addEditEventDetails($params){
+//     $eventManager = new EventManager();
 
-    if ($_FILES['file']['size'] !== 0) {
-        $fileName = $_FILES['file']['name'];
-        $fileTmpName = $_FILES['file']['tmp_name'];
-        $fileSize = $_FILES['file']['size'];
-        $fileError = $_FILES['file']['error'];
-        $fileType = $_FILES['file']['type'];
-        $fileExt = explode('.',$fileName);
-        $fileActualExt = strtolower(end($fileExt));
-        $allowed = array('jpg', 'jpeg', 'png');
-        if (in_array($fileActualExt,$allowed)) {
-            if ($fileError === 0) {
-                if($fileSize < 5000000) {
-                    $fileNameNew = uniqid('',true) . '.' . $fileActualExt;
-                    $fileDestination = './private/event/' . $fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    // $addEditManager->updateImage($params['petId'], $fileNameNew);
-                } else {
-                    echo "fileError";
-                    return null;
-                }
-            } else {
-                echo "fileError";
-                return null;
+//     if ($_FILES['file']['size'] !== 0) {
+//         $fileName = $_FILES['file']['name'];
+//         $fileTmpName = $_FILES['file']['tmp_name'];
+//         $fileSize = $_FILES['file']['size'];
+//         $fileError = $_FILES['file']['error'];
+//         $fileType = $_FILES['file']['type'];
+//         $fileExt = explode('.',$fileName);
+//         $fileActualExt = strtolower(end($fileExt));
+//         $allowed = array('jpg', 'jpeg', 'png');
+//         if (in_array($fileActualExt,$allowed)) {
+//             if ($fileError === 0) {
+//                 if($fileSize < 5000000) {
+//                     $fileNameNew = uniqid('',true) . '.' . $fileActualExt;
+//                     $fileDestination = './private/event/' . $fileNameNew;
+//                     move_uploaded_file($fileTmpName, $fileDestination);
+//                     // $addEditManager->updateImage($params['petId'], $fileNameNew);
+//                 } else {
+//                     echo "fileError";
+//                     return null;
+//                 }
+//             } else {
+//                 echo "fileError";
+//                 return null;
 
-            }
-        } else {
-            echo "fileError";
-            return null;
-        }
-    }
+//             }
+//         } else {
+//             echo "fileError";
+//             return null;
+//         }
+//     }
    
-    $photoData = array (
-        "eventPicture" => isset($fileNameNew) ? $fileNameNew : NULL ,
-    );
+//     $photoData = array (
+//         "eventPicture" => isset($fileNameNew) ? $fileNameNew : NULL ,
+//     );
 
-    $eventId = $eventManager->updateEventDetails($params, $photoData);
+//     $eventId = $eventManager->updateEventDetails($params, $photoData);
 
-    if($eventId){
-        //display the details of newly added or edited event
+//     if($eventId){
+//         //display the details of newly added or edited event
 
-        header("Location: index.php?action=showEventDetail&eventId=".$eventId);
-    }else{
-        echo "Event details were not saved properly";
-    }
-}
+//         header("Location: index.php?action=showEventDetail&eventId=".$eventId);
+//     }else{
+//         echo "Event details were not saved properly";
+//     }
+// }
 
-function deleteEvent($eventId) {
-    $eventManager = new EventManager();
-    $eventManager->deleteEvent($eventId);
-}
+// function deleteEvent($eventId) {
+//     $eventManager = new EventManager();
+//     $eventManager->deleteEvent($eventId);
+// }
 
 
 
@@ -203,3 +203,11 @@ function showMapDetail(){
     
     require("./view/mapViewDetail.php");
 }
+
+function postNotification($params) {
+    $commentNotification = new NotificationManager();
+    $notification = array("eventId"=>$params['eventId'], "author"=>$params['authorName'], "eventName"=>$params['eventName'], "hostId"=>$params['hostId']);
+    $commentNotification->commentPostNotification($notification);
+    
+}
+

@@ -220,7 +220,6 @@ require_once("Manager.php");
             $guestId = $params['guestId'];
             if ($params['action'] == 'attendEvent') {
                 $req = $db->prepare("INSERT INTO eventAttend (eventId, guestId) VALUES (:eventId, :guestId)");
-                
             } else if ($params['action'] == 'unattendEvent') {
                 $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId AND eventId = :eventId");
             }
@@ -243,6 +242,16 @@ require_once("Manager.php");
             $req->bindParam(':commentId',$commentId,PDO::PARAM_INT);
             $req->execute();
             $req->closeCursor();
+        }
+
+        public function getProfilePic($userId) {
+            $db = $this-> dbConnect();
+            $req = $db->prepare("SELECT profileImage FROM member WHERE id =  :userId");
+            $req->bindParam(':userId',$userId,PDO::PARAM_INT);
+            $req->execute();
+            $profileImage = $req->fetch(PDO::FETCH_ASSOC);
+            $req -> closeCursor();
+            return $profileImage;
         }
 
 

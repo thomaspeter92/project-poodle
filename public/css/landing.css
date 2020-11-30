@@ -369,7 +369,7 @@ body {
 .content5divMouseOver {
     transform: translateY(-5px);
     box-shadow: -1px 10px 13px -4px rgba(0,0,0,0.62);
-    /* z-index: 1; */
+    z-index: 1;
 }
 
 .content5div:nth-of-type(1) {
@@ -377,10 +377,6 @@ body {
     text-align: left;
     text-decoration: underline;
     line-height: 45px;
-}
-
-.content5div:nth-of-type(2), .content5div:nth-of-type(5), .content5div:nth-of-type(7)  {
-    background-color: rgb(248, 248, 248);
 }
 
 .content5div:nth-of-type(4) {
@@ -411,6 +407,7 @@ body {
 }
 .cardFlip{
     transform: rotateY(180deg);
+
     /* background-color: transparent; */
 }
 
@@ -419,8 +416,9 @@ body {
     backface-visibility: hidden;
     width: 100%;
     height: 100%;
-}
+    background-color: rgb(248, 248, 248);
 
+}
 
 .theBack {
     position: absolute;
@@ -602,11 +600,7 @@ body {
 
 @media (max-width: 450px) {
 
-    /* #carousel {
-        height: 80vh;
-        background-image: url(../images/portraitDog5.jpg);
-        background-size: cover;
-    } */
+    
     .mobileCarousel{ 
         display: initial;
     }
@@ -633,29 +627,6 @@ body {
     .content5div p {
         font-size: 1em;
     }
-
-    .content5div:nth-of-type(3) {
-        background-image: url(../images/dogWalk2.jpg);
-        background-size: cover;    
-    }
-
-    .content5div:nth-of-type(3) h5, .content5div:nth-of-type(3) p{
-        color: white;
-        font-weight: bold;
-    }
-
-    .content5div:nth-of-type(7) {
-        background-image: url(../images/dogWalk3.jpg);
-        background-size: cover;    
-
-    }
-    .content5div:nth-of-type(7) h5, .content5div:nth-of-type(7) p{
-        color: white;
-        font-weight: bold;
-
-    }
-
-
 }
 
 
