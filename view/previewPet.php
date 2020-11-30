@@ -77,6 +77,7 @@
 
     .accountBox {
         border-style: ridge;
+        border-radius: 10px;
         text-align: center;
         padding-top: 20px;
         padding-bottom: 20px;

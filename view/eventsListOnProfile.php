@@ -2,13 +2,15 @@
 if (isset($events)): 
     foreach ($events as $event): ?>
         <div class="item">
-            <div class="imgContainer">
-                <img src="./private/event/<?=$event->imageName;?>" alt="event image">
-            </div>
+            <div class="title"><?= $event->name; ?></div>
             <div class="content">
-                <div class="date"><?= $event->eventDate; ?></div>
-                <div class="title"><?= $event->name; ?></div>
-                <div class="host">Hosted by <?= $event->hostName; ?></div>
+                <div class="imgContainer">
+                    <img src="./private/event/<?=$event->imageName;?>" alt="event image">
+                </div>
+                <div class="rightContainer">
+                    <div class="date"><?= $event->eventDate; ?></div>
+                    <div class="host">Hosted by <?= $event->hostName; ?></div>
+                </div>
             </div>
             <input type="hidden" class="eventId" value="<?=$event->id;?>">
         </div>

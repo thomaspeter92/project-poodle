@@ -16,42 +16,44 @@ section>div:first-child {
 
 #myEventsWrapper .selected {
     border-bottom: 5px solid #FF3864; /* #72ddf7 */
+    font-family: "MontserratBold", sans-serif;
 }
 
 /* No Events */
 .noEvents {
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
     padding: 40px;
     padding-top: 20px;
 }
 .noEventsSub {
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
     padding: 0 40px;
     padding-bottom: 20px;
 }
 
 /* Event Item */
 .item {
-    border-top: 1px solid #d3d3d3;
-    padding: 0px;
+    border: 1px solid #9C9C9C;
+    border-radius: 20px;
+    padding: 0 20px;
+    margin-bottom: 10px;
     cursor: pointer;
-    display: flex;
+    
 }
-.item>.imgContainer {
-    width: 150px;
-    height: 100px;
-    margin-right: 0px;
+.item .imgContainer {
+    width: 100px;
+    height: 80px;
+    margin-right: 5%;
     border-radius: 10px;
     display: flex; 
     justify-content: center; 
     align-items: center; 
 }
-.item>.imgContainer>img {
-    border-radius: 10px;
+.item .imgContainer>img {
+    border-radius: 5px;
     max-width: 100%; 
     max-height: 100%;
-    /* object-fit: contain;  */
-    
+    margin-bottom: 5px;
 }
 
 @media screen and (max-width: 750px) {
@@ -60,20 +62,36 @@ section>div:first-child {
     }
 }
 
+/* .item>.content {
+    display: flex;
+    flex-direction: column;
+
+} */
 .item>.content>div {
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
-.item>.content>.date {
+.item .content {
+    display: flex;
+}
+.item .rightContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.item .date {
     color: #393E41;
     font-size: 0.9em;
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
 }
-.item>.content>.title {
-    font-family: "monsterRatBold", sans-serif;
+.item .title {
+    font-family: "MontserratBold", sans-serif;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
-.item>.content>.host {
+.item .host {
     color: gray;
     font-size: 0.8em;
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 

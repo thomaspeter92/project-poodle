@@ -78,12 +78,12 @@ section>div:first-child {
 
 /* No Events */
 .noEvents {
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
     padding: 40px;
     padding-top: 20px;
 }
 .noEventsSub {
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
     padding: 0 40px;
     padding-bottom: 20px;
 }
@@ -124,15 +124,15 @@ section>div:first-child {
 .item>.content>.date {
     color: #393E41;
     font-size: 0.9em;
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
 }
 .item>.content>.title {
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
 }
 .item>.content>.host {
     color: gray;
     font-size: 0.8em;
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 /* Attendees */
@@ -172,7 +172,7 @@ section>div:first-child {
     border-radius: 15px;
 }
 .item .attendees>.guestCount {
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 0.8em;
     color: gray;
     
