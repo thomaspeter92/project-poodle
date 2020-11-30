@@ -89,3 +89,6 @@ section>div:first-child {
     font-family: "Montserrat", sans-serif;
 }
 
+.item .hidden {
+    display: none;
+}

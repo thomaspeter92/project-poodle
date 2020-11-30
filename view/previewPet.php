@@ -718,12 +718,12 @@ ob_start();
         }
     };
 
-    const loadEvents = (url) => {
+    const loadEvents = (url, callback) => {
         const xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.addEventListener("load", () => {
             if (xhr.status === 200) {
-                updateEventsList(xhr.responseText);
+                callback(xhr.responseText);    
             } else {
                 //TODO: Error: loading events failed!!!");
                 alert("Error: loading events failed!!!");
@@ -734,15 +734,22 @@ ob_start();
 
     const loadMyEvents = () => {
         const url = "index.php?action=myEvents";
-        loadEvents(url);
-        
+        loadEvents(url, (htmlEventsList) => {
+            updateEventsList(htmlEventsList);
+
+            const hosts = document.querySelectorAll(".host");
+            hosts.forEach(host => host.classList.add("hidden"));
+        });
+    
         myEventsBtn.className = "selected";
         attendingEventsBtn.classList.remove(...attendingEventsBtn.classList);
     };
 
     const loadAttendingEvents = () => {
         const url = "index.php?action=attendingEvents";
-        loadEvents(url);
+        loadEvents(url, (htmlEventsList) => {
+            updateEventsList(htmlEventsList);
+        });
         
         attendingEventsBtn.className = "selected";
         myEventsBtn.classList.remove(...myEventsBtn.classList);
