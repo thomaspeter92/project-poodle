@@ -117,6 +117,26 @@ function displayAddEditEvent($eventId){
     require('./view/addEditEventView.php');
 }
 
+function checkPoints($userID){
+    $manager = new MemberManager;
+    $pointsCheck = $manager->checkPoints($userID);
+    if($pointsCheck){
+        header('Location: ./index.php?action=claimed');
+    }else{
+        $manager->addPoints($userID);
+        header('Location: ./index.php?action=coupon');
+    }
+}
+function claimed(){
+    require('./view/claimedView.php');
+}
+function coupon(){
+    require('./view/couponView.php');
+}
+function pleaseLogin(){
+    require('./view/pleaseLogInView.php');
+}
+
 function addEditEventDetails($params){
     $eventManager = new EventManager();
 
