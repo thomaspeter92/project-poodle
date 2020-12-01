@@ -13,91 +13,67 @@
         height: 65px;
     }
 
+    /* Page Layout */
     #profilePageContent{
         display: flex;
-        width: 100vw;
     }
-
+    #profilePageContent>div:first-child {
+        /* background-color: yellow; */
+        width: 35%;
+        padding: 2%;
+        padding-right: 0;
+    }
+    #profilePageContent>div:last-child {
+        /* background-color: yellowgreen; */
+        width: 65%;
+        padding: 2%;
+    }
     #petWrapper {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        width: 65%;
-        padding-top: 20px;
     }
-
     #petsList {
-        width: 90%;
+        width: 100%;
     }
 
-    .desktopColumn{
-        display: flex;
-        flex-direction: column;
-        width: 35%;
-        text-align: center;
-        padding-top: 20px;
-        padding-left: 1em;  
-    }
-
+    /* Account */
     .accountWrapper {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10%;
     }
 
     .accountBox {
-        border-style: ridge;
-        border-radius: 10px;
+        box-shadow: 2px 2px 3px 2px lightgrey;
+        border-radius: 15px;
         text-align: center;
         padding-top: 20px;
         padding-bottom: 20px;
         /* width: 200px; */
     }
-    #profileName {
-        font-size: 1.5em;
-        font-family: "MontserratBold", sans-serif;
-    }
-
-    #addPetButton {
-        background-color: #72ddf7;
-        border-radius:42px;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-family:Arial;
-        font-size:17px;
-        padding:13px 76px;
-        text-decoration:none;
-        border-style: none;
-        box-shadow: 5px 10px 18px #acacac;
-        margin-bottom: 20px;
-    }
-
-    #addPetButton:hover {
-	    background-color:#ff3864;
-    }
-
-    #addPetButton:focus {
-        outline: none;
-    }
-
-    #addPetButton:active {
-        position:relative;
-        top:1px;
-    }
-
     .profilePic {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         overflow: hidden;
         border-radius: 50%;
     }
-
     .modalDivContent .profilePic {
         padding-top:20px;
     }
+    #profileName {
+        padding: 10px;
+        font-size: 2.0em;
+        font-family: "MontserratBold", sans-serif;
+    }
+    button.manageAccount {
+        height: 46px;
+        padding: 0 20px;
+    }
+    
+
     @media (max-device-width : 1020px) {
-        #profilePageContent{
+        /* #profilePageContent{
             display: block;
             justify-content: column;
             width: 100vw;
@@ -109,7 +85,7 @@
             text-align: center;
             padding-right: 1em;
 
-        }
+        } */
     }
     @media (max-device-width : 400px) {
         /* .petPreviewContents{
@@ -160,37 +136,39 @@ ob_start();
 <script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
 <section>
     <div></div>
-    <div id="mainContainer">
-        <div id="profilePageContent">
-            <div class="desktopColumn">
-                <div class="accountWrapper">
-                    <div class="accountBox">
-                        <div class="proPicContainer">
-                            <img class="profilePic" src="<?= $profileImageURL;?>" alt="Profile Pic">
-                        </div>
-                        <p id="profileName"><?= $_SESSION['name'];?></p>
-                        <button class="manageAccount">Manage Account</button>
+    <div id="profilePageContent">
+        <div>
+            <div class="accountWrapper">
+                <div class="accountBox">
+                    <div class="proPicContainer">
+                        <img class="profilePic" src="<?= $profileImageURL;?>" alt="Profile Pic">
                     </div>
-                </div>
-                <!-- Events Section -->
-                <div id="myEventsWrapper">
-                    <div>
-                        <div id="myEvents">My Events</div>
-                        <div id="attendingEvents">Atteding Events</div>
-                    </div>
-                    <div id="eventsList">
-                        <?php require("./view/eventsListOnProfile.php"); ?>
-                    </div>
+                    <div id="profileName"><?= $_SESSION['name'];?></div>
+                    <button class="manageAccount">Manage Account</button>
                 </div>
             </div>
             <div id="petWrapper">
-                <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
-                <button id="addPetButton"> Add a Pet!</button>
+                <div id="myPetsHeader">
+                    <span>My Pets</span>&nbsp;&nbsp;&nbsp;
+                    <button id="addPetButton">+</button>
+                </div>
                 <div id="petsList">
                     <?php require("./view/petsListOnProfile.php"); ?>
                 </div>
             </div>
         </div>
+        <div>
+            <div id="myEventsWrapper">
+                <div id="myEventsHeader">
+                    <div id="myEvents"><span>My Events</span></div>
+                    <div id="attendingEvents"><span>Atteding Events</span></div>
+                </div>
+                <div id="eventsList">
+                    <?php require("./view/eventsListOnProfile.php"); ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
