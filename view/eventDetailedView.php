@@ -2,6 +2,62 @@
 
 <style>
 
+
+/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+.rating-group {
+    padding-top: 5em;
+    display: flex;
+    align-items: middle;
+}
+
+/* make hover effect work properly in IE */
+.rating__icon {
+  pointer-events: none;
+}
+
+/* hide radio inputs */
+.rating__input {
+ position: absolute !important;
+ left: -9999px !important;
+}
+
+/* hide 'none' input from screenreaders */
+.rating__input--none {
+  display: none
+}
+
+/* set icon padding and size */
+.rating__label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 2rem;
+}
+
+/* set default star color */
+.rating__icon--star {
+  color: orange;
+}
+
+/* if any input is checked, make its following siblings grey */
+.rating__input:checked ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+/* make all stars orange on rating group hover */
+.rating-group:hover .rating__label .rating__icon--star {
+  color: orange;
+}
+
+/* make hovered input's following siblings grey on hover */
+.rating__input:hover ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+
+
+
+
+
     #wrapper {
         background-color: rgb(245, 245, 245);
         width: 100vw;
@@ -615,7 +671,30 @@ if($event) {
                 <?php } ?>
             </aside>
         </div>
+<form method="POST" action="index.php" id="ratingForm">
+    <div id="full-stars">
+        <div class="rating-group">
+            <!-- <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio"> -->
 
+            <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input star1" name="rating" id="rating3-1" value="1" type="radio">
+
+            <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input star2" name="rating" id="rating3-2" value="2" type="radio">
+
+            <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input star3" name="rating" id="rating3-3" value="3" type="radio">
+
+            <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input star4" name="rating" id="rating3-4" value="4" type="radio">
+
+            <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input star5" name="rating" id="rating3-5" value="5" type="radio">
+        </div>
+        <button style="text-align: center" type="submit" class="submitRating">Submit</button> 
+    </div>
+</form>
+</div>
         <h5>More Events Like This One:</h5>
         <div id="eventPreviews">
         <?php foreach($eventList as $list): ?>
@@ -828,6 +907,47 @@ if($event) {
     }}
     editComments();
 
+//ADD STARS TO DATABASE
+    var ratingForm = document.querySelector('#ratingForm');
+    ratingForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        var rates = document.querySelectorAll('.rating__input');
+        console.log(rates[]);
+        var rate_value;
+        for(var i = 1; i < rates.length; i++){
+            if(rates[i].checked){
+                rate_value = rates[i].value;
+                console.log(rate_value);
+                let xhr = new XMLHttpRequest();
+                let params = new FormData(rates);
+               
+                xhr.open("POST", "index.php");
+            }
+            xhr.send(params);
+          
+        } 
+    });
+
+    // var star2 = document.querySelector('.star2');
+    // star2.addEventListener('click', function(){
+    //     starValue = 2;
+    // });
+
+    // var star3 = document.querySelector('.star3');
+    // star3.addEventListener('click', function(){
+    //     starValue = 3;
+    // });
+
+    // var star4 = document.querySelector('.star4');
+    // star4.addEventListener('click', function(){
+    //     starValue = 4;
+    // });
+
+    // var star5 = document.querySelector('.star5');
+    // star5.addEventListener('click', function(){
+    //     starValue = 5;
+    // });
+
 // ************* MAP FUNCTIONS ************
     var itin = <?= $event['itinerary'] ?>
     // var viewListArray = [[37.530750,126.971979],[37.540522437037716, 126.98675092518866],[37.55397916880342, 126.97248154788045]]
@@ -898,6 +1018,15 @@ if($event) {
         });
     }
 
+
+
+
+
+
+
+
+
+</script>
 </script>
 
 <?php

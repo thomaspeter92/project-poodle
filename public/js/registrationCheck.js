@@ -2,7 +2,6 @@ class RegistrationCheck{
     registrationCheck= () =>{
         var formSignUp = document.querySelector('#formSignUp');
         formSignUp.addEventListener("submit", function(e){
-            console.log("submit");
             
             var name = document.querySelector('#username');
             var password = document.querySelector('.password');

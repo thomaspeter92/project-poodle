@@ -304,4 +304,20 @@ require_once("Manager.php");
             $req->closeCursor();
             return $usersEvents;
         }   
+
+        public function addStars($params){
+            $db = $this->dbConnect();
+            $eventId = $params['eventId'];
+            $rating = $params['rating'];
+            echo $rating;
+            $query = ("INSERT INTO eventRating (eventId, userId, rating) 
+                      VALUES (:eventId, :userId, :rating)");
+            $response = $db->prepare($query);
+            $response->bindValue(":eventId", $eventId, PDO::PARAM_INT);
+            $response->bindValue(":userId", $_SESSION['id'], PDO::PARAM_INT);
+            $response->bindValue(":rating", $rating, PDO::PARAM_INT);
+            $response->execute();
+            $response->closeCursor();
+        }
+    
     }
