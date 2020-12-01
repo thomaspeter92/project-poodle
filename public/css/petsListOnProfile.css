@@ -69,23 +69,29 @@
     font-size: 1.3em;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
+    #myPetsHeader span {
+        font-size: 1.3em;
+    }
+    .petInnerDiv .petImage {
+        width: 100px;
+        height: 100px;
+    }
+    .petInnerDiv table .petName {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .petInnerDiv .icon, .petInnerDiv .text {
+        font-size: 1.0em;
+    }
+}
 
-    /* .modalSubDiv {
-        height: 80%;
-        width: 80%;
+@media (max-width: 700px) {
+    #myPetsHeader span {
+        font-size: 1.1em;
     }
-    .modalDivButtons {
-        top: 80%;
-        height: auto;
+    .petItem{
+        padding: 4.0vw;
     }
-    #profileBox {
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-    #profileBox > .innerDiv{
-        height: auto;
-        width: 90%;
-        margin: 10px;
-    } */
+    
 }

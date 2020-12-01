@@ -63,13 +63,6 @@
     max-width: 100%; 
     max-height: 100%;
 }
-
-@media screen and (max-width: 750px) {
-    .eventItem>.imgContainer {
-        display: none;
-    }
-}
-
 .eventItem .content {
     display: flex;
 }
@@ -93,7 +86,43 @@
     font-size: 1.1em;
     font-family: "Montserrat", sans-serif;
 }
-
 .eventItem .hidden {
     display: none;
+}
+
+@media (max-width: 1000px) {
+    #myEventsHeader span {
+        font-size: 1.3em;
+    }
+    .eventItem .imgContainer {
+        width: 100px;
+        height: 90px;
+    }
+    .eventItem .title {
+        font-size: 1.2em;
+    }
+    .eventItem .date {
+        font-size: 0.9em;
+    }
+    .eventItem .host {
+        font-size: 0.9em;
+    }
+    /* .eventItem .imgContainer {
+        display: none;
+    } */
+}
+
+@media (max-width: 700px) {
+    #myEventsHeader {
+        margin: 0px;
+    }
+    #myEventsHeader span {
+        font-size: 1.1em;
+    }
+    .eventItem{
+        padding: 4.0vw;
+    }
+    .eventItem .title {
+        font-size: 1.0em;
+    }
 }

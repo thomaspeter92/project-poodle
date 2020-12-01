@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="./public/css/eventsListOnProfile.css">
 <link rel="stylesheet" href="./public/css/petsListOnProfile.css">
 <style>
-    
     body{
         margin:0;
         padding:0;
@@ -22,14 +21,29 @@
         display: flex;
     }
     #profilePageContent>div:first-child {
-        width: 35%;
+        width: 40%;
         padding: 2%;
         padding-right: 0;
     }
     #profilePageContent>div:last-child {
-        width: 65%;
+        width: 60%;
         padding: 2%;
     }
+
+    @media (max-width: 850px) {
+        #profilePageContent{
+            width: 96%;
+            flex-direction: column
+        }
+        #profilePageContent>div:first-child {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        #profilePageContent>div:last-child {
+            width: 100%;
+        }
+    }
+
     #petWrapper {
         display: flex;
         flex-direction: column;
@@ -73,56 +87,18 @@
         padding: 0 20px;
     }
     
-
-    @media (max-device-width : 1020px) {
-        /* #profilePageContent{
-            display: block;
-            justify-content: column;
-            width: 100vw;
+    @media (max-width : 1000px) {
+        .profilePic {
+            width: 120px;
+            height: 120px;
         }
-        .desktopColumn{
-            display: flex;
-            flex-direction: column;
-            width: 100vw;
-            text-align: center;
-            padding-right: 1em;
-
-        } */
-    }
-    @media (max-device-width : 400px) {
-        /* .petPreviewContents{
-            margin-top: 4%;
+        #profileName {
+            font-size: 1.5em;
+        }
+        .accountWrapper {
             margin-bottom: 5%;
-            margin-left: 5%;
-            line-height: 10px;
-            height: 80%;
-            width: 70%;
         }
-
-        .petPreviewImage{
-            margin-top: 7%;
-        }
-
-        .petItem{
-            font-size: 0.8em;
-            height: 20%;
-        }
-        .petPreviewImage{
-            margin-top: 8%;
-            border-radius: 5px;
-            width: 30% ;
-            height: 65%;
-        }
-        .petItem{
-            width: 100vw;
-        }
-        #petWrapper{
-            display: flex;
-            align-items: center;
-            width: 100vw;
-        } */
-}
-
+    }
 </style>
 
 
