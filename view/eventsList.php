@@ -1,5 +1,5 @@
-<?php 
-if (isset($events)): 
+<?php
+if (isset($events) and !empty($events)): 
     foreach ($events as $event): ?>
         <div class="item">
             <div class="imgContainer">

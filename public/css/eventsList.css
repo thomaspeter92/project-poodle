@@ -1,12 +1,10 @@
 section {
-    /* position: relative; */
     width: 100%;
     background-color: white;
 }
 
 /* Empty box for the area of header */
 section>div:first-child {
-    /* background-color: yellowgreen; */
     height: 65px;
 }
 
@@ -25,9 +23,10 @@ section>div:first-child {
     padding: 0;
     padding-left: 20px;
     margin-right: 10px;
+
+    font-family: "Montserrat", sans-serif;
 }
 #selectOption {
-    /* width: 80px; */
     height: 46px;
     border-width: 1px;
     border-radius: 20px;
@@ -36,6 +35,8 @@ section>div:first-child {
     padding: 0;
     padding-left: 10px;
     margin-right: 10px;
+
+    font-family: "Montserrat", sans-serif;
 }
 #addButton {
     float: right;

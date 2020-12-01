@@ -57,7 +57,7 @@
     /* Account */
     .accountWrapper {
         text-align: center;
-        margin-bottom: 10%;
+        margin-bottom: 5%;
     }
 
     .accountBox {
@@ -598,7 +598,7 @@ ob_start();
     attendingEventsBtn.addEventListener("click", () => loadAttendingEvents());
 
     const setItemsEventListener = () => {
-        const items = document.querySelectorAll(".item");
+        const items = document.querySelectorAll(".eventItem");
         items.forEach(item => {
             item.addEventListener("click", () => {
                 const eventId = item.querySelector(".eventId").value;

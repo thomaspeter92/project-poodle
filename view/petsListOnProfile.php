@@ -1,5 +1,5 @@
 <?php 
-if (isset($petPreviews)): 
+if (isset($petPreviews) and !empty($petPreviews)): 
     foreach($petPreviews as $preview):?>
     <div class="petItem" data-petId="<?=$preview['id']?>">
         <div class="petInnerDiv">
@@ -26,6 +26,6 @@ if (isset($petPreviews)):
 <?php 
     endforeach;
 else : 
-    echo "<div class='noEvents'>Please add your first lovely pet.</div>";
+    echo "<div class='noPets'>Please add your first lovely pet.</div>";
 endif;
 ?>

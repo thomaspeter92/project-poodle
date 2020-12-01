@@ -27,6 +27,13 @@
     top:1px;
 }
 
+/* No Pets */
+.noPets {
+    font-family: "MontserratBold", sans-serif;
+    padding: 40px;
+    padding-top: 20px;
+}
+
 /* Pet Item */
 .petItem{
     margin-left: auto;

@@ -30,11 +30,7 @@
     font-family: "MontserratBold", sans-serif;
     padding: 40px;
     padding-top: 20px;
-}
-.noEventsSub {
-    font-family: "Montserrat", sans-serif;
-    padding: 0 40px;
-    padding-bottom: 20px;
+    text-align: center;
 }
 
 /* Event Item */
@@ -107,9 +103,6 @@
     .eventItem .host {
         font-size: 0.9em;
     }
-    /* .eventItem .imgContainer {
-        display: none;
-    } */
 }
 
 @media (max-width: 700px) {

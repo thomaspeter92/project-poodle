@@ -1,5 +1,5 @@
 <?php 
-if (isset($events)): 
+if (isset($events) and !empty($events)): 
     foreach ($events as $event): ?>
         <div class="eventItem">
             <div class="title"><?= $event->name; ?></div>
