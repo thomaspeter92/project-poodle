@@ -1,7 +1,7 @@
 <?php 
 if (isset($petPreviews)): 
     foreach($petPreviews as $preview):?>
-    <div class="petListElement" data-petId="<?=$preview['id']?>">
+    <div class="petItem" data-petId="<?=$preview['id']?>">
         <div class="petInnerDiv">
             <img class="petImage" src="./private/pet/<?=!empty($preview['photo']) ? $preview['photo'] : 'default.png' ?>" alt="pet profile image">
         </div>

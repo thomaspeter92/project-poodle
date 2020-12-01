@@ -7,7 +7,11 @@
         margin:0;
         padding:0;
     }
-      
+
+    .accountBox, .petItem, .eventItem {
+        background-color: white;
+    }
+
     /* Empty box for the area of header */
     section>div:first-child {
         height: 65px;
@@ -18,13 +22,11 @@
         display: flex;
     }
     #profilePageContent>div:first-child {
-        /* background-color: yellow; */
         width: 35%;
         padding: 2%;
         padding-right: 0;
     }
     #profilePageContent>div:last-child {
-        /* background-color: yellowgreen; */
         width: 65%;
         padding: 2%;
     }
@@ -101,7 +103,7 @@
             margin-top: 7%;
         }
 
-        .petListElement{
+        .petItem{
             font-size: 0.8em;
             height: 20%;
         }
@@ -111,7 +113,7 @@
             width: 30% ;
             height: 65%;
         }
-        .petListElement{
+        .petItem{
             width: 100vw;
         }
         #petWrapper{
@@ -276,7 +278,7 @@ ob_start();
         addEditFormDisplay(petId);
     }); 
 
-    let elements = document.getElementsByClassName("petListElement");
+    let elements = document.getElementsByClassName("petItem");
     for(i=0; i<elements.length; i++){
         elements[i].addEventListener('click', function(e){
             let target  = e.target;

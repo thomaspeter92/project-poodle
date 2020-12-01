@@ -1,7 +1,7 @@
 <?php 
 if (isset($events)): 
     foreach ($events as $event): ?>
-        <div class="item">
+        <div class="eventItem">
             <div class="title"><?= $event->name; ?></div>
             <div class="content">
                 <div class="imgContainer">

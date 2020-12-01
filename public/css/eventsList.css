@@ -1,6 +1,7 @@
 section {
     /* position: relative; */
     width: 100%;
+    background-color: white;
 }
 
 /* Empty box for the area of header */
