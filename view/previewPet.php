@@ -321,7 +321,7 @@
 
                 let petView = new Modal(xhr.responseText);
                 petView.generate(modalPetObj, allowCancel=false);
-                new FormCheck().formCheck(3);// Marie ugly way of calling
+                new FormCheck().formCheck(3);
                 let photoInput = document.querySelector('#file');
                 let petPhoto = document.querySelector('#imagePreview')
                 photoInput.addEventListener("change",  function() {

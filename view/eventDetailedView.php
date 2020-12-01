@@ -82,6 +82,11 @@
         object-fit: cover;
     }
 
+    #attendButton {
+        width: auto;
+        padding: 0 10px 0 10px;
+    }
+
     .eventDetailMainContent {
         display: flex;
         justify-content: space-between;
@@ -93,6 +98,10 @@
         width: 65%;
     }
 
+    #descriptionArea {
+        word-wrap: break-word;
+    }
+
     .eventDetailSideContent {
         width: 32%;
         margin-left: 15px;
@@ -102,6 +111,7 @@
     .eventImage {
         max-width: 100%;
         margin-bottom: 20px;
+        display: block;
     }
 
 
@@ -287,6 +297,10 @@
         justify-content: center;
     }
 
+    #mapContainer {
+        flex-direction: column;
+    }
+
     #loadbuttons p {
         margin: 10px;
         font-size: .8em;
@@ -458,17 +472,21 @@
     #authorPhoto {
         display: none;
     }
-
     #map {
         width: 100%;
     }
     #mapDisplay {
         width: 100%;
     }
+    #mapContainer {
+        height: 50vh;
+    }
 
     .submit {
         width: auto;
         font-size: .6em;
+        padding: 0 10px 0 10px;
+        width: 70px;
     }
 
     .modalMainDiv > .modalSubDiv {
@@ -555,8 +573,8 @@ if($event) {
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
                 <img class="eventImage" src="./private/event/<?=!empty($event['picture']) ? $event['picture'] : 'default.png' ?>" />
-                <?= nl2br($event['description']); ?>
-                
+                <p id="descriptionArea"><?= nl2br($event['description']); ?></p>
+
                 <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>  <?= !isset($_SESSION['id']) ? '<em>*Sign In to Leave a Comment</em>' : '';?> 
 
@@ -613,9 +631,8 @@ if($event) {
                 <div id="guestList">
                     <?php include("loadGuestsView.php") ?>
                 </div>
-                <?php if ($guestCount > 5) { ?>
-                    <p id="loadMoreGuests" data-eventId="<?=$event['eventId']; ?>">Show more...</p>
-                    <p id="showLessGuests" data-eventId="<?=$event['eventId']; ?>">Show Less...</p>
+                <?php if ($guestCount > 6 && isset($_SESSION['id'])) { ?>
+                    <p id="loadMoreGuests" data-eventId="<?=$event['eventId']; ?>">See All</p>
                 <?php } ?>
             </aside>
         </div>
@@ -668,7 +685,7 @@ if($event) {
             xhr.open("POST", "index.php");
             xhr.onload =  function() {
                 loadComments(limit);
-                // ERROR MESSAGES HERE
+                commentBox.value = '';
                 
             }
             xhr.send(params);
@@ -770,34 +787,21 @@ if($event) {
 
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
     var guestCount = document.querySelector('#guestCount');
-    var guestCounter = 5;
     var loadMoreGuests = document.querySelector('#loadMoreGuests');
-    var guests = document.querySelectorAll('.guestListItem')
-
-    if (guestCount.textContent > 5) {
+    if (guestCount.textContent > 6) {
         var eventId = loadMoreGuests.getAttribute("data-eventId");
         loadMoreGuests.addEventListener('click', function() {
-            guestCounter+= 5;
-            loadGuests(guestCounter, eventId);
-            showLessGuests.style.display = 'initial';
-            console.log(guestCounter)
-        })
-        var showLessGuests = document.querySelector('#showLessGuests')
-        showLessGuests.addEventListener('click', function() {
-            guestCounter = 5;
-            loadGuests(guestCounter, eventId);
-            showLessGuests.style.display = 'none';
+            loadGuests(eventId);
         })
     }
 
-    function loadGuests(guestCounter, eventId) {
+    function loadGuests(eventId) {
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', `index.php?action=loadGuests&eventId=${eventId}&limit=${guestCounter}`);
+        xhr.open('GET', `index.php?action=loadGuests&eventId=${eventId}&loadAll=true`);
         xhr.onload = function () {
             if (xhr.status == 200 ) {
-                let guestList = document.querySelector('#guestList');
-                guestList.innerHTML = xhr.responseText;
-                // guests.length == guestCount ? loadMoreGuests.style.display ='none' : loadMoreGuests.style.display ='initial';
+                let guestModal = new Modal(xhr.responseText);
+                guestModal.generate()
             }
         }
         xhr.send(null);

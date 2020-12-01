@@ -109,11 +109,14 @@ require_once("Manager.php");
 
         public function loadGuests($params) {
             $eventId = $params['eventId'];
-            $guestLimit = isset($params['limit']) ? $params['limit'] : 5;
             $db = $this->dbConnect();
-            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId LIMIT 0, :guestLimit");
+            if (isset($params['loadAll'])) {
+                $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId");
+            } else {
+                $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId LIMIT 0,6");
+            }
             $req->bindParam(':eventId',$eventId, PDO::PARAM_INT);
-            $req->bindParam(':guestLimit', $guestLimit, PDO::PARAM_INT);
+            // $req->bindParam(':guestLimit', $guestLimit, PDO::PARAM_INT);
             $req->execute();
             $guestList = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();

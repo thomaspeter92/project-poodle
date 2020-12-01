@@ -1,4 +1,11 @@
-
+<style>
+    #noComments {
+        text-align: center;
+        font-style: italic;
+        color: #ff3864;
+    }
+</style>
+<?=empty($comments) ? '<p id="noComments">No comments yet</p>' : '' ?>
 <?php foreach($comments as $comment):?>
     <div class="commentChunk">
         <p>
