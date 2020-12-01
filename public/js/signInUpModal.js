@@ -106,10 +106,14 @@ const initGoogle = () => {
     });
 }
 
+/**
+ * Initialize for using Kakao API for sign-in after loading script from KAKAO_URL
+ */
 const initKakao = () => {
     loadScript(KAKAO_SCRIPT_ID, KAKAO_URL, () => {
+        const APP_KEY_FOR_JAVASCRIPT = "cea8248c64bf22c135e642408c2fb6c2";
         Kakao.cleanup();
-        Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
+        Kakao.init(APP_KEY_FOR_JAVASCRIPT);
     });
 }
 
@@ -149,7 +153,7 @@ const showErrorForSignIn = (msg) => {
 /******************** Normal Sign-in ***********************/
 /**
  * AJAX call to checking that the user is authenticated
- * @param { Event } e 
+ * @param { Event } e Event object from sign-in form in loginView.php
  */
 const signIn = (e) => {
     const emailLogin = document.querySelector("#emailLogin");
@@ -270,6 +274,10 @@ const failGoogleSignIn = (erroMsg) => {
 /***************************************************/
 
 /********************* Kakao ***********************/
+/**
+ * Sign in & Sign up with Kakao account
+ * @param {boolean} signUp Whether to sign up when signing in with Kakao
+ */
 const signInWithKakao = (signUp) => {
     Kakao.Auth.loginForm({
         success: (authObj) => {
@@ -320,6 +328,10 @@ const signInWithKakao = (signUp) => {
     });
 };
 
+/**
+ * Request user information of Kakao account
+ * @param {function} callback Informs that requesting is finished with the information
+ */
 const requestUserInfo = (callback) => {
     Kakao.API.request({
         url: '/v2/user/me',
@@ -336,6 +348,10 @@ const requestUserInfo = (callback) => {
     });
 };
 
+/**
+ * If sign-in is failed, show error message about Kakao
+ * @param {string} erroMsg Error message to be displayed in sign-in modal
+ */
 const failKakaoSignIn = (erroMsg) => {
     showErrorForSignIn(erroMsg);
     signOutWithKakao();
@@ -350,7 +366,9 @@ const signOutWithKakao = () => {
     }
 };
 
-// For deleting account of Poodle
+/**
+ * Call this function when deleting account of Project Poodle
+ */
 const disconnectWithKakao = () => {
     Kakao.API.request({
         url: "/v1/user/unlink",
