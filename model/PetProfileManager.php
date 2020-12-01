@@ -24,7 +24,7 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, breed, age, photo, color, id FROM petProfile WHERE ownerId = ?");
+            $req = $db->prepare("SELECT name, breed, age, gender, photo, color, id FROM petProfile WHERE ownerId = ?");
             //bindparam
             $req -> execute(array($ownerId));
             $profile = $req -> fetchAll(PDO::FETCH_ASSOC);

@@ -1,13 +1,19 @@
 <?php ob_start();?>
 <link rel="stylesheet" href="./public/css/eventsListOnProfile.css">
+<link rel="stylesheet" href="./public/css/petsListOnProfile.css">
 <style>
     
     body{
         margin:0;
         padding:0;
     }
-           
-    .profilePageContent{
+      
+    /* Empty box for the area of header */
+    section>div:first-child {
+        height: 65px;
+    }
+
+    #profilePageContent{
         display: flex;
         width: 100vw;
     }
@@ -18,56 +24,20 @@
         justify-content: flex-start;
         align-items: center;
         width: 65%;
+        padding-top: 20px;
     }
 
-    #contentLeft {
+    #petsList {
         width: 90%;
     }
+
     .desktopColumn{
         display: flex;
         flex-direction: column;
         width: 35%;
         text-align: center;
+        padding-top: 20px;
         padding-left: 1em;  
-
-    }
-    /* .eventInfo{
-        box-shadow: 3px 3px 3px lightgrey;
-        border-radius: 15px;
-        background-color: rgba(128, 147, 241, 0.3);
-        padding: 1em;
-        margin-bottom: 1em;
-        color: black;
-    } */
-    .petListElement{
-        height: 200px;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 3px 3px 3px lightgrey;
-        border-radius: 15px;
-        background-color: rgba(213, 253, 255, 0.3);
-        margin-bottom: 5%;
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .petPreviewContents{
-        margin-bottom: 10%;
-        width: 40%;
-        height: 80%;
-        font-size: 90%;
-    }
-
-    .petPreviewImage{
-        margin: 3%;
-        border-radius: 5px;
-        height: 30%;
-    }
-
-    .petDivPreviewImage{
-        width: 40%;
-        margin-top: 15%;
     }
 
     .accountWrapper {
@@ -83,23 +53,28 @@
         padding-bottom: 20px;
         /* width: 200px; */
     }
+    #profileName {
+        font-size: 1.5em;
+        font-family: "MontserratBold", sans-serif;
+    }
+
     #addPetButton {
-	background-color: #72ddf7;
-	border-radius:42px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:13px 76px;
-    text-decoration:none;
-    border-style: none;
-    box-shadow: 5px 10px 18px #acacac;
-    margin-bottom: 20px;
+        background-color: #72ddf7;
+        border-radius:42px;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:13px 76px;
+        text-decoration:none;
+        border-style: none;
+        box-shadow: 5px 10px 18px #acacac;
+        margin-bottom: 20px;
     }
 
     #addPetButton:hover {
-	background-color:#ff3864;
+	    background-color:#ff3864;
     }
 
     #addPetButton:focus {
@@ -107,14 +82,9 @@
     }
 
     #addPetButton:active {
-	position:relative;
-	top:1px;
+        position:relative;
+        top:1px;
     }
-
-
-    /* .proPicContainer {
-
-    } */
 
     .profilePic {
         width: 100px;
@@ -127,7 +97,7 @@
         padding-top:20px;
     }
     @media (max-device-width : 1020px) {
-        .profilePageContent{
+        #profilePageContent{
             display: block;
             justify-content: column;
             width: 100vw;
@@ -140,20 +110,9 @@
             padding-right: 1em;
 
         }
-        .petPreviewImage{
-            margin-top: 8%;
-            border-radius: 5px;
-            width: 30% ;
-            height: 65%;
-        }
-        .petListElement{
-            width: 100vw;
-        }
-
-
     }
     @media (max-device-width : 400px) {
-        .petPreviewContents{
+        /* .petPreviewContents{
             margin-top: 4%;
             margin-bottom: 5%;
             margin-left: 5%;
@@ -183,7 +142,7 @@
             display: flex;
             align-items: center;
             width: 100vw;
-        }
+        } */
 }
 
 </style>
@@ -202,14 +161,14 @@ ob_start();
 <section>
     <div></div>
     <div id="mainContainer">
-        <div class="profilePageContent">
+        <div id="profilePageContent">
             <div class="desktopColumn">
                 <div class="accountWrapper">
                     <div class="accountBox">
                         <div class="proPicContainer">
                             <img class="profilePic" src="<?= $profileImageURL;?>" alt="Profile Pic">
                         </div>
-                        <p><?= $_SESSION['name'];?></p>
+                        <p id="profileName"><?= $_SESSION['name'];?></p>
                         <button class="manageAccount">Manage Account</button>
                     </div>
                 </div>
@@ -227,23 +186,12 @@ ob_start();
             <div id="petWrapper">
                 <!-- •••••••••••••••••••••••• ADD A NEW PET BUTTON •••••••••••••••••• -->
                 <button id="addPetButton"> Add a Pet!</button>
-                <div id="contentLeft">
-                    <?php foreach($petPreviews as $preview):?>
-                        <div class = "petListElement" data-petId="<?=$preview['id']?>">
-                            <div class="petPreviewContents">
-                                <p>NAME <?=" : ".$preview['name'];?></p>
-                                <p>BREED <?=" : ".$preview['breed'];?></p>
-                                <p>AGE <?=" : ".$preview['age']." years";?></p>
-                                <p>COLOR <?=" : ".$preview['color'];?></p>
-                                <img class="petPreviewImage" src="./private/pet/<?=$preview['photo']?>" />
-                            </div>
-                        </div>
-                    <?php endforeach;?>
+                <div id="petsList">
+                    <?php require("./view/petsListOnProfile.php"); ?>
                 </div>
             </div>
         </div>
 </div>
-<!-- <script src="./public/js/Modal.js"></script> -->
 
 <script>
 {

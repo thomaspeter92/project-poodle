@@ -1,0 +1,73 @@
+
+.petListElement{
+    width: 80%;
+    /* height: 200px; */
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 2px 2px 3px 2px lightgrey;
+    border-radius: 15px;
+    /* background-color: rgba(213, 253, 255, 0.3); */
+    display: flex;
+    /* justify-content: space-around; */
+    padding: 30px;
+    margin-bottom: 5%;
+}
+
+.innerDiv {
+    display: flex;
+    /* align-items: center; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* height: 95%; */
+    
+}
+.innerDiv:first-of-type {
+    width: 35%;
+}
+.innerDiv:last-of-type {
+    width: 65%;
+}
+.innerDiv .petImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #ff3864;
+}
+.innerDiv table .petName {
+    font-size: 1.2em;
+    font-family: "MontserratBold", sans-serif;
+    margin-bottom: 20px;
+    /* padding: 5px; */
+    /* color: black; */
+}
+.innerDiv table i {
+    color: #ff3864;
+}
+.innerDiv table td {
+    font-size: 1.5em;
+}
+.innerDiv table .icon {
+    width: 40px;
+}
+
+@media (max-width: 500px) {
+
+    .modalSubDiv {
+        height: 80%;
+        width: 80%;
+    }
+    .modalDivButtons {
+        top: 80%;
+        height: auto;
+    }
+    #profileBox {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    #profileBox > .innerDiv{
+        height: auto;
+        width: 90%;
+        margin: 10px;
+    }
+}
