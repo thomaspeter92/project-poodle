@@ -2,9 +2,13 @@
 <link rel="stylesheet" href="./public/css/eventsListOnProfile.css">
 <link rel="stylesheet" href="./public/css/petsListOnProfile.css">
 <style>
-    body{
+    body {
         margin:0;
         padding:0;
+        background-color: rgb(245, 245, 245);
+    }
+    footer {
+        background-color: rgb(245, 245, 245);
     }
 
     .accountBox, .petItem, .eventItem {
