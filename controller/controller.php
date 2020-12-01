@@ -116,10 +116,6 @@ function displayAddEditEvent($eventId){
     }
     require('./view/addEditEventView.php');
 }
-
-function stars(){
-    require('./view/starsView.php');
-}
 function checkPoints($userID){
     $manager = new MemberManager;
     $pointsCheck = $manager->checkPoints($userID);
@@ -204,6 +200,13 @@ function showMap(){
 }
 
 function showMapDetail(){
-    
     require("./view/mapViewDetail.php");
+}
+
+
+function stars(){
+    require('./view/starsView.php');
+}
+function addStars($starValue, $eventId){
+    $starManager = new StarManager($starValue, $eventId);
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php $title= "contactPage"?>
 <?php ob_start(); ?>
 <style>
@@ -96,12 +95,12 @@ var starValue;
 // }
 var stars = document.querySelectorAll('input');
 
-
+var starValue;
 
 var star1 = document.querySelector('.star1');
-star1.addEventListener('click', function(){
+star1.addEventListener('click', function(starValue){
     starValue = 1;
-    
+    window.location.href = "../index.php?action=addStars";
 });
 
 var star2 = document.querySelector('.star2');
@@ -124,14 +123,10 @@ star5.addEventListener('click', function(){
     starValue = 5;
 });
 
-console.log(starValue);
+
 </script>
 
 <?php
 $content = ob_get_clean();
 require("template.php");
 ?>
-=======
-<!-- https://www.youtube.com/watch?v=EnU0DSdvF_c&ab_channel=AdnanAfzal -->
-<!-- ^ possibly a useful tutorial -->
->>>>>>> 4368db9be844caa0f1e2c212acb61eb0ab2c2917
