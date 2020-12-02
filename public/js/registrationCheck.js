@@ -1,5 +1,5 @@
 class RegistrationCheck{
-    registrationCheck= () =>{
+    registrationCheck() {
         var formSignUp = document.querySelector('#formSignUp');
         formSignUp.addEventListener("submit", function(e){
             
