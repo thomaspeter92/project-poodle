@@ -176,7 +176,6 @@
 
     @media (max-width: 900px) {
         #formAddEditEvent{
-            /* overflow:scroll; */
             font-size:0.9em;
         }
         
