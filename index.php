@@ -228,11 +228,9 @@ try {
             break;
 
         case "updateEventDetails" :
-            // updateEventDetails($eventId = isset($_REQUEST['eventId']) ? $_REQUEST['eventId'] : "" );
 
-            if (!empty($_REQUEST['eventName']) && !empty($_REQUEST['eventGuestLimit']) && !empty($_REQUEST['eventDate']) && !empty($_REQUEST['eventTime']) && !empty($_REQUEST['eventExpiryDate']) && !empty($_REQUEST['eventExpiryTime']) && !empty($_REQUEST['eventDescription'])) {
                 $eventData = array(
-                "eventName" => $_REQUEST['eventName'],
+                "eventName" => $_REQUEST['eventName2'],
                 "eventGuestLimit" => $_REQUEST['eventGuestLimit'],
                 "eventDate" => $_REQUEST['eventDate'],
                 "eventTime" => $_REQUEST['eventTime'],
@@ -245,7 +243,7 @@ try {
                 "eventPicture" => $_REQUEST['eventPicture']);
 
                 addEditEventDetails($eventData);
-            }
+                
             break;
         case "deleteEvent" :
             $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;

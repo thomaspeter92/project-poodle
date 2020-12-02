@@ -1,6 +1,6 @@
 
 /**
- * This function 
+ * @desc - this function is called when a user is successful with Google Sign-in authentication
  * @param {*} googleUser 
  */
 function onGoogleSignIn(googleUser) {
@@ -19,7 +19,9 @@ function onGoogleSignIn(googleUser) {
 }
 
 
-// Sign out the user
+/**
+ * @desc - signs out of application if google Sign-in authentication was used
+ */
 function googleSignOut() {
     var auth2;
     if(gapi){
@@ -41,11 +43,11 @@ function googleSignOut() {
 }
 
 
-function onFailure(error) {
-
-}
-
-
+/**
+ * @desc - function retrieves user profile information after signing in or signing up with Google Sign-in authentication and send info to back-end server
+ * @param {*} gUser - user object from google from which profile info can be obtained
+ * @param {*} signUp - true if signup was performed, false if signin was performed
+ */
 function gRequestUserInfo(gUser,signUp){
     
     var profile = gUser.getBasicProfile();
@@ -58,21 +60,23 @@ function gRequestUserInfo(gUser,signUp){
         form.querySelector("#googlePicture").value = profile.getImageUrl();
         form.querySelector("#googleUserId").value = profile.getId();
         if (signUp) {
-            //TODO: Direct to user profile page?????
             form.action = "index.php?action=googleSignUp";
      
         } else {
-            //TODO: Direct to user profile page???? or current page???
             form.action = "index.php?action=googleSignIn";
         }
         form.submit();
     }
 }
 
+/**
+ * @desc - function signs out of Google, Kakao and call back-end method to close session
+ *      - function can be called whichever sign-in methods have been used 
+ * 
+ */
 function signAllOut(){
 
     //sign out from google
-
     googleSignOut();
 
     logoutWithKakao();

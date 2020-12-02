@@ -23,27 +23,75 @@ const createAddEditEventModal = (id) =>{
         
             var eventPreviousBut =  document.querySelector("#eventPreviousButton");
             if (eventPreviousBut) {
-                eventPreviousBut.addEventListener("click", movePreviousStep);  
+                eventPreviousBut.addEventListener("click", function(){movePreviousStep(id)});  
             }
             var eventNextBut =  document.querySelector("#eventNextButton");
             if (eventNextBut) {
-                eventNextBut.addEventListener("click", moveNextStep);  
+                eventNextBut.addEventListener("click", function(){moveNextStep(id)});  
             }
             var eventForm =  document.querySelector("#formAddEditEvent");
 
             if (eventForm) {
-                eventForm.addEventListener("submit", function(){
+                eventForm.addEventListener("submit", function(e){
+
+                    //if user did not choose any points on map, use previously chosen points on map
                     var eventItineraryEle  = document.getElementById("itinerary");
-                    eventItineraryEle.value = JSON.stringify(polyLineArray);
+                    if(polyLineArray.length > 0){
+                        eventItineraryEle.value = JSON.stringify(polyLineArray);
+                    }
                     
+                    //check that all the inputs have been entered
+                    var missingField='';
+                    var eventNameEle = document.getElementById("eventName2");
+                    var eventGuestLimitEle = document.getElementById("eventGuestLimit");
+                    var eventDateEle = document.getElementById("eventDate");
+                    var eventTimeEle = document.getElementById("eventTime");
+                    var eventExpiryDateEle = document.getElementById("eventExpiryDate");
+                    var eventExpiryTimeEle = document.getElementById("eventExpiryTime");
+                    var eventDescriptionEle = document.getElementById("eventDescription");
+
+                    if(eventNameEle.value.length == 0){
+                        missingField += " Name of event,";
+
+                    }
+                    if(eventGuestLimitEle.value.length == 0){
+                        missingField += " Guest limit,";
+                    }
+                    if (eventDateEle.value.length == 0){
+                        missingField += " Event date,";
+
+                    }
+                    if (eventTimeEle.value.length == 0){
+                        missingField += " Event time,";
+                    }
+                    if (eventExpiryDateEle.value.length == 0){
+                        missingField += " Last date,";
+                    }
+                    if (eventExpiryTimeEle.value.length == 0){
+                        missingField += " Last time,";
+                    }
+                    if (eventDescriptionEle.value.length == 0){
+                        missingField += " Event description,";
+                    }
+
+                    if (missingField.length > 0){
+                        var errorMsgEle = document.getElementById("errorMsg");
+                        var msg = "The following has missing values:" + missingField;
+                        errorMsgEle.innerHTML = msg;
+                        errorMsgEle.style.color = 'red';
+
+                        //Prevent the submitting of the form
+                        e.preventDefault();
+                    }
                 });  
             }
 
 
             startMap(polyLineArray);
             displayPicture();
-            showEventStep("eventStep1");
+            showEventStep("eventStep1", id);
             recommendExpiryDateTime();
+
             
         }
     }
@@ -57,18 +105,18 @@ if (addEventBut) {
 }
 
 
-function moveNextStep(){
+function moveNextStep(id){
     step +=1;
     let currentStep="eventStep"+step;
-    showEventStep(currentStep);
+    showEventStep(currentStep,id);
 }
 
-function movePreviousStep(){
+function movePreviousStep(id){
     step -=1;
     let currentStep="eventStep"+step;
-    showEventStep(currentStep);
+    showEventStep(currentStep,id);
 }
-function showEventStep(currentStep){
+function showEventStep(currentStep, id=null){
     switch (currentStep){
         case "eventStep1":
             document.getElementById("eventStep1").style.display = "block";
@@ -77,13 +125,22 @@ function showEventStep(currentStep){
             document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "none";
             document.getElementById("eventNextButton").style.display = "block";
-            document.getElementById("eventSubmitButton").style.display = "none";
+            // document.getElementById("eventSubmitButton").style.display = "none";
             document.getElementById("lblStepIndicator").innerHTML="Step 1 of 4";
             document.getElementById("stepIndicator").value = "25";
+            // document.getElementById("eventSpaceMiddle").style.display = "block";
             //Force step to be 1 on first page
             if(step!==1) step=1;
 
-        
+            if(id){
+                document.getElementById("eventSubmitButton").style.display = "block";
+                document.getElementById("eventSpaceRight").style.width = "58%";
+                document.getElementById("eventSpaceRight").style.justifyContent = "space-between";
+            }else{
+                document.getElementById("eventSubmitButton").style.display = "none";
+                document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+            }
+      
             break;
             
         case "eventStep2":
@@ -93,9 +150,19 @@ function showEventStep(currentStep){
             document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "block";
             document.getElementById("eventNextButton").style.display = "block";
-            document.getElementById("eventSubmitButton").style.display = "none";
+            // document.getElementById("eventSubmitButton").style.display = "none";
             document.getElementById("lblStepIndicator").innerHTML="Step 2 of 4";
             document.getElementById("stepIndicator").value = "50";
+
+            if(id){
+                document.getElementById("eventSubmitButton").style.display = "block";
+                document.getElementById("eventSpaceRight").style.width = "58%";
+                document.getElementById("eventSpaceRight").style.justifyContent = "space-between";
+
+            }else{
+                document.getElementById("eventSubmitButton").style.display = "none";
+                document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+            }
             break;
  
         case "eventStep3":
@@ -105,9 +172,17 @@ function showEventStep(currentStep){
             document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "block";
             document.getElementById("eventNextButton").style.display = "block";
-            document.getElementById("eventSubmitButton").style.display = "none";
+            
             document.getElementById("lblStepIndicator").innerHTML="Step 3 of 4";
             document.getElementById("stepIndicator").value = "75";
+            if(id){
+                document.getElementById("eventSubmitButton").style.display = "block";
+                document.getElementById("eventSpaceRight").style.width = "58%";
+                document.getElementById("eventSpaceRight").style.justifyContent = "space-between";
+            }else{
+                document.getElementById("eventSubmitButton").style.display = "none";
+                document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+            }
             break;
         case "eventStep4":
             document.getElementById("eventStep1").style.display = "none";
@@ -119,6 +194,8 @@ function showEventStep(currentStep){
             document.getElementById("eventSubmitButton").style.display = "block";
             document.getElementById("lblStepIndicator").innerHTML="Step 4 of 4";
             document.getElementById("stepIndicator").value = "100";
+            document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+
             break;
         default:
             break;
@@ -186,8 +263,8 @@ var startEndHandler = function startEnd(mouseEvent){
         content : markerInfo,
     });
     infowindow.open(map, markerClick);
-    bounds.extend(latlng);
-    map.setBounds(bounds);
+    bounds2.extend(latlng);
+    map.setBounds(bounds2);
     polyLineArray.push(latlng);
     var destination = document.createElement("div");
     var dash = document.createElement("div");
@@ -207,7 +284,7 @@ var startEndHandler = function startEnd(mouseEvent){
 function startMap(polyLineArray){
     var stopByCounter = 1;
     var locationList = document.getElementById("locationList2");
-    var bounds = new kakao.maps.LatLngBounds();
+    var bounds2 = new kakao.maps.LatLngBounds();
     // var polyLineArray = Array();
     var mapContainer = document.getElementById('map2'); // 지도를 표시할 div 
 
@@ -238,8 +315,8 @@ function startMap(polyLineArray){
             content : markerInfo,
         });
         infowindow.open(map, markerClick);
-        bounds.extend(latlng);
-        map.setBounds(bounds);
+        bounds2.extend(latlng);
+        map.setBounds(bounds2);
         polyLineArray.push(latlng);
         var destination = document.createElement("div");
         var dash = document.createElement("div");
@@ -301,8 +378,8 @@ function startMap(polyLineArray){
                         // })
                         infowindow.open(map, marker);  
                         // polyLineArray.push(coords);
-                        bounds.extend(coords);
-                        map.setBounds(bounds);
+                        bounds2.extend(coords);
+                        map.setBounds(bounds2);
                         let titles = document.getElementsByClassName("infoWindow");
                         titles[titles.length-1].addEventListener('click', function(e){
                             let modalMapObj = { }
