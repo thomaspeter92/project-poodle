@@ -354,19 +354,6 @@ function time_elapsed_string($datetime, $full = false) {
         } 
     }
     </script> 
-    <script>
-        function initGoogle(){
-            const CLIENT_ID = '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com';
-            gapi.load('auth2', function() {
-            gapi.auth2.init({client_id:CLIENT_ID});
-                });
-        }
-
-        function initKakao(){
-            Kakao.init("cea8248c64bf22c135e642408c2fb6c2");
-        }
-    </script>
-
     <script src="./public/js/notifications.js"></script>
     <script src="./public/js/common.js"></script>
     <script src="./public/js/template.js"></script>
