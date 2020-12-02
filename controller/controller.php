@@ -100,11 +100,7 @@ function contactPage(){
     require('./view/contactPageView.php');
 }
 
-function accountView($userID){
-    $manager = new MemberManager();
-    $memberDataFromDB = $manager->getMemberDataByID($userID);
-    require("./view/accountView.php");
-}
+
 function legalPage(){
     require('./view/legalPageView.php');
 }

@@ -421,8 +421,8 @@
                             saveAccountChanges()
                         },
                     }
-                    let petView = new Modal(xhr.responseText);
-                    petView.generate(modalPetObj, allowCancel=true);   
+                    let accountView = new Modal(xhr.responseText);
+                    accountView.generate(modalPetObj, allowCancel=true);   
                         
                     
                     // Image Event listener Buttons

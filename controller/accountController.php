@@ -1,4 +1,10 @@
 <?php
+function accountView($userID){
+    $manager = new MemberManager();
+    $memberDataFromDB = $manager->getMemberDataByID($userID);
+    require("./view/accountView.php");
+}
+
 function checkChangePW($passwordInput, $userID){
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByID($userID);
@@ -100,8 +106,25 @@ function deleteAccountCheck($userID){
 
 function checkNotifications($userID) {
     $manager = new NotificationManager();
-    $result = $manager->getNotifications($userID);
-    if($result) {
+    $notifications = $manager->getNotifications($userID);
+    if($notifications) {
+        $notifications;
+    }   else {
+        $notifications = "failed to get notifications";
+    }
+    return $notifications;
+}
+
+function notificationsView($userID){
+    $manager = new NotificationManager();
+    $notifications = $manager->getNotifications($userID);
+    require("./view/notificationsView.php");
+}
+
+function readNotifications($userID){
+    $manager = new NotificationManager();
+    $result = $manager->clearNotifications($userID);
+    if ($result) {
         $result = "success";
     }   else {
         $result = "failed";

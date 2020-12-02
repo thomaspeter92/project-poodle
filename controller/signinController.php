@@ -106,16 +106,10 @@ function createSessionByMemberDB($memberDataFromDB) {
     }
     $profileImageDir = "./private/profile/";
     $sessionID = $memberDataFromDB["id"];
-    $sessionName = isset($memberDataFromDB["name"]) ? 
-                    $memberDataFromDB["name"] : $memberData["name"];
+    $sessionName = $memberDataFromDB["name"];
     $sessionImageURL = NULL;
-    
     if (isset($memberDataFromDB["profileImage"])) {
         $sessionImageURL = $profileImageDir.$memberDataFromDB["profileImage"];
-    } else {
-        if (isset($memberData["imageURL"])) {
-            $sessionImageURL = $memberData["imageURL"];
-        }
     }
     createSession($sessionID, $sessionName, $sessionImageURL);
 }

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require("./controller/controller.php");
 
@@ -9,6 +10,20 @@ try {
     switch ($action) {
         case "landing":
             landing();
+            break;
+        case "notificationsView":
+            if(isset($_SESSION['id'])){
+                notificationsView($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
+        case "readNotifications":
+            if(isset($_SESSION['id'])){
+                readNotifications($_SESSION['id']);
+            }else{
+                login();
+            }
             break;
         case "petprofile":
             // isThatReallyMyDog($_SESSION['id', $_REQUEST['petid'])
@@ -263,8 +278,7 @@ try {
             landing();
             break;
     }
+    
 } catch (Exception $e) {
-
     require("./view/error.php");
 }
-
