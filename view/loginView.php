@@ -206,12 +206,22 @@
                     <input type="password" name="passwordLogin" id="passwordLogin" class="loginInput required" required>
                 </div>
                 <div class='subSection'>
+                    <span class="warning">Please enter a correct email and password.</span>
+                </div>
+                <div class='subSection'>
                     <button type="submit" name="connect" id="connect" class='loginButton submitButton'>Sign In</button>
                 </div>
             </form>            
             <div class='thirdParty'>
                 <div><span>OR</span></div>
-                <div id='thirdPartyGoogle1'></div>
+                <div id='thirdPartyGoogle1'>
+                    <div id="gSignInWrapper">
+                        <div id="googleCustomBtn" class="customGPlusSignIn signin">
+                            <span class="icon"></span>
+                            <span class="buttonText">Google</span>
+                        </div>
+                    </div>
+                </div>
 
                 <div id='thirdPartyKakao1'>
                     <div class="buttonK" id="kakaoLogin">
@@ -227,9 +237,6 @@
 
         </div>
     </div>
-    <!-- <script src="./projectPoodle/public/js/formCheck.js"></script> -->
-    <?php require("kakaoForm.php"); ?>
-    <?php require("googleForm.php"); ?>
-  
+
 
 
