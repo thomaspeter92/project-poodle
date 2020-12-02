@@ -719,7 +719,9 @@ if($event) {
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "index.php");
             xhr.onload = function() {
+                console.log(xhr.responseText);
                 if (xhr.responseText.trim() == 'success') {
+       
                     location.reload();
                 } else {
                     alert('Oops, something went wrong. Please try again.')
@@ -836,7 +838,8 @@ if($event) {
     editComments();
 
 // ************* MAP FUNCTIONS ************
-    var itin = <?= $event['itinerary'] ?>
+    var itin;
+    itin = '<?= isset($event["itinerary"]) ? $event["itinerary"] : ""; ?>';
     // var viewListArray = [[37.530750,126.971979],[37.540522437037716, 126.98675092518866],[37.55397916880342, 126.97248154788045]]
 
     var bounds = new kakao.maps.LatLngBounds();
@@ -853,34 +856,35 @@ if($event) {
     // var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
 
     // 마커를 생성합니다
-    for(let i=0; i<itin.length; i++){
-        var coords = new kakao.maps.LatLng(itin[i]['Ma'],itin[i]['La']);
-        console.log(coords)
-        routeArray.push(coords);
-        var marker = new kakao.maps.Marker({
-            position: coords
-        });
+    if(itin){
+        itin = JSON.parse(itin);
+        for(let i=0; i<itin.length; i++){
+            var coords = new kakao.maps.LatLng(itin[i]['Ma'],itin[i]['La']);
+            console.log(coords)
+            routeArray.push(coords);
+            var marker = new kakao.maps.Marker({
+                position: coords
+            });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-        bounds.extend(coords);
-        map.setBounds(bounds);
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+            bounds.extend(coords);
+            map.setBounds(bounds);
+        }
+
+        var polyline = new kakao.maps.Polyline({
+                map: map,
+                path: routeArray,
+                strokeWeight: 2,
+                strokeColor: 'red',
+                strokeOpacity: 0.8,
+                strokeStyle: 'solid'
+            });
+        polyline.setMap(map);
     }
-
-    var polyline = new kakao.maps.Polyline({
-            map: map,
-            path: routeArray,
-            strokeWeight: 2,
-            strokeColor: 'red',
-            strokeOpacity: 0.8,
-            strokeStyle: 'solid'
-        });
-    polyline.setMap(map);
-
     let deleteEventButton = document.querySelector('.deleteEvent');
     if (deleteEventButton){
         deleteEventButton.addEventListener('click', function(e) {
-            // let eventId = e.target.getAttribute("data-eventId");
             deleteEvent();
         });
     }
@@ -892,10 +896,6 @@ if($event) {
         }
     }
 
-    // function editEvent (eventId){
-
-    //     createAddEditEventModal(eventId);
-    // }
 
     let editEventButton = document.getElementById('editEvent');
     if (editEventButton){

@@ -72,6 +72,12 @@ function editEventComment($params) {
 function attendEvent($params) {
     $eventAttend = new EventManager();
     $success = $eventAttend->attendEventSend($params);
+
+    //Franco
+    if($params['action']=='attendEvent'){
+        $notificationManager = new NotificationManager();
+        $notificationManager->setEventTimerNotification($params['eventId'],$params['guestId']);
+    }
 }
 
 function loadGuests($params) {
@@ -134,16 +140,33 @@ function addEditEventDetails($params){
     $photoData = array (
         "eventPicture" => isset($fileNameNew) ? $fileNameNew : NULL ,
     );
+    $result = array();
+    $result = $eventManager->updateEventDetails($params, $photoData);
+    if ($result){
+        
+        if($result['update'] === false){
+            //Create new event notifications
+            $notificationManager = new NotificationManager();
+            $notificationManager->setEventTimerNotification($result['eventId']);
 
-    $eventId = $eventManager->updateEventDetails($params, $photoData);
-
-    if($eventId){
+            //Automatically assign host as attending event
+            $attendParams = array(
+                "eventId" => $result['eventId'],
+                "guestId" => htmlspecialchars($params['hostId']),
+                "action" => 'attendEvent');
+            attendEvent($attendParams);
+        }
+        if($result['eventId']){
         //display the details of newly added or edited event
 
-        header("Location: index.php?action=showEventDetail&eventId=".$eventId);
+            header("Location: index.php?action=showEventDetail&eventId=".$result['eventId']);
+        }else{
+            echo "Event details were not saved properly";
+        }
     }else{
         echo "Event details were not saved properly";
     }
+   
 }
 
 function deleteEvent($eventId) {

@@ -228,7 +228,8 @@ require_once("Manager.php");
             $success = $req->execute();
             $req->closeCursor();
 
-            echo !empty($success) ? 'success' : 'error';
+            // echo !empty($success) ? 'success' : 'error';
+            echo ($success) ? 'success' : 'error';
 
         }
 
@@ -322,8 +323,8 @@ require_once("Manager.php");
             $result = $req->execute();
             $req->closeCursor();  
             if($result) {
-                $resp = $update ? htmlspecialchars($newEvent['eventId']) : $db->lastInsertId();
-                echo $resp;
+                $eventId = $update ? htmlspecialchars($newEvent['eventId']) : $db->lastInsertId();
+                $resp = array('eventId'=>$eventId, 'update'=>$update);
                 return $resp;
             }else{
                 return NULL;}
