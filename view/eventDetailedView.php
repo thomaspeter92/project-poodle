@@ -5,7 +5,7 @@
 
 /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
 .rating-group {
-    padding-top: 5em;
+    /* padding-top: 5em; */
     display: flex;
     align-items: middle;
 }
@@ -109,8 +109,9 @@
 
     #headerContentExtra {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-end
+        /* justify-content: space-between; */
     }
 
     #headerContentExtra p:first-child {
@@ -603,6 +604,39 @@ if($event) {
                     echo '<em>This event has now passed.</em>';
                 }
 
+                if($eventPassed == true && isset($_SESSION['id'])){ ?> 
+                    <div id="ratingSection">
+                        <p>rate the event: </p>
+                            <form method="POST" action="index.php" id="ratingForm">
+                                <div id="full-stars">
+                                    <div class="rating-group">
+                                        <input disabled checked class="rating__input rating__input--none" name="rating" id="rating3-none" value="0" type="radio">
+
+                                        <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star1" name="rating" id="rating3-1" value="1" type="radio">
+
+                                        <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star2" name="rating" id="rating3-2" value="2" type="radio">
+
+                                        <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star3" name="rating" id="rating3-3" value="3" type="radio">
+
+                                        <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star4" name="rating" id="rating3-4" value="4" type="radio">
+
+                                        <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star5" name="rating" id="rating3-5" value="5" type="radio">
+                                    </div>
+                                    <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
+                                    <input type="hidden" name="action" value="addStars">
+                                </div>
+                                <button style="text-align: center" type="submit" class="submitRating">Submit</button> 
+                            </form>
+                    </div>
+                
+                <?php
+                }
+
                 ?>
                 </div>
             </div>
@@ -671,29 +705,7 @@ if($event) {
                 <?php } ?>
             </aside>
         </div>
-<form method="POST" action="index.php" id="ratingForm">
-    <div id="full-stars">
-        <div class="rating-group">
-            <!-- <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio"> -->
 
-            <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-            <input class="rating__input star1" name="rating" id="rating3-1" value="1" type="radio">
-
-            <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-            <input class="rating__input star2" name="rating" id="rating3-2" value="2" type="radio">
-
-            <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-            <input class="rating__input star3" name="rating" id="rating3-3" value="3" type="radio">
-
-            <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-            <input class="rating__input star4" name="rating" id="rating3-4" value="4" type="radio">
-
-            <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-            <input class="rating__input star5" name="rating" id="rating3-5" value="5" type="radio">
-        </div>
-        <button style="text-align: center" type="submit" class="submitRating">Submit</button> 
-    </div>
-</form>
 </div>
         <h5>More Events Like This One:</h5>
         <div id="eventPreviews">
@@ -907,46 +919,30 @@ if($event) {
     }}
     editComments();
 
-//ADD STARS TO DATABASE
+//FUNCTION TO ADD STAR RATING TO DB
     var ratingForm = document.querySelector('#ratingForm');
     ratingForm.addEventListener('submit', function(e){
         e.preventDefault();
         var rates = document.querySelectorAll('.rating__input');
-        console.log(rates[]);
-        var rate_value;
-        for(var i = 1; i < rates.length; i++){
+        for(var i=1; i<rates.length; i++){
             if(rates[i].checked){
-                rate_value = rates[i].value;
-                console.log(rate_value);
-                let xhr = new XMLHttpRequest();
-                let params = new FormData(rates);
-               
-                xhr.open("POST", "index.php");
+                var checked = rates[i];
+                var rateValue = rates[i].value;
+                var xhr = new XMLHttpRequest();
+                var params = new FormData(ratingForm);
+                xhr.open("POST", "index.php?action=addStars");
+                xhr.send(params);
             }
-            xhr.send(params);
-          
         } 
+        var ratingSection = document.querySelector('#ratingSection');
+        var rateTheEvent = document.querySelector('#ratingSection>p');
+        rateTheEvent.remove();
+        var rated = document.createElement('p');
+        rated.textContent = "thank you for rating";
+        rated.style.color = "#72ddf7";
+        ratingSection.replaceChild(rated, ratingForm);
+
     });
-
-    // var star2 = document.querySelector('.star2');
-    // star2.addEventListener('click', function(){
-    //     starValue = 2;
-    // });
-
-    // var star3 = document.querySelector('.star3');
-    // star3.addEventListener('click', function(){
-    //     starValue = 3;
-    // });
-
-    // var star4 = document.querySelector('.star4');
-    // star4.addEventListener('click', function(){
-    //     starValue = 4;
-    // });
-
-    // var star5 = document.querySelector('.star5');
-    // star5.addEventListener('click', function(){
-    //     starValue = 5;
-    // });
 
 // ************* MAP FUNCTIONS ************
     var itin = <?= $event['itinerary'] ?>
