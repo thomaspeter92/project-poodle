@@ -61,6 +61,7 @@ function deleteEventComment($commentId) {
 function loadComments($params) {
     $commentManager = new EventManager();
     $comments = $commentManager->loadComments($params);
+    $commentsCount = $commentManager->countComments($params['eventId']);
     require("./view/eventCommentsView.php");
 }
 

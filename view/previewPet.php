@@ -174,8 +174,9 @@ ob_start();
         let petType = document.querySelector('#type');
         let petBreed = document.querySelector('#breed');
         let petAge = document.querySelector('#age');
-        let genderButtons = document.querySelectorAll('input[name="gender"]')
-        let genderLabel = document.querySelector('#genderLabel')
+        let genderButtons = document.querySelectorAll('input[name="gender"]');
+        let genderLabel = document.querySelector('#genderLabel');
+        let description = document.querySelector('#descriptionInput');
         let selectedValue;
             for (button of genderButtons) {
                 if (button.checked) {
@@ -184,7 +185,7 @@ ob_start();
                 }
             }
         
-        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0 || selectedValue == null) {
+        if (petName.value.length < 2 || petType.value.length < 2 || petBreed.value.length < 2 || parseInt(petAge.value) < 0 || selectedValue == null || description.value.length > 150) {
             petName.value.length < 2 ? petName.style.borderColor = 'red' : petName.style.borderColor = 'lightgrey'
             petType.value.length < 2 ? petType.style.borderColor = 'red' : petType.style.borderColor = 'lightgrey' ;
             petBreed.value.length < 2 ? petBreed.style.borderColor = 'red' : petBreed.style.borderColor = 'lightgrey' ;
@@ -229,7 +230,7 @@ ob_start();
 
                 let petView = new Modal(xhr.responseText);
                 petView.generate(modalPetObj, allowCancel=false);
-                new FormCheck().formCheck(3);// Marie ugly way of calling
+                new FormCheck().formCheck(3);
                 let photoInput = document.querySelector('#file');
                 let petPhoto = document.querySelector('#imagePreview')
                 photoInput.addEventListener("change",  function() {
@@ -278,6 +279,8 @@ ob_start();
                 if(xhr.status == 200){
                     let modalPetObj = {
                         EDIT : function () {
+                            let modalDiv =document.querySelector('.modalMainDiv');
+                            document.body.removeChild(modalDiv);
                             addEditFormDisplay(petId);
                         },
                         DELETE : function() {

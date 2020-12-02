@@ -78,6 +78,7 @@ function petAddEdit($params) {
         "photo" => isset($fileNameNew) ? $fileNameNew : '' ,
     );
     $success = $addEditManager->addEditPet($params, $photoData);
+
     
     echo !empty($success) ? 'success' : 'error';
 }
@@ -131,7 +132,6 @@ function showMap(){
 }
 
 function showMapDetail(){
-    
     require("./view/mapViewDetail.php");
 }
 
@@ -139,6 +139,12 @@ function postNotification($params) {
     $commentNotification = new NotificationManager();
     $notification = array("eventId"=>$params['eventId'], "author"=>$params['authorName'], "eventName"=>$params['eventName'], "hostId"=>$params['hostId']);
     $commentNotification->commentPostNotification($notification);
-    
 }
 
+
+function stars(){
+    require('./view/starsView.php');
+}
+function addStars($starValue, $eventId){
+    $starManager = new StarManager($starValue, $eventId);
+}

@@ -66,9 +66,7 @@
 <div id="mapContainer">
     <div id="map"></div>
     <div id="distanceDiv"></div>
-    <div id="locationList"></div>
-    <br><br><br>
+    <!-- <div id="locationList"></div>
     <div id="vendorList">
-        
-    </div>
+    </div> -->
 </div>

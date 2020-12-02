@@ -223,8 +223,8 @@ try {
             isset($_REQUEST['eventId']) ? showEventDetail($_REQUEST) : landing();
             break;
         case "eventCommentPost" :
-            eventCommentPost($_REQUEST);
             postNotification($_REQUEST);
+            eventCommentPost($_REQUEST);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);
@@ -290,6 +290,9 @@ try {
         case "pleaseLogIn":
             pleaseLogIn();
             break;
+        case "stars":
+            stars($starValue, $_REQUEST['eventId']);
+            break; 
         default:
             landing();
             break;

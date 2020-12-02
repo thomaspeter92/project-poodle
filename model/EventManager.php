@@ -137,7 +137,7 @@ require_once("Manager.php");
         
         public function getEventDetail($eventId) {
             $db = $this->dbconnect();
-            $req = $db->prepare("SELECT e.id eventId, e.name name, e.location location, e.itinerary itinerary, e.description description, e.imageName picture, e.hostId hostId, e.guestLimit guestLimit, m.name hostName, m.profileImage image, DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
+            $req = $db->prepare("SELECT e.id eventId, e.name name, e.location location, e.itinerary itinerary, e.description description, e.imageName picture, e.hostId hostId, e.guestLimit guestLimit, e.expiryDate expiry, m.name hostName, m.profileImage image, DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate FROM event e INNER JOIN member m ON e.hostId = m.id  WHERE e.id = :id");
             $req->bindParam(':id',$eventId,PDO::PARAM_INT);
             $req->execute();
             $event =$req->fetch(PDO::FETCH_ASSOC);
@@ -147,11 +147,14 @@ require_once("Manager.php");
 
         public function loadGuests($params) {
             $eventId = $params['eventId'];
-            $guestLimit = isset($params['limit']) ? $params['limit'] : 5;
             $db = $this->dbConnect();
-            $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId LIMIT 0, :guestLimit");
+            if (isset($params['loadAll'])) {
+                $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId");
+            } else {
+                $req = $db->prepare("SELECT g.guestId guestId, m.name guestName, m.profileImage image FROM eventAttend g INNER JOIN member m ON g.guestId = m.id WHERE g.eventId = :eventId LIMIT 0,6");
+            }
             $req->bindParam(':eventId',$eventId, PDO::PARAM_INT);
-            $req->bindParam(':guestLimit', $guestLimit, PDO::PARAM_INT);
+            // $req->bindParam(':guestLimit', $guestLimit, PDO::PARAM_INT);
             $req->execute();
             $guestList = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();

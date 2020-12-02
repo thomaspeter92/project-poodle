@@ -65,15 +65,21 @@ class NotificationManager extends Manager{
         $author = $params['author'];
         $eventName = $params['eventName'];
 
-        $href = "<a href='https://localhost/index.php?action=showEventDetail&eventId={$eventId}>";
-        $message = "{$author} commented in {$eventName}";
+        $href = "index.php?action=showEventDetail&eventId={$eventId}";
+
+        $message = "#".$params['author']."| commented in #".$params['eventName']."|";
+        // $message = "{$author} || commented in {$eventName}";
         $userID = $params['hostId'];
 
         $db = $this->dbConnect();
-        $req = $db->prepare("INSERT INTO notification (userID, message, href) VALUES (:userID, :message, :href)");
+        $req = $db->prepare("INSERT INTO notification (userID, message, href, viewed, eventDate) VALUES (:userID, :message, :href, :viewed, :eventDate)");
         $req->bindParam(':userID',$userID,PDO::PARAM_INT);
         $req->bindParam(':message',$message,PDO::PARAM_STR);
         $req->bindParam(':href',$href,PDO::PARAM_STR);
+        $req->bindValue(":viewed", NULL , PDO::PARAM_STR);
+        $req->bindValue(":eventDate", NULL, PDO::PARAM_STR);
+
+
         $req->execute();
         $req->closeCursor();
     }
