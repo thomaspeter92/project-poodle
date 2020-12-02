@@ -1,7 +1,7 @@
 <?php
 //TODO: Default image URL
-$DEFAULT_IMAGE_URL = "./private/defaultProfile.png";
-$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
+define("DEFAULT_IMAGE_URL", "./private/defaultProfile.png");
+$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAULT_IMAGE_URL;
 
 // $notificationManager = new NotificationManager();
 

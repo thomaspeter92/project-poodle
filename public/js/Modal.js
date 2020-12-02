@@ -45,7 +45,7 @@ class Modal{
         for (let addedButton in this.buttonMethods){
                 let modalButton = document.createElement("button");
                 modalButton.className="modalButton";
-                modalButton.textContent=addedButton;
+                modalButton.textContent = capitalize(addedButton);
                 modalButton.addEventListener("click", this.buttonMethods[addedButton]);
                 modalDivButtons.appendChild(modalButton);
         }
@@ -58,9 +58,10 @@ class Modal{
        
        
 
-        modalSubDiv.appendChild(modalButtonClose);
+        
         modalSubDiv.appendChild(modalDivContent);
         modalSubDiv.appendChild(modalDivButtons);
+        modalSubDiv.appendChild(modalButtonClose);
 
         if(allowCancel) {
             let buttonCancel = document.createElement("button");

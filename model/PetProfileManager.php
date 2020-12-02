@@ -6,11 +6,12 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, type, breed, age, gender, weight, color, friendliness, activityLevel, photo, description, ownerId FROM petProfile WHERE id = ?");
+            $req = $db->prepare("SELECT name, type, breed, age, gender, weight, color, friendliness, activityLevel, photo, description, ownerId FROM petprofile WHERE id = ?");
             //bindparam
             $req -> execute(array($petId));
             $profiles = $req -> fetch(PDO::FETCH_ASSOC);
             $req -> closeCursor();
+        
             if($_SESSION["id"]==$profiles["ownerId"]){
                 return $profiles;
             } else{
@@ -23,7 +24,7 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, breed, age, photo, color, id FROM petProfile WHERE ownerId = ?");
+            $req = $db->prepare("SELECT name, breed, age, gender, photo, color, id FROM petProfile WHERE ownerId = ?");
             //bindparam
             $req -> execute(array($ownerId));
             $profile = $req -> fetchAll(PDO::FETCH_ASSOC);

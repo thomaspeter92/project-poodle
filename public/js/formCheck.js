@@ -1,6 +1,6 @@
 class FormCheck {
 
-formCheck = (valueLimit) => {
+formCheck(valueLimit) {
     var password = document.querySelector(`.password`); 
     var confirmPassword = document.querySelector(`.confirmPassword`);
     var email = document.querySelector(`.email`);

@@ -229,8 +229,8 @@ div .rating-group {
             </p>
             <p>
                 <label for="gender" id="genderLabel">*Gender:</label><br>
-                <input type="radio" id="male" name="gender" value="male" <?= $petProfile['gender'] == "male" ? 'checked' : ''; ?> >Male
-                <input type="radio" id="female" name="gender" value="female" <?= $petProfile['gender'] == "female" ? 'checked' : ''; ?>>Female
+                <input type="radio" id="male" name="gender" value="male" <?=isset($petProfile['gender']) ? ($petProfile['gender'] == "male" ? 'checked' : '') : ''; ?> >Male
+                <input type="radio" id="female" name="gender" value="female" <?= isset($petProfile['gender']) ? ($petProfile['gender'] == "female" ? 'checked' : '') : ''; ?>>Female
             </p>
             <textarea name="description" id="descriptionInput" cols="30" rows="3" placeholder="Please provide a short description of your pet... (max 150 char)" maxlength="150"><?=!empty($petProfile['description']) ? $petProfile['description'] : '' ?></textarea>
         </div>
@@ -290,8 +290,7 @@ div .rating-group {
                 <input type="hidden" name="action" id="action" value="addEditPet">
             </p>
         </div>
-    </div>    
-   
+    </div>
 </form>
 <p>* indicates a required field.</p>
 <p id="fileError" class="errorMsg">* error uploading file, check size and file type.</p>

@@ -1,8 +1,4 @@
-<?php
-
-?>
 <style>
-
     img {
         margin-left: auto;
         margin-right: auto;    
@@ -117,8 +113,6 @@
         display:none;
     }
 
-    
-
     .show {
         display: block;
     }
@@ -144,18 +138,14 @@
 
     /* Change the background color of the dropdown button when the dropdown content is shown */
     .dropdown:hover .dropbtn {background-color: #3e8e41;}
-    
-
-
 </style>
-
-<br>
+<?php 
+$profileImageURL = isset($memberDataFromDB['profileImage']) ? 
+                    "./private/profile/".$memberDataFromDB['profileImage'] :
+                    "./private/defaultProfile.png"; 
+?>
 <div class="accountForm">
-    <img class="profilePicManage" src="<?php if($memberDataFromDB['profileImage'] == NULL) { 
-                echo "./private/defaultProfile.png"; 
-            } else { 
-                echo "./private/profile/".$memberDataFromDB['profileImage']; 
-            };?>" alt="Profile Pic">
+    <img class="profilePicManage" src="<?= $profileImageURL; ?>" alt="Profile Pic">
     <img class="imagePreview" src="" alt="Image Preview">
     <div class="dropdown">
         <button class="imageDropbtn">Update Image</button>
@@ -186,14 +176,14 @@
     </div>
     <div class="changePW" hidden>
         <input type="hidden" name="action" value="changePW">
-        Current Password: <input type="text" name="currentPW" id="currentPW" class="required">
+        Current Password: <input type="password" name="currentPW" id="currentPW" class="required">
         <br>
         <br>
-        New Password: <input type="text" name="newPW" id="newPW" class="required password"> 
+        New Password: <input type="password" name="newPW" id="newPW" class="required password"> 
         <br>
         <div class="needDiffPW fail" hidden>New Password Cannot be same as old Password</div>
         <br>
-        Confirm Password: <input type="text" name="confirmPW" id="confirmPW" class="confirmPassword required">
+        Confirm Password: <input type="password" name="confirmPW" id="confirmPW" class="confirmPassword required">
         <br>
         <br>
         <div class="failedPW fail" hidden>Incorrect Password</div>

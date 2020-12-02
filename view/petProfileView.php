@@ -229,10 +229,8 @@ div .rating-group {
 
 </style>
 
-<?php if($petProfile != false){ ?>
-
+<?php if($petProfile != false): ?>
 <!-- CREATE FUNCTION TO INCREASE PET AGE EVERY YEAR? -->
-
 <div id="profileBox">
     <div class="innerDiv">
         <img class="petImage" src="./private/pet/<?=!empty($petProfile['photo']) ? $petProfile['photo'] : 'default.png' ?>" alt="pet profile image">
@@ -318,13 +316,8 @@ div .rating-group {
         </div>
     </div>
 </div>
-
-
-
-<?php }else{
+<?php 
+else:
     echo "We are not able to find your pet information";
-}
+endif;
 ?>
-
-
-<script src="https://kit.fontawesome.com/f66e3323fd.js" crossorigin="anonymous"></script>
