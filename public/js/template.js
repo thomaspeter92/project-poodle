@@ -26,9 +26,10 @@ function adjustFooter() {
     const footer = document.querySelector("footer");
     const viewportHeight = tempContainer.offsetHeight;
     const footerBottom = footer.offsetTop + footer.offsetHeight;
-    
+
     if (footerBottom < viewportHeight) {
         body.style.position = "relative";
+        body.style.height = "100vh";
         footer.style.position = "absolute";
         footer.style.bottom = 0;
         footer.style.width = "100%";

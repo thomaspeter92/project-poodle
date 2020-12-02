@@ -1,6 +1,6 @@
 class FormCheck {
 
-formCheck = () => {
+formCheck(valueLimit) {
     var password = document.querySelector(`.password`); 
     var confirmPassword = document.querySelector(`.confirmPassword`);
     var email = document.querySelector(`.email`);
@@ -76,16 +76,23 @@ formCheck = () => {
     //making sure required input fields are not empty
     for(var i=0;i<requiredInputs.length;i++){
         requiredInputs[i].addEventListener(`keyup`, function(){
-            for(var j=0;j<requiredInputs.length;j++){
-                var inputLength = requiredInputs[j].value.length;
-                if(inputLength = 0){
-                    requiredInputs[j].classList.remove(`blue`);
-                    requiredInputs[j].classList.add(`red`);
-                }else{
-                    requiredInputs[j].classList.remove(`red`);
-                    requiredInputs[j].classList.add(`blue`);
-                    }
+            if(this.value.length < valueLimit){
+                this.classList.remove(`blue`);
+                this.classList.add(`red`);
+            }else{
+                this.classList.remove(`red`);
+                this.classList.add(`blue`);
             }
+            // for(var j=0;j<requiredInputs.length;j++){
+            //     let inputLength = requiredInputs[j].value.length;
+            //     if(inputLength = 0){
+            //         requiredInputs[j].classList.remove(`blue`);
+            //         requiredInputs[j].classList.add(`red`);
+            //     }else{
+            //         requiredInputs[j].classList.remove(`red`);
+            //         requiredInputs[j].classList.add(`blue`);
+            //         }
+            // }
         });
         
     }

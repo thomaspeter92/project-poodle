@@ -16,7 +16,7 @@ ob_start();
         </select>
     <?php if (isset($sessionID)): ?>
         <div id="addButton">
-            <button class="button fullText">Add a Event</button>
+            <button class="button fullText">Add event</button>
             <button class="button shortText">+</button>
         </div>
     <?php endif; ?>

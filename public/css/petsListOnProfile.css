@@ -1,0 +1,104 @@
+/* My Pets Header */
+#myPetsHeader {
+    width: 100%;
+    margin: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+#myPetsHeader span {
+    height: 46px;
+    font-size: 1.5em;
+    font-family: "MontserratBold", sans-serif;
+    margin-left: 10px;
+}
+#myPetsHeader #addPetButton {
+    width: 46px;
+    height: 46px;
+    font-size: 2.0em;
+}
+#myPetsHeader #addPetButton:hover {
+    background-color:#ff3864;
+}
+#myPetsHeader #addPetButton:focus {
+    outline: none;
+}
+#myPetsHeader #addPetButton:active {
+    position:relative;
+    top:1px;
+}
+
+/* No Pets */
+.noPets {
+    font-family: "MontserratBold", sans-serif;
+    padding: 40px;
+    padding-top: 20px;
+}
+
+/* Pet Item */
+.petItem{
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 2px 2px 3px 2px lightgrey;
+    border-radius: 15px;
+    padding: 2.0vw;
+    margin-bottom: 1.0vw;
+    cursor: pointer;
+
+    display: flex;
+}
+
+.petInnerDiv:first-of-type {
+    width: 160px;
+    padding-right: 10px;
+}
+.petInnerDiv:last-of-type {
+    width: 65%;
+}
+.petInnerDiv .petImage {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #ff3864;
+}
+.petInnerDiv table .petName {
+    font-size: 1.5em;
+    font-family: "MontserratBold", sans-serif;
+    margin-bottom: 20px;
+}
+.petInnerDiv table .icon {
+    width: 40px;
+}
+.petInnerDiv table i {
+    color: #ff3864;
+}
+.petInnerDiv .icon, .petInnerDiv .text {
+    font-size: 1.3em;
+}
+
+@media (max-width: 1000px) {
+    #myPetsHeader span {
+        font-size: 1.3em;
+    }
+    .petInnerDiv .petImage {
+        width: 100px;
+        height: 100px;
+    }
+    .petInnerDiv table .petName {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .petInnerDiv .icon, .petInnerDiv .text {
+        font-size: 1.0em;
+    }
+}
+
+@media (max-width: 700px) {
+    #myPetsHeader span {
+        font-size: 1.1em;
+    }
+    .petItem{
+        padding: 4.0vw;
+    }
+    
+}

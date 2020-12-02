@@ -5,10 +5,11 @@
 
     //Function to change carousel image on an interval. Playing with opacitiy. 
     function nextImage() {
-        carouselImages[imageCounter].style.opacity = 0;
+        carouselImages[imageCounter] ? carouselImages[imageCounter].style.opacity = 0 : null;
         imageCounter == 2 ? imageCounter = -1 : null;
+        console.log(imageCounter)
         imageCounter += 1;
-        carouselImages[imageCounter].style.opacity = 1;
+        carouselImages[imageCounter] ? carouselImages[imageCounter].style.opacity = 1 : null;
     }
 
     // Same function as above but for mobile view. 
@@ -64,18 +65,22 @@
         arrowBalls[i].addEventListener('click', cardFlip);
     }
 
-    const carouselImages = document.querySelectorAll('.carouselImg');
-    const nextImageDelay = 4000;
-    let imageCounter = 0;
+    var carouselImages = document.querySelectorAll('.carouselImg');
+    var nextImageDelay = 4000;
+    var imageCounter = 0;
+
     if(carouselImages[imageCounter]) {
         carouselImages[imageCounter].style.opacity = 1;
         setInterval(nextImage, nextImageDelay);
     }
-    const mobileCarousel = document.querySelectorAll('.mobileCarousel');
-    let imageCounter2 = 0; 
-    if(mobileCarousel[imageCounter2] ) {
-        mobileCarousel[imageCounter2].style.opacity = 1;
-        setInterval(nextImageMobile, nextImageDelay);
+
+    var mobileCarousel = document.querySelectorAll('.mobileCarousel');
+    var imageCounter2 = 0;
+    if(mobileCarousel) {
+        if(mobileCarousel[imageCounter2] ) {
+            mobileCarousel[imageCounter2].style.opacity = 1;
+            setInterval(nextImageMobile, nextImageDelay);
+        }
     }
 
     // let content3divs = document.querySelectorAll('.content3inner');
@@ -89,9 +94,9 @@
     }
 
     let content5div = document.querySelectorAll('.content5div');
-    // for (let i = 1; i<content5div.length; i++) {
-    //     content5div[i].addEventListener('mouseenter', mouseOverElevate)
-    //     content5div[i].addEventListener('mouseleave', mouseOverElevate) 
-    // }
+    for (let i = 1; i<content5div.length; i++) {
+        content5div[i].addEventListener('mouseenter', mouseOverElevate)
+        content5div[i].addEventListener('mouseleave', mouseOverElevate) 
+    }
 
 }

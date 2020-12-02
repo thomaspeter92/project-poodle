@@ -63,6 +63,44 @@ require_once("Manager.php");
             return $events;
         }
 
+        //used to display user's events on their profile page
+        public function ownersEvents($ownerId){
+            $db = $this->dbconnect();
+            // $req = $db->prepare("SELECT id, name, eventDate, location, imageName, hostId FROM event WHERE hostId = :ownerId");
+            // $req = $db->prepare("SELECT g.name, g.eventDate, g.location, g.imageName, g.hostId FROM event g INNER JOIN member m ON g.hostId = m.id WHERE g.hostId = :id");
+            $query = "SELECT e.id, e.name, e.location, e.imageName, m.name AS hostName, 
+                        DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
+                        FROM event AS e
+                        JOIN member AS m
+                        ON e.hostId = m.id
+                        WHERE e.hostId = :ownerId";
+            $req = $db->prepare($query);
+            $req->bindParam(':ownerId',$ownerId, PDO::PARAM_INT);
+            $req->execute();
+            $usersEvents =$req->fetchAll(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $usersEvents;
+        }
+
+        //used to display user's events on their profile page
+        public function getAttendingEvents($userId){
+            $db = $this->dbconnect();
+            $query = "SELECT e.id, e.name, e.location, e.imageName, m.name AS hostName, 
+                        DATE_FORMAT(e.eventDate, '%a, %b %d, %h:%i %p') AS eventDate
+                        FROM eventAttend AS ea
+                        JOIN event AS e
+                        ON e.id = ea.eventId
+                        JOIN member AS m
+                        ON m.id = ea.guestId
+                        WHERE ea.guestId = :userId AND e.hostId != :userId";
+            $req = $db->prepare($query);
+            $req->bindParam(':userId',$userId, PDO::PARAM_INT);
+            $req->execute();
+            $usersEvents =$req->fetchAll(PDO::FETCH_OBJ);
+            $req->closeCursor();
+            return $usersEvents;
+        }   
+
         public function getMembersCountBy($eventId) {
             $db = $this->dbconnect();
             $query = "SELECT COUNT(*) AS guestCount
@@ -182,15 +220,16 @@ require_once("Manager.php");
             $guestId = $params['guestId'];
             if ($params['action'] == 'attendEvent') {
                 $req = $db->prepare("INSERT INTO eventAttend (eventId, guestId) VALUES (:eventId, :guestId)");
-                $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
             } else if ($params['action'] == 'unattendEvent') {
-                $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId");
+                $req = $db->prepare("DELETE FROM eventAttend WHERE guestId = :guestId AND eventId = :eventId");
             }
+            $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
             $req->bindParam(':guestId',$guestId,PDO::PARAM_INT);
             $success = $req->execute();
             $req->closeCursor();
 
-            echo !empty($success) ? 'success' : 'error';
+            // echo !empty($success) ? 'success' : 'error';
+            echo ($success) ? 'success' : 'error';
 
         }
 
@@ -204,6 +243,16 @@ require_once("Manager.php");
             $req->bindParam(':commentId',$commentId,PDO::PARAM_INT);
             $req->execute();
             $req->closeCursor();
+        }
+
+        public function getProfilePic($userId) {
+            $db = $this-> dbConnect();
+            $req = $db->prepare("SELECT profileImage FROM member WHERE id =  :userId");
+            $req->bindParam(':userId',$userId,PDO::PARAM_INT);
+            $req->execute();
+            $profileImage = $req->fetch(PDO::FETCH_ASSOC);
+            $req -> closeCursor();
+            return $profileImage;
         }
 
 
@@ -246,8 +295,7 @@ require_once("Manager.php");
             // $imageName = "1";
             $imageName = !empty($photoData['eventPicture']) ? htmlspecialchars($photoData['eventPicture']) : $newEvent['eventPicture'];
             $rating = 3;
-    // print_r($photoData);
-    // print_r($newEvent);
+
             $guestLimit = htmlspecialchars($newEvent['eventGuestLimit']);//
             $itinerary  = $newEvent['itinerary'];//
             // $dateCreated = htmlspecialchars($newEvent['dateCreated']); //Only created when the event is created
@@ -275,8 +323,8 @@ require_once("Manager.php");
             $result = $req->execute();
             $req->closeCursor();  
             if($result) {
-                $resp = $update ? htmlspecialchars($newEvent['eventId']) : $db->lastInsertId();
-                echo $resp;
+                $eventId = $update ? htmlspecialchars($newEvent['eventId']) : $db->lastInsertId();
+                $resp = array('eventId'=>$eventId, 'update'=>$update);
                 return $resp;
             }else{
                 return NULL;}
@@ -292,16 +340,4 @@ require_once("Manager.php");
             $req->execute();
             $req->closeCursor();
         }
-
-        //used to display user's events on their profile page
-        public function ownersEvents($ownerId){
-            $db = $this->dbConnect();
-            $req = $db->prepare("SELECT id, name, eventDate, location, imageName, hostId FROM event WHERE hostId = :id");
-            // $req = $db->prepare("SELECT g.name, g.eventDate, g.location, g.imageName, g.hostId FROM event g INNER JOIN member m ON g.hostId = m.id WHERE g.hostId = :id");
-            $req->bindParam(':id',$ownerId, PDO::PARAM_INT);
-            $req->execute();
-            $usersEvents =$req->fetchAll(PDO::FETCH_ASSOC);
-            $req->closeCursor();
-            return $usersEvents;
-        }   
     }

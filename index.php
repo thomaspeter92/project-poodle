@@ -33,6 +33,7 @@ try {
             if(isset($_SESSION['id'])){
                 // THIS ALSO SHOWS OWNER PROFILE PIC
                 showPetPreview($_SESSION['id']);    
+
             }else{
                 header("Location: index.php?action=login&error=login");
             }
@@ -50,12 +51,7 @@ try {
         case "registration":
             registration();
             break;
-        case "emailCheck":
-            if(!empty($_REQUEST['email'])){
-                emailCheck($_REQUEST['email']);
-            }
-            break;
-        case "registrationInput":
+        case "signUp":
             if (!empty($_REQUEST['username']) && !empty($_REQUEST['password']) && !empty($_REQUEST['confirmpass']) && !empty($_REQUEST['email'])) {
                 $memberData = array(
                     "name" => $_REQUEST['username'],
@@ -74,6 +70,7 @@ try {
             break;
         case "addEditInput":
             displayAddEditInput(!empty($_REQUEST['petId']) ? $_REQUEST['petId'] : '');
+  
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
@@ -97,7 +94,7 @@ try {
         case "legalPage":
             legalPage();
             break;
-        case "kakaoLogin":
+        case "kakaoSignIn":
             $kakaoSignUp = isset($_REQUEST["kakaoSignUp"]) ? $_REQUEST["kakaoSignUp"] : NULL;
             $kakaoNickname = isset($_REQUEST["kakaoNickname"]) ? $_REQUEST["kakaoNickname"] : NULL;
             $kakaoEmail = isset($_REQUEST["kakaoEmail"]) ? $_REQUEST["kakaoEmail"] : NULL;
@@ -166,6 +163,14 @@ try {
             $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
             showSearchedEventsList($search, $option);
             break;
+        case "myEvents":
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showMyEventsList($sessionID);
+            break;
+        case "attendingEvents":
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showMyAttendingEventsList($sessionID);
+            break;
         case "accountView":
             if(isset($_SESSION['id'])){
                 accountView($_SESSION['id']);
@@ -219,6 +224,7 @@ try {
             break;
         case "eventCommentPost" :
             eventCommentPost($_REQUEST);
+            postNotification($_REQUEST);
             break;
         case "deleteEventComment" :
             deleteEventComment($_REQUEST['commentId']);
@@ -241,11 +247,9 @@ try {
             break;
 
         case "updateEventDetails" :
-            // updateEventDetails($eventId = isset($_REQUEST['eventId']) ? $_REQUEST['eventId'] : "" );
 
-            if (!empty($_REQUEST['eventName']) && !empty($_REQUEST['eventGuestLimit']) && !empty($_REQUEST['eventDate']) && !empty($_REQUEST['eventTime']) && !empty($_REQUEST['eventExpiryDate']) && !empty($_REQUEST['eventExpiryTime']) && !empty($_REQUEST['eventDescription'])) {
                 $eventData = array(
-                "eventName" => $_REQUEST['eventName'],
+                "eventName" => $_REQUEST['eventName2'],
                 "eventGuestLimit" => $_REQUEST['eventGuestLimit'],
                 "eventDate" => $_REQUEST['eventDate'],
                 "eventTime" => $_REQUEST['eventTime'],
@@ -258,7 +262,7 @@ try {
                 "eventPicture" => $_REQUEST['eventPicture']);
 
                 addEditEventDetails($eventData);
-            }
+                
             break;
         case "deleteEvent" :
             $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
@@ -273,6 +277,18 @@ try {
             break;
         case "requestMapDetail":
             showMapDetail();
+            break;
+        case "checkPoints":
+            checkPoints($_SESSION['id']);
+            break;
+        case "claimed":
+            claimed();
+            break;
+        case "coupon":
+            coupon();
+            break;
+        case "pleaseLogIn":
+            pleaseLogIn();
             break;
         default:
             landing();

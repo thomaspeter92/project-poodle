@@ -1,7 +1,7 @@
 <?php
 //TODO: Default image URL
-$DEFAULT_IMAGE_URL = "./private/defaultProfile.png";
-$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAULT_IMAGE_URL;
+define("DEFAULT_IMAGE_URL", "./private/defaultProfile.png");
+$sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAULT_IMAGE_URL;
 
 
 // this code pulls notifications from database
@@ -57,11 +57,6 @@ function time_elapsed_string($datetime, $full = false) {
     <!-- FONT LINKS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <!-- Franco -->
-    <meta name="google-signin-client_id" content="659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com">
-    <!-- <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer></script>  -->
-    <script src="https://apis.google.com/js/platform.js?onload=initGoogle" async defer ></script> 
-    <script src='https://developers.kakao.com/sdk/js/kakao.min.js?onload=initKakao'></script>
     <?= isset($style) ? $style : ""; ?>
     
     <!-- COUNTDOWN SCRIPT -->
@@ -262,6 +257,7 @@ function time_elapsed_string($datetime, $full = false) {
                         <form id="signOutForm" method="POST">
                         </form>
                         <p><a href="#"  onclick="signAllOut()">Sign Out</a></p>
+                        <p><a href="./ArTest/captionAR.php">AR</a></p>
                     <?php endif; ?>
                         <p><a href="index.php?action=events">Events</a></p>
                         <p><a href="index.php?action=aboutUs">About Us</a></p>
@@ -339,9 +335,9 @@ function time_elapsed_string($datetime, $full = false) {
     <!-- The following script controls menu animation on Click -->
     <script>
     {
-        let showMenu = false;   // Set the initial state of the menu 
-        const menuBtn = document.querySelector(".menu-btn"); 
-        const hoverWrapper = document.querySelector(".hoverWrapper"); 
+        var showMenu = false;   // Set the initial state of the menu 
+        var menuBtn = document.querySelector(".menu-btn"); 
+        var hoverWrapper = document.querySelector(".hoverWrapper"); 
         
         menuBtn.addEventListener("click", toggleMenu); 
     
@@ -372,11 +368,10 @@ function time_elapsed_string($datetime, $full = false) {
     </script>
 
     <script src="./public/js/notifications.js"></script>
+    <script src="./public/js/common.js"></script>
     <script src="./public/js/template.js"></script>
     <script src="./public/js/registrationCheck.js"></script>
     <script src="./public/js/formCheck.js"></script>
-    <script src="./public/js/googlelogin.js"></script>
-    <script src="./public/js/kakaologin.js"></script>
     <script src="./public/js/Modal.js"></script> 
     <script src="./public/js/ModalLogin.js"></script> 
     <script src="./public/js/signInUpModal.js"></script>

@@ -23,27 +23,76 @@ const createAddEditEventModal = (id) =>{
         
             var eventPreviousBut =  document.querySelector("#eventPreviousButton");
             if (eventPreviousBut) {
-                eventPreviousBut.addEventListener("click", movePreviousStep);  
+                eventPreviousBut.addEventListener("click", function(){movePreviousStep(id)});  
             }
             var eventNextBut =  document.querySelector("#eventNextButton");
             if (eventNextBut) {
-                eventNextBut.addEventListener("click", moveNextStep);  
+                eventNextBut.addEventListener("click", function(){moveNextStep(id)});  
             }
             var eventForm =  document.querySelector("#formAddEditEvent");
 
             if (eventForm) {
-                eventForm.addEventListener("submit", function(){
+                eventForm.addEventListener("submit", function(e){
+
+                    //if user did not choose any points on map, use previously chosen points on map
                     var eventItineraryEle  = document.getElementById("itinerary");
-                    eventItineraryEle.value = JSON.stringify(polyLineArray);
+                    if(polyLineArray.length > 0){
+                        eventItineraryEle.value = JSON.stringify(polyLineArray);
+                    }
                     
+                    //check that all the inputs have been entered
+                    var missingField='';
+                    var eventNameEle = document.getElementById("eventName2");
+                    var eventGuestLimitEle = document.getElementById("eventGuestLimit");
+                    var eventDateEle = document.getElementById("eventDate");
+                    var eventTimeEle = document.getElementById("eventTime");
+                    var eventExpiryDateEle = document.getElementById("eventExpiryDate");
+                    var eventExpiryTimeEle = document.getElementById("eventExpiryTime");
+                    var eventDescriptionEle = document.getElementById("eventDescription");
+
+                    if(eventNameEle.value.length == 0){
+                        missingField += " Name of event,";
+
+                    }
+                    if(eventGuestLimitEle.value.length == 0){
+                        missingField += " Guest limit,";
+                    }
+                    if (eventDateEle.value.length == 0){
+                        missingField += " Event date,";
+
+                    }
+                    if (eventTimeEle.value.length == 0){
+                        missingField += " Event time,";
+                    }
+                    if (eventExpiryDateEle.value.length == 0){
+                        missingField += " Last date,";
+                    }
+                    if (eventExpiryTimeEle.value.length == 0){
+                        missingField += " Last time,";
+                    }
+                    if (eventDescriptionEle.value.length == 0){
+                        missingField += " Event description,";
+                    }
+
+                    if (missingField.length > 0){
+                        var errorMsgEle = document.getElementById("errorMsg");
+                        var msg = "The following has missing values:" + missingField;
+                        errorMsgEle.innerHTML = msg;
+                        errorMsgEle.style.color = 'red';
+
+                        //Prevent the submitting of the form
+                        e.preventDefault();
+                    }
                 });  
             }
 
 
             startMap(polyLineArray);
-            showEventStep("eventStep1");
+            displayPicture();
+            showEventStep("eventStep1", id);
             recommendExpiryDateTime();
 
+            
         }
     }
      xhr.send(null);
@@ -56,18 +105,18 @@ if (addEventBut) {
 }
 
 
-function moveNextStep(){
+function moveNextStep(id){
     step +=1;
     let currentStep="eventStep"+step;
-    showEventStep(currentStep);
+    showEventStep(currentStep,id);
 }
 
-function movePreviousStep(){
+function movePreviousStep(id){
     step -=1;
     let currentStep="eventStep"+step;
-    showEventStep(currentStep);
+    showEventStep(currentStep,id);
 }
-function showEventStep(currentStep){
+function showEventStep(currentStep, id=null){
     switch (currentStep){
         case "eventStep1":
             document.getElementById("eventStep1").style.display = "block";
@@ -76,13 +125,22 @@ function showEventStep(currentStep){
             document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "none";
             document.getElementById("eventNextButton").style.display = "block";
-            document.getElementById("eventSubmitButton").style.display = "none";
+            // document.getElementById("eventSubmitButton").style.display = "none";
             document.getElementById("lblStepIndicator").innerHTML="Step 1 of 4";
             document.getElementById("stepIndicator").value = "25";
+            // document.getElementById("eventSpaceMiddle").style.display = "block";
             //Force step to be 1 on first page
             if(step!==1) step=1;
 
-        
+            if(id){
+                document.getElementById("eventSubmitButton").style.display = "block";
+                document.getElementById("eventSpaceRight").style.width = "58%";
+                document.getElementById("eventSpaceRight").style.justifyContent = "space-between";
+            }else{
+                document.getElementById("eventSubmitButton").style.display = "none";
+                document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+            }
+      
             break;
             
         case "eventStep2":
@@ -92,9 +150,19 @@ function showEventStep(currentStep){
             document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "block";
             document.getElementById("eventNextButton").style.display = "block";
-            document.getElementById("eventSubmitButton").style.display = "none";
+            // document.getElementById("eventSubmitButton").style.display = "none";
             document.getElementById("lblStepIndicator").innerHTML="Step 2 of 4";
             document.getElementById("stepIndicator").value = "50";
+
+            if(id){
+                document.getElementById("eventSubmitButton").style.display = "block";
+                document.getElementById("eventSpaceRight").style.width = "58%";
+                document.getElementById("eventSpaceRight").style.justifyContent = "space-between";
+
+            }else{
+                document.getElementById("eventSubmitButton").style.display = "none";
+                document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+            }
             break;
  
         case "eventStep3":
@@ -104,9 +172,17 @@ function showEventStep(currentStep){
             document.getElementById("eventStep4").style.display = "none";
             document.getElementById("eventPreviousButton").style.display = "block";
             document.getElementById("eventNextButton").style.display = "block";
-            document.getElementById("eventSubmitButton").style.display = "none";
+            
             document.getElementById("lblStepIndicator").innerHTML="Step 3 of 4";
             document.getElementById("stepIndicator").value = "75";
+            if(id){
+                document.getElementById("eventSubmitButton").style.display = "block";
+                document.getElementById("eventSpaceRight").style.width = "58%";
+                document.getElementById("eventSpaceRight").style.justifyContent = "space-between";
+            }else{
+                document.getElementById("eventSubmitButton").style.display = "none";
+                document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+            }
             break;
         case "eventStep4":
             document.getElementById("eventStep1").style.display = "none";
@@ -118,6 +194,8 @@ function showEventStep(currentStep){
             document.getElementById("eventSubmitButton").style.display = "block";
             document.getElementById("lblStepIndicator").innerHTML="Step 4 of 4";
             document.getElementById("stepIndicator").value = "100";
+            document.getElementById("eventSpaceRight").style.justifyContent = "flex-end";
+
             break;
         default:
             break;
@@ -155,12 +233,11 @@ function addRecommendedDateTime(){
         let dd=String(recommendedDateTime.getDate()).padStart(2,'0');
         let mm = String(recommendedDateTime.getMonth()+1).padStart(2,'0');
         let yyyy = recommendedDateTime.getFullYear();
-        let hh = String(recommendedDateTime.getHours());
+        let hh = String(recommendedDateTime.getHours()).padStart(2,'0');
         let min = String(recommendedDateTime.getMinutes()).padStart(2,'0');;
         
         let recommendedDate = yyyy + '-' + mm +'-'+ dd;
         let recommendedTime = hh+":"+min;
-
          expiryDateEle.value = recommendedDate;
          expiryTimeEle.value = recommendedTime;
     }
@@ -171,119 +248,6 @@ function addMinutes(date, minutes){
 }
 
 
-
-
-// Functions for the mapping
-// var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-// var mapOption = { 
-//         center: new kakao.maps.LatLng(37.530767, 126.971937), // 지도의 중심좌표
-//         level: 3 // 지도의 확대 레벨
-//     };
-
-// var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-// var bounds = new kakao.maps.LatLngBounds();
-// functions parts
-/**
- * callback function for geoCoder
- */
-var getCoords = function (result, status) {
-        // 정상적으로 검색이 완료됐으면 
-        if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            // points.push(coords);
-    // createMarkersPoints(points);
-    var marker = new kakao.maps.Marker({
-            position: coords,
-            map: map,
-            clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-        });
-    var infowindow = new kakao.maps.InfoWindow({
-                        content :"<"+(1)+">"+ locationData[1][2],
-                    });
-    infowindow.open(map, marker);  
-    bounds.extend(coords);
-    map.setBounds(bounds);
-            // points.push(coords);
-        } else{
-            // alert("We could not find the address you provided");
-        }
-};
-
-    // traitement after addressSearch exec
-//  var points= Array();
-
-    function useMyCoords(coords) {
-        // points.push(coords);
-        // createMarkersPoints(points);
-        var marker = new kakao.maps.Marker({
-                position: coords,
-                map: map,
-                clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-            });
-        var infowindow = new kakao.maps.InfoWindow({
-                            content :"<"+(i+1)+">"+ locationData[i][2],
-                        });
-        infowindow.open(map, marker);  
-        bounds.extend(coords);
-        map.setBounds(bounds);
-        
-    }
-
-
-function getLatLonFromAddress(location) {
-    var geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(location[1], function (result, status) {
-        // 정상적으로 검색이 완료됐으면 
-        if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            var marker = new kakao.maps.Marker({
-                            position: coords,
-                            map: map,
-                            clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-                        });
-            // var location4 = location[4];
-            var infowindow = new kakao.maps.InfoWindow({
-                                content :"<"+counter+">"+location[2],
-                            });
-            // location4.addEventListener('click', function(){
-            //     polyLineArray.push(coords);
-            // })
-            infowindow.open(map, marker);  
-            // polyLineArray.push(coords);
-            bounds.extend(coords);
-            map.setBounds(bounds);
-            let titles = document.getElementsByClassName("infoWindow");
-            titles[titles.length-1].addEventListener('click', function(e){
-                let modalMapObj = { }
-                let infoView = new Modal(location[3]);
-                infoView.generate(modalMapObj, allowCancel=false);
-                var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
-                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
-                roadviewClient.getNearestPanoId(coords, 50, function(panoId) {
-                    roadview.setPanoId(panoId, coords); //panoId와 중심좌표를 통해 로드뷰 실행
-                });
-                var addButton = document.getElementsByClassName("addButton");
-                addButton[0].addEventListener('click', function(){
-                    polyLineArray.push(coords);
-                    var destination = document.createElement("div");
-                    destination.textContent = location[0];
-                    var dash = document.createElement("div");
-                    dash.textContent = "************";
-                    locationList.appendChild(destination);
-                    locationList.appendChild(dash);
-                    console.log(polyLineArray);
-                })
-            });
-              
-            counter++;
-
-            
-        } else{
-            // alert("We could not find the address you provided");
-        }
-    });
-}
 
 var startEndHandler = function startEnd(mouseEvent){
     // 클릭한 위도, 경도 정보를 가져옵니다   
@@ -299,8 +263,8 @@ var startEndHandler = function startEnd(mouseEvent){
         content : markerInfo,
     });
     infowindow.open(map, markerClick);
-    bounds.extend(latlng);
-    map.setBounds(bounds);
+    bounds2.extend(latlng);
+    map.setBounds(bounds2);
     polyLineArray.push(latlng);
     var destination = document.createElement("div");
     var dash = document.createElement("div");
@@ -319,8 +283,8 @@ var startEndHandler = function startEnd(mouseEvent){
 
 function startMap(polyLineArray){
     var stopByCounter = 1;
-    var locationList = document.getElementById("locationList");
-    var bounds = new kakao.maps.LatLngBounds();
+    var locationList = document.getElementById("locationList2");
+    var bounds2 = new kakao.maps.LatLngBounds();
     // var polyLineArray = Array();
     var mapContainer = document.getElementById('map2'); // 지도를 표시할 div 
 
@@ -351,8 +315,8 @@ function startMap(polyLineArray){
             content : markerInfo,
         });
         infowindow.open(map, markerClick);
-        bounds.extend(latlng);
-        map.setBounds(bounds);
+        bounds2.extend(latlng);
+        map.setBounds(bounds2);
         polyLineArray.push(latlng);
         var destination = document.createElement("div");
         var dash = document.createElement("div");
@@ -386,7 +350,7 @@ function startMap(polyLineArray){
     let counter = 1;
     for(let i=0; i<locationData.length; i++){
             let myLocation = locationData[i];
-            let containerVendor = document.getElementById("vendorList");
+            let containerVendor = document.getElementById("vendorList2");
             var vendor = document.createElement("div");
             vendor.className="vendorElement";
             vendor.textContent = "* "+locationData[i][0];
@@ -414,8 +378,8 @@ function startMap(polyLineArray){
                         // })
                         infowindow.open(map, marker);  
                         // polyLineArray.push(coords);
-                        bounds.extend(coords);
-                        map.setBounds(bounds);
+                        bounds2.extend(coords);
+                        map.setBounds(bounds2);
                         let titles = document.getElementsByClassName("infoWindow");
                         titles[titles.length-1].addEventListener('click', function(e){
                             let modalMapObj = { }
@@ -457,8 +421,8 @@ function startMap(polyLineArray){
     }
 
 
-    var distanceButton = document.getElementById("calculateDistance");
-    var distanceDiv = document.getElementById("distanceDiv");
+    var distanceButton = document.getElementById("calculateDistance2");
+    var distanceDiv = document.getElementById("distanceDiv2");
     var distanceLength = document.createElement("span");
     
     distanceButton.addEventListener('click', function(){
@@ -478,5 +442,19 @@ function startMap(polyLineArray){
     
         })
 
+}
 
+function displayPicture(){
+
+    var picInput = document.getElementById('eventPicture');
+    var image = document.getElementById('eventImage');
+    if(picInput.value){
+        image.src = "./private/event/"+picInput.value;
+    }
+
+    document.getElementById('file').onchange = function (e) {
+         
+         image.src = URL.createObjectURL(e.target.files[0]);
+
+    };
 }
