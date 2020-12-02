@@ -70,7 +70,7 @@ p {
     background-image: none;
     background-color: white;
     width: 50%;
-    height: auto;
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -136,6 +136,58 @@ p {
     display: block;
 }
 
+/* FOR THE STAR RATING INPUTS!!!! */
+/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+div .rating-group {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+/* make hover effect work properly in IE */
+.rating__icon {
+  pointer-events: none;
+}
+
+/* hide radio inputs */
+.rating__input {
+ position: absolute !important;
+ left: -9999px !important;
+}
+
+/* hide 'none' input from screenreaders */
+.rating__input--none {
+  display: none
+}
+
+/* set icon padding and size */
+.rating__label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 1.5rem;
+}
+
+/* set default star color */
+.rating__icon--star {
+  color: orange;
+}
+
+/* if any input is checked, make its following siblings grey */
+.rating__input:checked ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+
+/* make all stars orange on rating group hover */
+.rating-group:hover .rating__label .rating__icon--star {
+  color: orange;
+}
+
+/* make hovered input's following siblings grey on hover */
+.rating__input:hover ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
 @media (max-width: 500px) {
     .modalSubDiv {
         width: 80%;
@@ -180,7 +232,7 @@ p {
                 <input type="radio" id="male" name="gender" value="male" <?= $petProfile['gender'] == "male" ? 'checked' : ''; ?> >Male
                 <input type="radio" id="female" name="gender" value="female" <?= $petProfile['gender'] == "female" ? 'checked' : ''; ?>>Female
             </p>
-            <textarea name="description" id="description" cols="30" rows="3" placeholder="Please provide a short description of your pet..."><?=!empty($petProfile['description']) ? $petProfile['description'] : '' ?></textarea>
+            <textarea name="description" id="descriptionInput" cols="30" rows="3" placeholder="Please provide a short description of your pet... (max 150 char)" maxlength="150"><?=!empty($petProfile['description']) ? $petProfile['description'] : '' ?></textarea>
         </div>
         <div>
             <p>
@@ -191,14 +243,41 @@ p {
                 <label for="color">Color:</label><br>
                 <input type="text" id="color" name="color" value=<?=!empty($petProfile['color']) ? $petProfile['color'] : '' ?>>
             </p>
-            <p>          
-                <label for="friendliness">Friendliness:</label><br>
-                <input type="range" id="friendliness" name="friendliness" min="0" max="5" value="<?=!empty($petProfile['friendliness']) ? $petProfile['friendliness'] : '' ?>">
-            </p>
-            <p>
-                <label for="activityLevel">Activity Level:</label><br>
-                <input type="range" id="activityLevel" name="activityLevel" min="0" max="5" value="<?=!empty($petProfile['activityLevel']) ? $petProfile['activityLevel'] : '' ?>">
-            </p>
+                <span>Friendliness:</span>
+                <div class="rating-group">
+                    <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star1" name="friendliness" id="rating3-1" value="1" type="radio" <?= $petProfile['friendliness'] == 1 ? 'checked' : '' ?>>
+
+                    <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star2" name="friendliness" id="rating3-2" value="2" type="radio" <?= $petProfile['friendliness'] == 2 ? 'checked' : '' ?>>
+
+                    <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star3" name="friendliness" id="rating3-3" value="3" type="radio" <?= $petProfile['friendliness'] == 3 ? 'checked' : '' ?>>
+
+                    <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star4" name="friendliness" id="rating3-4" value="4" type="radio" <?= $petProfile['friendliness'] == 4 ? 'checked' : '' ?>>
+
+                    <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star5" name="friendliness" id="rating3-5" value="5" type="radio" <?= $petProfile['friendliness'] == 5 ? 'checked' : '' ?>>
+                </div>
+            <p></p>
+                <span>Activity Level:</span>
+                <div class="rating-group">
+                    <label aria-label="1 star" class="rating__label" for="rating3-12"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star1" name="activityLevel" id="rating3-12" value="1" type="radio" <?= $petProfile['activityLevel'] == 1 ? 'checked' : '' ?>>
+
+                    <label aria-label="2 stars" class="rating__label" for="rating3-22"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star2" name="activityLevel" id="rating3-22" value="2" type="radio" <?= $petProfile['activityLevel'] == 2 ? 'checked' : '' ?>>
+
+                    <label aria-label="3 stars" class="rating__label" for="rating3-32"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star3" name="activityLevel" id="rating3-32" value="3" type="radio" <?= $petProfile['activityLevel'] == 3 ? 'checked' : '' ?>>
+
+                    <label aria-label="4 stars" class="rating__label" for="rating3-42"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star4" name="activityLevel" id="rating3-42" value="4" type="radio" <?= $petProfile['activityLevel'] == 4 ? 'checked' : '' ?>>
+
+                    <label aria-label="5 stars" class="rating__label" for="rating3-52"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input star5" name="activityLevel" id="rating3-52" value="5" type="radio" <?= $petProfile['activityLevel'] == 5 ? 'checked' : '' ?>>
+                </div>
             <p>
                 <img src="./private/pet/<?=!empty($petProfile['photo']) ? $petProfile['photo'] : 'default.png' ?>" id="imagePreview"></img>
                 <label for="file" id="uploadButton">UPLOAD IMAGE</label>

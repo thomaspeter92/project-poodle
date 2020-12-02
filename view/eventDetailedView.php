@@ -306,6 +306,10 @@
         font-size: .8em;
     }
 
+    #loadMore {
+        display: none;
+    }
+
     #showLess {
         display: none;
     }
@@ -327,16 +331,16 @@
         outline: none;
 }
 
-    .overlay {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-        background-color: rgba(250, 250, 250, 0.7);
-        border-radius: 10px;
-        background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(250, 250, 250, 0.7);
+    border-radius: 10px;
+    background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
 }
 
     #errorDisplay {
@@ -524,9 +528,9 @@ if (isset($_SESSION['id'])) {
 }
 
 //CHECKING FOR OLD EVENTS TO DISABLE ATTEND FUNCTION
-$eventTime = strtotime($event['eventDate']);
+$eventExpiry = strtotime($event['expiry']);
 $currentTime = time();
-$eventPassed = $eventTime < $currentTime ? true : false;
+$eventPassed = $eventExpiry < $currentTime ? true : false;
 
 
 //IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
@@ -537,7 +541,7 @@ if($event) {
     <div class=eventDetail>
         <div class="eventDetailHeader">
             <div id="eventHeaderContent">
-                <p><?= $event['eventDate']; ?></p>
+                <p><em>DEADLINE:</em><br> <?= $event['eventDate']; ?></p>
                 <div id="eventName">
                     <h3><?= $event['name']; ?></h3>
                     <?php if (isset($_SESSION['id']) && $event['hostId'] === $_SESSION['id']) { ?>
@@ -561,7 +565,7 @@ if($event) {
                         echo '<em>Sign in to Attend</em>';
                     }
                 } else {
-                    echo '<em>This event has now passed.</em>';
+                    echo '<em>This event has now expired.</em>';
                 }
 
                 ?>
@@ -596,17 +600,16 @@ if($event) {
 
         <?php } ?>
                 </form>
-                <div id="commentArea" data-commentCount="<?= count($commentsCount);?>" data-eventId="<?= $event['eventId'];?>">
+                <div id="commentArea" data-eventId="<?= $event['eventId'];?>">
 
                 <?php include("eventCommentsView.php") ?>
 
                 </div>
-        <?php if (isset($_SESSION['id'])) { 
-                    if  (count($commentsCount) > 5) {  ?>
+        <?php if (isset($_SESSION['id'])) {  ?>
                         <div id="loadButtons">
                             <p id="loadMore" data-eventId="<?= $event['eventId'];?>">Show More <i class="fas fa-caret-down"></i></p>
                             <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
-                        </div>  <?php }    
+                        </div>  <?php    
                 } else { 
                     echo '<p  style="text-align: center;"><em>Sign In to See More</em></p>' ; 
                 } ?>
@@ -665,7 +668,6 @@ if($event) {
 
 <?php    } ?>
         
-<!-- <script src="./public/js/Modal.js"></script> -->
 
 
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
@@ -752,22 +754,21 @@ if($event) {
     //FUNCTION TO LOAD MORE/LESS COMMENTS.
     var limit = 5;
     let loadMore = document.querySelector('#loadMore');
-    let commentCount = document.querySelector('#commentArea').getAttribute("data-commentCount");
-    if (commentCount > 5 && loadMore) {
-        loadMore.addEventListener('click', function() {
-            limit+= 5;
-            loadComments(limit);
-            showLess.style.display = 'initial';
-        })
+    let commentCount = document.querySelector('#commentCount').getAttribute("data-commentCount");
 
-        let showLess = document.querySelector('#showLess')
-        showLess.addEventListener('click', function() {
-            limit = 5;
-            loadComments(limit);
-            showLess.style.display = 'none';
-        })
-    }
+    loadMore.addEventListener('click', function() {
+        limit+= 5;
+        loadComments(limit);
+        showLess.style.display = 'initial';
+    })
 
+    let showLess = document.querySelector('#showLess')
+    showLess.addEventListener('click', function() {
+        limit = 5;
+        loadComments(limit);
+        showLess.style.display = 'none';
+    })
+    
     function loadComments(limit) {
         let commentArea = document.querySelector('#commentArea');
         let eventId = commentArea.getAttribute("data-eventId");
@@ -779,11 +780,13 @@ if($event) {
             editComments();
             deleteComment();
             let comments = document.querySelectorAll('.commentChunk');
-            comments.length == commentCount ? loadMore.style.display ='none' : loadMore.style.display ='initial';
+            commentCount = document.querySelector('#commentCount').getAttribute("data-commentCount");
+            comments.length == commentCount ? loadMore.style.display = 'none' : loadMore.style.display ='initial';
             }
         }
         xhr.send(null);
     }
+    loadComments(5);
 
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
     var guestCount = document.querySelector('#guestCount');

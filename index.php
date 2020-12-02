@@ -267,6 +267,9 @@ try {
         case "pleaseLogIn":
             pleaseLogIn();
             break;
+        case "stars":
+            stars($starValue, $_REQUEST['eventId']);
+            break; 
         default:
             landing();
             break;
