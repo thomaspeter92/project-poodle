@@ -199,9 +199,9 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAUL
     <!-- The following script controls menu animation on Click -->
     <script>
     {
-        let showMenu = false;   // Set the initial state of the menu 
-        const menuBtn = document.querySelector(".menu-btn"); 
-        const hoverWrapper = document.querySelector(".hoverWrapper"); 
+        var showMenu = false;   // Set the initial state of the menu 
+        var menuBtn = document.querySelector(".menu-btn"); 
+        var hoverWrapper = document.querySelector(".hoverWrapper"); 
         
         menuBtn.addEventListener("click", toggleMenu); 
     

@@ -65,8 +65,8 @@
         arrowBalls[i].addEventListener('click', cardFlip);
     }
 
-    const carouselImages = document.querySelectorAll('.carouselImg');
-    const nextImageDelay = 4000;
+    var carouselImages = document.querySelectorAll('.carouselImg');
+    var nextImageDelay = 4000;
     var imageCounter = 0;
 
     if(carouselImages[imageCounter]) {
@@ -74,8 +74,8 @@
         setInterval(nextImage, nextImageDelay);
     }
 
-    const mobileCarousel = document.querySelectorAll('.mobileCarousel');
-    let imageCounter2 = 0;
+    var mobileCarousel = document.querySelectorAll('.mobileCarousel');
+    var imageCounter2 = 0;
     if(mobileCarousel) {
         if(mobileCarousel[imageCounter2] ) {
             mobileCarousel[imageCounter2].style.opacity = 1;
