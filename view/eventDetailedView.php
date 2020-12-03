@@ -139,8 +139,10 @@
         object-fit: cover;
     }
 
-
-
+    #attendButton {
+        width: auto;
+        padding: 0 10px 0 10px;
+    }
 
     .eventDetailMainContent {
         display: flex;
@@ -153,6 +155,10 @@
         width: 65%;
     }
 
+    #descriptionArea {
+        word-wrap: break-word;
+    }
+
     .eventDetailSideContent {
         width: 32%;
         margin-left: 15px;
@@ -162,6 +168,7 @@
     .eventImage {
         max-width: 100%;
         margin-bottom: 20px;
+        display: block;
     }
 
 
@@ -347,9 +354,17 @@
         justify-content: center;
     }
 
+    #mapContainer {
+        flex-direction: column;
+    }
+
     #loadbuttons p {
         margin: 10px;
         font-size: .8em;
+    }
+
+    #loadMore {
+        display: none;
     }
 
     #showLess {
@@ -373,16 +388,16 @@
         outline: none;
 }
 
-    .overlay {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-        background-color: rgba(250, 250, 250, 0.7);
-        border-radius: 10px;
-        background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(250, 250, 250, 0.7);
+    border-radius: 10px;
+    background: linear-gradient(360deg, rgba(255,255,255,1) 18%, rgba(255,255,255,0) 100%);
 }
 
     #errorDisplay {
@@ -518,13 +533,21 @@
     #authorPhoto {
         display: none;
     }
-
     #map {
-        width: 90%;
+        width: 100%;
     }
+    #mapDisplay {
+        width: 100%;
+    }
+    #mapContainer {
+        height: 50vh;
+    }
+
     .submit {
         width: auto;
         font-size: .6em;
+        padding: 0 10px 0 10px;
+        width: 70px;
     }
 
     .modalMainDiv > .modalSubDiv {
@@ -537,7 +560,6 @@
     }
 
 }
-
 
     /* Franco */
     #editEvent:hover, .deleteEvent:hover{
@@ -563,9 +585,9 @@ if (isset($_SESSION['id'])) {
 }
 
 //CHECKING FOR OLD EVENTS TO DISABLE ATTEND FUNCTION
-$eventTime = strtotime($event['eventDate']);
+$eventExpiry = strtotime($event['expiry']);
 $currentTime = time();
-$eventPassed = $eventTime < $currentTime ? true : false;
+$eventPassed = $eventExpiry < $currentTime ? true : false;
 
 
 //IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
@@ -576,18 +598,14 @@ if($event) {
     <div class=eventDetail>
         <div class="eventDetailHeader">
             <div id="eventHeaderContent">
-                <p><?= $event['eventDate']; ?></p>
+                <p><em>DEADLINE:</em><br> <?= $event['expiry']; ?></p>
                 <div id="eventName">
                     <h3><?= $event['name']; ?></h3>
                     <?php if (isset($_SESSION['id']) && $event['hostId'] === $_SESSION['id']) { ?>
                             <i id="editEvent" class="fas fa-edit" data-eventid="<?=$event['eventId'];?>"></i><i class="fas fa-trash-alt deleteEvent" data-eventid="<?=$event['eventId']; ?>"></i> <?php }; ?>
                 </div>
                 <div id="headerContentExtra">
-                    <p><img class="hostPhoto" src="./private/profile/<?= $event['image']; ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
-                    <!-- Franco -->
-                    
-                    <!-- Franco -->
-            
+                    <p><img class="hostPhoto" src="./private/profile/<?= !empty($event['image']) ?$event['image'] : 'defaultProfile.png' ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
                 if ($eventPassed == false) {
@@ -601,7 +619,7 @@ if($event) {
                         echo '<em>Sign in to Attend</em>';
                     }
                 } else {
-                    echo '<em>This event has now passed.</em>';
+                    echo '<em>This event has now expired.</em>';
                 }
 
                 // if($eventPassed == true && isset($_SESSION['id'])){ ?> 
@@ -645,36 +663,40 @@ if($event) {
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
-                <img class="eventImage" src="./private/event/<?= $event['picture']; ?>" />
-                <?= nl2br($event['description']); ?>
-                
+                <img class="eventImage" src="./private/event/<?=!empty($event['picture']) ? $event['picture'] : 'default.png' ?>" />
+                <p id="descriptionArea"><?= nl2br($event['description']); ?></p>
+
                 <form action="index.php" method="POST" id="commentForm">
                     <h4>Discussion:</h4>  <?= !isset($_SESSION['id']) ? '<em>*Sign In to Leave a Comment</em>' : '';?> 
 
         <?php if (isset($_SESSION['id'])) {?>
 
                     <div id="formContent">
-                        <img id="authorPhoto" class="hostPhoto" src="<?=$_SESSION['imageURL'] ?>"></img>
+                        <img id="authorPhoto" class="hostPhoto" src="./private/profile/<?=!empty($profilePic['profileImage']) ? $profilePic['profileImage'] : 'defaultProfile.png' ?>"></img>
                         <input type="hidden" name="author" id="author" value="<?= isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
                         <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                         <textarea name="comment" id="comment" rows="1" placeholder="Leave a comment..."></textarea>
                         <input type="hidden" name="action" value="eventCommentPost">
                         <button type="submit" class="submit">POST</button>
+                        <!-- ADDED PARAMS FOR NOTIFICATION -->
+                        <input type="hidden" name="authorName" value="<?= $_SESSION['name'] ?>">
+                        <input type="hidden" name="hostId" value="<?= $event['hostId'] ?>">
+                        <input type="hidden" name="eventName" value="<?= $event['name'] ?>">
+
                     </div>
 
         <?php } ?>
                 </form>
-                <div id="commentArea" data-commentCount="<?= count($commentsCount); ?>">
+                <div id="commentArea" data-eventId="<?= $event['eventId'];?>">
 
                 <?php include("eventCommentsView.php") ?>
 
                 </div>
-        <?php if (isset($_SESSION['id'])) { 
-                    if  (count($commentsCount) > 5) {  ?>
+        <?php if (isset($_SESSION['id'])) {  ?>
                         <div id="loadButtons">
                             <p id="loadMore" data-eventId="<?= $event['eventId'];?>">Show More <i class="fas fa-caret-down"></i></p>
                             <p id="showLess">Show Less <i class="fas fa-caret-up"></i></p>
-                        </div>  <?php }    
+                        </div>  <?php    
                 } else { 
                     echo '<p  style="text-align: center;"><em>Sign In to See More</em></p>' ; 
                 } ?>
@@ -699,9 +721,8 @@ if($event) {
                 <div id="guestList">
                     <?php include("loadGuestsView.php") ?>
                 </div>
-                <?php if ($guestCount > 5) { ?>
-                    <p id="loadMoreGuests" data-eventId="<?=$event['eventId']; ?>">Show more...</p>
-                    <p id="showLessGuests" data-eventId="<?=$event['eventId']; ?>">Show Less...</p>
+                <?php if ($guestCount > 6 && isset($_SESSION['id'])) { ?>
+                    <p id="loadMoreGuests" data-eventId="<?=$event['eventId']; ?>">See All</p>
                 <?php } ?>
             </aside>
         </div>
@@ -735,7 +756,6 @@ if($event) {
 
 <?php    } ?>
         
-<!-- <script src="./public/js/Modal.js"></script> -->
 
 
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cea8248c64bf22c135e642408c2fb6c2&libraries=services"></script>
@@ -749,40 +769,43 @@ if($event) {
     commentForm.addEventListener('submit', function(e) {
         e.preventDefault();
         let commentBox = document.querySelector('#comment');
-        if(commentBox.value.length >= 3) {
+        if(commentBox.value.length >= 2) {
             let xhr = new XMLHttpRequest();
             let params = new FormData(commentForm);
             xhr.open("POST", "index.php");
-
             xhr.onload =  function() {
-
-                // ERROR MESSAGES HERE
+            if (xhr.status == 200) {
+                loadComments(limit);
+                commentBox.value = '';
+            }
             }
             xhr.send(params);
-            location.reload();
         } else {
             commentBox.style.border = '1px solid red';
         }
     })
 
 // FUNCTION TO DELETE COMMENT FROM DB, SEND COMMENT ID AS FORM DATA. 
-    let deleteCommentButton = document.querySelectorAll('.deleteComment');
-    for (let i=0; i<deleteCommentButton.length; i++) {
-        deleteCommentButton[i].addEventListener('click', function(e) {
-            let commentId = e.target.getAttribute("data-commentId");
-            deleteComment(commentId);
-        })
-    }
-    function deleteComment (commentId){
-        if (confirm('Are you sure you want to delete?')) { 
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "index.php?action=deleteEventComment");
-            let params = new FormData();
-            params.append("commentId",commentId);
-            xhr.send(params);
-            location.reload();
+    function deleteComment() {
+        let deleteCommentButton = document.querySelectorAll('.deleteComment');
+        if (deleteCommentButton) {
+            for (let i=0; i<deleteCommentButton.length; i++) {
+                deleteCommentButton[i].addEventListener('click', function(e) {
+                    let commentId = e.target.getAttribute("data-commentId");
+                    if (confirm('Are you sure you want to delete?')) { 
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "index.php?action=deleteEventComment");
+                        let params = new FormData();
+                        params.append("commentId",commentId);
+                        xhr.send(params);
+                        loadComments(limit)
+                    }
+                })
+            }
         }
     }
+    deleteComment();
+
 
     //FUNCTION TO INSERT USER INTO GUEST LIST, USING USER ID AND EVENT ID
     let attendButton = document.querySelector('#attendButton');
@@ -807,7 +830,9 @@ if($event) {
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "index.php");
             xhr.onload = function() {
+                console.log(xhr.responseText);
                 if (xhr.responseText.trim() == 'success') {
+       
                     location.reload();
                 } else {
                     alert('Oops, something went wrong. Please try again.')
@@ -820,64 +845,58 @@ if($event) {
     //FUNCTION TO LOAD MORE/LESS COMMENTS.
     var limit = 5;
     let loadMore = document.querySelector('#loadMore');
-    let commentCount = document.querySelector('#commentArea').getAttribute("data-commentCount");
-    if (commentCount > 5 && commentCount == true) {
-        loadMore.addEventListener('click', function() {
-            limit+= 5;
-            loadComments(limit);
-            showLess.style.display = 'initial';
-        })
+    let commentCount = document.querySelector('#commentCount').getAttribute("data-commentCount");
 
-        let showLess = document.querySelector('#showLess')
-        showLess.addEventListener('click', function() {
-            limit = 5;
-            loadComments(limit);
-            showLess.style.display = 'none';
-        })
-        function loadComments(limit) {
-            let eventId = loadMore.getAttribute("data-eventId");
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
-            xhr.onload = function () {
-                if (xhr.status == 200 ) {
-                let commentArea = document.querySelector('#commentArea');
-                commentArea.innerHTML = xhr.responseText;
-                editComments();
-                }
+    loadMore.addEventListener('click', function() {
+        limit+= 5;
+        loadComments(limit);
+        showLess.style.display = 'initial';
+    })
+
+    let showLess = document.querySelector('#showLess')
+    showLess.addEventListener('click', function() {
+        limit = 5;
+        loadComments(limit);
+        showLess.style.display = 'none';
+    })
+    
+    function loadComments(limit) {
+        let commentArea = document.querySelector('#commentArea');
+        let eventId = commentArea.getAttribute("data-eventId");
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', `index.php?action=loadComments&eventId=${eventId}&limit=${limit}`);
+        xhr.onload = function () {
+            if (xhr.status == 200 ) {
+            commentArea.innerHTML = xhr.responseText;
+            editComments();
+            deleteComment();
+            let comments = document.querySelectorAll('.commentChunk');
+            commentCount = document.querySelector('#commentCount').getAttribute("data-commentCount");
+            comments.length == commentCount ? loadMore.style.display = 'none' : loadMore.style.display ='initial';
+
             }
-            xhr.send(null);
         }
+        xhr.send(null);
     }
+    loadComments(5);
 
 // FUNCTION TO LOAD MORE GUEST LIST ITEMS.
     var guestCount = document.querySelector('#guestCount');
-    var guestCounter = 5;
     var loadMoreGuests = document.querySelector('#loadMoreGuests');
-
-    if (guestCount.textContent > 5) {
+    if (guestCount.textContent > 6) {
         var eventId = loadMoreGuests.getAttribute("data-eventId");
         loadMoreGuests.addEventListener('click', function() {
-            guestCounter+= 5;
-            loadGuests(guestCounter, eventId);
-            showLessGuests.style.display = 'initial';
-            console.log(guestCounter)
-        })
-        var showLessGuests = document.querySelector('#showLessGuests')
-        showLessGuests.addEventListener('click', function() {
-            guestCounter = 5;
-            loadGuests(guestCounter, eventId);
-            showLessGuests.style.display = 'none';
+            loadGuests(eventId);
         })
     }
 
-    function loadGuests(guestCounter, eventId) {
+    function loadGuests(eventId) {
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', `index.php?action=loadGuests&eventId=${eventId}&limit=${guestCounter}`);
+        xhr.open('GET', `index.php?action=loadGuests&eventId=${eventId}&loadAll=true`);
         xhr.onload = function () {
             if (xhr.status == 200 ) {
-                let guestList = document.querySelector('#guestList');
-                guestList.innerHTML = xhr.responseText;
-                console.log(xhr.responseText)
+                let guestModal = new Modal(xhr.responseText);
+                guestModal.generate()
             }
         }
         xhr.send(null);
@@ -888,7 +907,6 @@ if($event) {
     let editCommentButton = document.querySelectorAll('.editComment');
     for (let i=0; i<editCommentButton.length; i++) {
         editCommentButton[i].addEventListener('click', function(e) {
-            console.log('hello')
             let commentId = e.target.getAttribute("data-commentId");
             let comment = editCommentButton[i].parentElement.parentElement.parentElement.childNodes[3].textContent;
             let editCommentInput = `<textarea rows="1" id="editInput">${comment}</textarea>`;
@@ -945,7 +963,8 @@ if($event) {
     });
 
 // ************* MAP FUNCTIONS ************
-    var itin = <?= $event['itinerary'] ?>
+    var itin;
+    itin = '<?= isset($event["itinerary"]) ? $event["itinerary"] : ""; ?>';
     // var viewListArray = [[37.530750,126.971979],[37.540522437037716, 126.98675092518866],[37.55397916880342, 126.97248154788045]]
 
     var bounds = new kakao.maps.LatLngBounds();
@@ -962,34 +981,35 @@ if($event) {
     // var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
 
     // 마커를 생성합니다
-    for(let i=0; i<itin.length; i++){
-        var coords = new kakao.maps.LatLng(itin[i]['Ma'],itin[i]['La']);
-        console.log(coords)
-        routeArray.push(coords);
-        var marker = new kakao.maps.Marker({
-            position: coords
-        });
+    if(itin){
+        itin = JSON.parse(itin);
+        for(let i=0; i<itin.length; i++){
+            var coords = new kakao.maps.LatLng(itin[i]['Ma'],itin[i]['La']);
+            console.log(coords)
+            routeArray.push(coords);
+            var marker = new kakao.maps.Marker({
+                position: coords
+            });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-        bounds.extend(coords);
-        map.setBounds(bounds);
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+            bounds.extend(coords);
+            map.setBounds(bounds);
+        }
+
+        var polyline = new kakao.maps.Polyline({
+                map: map,
+                path: routeArray,
+                strokeWeight: 2,
+                strokeColor: 'red',
+                strokeOpacity: 0.8,
+                strokeStyle: 'solid'
+            });
+        polyline.setMap(map);
     }
-
-    var polyline = new kakao.maps.Polyline({
-            map: map,
-            path: routeArray,
-            strokeWeight: 2,
-            strokeColor: 'red',
-            strokeOpacity: 0.8,
-            strokeStyle: 'solid'
-        });
-    polyline.setMap(map);
-
     let deleteEventButton = document.querySelector('.deleteEvent');
     if (deleteEventButton){
         deleteEventButton.addEventListener('click', function(e) {
-            // let eventId = e.target.getAttribute("data-eventId");
             deleteEvent();
         });
     }
@@ -1001,10 +1021,6 @@ if($event) {
         }
     }
 
-    // function editEvent (eventId){
-
-    //     createAddEditEventModal(eventId);
-    // }
 
     let editEventButton = document.getElementById('editEvent');
     if (editEventButton){

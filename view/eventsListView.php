@@ -16,7 +16,7 @@ ob_start();
         </select>
     <?php if (isset($sessionID)): ?>
         <div id="addButton">
-            <button class="button fullText">Add a Event</button>
+            <button class="button fullText">Add event</button>
             <button class="button shortText">+</button>
         </div>
     <?php endif; ?>
@@ -38,16 +38,18 @@ ob_start();
 <script src="./public/js/event.js"></script>
 <script>
     {
-        const items = document.querySelectorAll(".item");
-        items.forEach(item => {
-            item.addEventListener("click", () => {
-                const eventId = item.querySelector(".eventId").value;
-                if (eventId) {
-                    const url = `index.php?action=showEventDetail&eventId=${eventId}`;
-                    window.location.href = url;
-                }
-            });
-        });
+        const setEventListeners = () => {
+            const items = document.querySelectorAll(".item");
+            items.forEach(item => {
+                item.addEventListener("click", () => {
+                    const eventId = item.querySelector(".eventId").value;
+                    if (eventId) {
+                        const url = `index.php?action=showEventDetail&eventId=${eventId}`;
+                        window.location.href = url;
+                    }
+                });
+            });    
+        };
 
         const searchEvents = document.querySelector("#searchEvents");
         searchEvents.addEventListener("keypress", (e) => {
@@ -60,6 +62,7 @@ ob_start();
                         const eventsList = document.querySelector("#eventsList");
                         eventsList.innerHTML = xhr.responseText;
                         adjustFooter();
+                        setEventListeners()
                     } else {
                         //TODO: Show error messages
                     }
@@ -79,6 +82,7 @@ ob_start();
                     const eventsList = document.querySelector("#eventsList");
                     eventsList.innerHTML = xhr.responseText;
                     adjustFooter();
+                    setEventListeners()
                 } else {
                     //TODO: Show error messages
                 }
@@ -91,6 +95,8 @@ ob_start();
         addButtons.forEach(button => {
             button.addEventListener("click", () => createAddEditEventModal());
         });
+
+        setEventListeners();
     }
 </script>
 <?php

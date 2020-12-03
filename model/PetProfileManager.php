@@ -6,11 +6,12 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, type, breed, age, gender, weight, color, friendliness, activityLevel, photo, description, ownerId FROM petProfile WHERE id = ?");
+            $req = $db->prepare("SELECT name, type, breed, age, gender, weight, color, friendliness, activityLevel, photo, description, ownerId FROM petprofile WHERE id = ?");
             //bindparam
             $req -> execute(array($petId));
             $profiles = $req -> fetch(PDO::FETCH_ASSOC);
             $req -> closeCursor();
+        
             if($_SESSION["id"]==$profiles["ownerId"]){
                 return $profiles;
             } else{
@@ -23,7 +24,7 @@ require_once("Manager.php");
             
             //Retrieving pet's profile from the database
             $db = $this-> dbConnect();
-            $req = $db->prepare("SELECT name, breed, age, photo, color, id FROM petProfile WHERE ownerId = ?");
+            $req = $db->prepare("SELECT name, breed, age, gender, photo, color, id FROM petProfile WHERE ownerId = ?");
             //bindparam
             $req -> execute(array($ownerId));
             $profile = $req -> fetchAll(PDO::FETCH_ASSOC);
@@ -53,17 +54,17 @@ require_once("Manager.php");
                 $req->bindParam(':petId', $newPet['petId'], PDO::PARAM_STR);
             }
 
-            $name = htmlspecialchars($newPet['name']);
-            $type = htmlspecialchars($newPet['type']);
-            $breed = htmlspecialchars($newPet['breed']);
-            $age = htmlspecialchars($newPet['age']);
-            $gender = htmlspecialchars($newPet['gender']);
-            $weight = htmlspecialchars($newPet['weight']);
-            $color = htmlspecialchars($newPet['color']);
-            $friendliness = htmlspecialchars($newPet['friendliness']);
-            $activityLevel = htmlspecialchars($newPet['activityLevel']);
+            $name = isset($newPet['name']) ? htmlspecialchars($newPet['name']) : NULL;
+            $type = isset($newPet['type']) ? htmlspecialchars($newPet['type']) : NULL;
+            $breed = isset($newPet['breed']) ? htmlspecialchars($newPet['breed']) : NULL;
+            $age = isset($newPet['age']) ? htmlspecialchars($newPet['age']) : NULL;
+            $gender = isset($newPet['gender']) ? htmlspecialchars($newPet['gender']) : NULL;
+            $weight = isset($newPet['weight']) ? htmlspecialchars($newPet['weight']) : NULL;
+            $color = isset($newPet['color']) ? htmlspecialchars($newPet['color']) : NULL;
+            $friendliness = isset($newPet['friendliness']) ? htmlspecialchars($newPet['friendliness']) : NULL;
+            $activityLevel = isset($newPet['activityLevel']) ? htmlspecialchars($newPet['activityLevel']) : NULL;
             $petPhoto = !empty($photoData['photo']) ? htmlspecialchars($photoData['photo']) : $newPet['photo'];
-            $description = htmlspecialchars($newPet['description']);
+            $description = isset($newPet['description']) ? htmlspecialchars($newPet['description']) : NULL;
 
             $req->bindParam(':name',$name,PDO::PARAM_STR);
             $req->bindParam(':type',$type,PDO::PARAM_STR);

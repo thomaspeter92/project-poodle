@@ -1,11 +1,10 @@
 section {
-    /* position: relative; */
     width: 100%;
+    background-color: white;
 }
 
 /* Empty box for the area of header */
 section>div:first-child {
-    /* background-color: yellowgreen; */
     height: 65px;
 }
 
@@ -24,9 +23,10 @@ section>div:first-child {
     padding: 0;
     padding-left: 20px;
     margin-right: 10px;
+
+    font-family: "Montserrat", sans-serif;
 }
 #selectOption {
-    /* width: 80px; */
     height: 46px;
     border-width: 1px;
     border-radius: 20px;
@@ -35,6 +35,8 @@ section>div:first-child {
     padding: 0;
     padding-left: 10px;
     margin-right: 10px;
+
+    font-family: "Montserrat", sans-serif;
 }
 #addButton {
     float: right;
@@ -78,12 +80,12 @@ section>div:first-child {
 
 /* No Events */
 .noEvents {
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
     padding: 40px;
     padding-top: 20px;
 }
 .noEventsSub {
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
     padding: 0 40px;
     padding-bottom: 20px;
 }
@@ -93,18 +95,24 @@ section>div:first-child {
     border-top: 1px solid lightgray;
     padding: 20px;
     cursor: pointer;
-}
-.item>div {
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
 }
 .item>.imgContainer {
     width: 200px;
+    height: 130px;
+    min-width: 200px;
     margin-right: 20px;
+    border-radius: 10px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
 .item>.imgContainer>img {
-    width: 100%;
     border-radius: 10px;
+    max-width: 100%; 
+    max-height: 100%;
+    /* object-fit: contain;  */
+    
 }
 
 @media screen and (max-width: 750px) {
@@ -119,15 +127,15 @@ section>div:first-child {
 .item>.content>.date {
     color: #393E41;
     font-size: 0.9em;
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
 }
 .item>.content>.title {
-    font-family: "monsterRatBold", sans-serif;
+    font-family: "MontserratBold", sans-serif;
 }
 .item>.content>.host {
     color: gray;
     font-size: 0.8em;
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 /* Attendees */
@@ -167,7 +175,7 @@ section>div:first-child {
     border-radius: 15px;
 }
 .item .attendees>.guestCount {
-    font-family: "monsterRatRegular", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 0.8em;
     color: gray;
     

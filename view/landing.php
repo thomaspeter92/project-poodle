@@ -13,20 +13,23 @@ if (isset($_GET['account'])) {
     }
 }
 ?>
+
+<div id="wrapper">
+
 <div id="carousel">
     <img src="./public/images/dogCarousel4.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel3.jpg" alt="" class="carouselImg">
-
-    <img src="./public/images/dogCarousel0.jpg" alt="" class="carouselImg mobileCarousel">
-    <img src="./public/images/contactPageMobile.jpg" alt="" class="carouselImg mobileCarousel">
-    <img src="./public/images/portraitDog2.jpg" alt="" class="carouselImg mobileCarousel">
-
     <div id="carouselTextBox">
             <p>I LOVE DOGS! WOOF!</p>
             <div id="carouselButton" class="button"><p>LEARN MORE</p></div>
     </div>
 </div>
+
+<div id="mobileCarousel">
+    <img src="./public/images/portraitCarousel.jpg" alt="">
+</div>
+
 
 
 <!-- ************************* CONTENT 1 AREA **************** -->
@@ -71,76 +74,23 @@ if (isset($_GET['account'])) {
 <!-- ************************* CONTENT 3 AREA **************** -->
 <div id="content3" class="content">
     <p id="content3text">+20,000 Profiles</p>
-    <div id="leftRightArrow"><i class="fas fa-arrow-circle-left"></i> <i class="fas fa-arrow-circle-right"></i></div>
-    <img class="content3image" src="./public/images/profilePreview.png" alt="">
-    <img class="content3image" src="./public/images/profilePreview2.png" alt="">
-    <img class="content3image" src="./public/images/profilePreview3.png" alt="">
+    <div id="leftRightArrow"><i class="fas fa-arrow-circle-left leftArrow"></i> <i class="fas fa-arrow-circle-right rightArrow"></i></div>
+    <div id="profileContainer">
+        <img class="content3image" src="./public/images/profilePreview.png" alt="">
+        <img class="content3image" src="./public/images/profilePreview4.png" alt="">
+        <img class="content3image" src="./public/images/profilePreview2.png" alt="">
+        <img class="content3image" src="./public/images/profilePreview3.png" alt="">
+        <img class="content3image" src="./public/images/profilePreview5.png" alt="">
+        <img href="idex.php?action=registration" class="content3image" src="./public/images/profilePreview6.png" alt="">
 
-    <!-- <div class="content3inner">
-        <div class="clickMe"></div>
-        <section class="content3hidden">
-            <div class="profileImageBall"></div>
-            <h5>Betty Boop</h5>
-            <p>"I'm a kind dog looking to have fun with another cute pup!"</p>
-            <p>Friendliness: *****</p>
-            <p>Fitness Level: ***</p>
-        </section>
+
     </div>
-    <div class="content3inner">
-        <div class="clickMe"></div>
-        <section class="content3hidden">
-            <div class="profileImageBall"></div>
-            <h5>Baby</h5>
-            <p>"I'm a kind dog looking to have fun with another cute pup!"</p>
-            <p>Friendliness: *****</p>
-            <p>Fitness Level: ***</p>
-        </section>
-    </div> -->
-    <!-- <div class="content3inner">
-        <div class="clickMe"></div>
-        <section class="content3hidden">
-            <div class="profileImageBall"></div>
-            <h5>Lil Pup</h5>
-            <p>"I'm a kind dog looking to have fun with another cute pup!"</p>
-            <p>Friendliness: *****</p>
-            <p>Fitness Level: ***</p>
-        </section>
-    </div> -->
 </div>
 
 
 <!-- ************************* CONTENT 4 AREA **************** -->
 <div id="content4" class="content">
     <img class="largeImage" src="./public/images/contactPageMobile.jpg">
-    <!-- <div id="expandingContainer">
-        <div class="insideContainer inside1">
-            <h3>VR Features</h3><i class="fas fa-arrow-circle-down"></i>
-            <div class="insideContent">
-                <article>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur doloremque temporibus porro dolorum minima id quo aliquam aspernatur molestiae cupiditate repellendus, similique laborum ab, dolore iure quaerat inventore mollitia!</p>
-                </article>
-            </div>
-
-
-        </div>
-        <div class="insideContainer inside2">
-            <h3>Create Events</h3><i class="fas fa-arrow-circle-down"></i>
-            <div class="insideContent">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis dolorem architecto iure modi nobis, aliquid ex. Exercitationem quo quos laudantium nihil ullam cumque? At dolores voluptates quod laborum. Omnis, maxime? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex. Explicabo eaque provident odit doloremque consequatur deserunt error mollitia cumque debitis eius dolor ullam suscipit perferendis porro expedita, quasi amet! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, pariatur! Sapiente vero delectus quas optio officiis iusto!</p>
-            </div>
-
-        </div>
-        <div class="insideContainer inside3">
-            <h3>Meet Other Owners</h3><i class="fas fa-arrow-circle-down"></i>
-            <div class="insideContent">
-                <div class="insideContentText">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet repudiandae consequatur cumque sequi nulla aliquam maiores tempora labore ipsa fugit exercitationem, culpa possimus pariatur dicta a iusto molestiae delectus dolorem.</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
     <section id="content4section">
         <article class="content4article">
             <h5>About Us</h5>
@@ -191,20 +141,21 @@ if (isset($_GET['account'])) {
     <div class="content5div theCard">
         <div class="theFront">
             <h5>Browse Events Nearby</h5>
-            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <p>See what events are upcoming in your area, and communicate with other attendees!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
         <div class="theBack">
+            <img src="./public/images/eventsView.png" alt="">
         </div>
     </div>
     <div class="content5div theCard">
         <div class="theFront">
             <h5>Manage Your Pets With Ease</h5>
-            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <p>Add and modify your pets easily with our pet management system!</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
         <div class="theBack">
-            <img src="./public/images/eventsView.png" alt="">
+            <img src="./public/images/editPetView.png" alt="">
         </div>
     </div>
     <div class="content5div">
@@ -234,7 +185,7 @@ if (isset($_GET['account'])) {
         <div class="theBack">Back of the card</div>
     </div>
 </div>
-
+</div>
 
 <script src="./public/js/carousel.js"></script>
 <?php

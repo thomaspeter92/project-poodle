@@ -1,5 +1,5 @@
-<?php 
-if ($events): 
+<?php
+if (isset($events) and !empty($events)): 
     foreach ($events as $event): ?>
         <div class="item">
             <div class="imgContainer">
@@ -17,7 +17,10 @@ if ($events):
                     //NOTICE: The first profile image should be the host
                     $imageNames = getGuestProfileImagesOfEvent($eventId, 3);
                     foreach ($imageNames as $imageName): 
-                        $imageURL = "./private/profile/".$imageName->profileImage;?>
+                        $imageURL = "./private/defaultProfile.png";
+                        if (isset($imageName->profileImage)) {
+                            $imageURL = "./private/profile/".$imageName->profileImage;
+                        } ?>
                         <div class='profileImg'>
                             <div class='whiteCircle'><img src=<?=$imageURL;?>></div>
                         </div>

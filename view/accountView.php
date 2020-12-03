@@ -1,8 +1,4 @@
-<?php
-
-?>
 <style>
-
     img {
         margin-left: auto;
         margin-right: auto;    
@@ -68,24 +64,19 @@
     }
 
     .customFileUpload {
-    /* border: 1px solid #ccc;
-    cursor: pointer;
-    width:100px;
-    font-family: monsterRatRegular; */
-    /* font-size: 14px; */
     margin: 0;
     width: auto;
-    /* height: 50px; */
     margin-bottom: 0;
     background-color: #72ddf7;
     border-radius: 42px;
     cursor: pointer;
     color: #ffffff;
+    font-style: Arial;
     font-size: 17px;
-    /* padding: 13px 76px; */
     border-style: none;
     box-shadow: 5px 10px 18px #acacac;
     text-align: center;
+    padding: 0px 5px;
     }
 
     .customFileUpload:hover {
@@ -106,18 +97,16 @@
 
     
     .dropdownContent {
-        /* position: absolute; */
-        /* transform: translate(-50%, -50%);
+        position: absolute;
+        transform: translate(-50%, -50%);
         left: 50%;
-        top: 70%; */
+        top: 67%;
         /* background-color: #f1f1f1; */
         /* min-width: 160px; */
         /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
         z-index: 100;
         display:none;
     }
-
-    
 
     .show {
         display: block;
@@ -144,18 +133,14 @@
 
     /* Change the background color of the dropdown button when the dropdown content is shown */
     .dropdown:hover .dropbtn {background-color: #3e8e41;}
-    
-
-
 </style>
-
-<br>
+<?php 
+$profileImageURL = isset($memberDataFromDB['profileImage']) ? 
+                    "./private/profile/".$memberDataFromDB['profileImage'] :
+                    "./private/defaultProfile.png"; 
+?>
 <div class="accountForm">
-    <img class="profilePicManage" src="<?php if($memberDataFromDB['profileImage'] == NULL) { 
-                echo "./private/defaultProfile.png"; 
-            } else { 
-                echo "./private/profile/".$memberDataFromDB['profileImage']; 
-            };?>" alt="Profile Pic">
+    <img class="profilePicManage" src="<?= $profileImageURL; ?>" alt="Profile Pic">
     <img class="imagePreview" src="" alt="Image Preview">
     <div class="dropdown">
         <button class="imageDropbtn">Update Image</button>
@@ -186,14 +171,14 @@
     </div>
     <div class="changePW" hidden>
         <input type="hidden" name="action" value="changePW">
-        Current Password: <input type="text" name="currentPW" id="currentPW" class="required">
+        Current Password: <input type="password" name="currentPW" id="currentPW" class="required">
         <br>
         <br>
-        New Password: <input type="text" name="newPW" id="newPW" class="required password"> 
+        New Password: <input type="password" name="newPW" id="newPW" class="required password"> 
         <br>
         <div class="needDiffPW fail" hidden>New Password Cannot be same as old Password</div>
         <br>
-        Confirm Password: <input type="text" name="confirmPW" id="confirmPW" class="confirmPassword required">
+        Confirm Password: <input type="password" name="confirmPW" id="confirmPW" class="confirmPassword required">
         <br>
         <br>
         <div class="failedPW fail" hidden>Incorrect Password</div>

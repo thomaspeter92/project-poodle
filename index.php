@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require("./controller/controller.php");
 
@@ -10,6 +11,20 @@ try {
         case "landing":
             landing();
             break;
+        case "notificationsView":
+            if(isset($_SESSION['id'])){
+                notificationsView($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
+        case "readNotifications":
+            if(isset($_SESSION['id'])){
+                readNotifications($_SESSION['id']);
+            }else{
+                login();
+            }
+            break;
         case "petprofile":
             // isThatReallyMyDog($_SESSION['id', $_REQUEST['petid'])
             showPetProfile($_REQUEST['petid']);
@@ -18,6 +33,7 @@ try {
             if(isset($_SESSION['id'])){
                 // THIS ALSO SHOWS OWNER PROFILE PIC
                 showPetPreview($_SESSION['id']);    
+
             }else{
                 header("Location: index.php?action=login&error=login");
             }
@@ -54,6 +70,7 @@ try {
             break;
         case "addEditInput":
             displayAddEditInput(!empty($_REQUEST['petId']) ? $_REQUEST['petId'] : '');
+  
             break;
         case "addEditPet":
             if (!empty($_REQUEST['name']) AND !empty($_REQUEST['type']) AND !empty($_REQUEST['breed']) AND !empty($_REQUEST['age'])) {
@@ -146,6 +163,14 @@ try {
             $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : NULL;
             showSearchedEventsList($search, $option);
             break;
+        case "myEvents":
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showMyEventsList($sessionID);
+            break;
+        case "attendingEvents":
+            $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
+            showMyAttendingEventsList($sessionID);
+            break;
         case "accountView":
             if(isset($_SESSION['id'])){
                 accountView($_SESSION['id']);
@@ -198,6 +223,7 @@ try {
             isset($_REQUEST['eventId']) ? showEventDetail($_REQUEST) : landing();
             break;
         case "eventCommentPost" :
+            postNotification($_REQUEST);
             eventCommentPost($_REQUEST);
             break;
         case "deleteEventComment" :
@@ -221,11 +247,9 @@ try {
             break;
 
         case "updateEventDetails" :
-            // updateEventDetails($eventId = isset($_REQUEST['eventId']) ? $_REQUEST['eventId'] : "" );
 
-            if (!empty($_REQUEST['eventName']) && !empty($_REQUEST['eventGuestLimit']) && !empty($_REQUEST['eventDate']) && !empty($_REQUEST['eventTime']) && !empty($_REQUEST['eventExpiryDate']) && !empty($_REQUEST['eventExpiryTime']) && !empty($_REQUEST['eventDescription'])) {
                 $eventData = array(
-                "eventName" => $_REQUEST['eventName'],
+                "eventName" => $_REQUEST['eventName2'],
                 "eventGuestLimit" => $_REQUEST['eventGuestLimit'],
                 "eventDate" => $_REQUEST['eventDate'],
                 "eventTime" => $_REQUEST['eventTime'],
@@ -238,7 +262,7 @@ try {
                 "eventPicture" => $_REQUEST['eventPicture']);
 
                 addEditEventDetails($eventData);
-            }
+                
             break;
         case "deleteEvent" :
             $sessionID = (isset($_SESSION['id'])) ? $_SESSION['id'] : NULL;
@@ -273,8 +297,7 @@ try {
             landing();
             break;
     }
+    
 } catch (Exception $e) {
-
     require("./view/error.php");
 }
-
