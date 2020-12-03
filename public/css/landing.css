@@ -40,6 +40,9 @@ body {
 #mobileCarousel {
     display: none;
     position: relative;
+    background-image: url(../images/portraitCarousel.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 #carouselTextBox {
@@ -459,12 +462,59 @@ body {
 /* ******************MEDIA QUERY*************************************** */
 @media (max-width: 900px) {
 
-    #carousel {
+    #wrapper {
+        position: relative;
+    }
+
+    #carousel > * {
         display: none;
     }
 
+    #carousel {
+        width: 100vw;
+        height: 100vh;
+        background-image: linear-gradient(360deg, rgba(0, 0, 0,.5) 10%, rgba(255,255,255,0) 100%), url(../images/portraitCarousel.jpg);        
+        background-size: cover;
+        display: flex;
+        background-position-y: bottom;
+    }
+
+    #mobileCarouselContent {
+        display: unset;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        justify-content: flex-end;
+    }
+
+    #mobileCarouselContent h2 {
+        justify-self: start;
+        margin: auto;
+        font-size: 2.5em;
+        text-align: center;
+        background-color: rgba(255, 255, 255,.2);
+    }
+
+    #mobileCarouselContent h4 {
+        font-weight: 600;
+        margin: 15% 0 5% 0;
+        width: 70%;
+        text-align: center;
+        font-size: 2em;
+    }
+
+    #mobileCarouselContent i {
+        margin-bottom: 5%;
+        font-size: 2em;
+        animation: bounce 1s infinite ease-in-out;
+    }
+    
+
     #mobileCarousel {
-        display: initial;
+        display: unset;
         /* width: 100vw; */
         height: 100vh;
     }
@@ -631,7 +681,10 @@ body {
 
 @media (max-width: 450px) {
 
-    
+    #mobileCarousel  {
+        height: 100vh;
+        width: 100vw;
+    }  
 
     #content1 {
         height: auto;
@@ -650,5 +703,16 @@ body {
 
     .content5div p {
         font-size: 1em;
+    }
+}
+
+@keyframes bounce{
+    
+    50%{
+        transform: translateY(5px);
+    }
+
+    100%{
+        transform: translateY(-5px);
     }
 }

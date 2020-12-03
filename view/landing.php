@@ -24,10 +24,15 @@ if (isset($_GET['account'])) {
             <p>I LOVE DOGS! WOOF!</p>
             <div id="carouselButton" class="button"><p>LEARN MORE</p></div>
     </div>
+    <div id="mobileCarouselContent">
+        <h2>Tomorrow Starts Here.</h2>
+        <h4>Where Will Pet Venture Take You?</h4>
+        <i class="fas fa-chevron-down"></i>
+    </div>
 </div>
 
 <div id="mobileCarousel">
-    <img src="./public/images/portraitCarousel.jpg" alt="">
+    <!-- <img src="./public/images/portraitCarousel.jpg" alt=""> -->
 </div>
 
 
