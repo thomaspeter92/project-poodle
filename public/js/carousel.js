@@ -49,8 +49,8 @@
     }
 
     function cardFlip() {
-        var card = this.parentElement.parentElement;
-        card.classList.contains('cardFlip') ? card.classList.remove('cardFlip') : card.classList.add('cardFlip');
+        // var card = this.parentElement.parentElement;
+        this.classList.contains('cardFlip') ? this.classList.remove('cardFlip') : this.classList.add('cardFlip');
     }
 
 
@@ -59,9 +59,9 @@
 
     window.addEventListener('scroll', scrollAppear);
 
-    var arrowBalls = document.querySelectorAll('.arrowBall');
-    for(var i = 0; i < arrowBalls.length; i++) {
-        arrowBalls[i].addEventListener('click', cardFlip);
+    var cards = document.querySelectorAll('.theCard')
+    for(var i = 0; i < cards.length; i++) {
+        cards[i].addEventListener('click', cardFlip);
     }
 
     var carouselImages = document.querySelectorAll('.carouselImg');
