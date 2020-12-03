@@ -330,10 +330,15 @@ require_once("Manager.php");
                 $req->closeCursor();
 
                 //getting median of the event's rating
-                $medianPosition = (count($eventRatings)/2);
-                $getEventsMedianRating = $eventRatings[$medianPosition];
-                $eventsMedianRating = $getEventsMedianRating['rating'];
-
+                $medianPosition = ceil(count($eventRatings)/2);
+                if(count($eventRatings)>1){
+                    $getEventsMedianRating = $eventRatings[$medianPosition];
+                    $eventsMedianRating = $getEventsMedianRating['rating'];
+                }else{
+                    $getEventsMedianRating = $eventRatings[0];
+                    $eventsMedianRating = $getEventsMedianRating['rating'];
+                }
+               
                 //inserting median rating into `event` table
                 $db = $this->dbConnect();
                 $query = ("UPDATE event SET rating = :eventsMedianRating WHERE id = :eventId");
@@ -363,9 +368,15 @@ require_once("Manager.php");
                 $req->closeCursor();
                 
                 //calculating the median of the event ratings that belongs to that host
-                $hostMedianPosition = (count($hostsEventRatings)/2);
-                $getHostsMedianRating = $hostsEventRatings[$hostMedianPosition]; 
-                $hostsMedianRating = $getHostsMedianRating['rating'];
+                $hostMedianPosition = ceil(count($hostsEventRatings)/2);
+                if(count($hostMedianPosition)>1){
+                    $getHostsMedianRating = $hostsEventRatings[$hostMedianPosition]; 
+                    $hostsMedianRating = $getHostsMedianRating['rating'];
+                }else{
+                    $getHostsMedianRating = $hostsEventRatings[0]; 
+                    $hostsMedianRating = $getHostsMedianRating['rating'];
+                }
+
 
                 //inserting user's median rating into `member` table
                 $db = $this->dbConnect();
