@@ -357,7 +357,7 @@ function time_elapsed_string($datetime, $full = false) {
 
        
         var starsDivDesktop = document.querySelector(".starsDesktop");
-        var stasrDivMobile = document.querySelector(".starsMobile");
+        var starsDivMobile = document.querySelector(".starsMobile");
         var starValueInput = document.querySelector(".starValue");
         var starValue = starValueInput.value;
    
