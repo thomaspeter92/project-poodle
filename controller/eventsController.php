@@ -100,7 +100,20 @@ function addStars($params) {
     $addStars->addStars($params);
 }
 
+function ratingCheck($params){
+    $ratingCheck = new EventManager();
+    $ratingCheck->ratingCheck($params);
+}
 
+function isEventOverCheck($params){
+    $isEventOverCheck = new EventManager();
+    $isEventOverCheck->isEventOverCheck($params);
+}
+
+function attendeeCheck($params){
+    $attendeeCheck = new EventManager();
+    $attendeeCheck->attendeeCheck($params);
+}
 function displayAddEditEvent($eventId){
     if(!empty($eventId)){
         $eventManager = new EventManager();

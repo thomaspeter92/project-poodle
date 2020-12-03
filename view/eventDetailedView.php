@@ -937,6 +937,17 @@ if($event) {
     }}
     editComments();
 
+//FUNCTION TO DETERMINE WHETHER OR NOT TO SHOW THE STARS
+window.addEventListener('load', function(){
+    var xhr = new XMLHttpRequest();
+    xhr.open(`POST`, `index.php?action=isEventOverCheck`);
+    xhr.responseText
+})
+//check to see if event is over 
+//check to see if user was an attendee
+//check to see if the user has already rated 
+
+
 //FUNCTION TO ADD STAR RATING TO DB
     var ratingForm = document.querySelector('#ratingForm');
     ratingForm.addEventListener('submit', function(e){
@@ -959,7 +970,6 @@ if($event) {
         rated.textContent = "thank you for rating";
         rated.style.color = "#72ddf7";
         ratingSection.replaceChild(rated, ratingForm);
-
     });
 
 // ************* MAP FUNCTIONS ************
@@ -1029,13 +1039,6 @@ if($event) {
             createAddEditEventModal(eventId);
         });
     }
-
-
-
-
-
-
-
 
 
 </script>
