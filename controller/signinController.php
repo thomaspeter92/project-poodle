@@ -117,7 +117,7 @@ function createSessionByMemberDB($memberDataFromDB) {
     $sessionID = $memberDataFromDB["id"];
     $sessionName = $memberDataFromDB["name"];
     $sessionImageURL = NULL;
-    $sessionRating = NULL;
+    $sessionRating = $memberDataFromDB["rating"];
     if (isset($memberDataFromDB["profileImage"])) {
         $sessionImageURL = $profileImageDir.$memberDataFromDB["profileImage"];
     }

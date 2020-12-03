@@ -65,12 +65,13 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                     <div class="userImageWrapper">
                         <div><img class="userImage" src="<?=$sessionImageURL;?>" alt="default"></div>
                         <!-- <div><i class="fas fa-star"></i></div> -->
-                        <div class="stars">
+                        <div class="starsDesktop">
+                            <input type="hidden" class="starValue" value=<?= $_SESSION['rating']; ?>> </input>
+                            <!-- <img class="" src="./public/images/star.png" alt="default">
                             <img class="" src="./public/images/star.png" alt="default">
                             <img class="" src="./public/images/star.png" alt="default">
                             <img class="" src="./public/images/star.png" alt="default">
-                            <img class="" src="./public/images/star.png" alt="default">
-                            <img class="" src="./public/images/star.png" alt="default">
+                            <img class="" src="./public/images/star.png" alt="default"> -->
                         </div>
                     </div>
                     <div>
@@ -94,12 +95,13 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                     <div class="mobileLoggedIn">
                         <div class="userImageWrapper">
                             <img class="userImage" src="<?=$sessionImageURL;?>" alt="default">
-                            <div class="stars">
+                            <div class="starsMobile">
+                                <input type="hidden" class="starValue" value=<?= $_SESSION['rating']; ?>> </input>
+                                <!-- <img class="" src="./public/images/star.png" alt="default">
                                 <img class="" src="./public/images/star.png" alt="default">
                                 <img class="" src="./public/images/star.png" alt="default">
                                 <img class="" src="./public/images/star.png" alt="default">
-                                <img class="" src="./public/images/star.png" alt="default">
-                                <img class="" src="./public/images/star.png" alt="default">
+                                <img class="" src="./public/images/star.png" alt="default"> -->
                             </div>
                         </div>
                         <div>
@@ -216,6 +218,27 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : $DEFAU
                 showMenu = false; 
             } 
         } 
+
+       
+        var starsDivDesktop = document.querySelector(".starsDesktop");
+        var stasrDivMobile = document.querySelector(".starsMobile");
+        var starValueInput = document.querySelector(".starValue");
+        var starValue = starValueInput.value;
+   
+        for(var i=0; i<starValue; i++){
+            starElement = document.createElement('img');
+            starElement.src = "./public/images/star.png";
+            starElement.alt = "star";   
+            starsDivDesktop.appendChild(starElement);
+
+        }
+        for(var i=0; i<starValue; i++){
+            starElement = document.createElement('img');
+            starElement.src = "./public/images/star.png";
+            starElement.alt = "star";  
+            starsDivMobile.appendChild(starElement);
+        }
+
     }
     </script> 
     <script src="./public/js/common.js"></script>

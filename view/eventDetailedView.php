@@ -604,7 +604,7 @@ if($event) {
                     echo '<em>This event has now passed.</em>';
                 }
 
-                if($eventPassed == true && isset($_SESSION['id'])){ ?> 
+                // if($eventPassed == true && isset($_SESSION['id'])){ ?> 
                     <div id="ratingSection">
                         <p>rate the event: </p>
                             <form method="POST" action="index.php" id="ratingForm">
@@ -635,7 +635,7 @@ if($event) {
                     </div>
                 
                 <?php
-                }
+                // }
 
                 ?>
                 </div>
