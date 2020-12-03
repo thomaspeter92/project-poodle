@@ -97,7 +97,7 @@ const initGoogle = () => {
         gapi.load('auth2', function(){
             auth2 = gapi.auth2.init({
             client_id: '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com',
-            cookiepolicy: 'single_host_origin',
+            cookiepolicy: 'single_host_origin'
             // Request scopes in addition to 'profile' and 'email'
             //scope: 'additional_scope'
             });
@@ -121,7 +121,11 @@ const signAllOut = () => {
     loadScript(GOOGLE_SCRIPT_ID, GOOGLE_URL, () => {
         googleSignOut();
     });
+
     loadScript(KAKAO_SCRIPT_ID, KAKAO_URL, () => {
+        const APP_KEY_FOR_JAVASCRIPT = "cea8248c64bf22c135e642408c2fb6c2";
+        Kakao.cleanup();
+        Kakao.init(APP_KEY_FOR_JAVASCRIPT);
         signOutWithKakao();
     });
 
@@ -245,9 +249,11 @@ const gRequestUserInfo = (gUser,signUp) => {
                 if (result.alreadySignedUp) {
                     failGoogleSignIn("You account has been already signed up. Please try to sign in.");
                 } else {
-                    if (result.kakao) failGoogleSignIn("You account has been signed up with Kakao.");
-                    else if (!result.google && !result.kakao) failGoogleSignIn("You account has not been signed up with Google.");
-                    else failGoogleSignIn("Your Google account is not signed up yet. Please sign up first.");
+                    if (!result.signedIn){
+                        if (result.kakao) failGoogleSignIn("You account has been signed up with Kakao.");
+                        else if (!result.google && !result.kakao) failGoogleSignIn("You account has not been signed up with Google.");
+                        else failGoogleSignIn("Your Google account is not signed up yet. Please sign up first.");
+                    }
                 }
             } 
             else failGoogleSignIn("Please try it again."); //Error - result is not JSON string    
@@ -259,7 +265,7 @@ const gRequestUserInfo = (gUser,signUp) => {
 
 const googleSignOut = () => {
     if(gapi){
-        const auth2 = gapi.auth2.getAuthInstance();
+        var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
             
         });

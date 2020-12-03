@@ -125,6 +125,7 @@
             font-size: 1em;
         }
         .loginInput {
+            width:48%;
             border-radius:42px;
             border-style: none;
             border: 1px solid lightgrey;

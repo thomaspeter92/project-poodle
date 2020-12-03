@@ -57,7 +57,7 @@ function signUpWith($memberData) {
     $manager = new MemberManager();
     $memberDataFromDB = $manager->getMemberDataByEmail($email);
     if ($memberDataFromDB) {
-        $result = array("alreaySignedUp" => TRUE);
+        $result = array("alreadySignedUp" => TRUE);
         echo json_encode($result);
     } else {
         if (empty($memberData["name"]) 
