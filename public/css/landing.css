@@ -1,4 +1,4 @@
-body {
+html {
     scroll-behavior: smooth;
 }
 #wrapper {
@@ -37,12 +37,8 @@ body {
     z-index: -1;
 }
 
-#mobileCarousel {
+#mobileCarouselContent {
     display: none;
-    position: relative;
-    background-image: url(../images/portraitCarousel.jpg);
-    background-position: center;
-    background-size: cover;
 }
 
 #carouselTextBox {
@@ -60,6 +56,13 @@ body {
     font-weight: bold;
 }
 
+#carouselTextBox p{
+    text-shadow: 10px 10px 18px #979797;
+}
+
+a {
+    color: white;
+}
 
 #carouselButton {
     background-color: #72ddf7;
@@ -312,6 +315,8 @@ body {
 .insideContentAfterClick {
     opacity: 1;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .insideContent p {
@@ -330,11 +335,6 @@ body {
 
 .arrowClick {
     transform: rotate(180deg);
-}
-
-.insideContent img {
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
 }
 
 #content4section {
@@ -495,7 +495,6 @@ body {
         margin: auto;
         font-size: 2.5em;
         text-align: center;
-        background-color: rgba(255, 255, 255,.2);
     }
 
     #mobileCarouselContent h4 {
@@ -506,16 +505,18 @@ body {
         font-size: 2em;
     }
 
-    #mobileCarouselContent i {
+    #mobileCarouselContent a {
         margin-bottom: 5%;
         font-size: 2em;
         animation: bounce 1s infinite ease-in-out;
+        color: white;
     }
+
+   
     
 
     #mobileCarousel {
         display: unset;
-        /* width: 100vw; */
         height: 100vh;
     }
 
@@ -523,7 +524,6 @@ body {
         width: 100%;
         text-align: center;
         filter: blur(2px);
-        /* position: relative; */
     }
 
 

@@ -375,7 +375,7 @@
     background-image: none;
     background-color: rgb(245, 245, 245);
     width: 50%;
-    height: auto;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -399,7 +399,7 @@
     margin: 0;
     width: auto;
     height: 50px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     background-color: #72ddf7;
 	border-radius:42px;
 	cursor:pointer;
@@ -573,7 +573,7 @@ if($event) {
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
-                <img class="eventImage" src="<?=!empty($event['picture']) ? './private/event/$event'.$event['picture'] : './public/images/event/default.png' ?>" />
+                <img class="eventImage" src="<?=!empty($event['picture']) ? './private/event/'.$event['picture'] : './public/images/event/default.png' ?>" />
                 <p id="descriptionArea"><?= nl2br($event['description']); ?></p>
 
                 <form action="index.php" method="POST" id="commentForm">
