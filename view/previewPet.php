@@ -143,7 +143,7 @@ ob_start();
             <div id="myEventsWrapper">
                 <div id="myEventsHeader">
                     <div id="myEvents"><span>My Events</span></div>
-                    <div id="attendingEvents"><span>Atteding Events</span></div>
+                    <div id="attendingEvents"><span>Attending Events</span></div>
                 </div>
                 <div id="eventsList">
                     <?php require("./view/eventsListOnProfile.php"); ?>
