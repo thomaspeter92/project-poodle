@@ -111,7 +111,7 @@ if (isset($_GET['account'])) {
 <div id="expandingSection" class="content">
     <div id="expandingContainer">
             <div class="insideContainer inside1">
-                <h3>VR Features</h3><i class="fas fa-arrow-circle-down downArrow"></i>
+                <h3>AR Features</h3><i class="fas fa-arrow-circle-down downArrow"></i>
                 <div class="insideContent">
                     <article>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur doloremque temporibus porro dolorum minima id quo aliquam aspernatur molestiae cupiditate repellendus, similique laborum ab, dolore iure quaerat inventore mollitia!</p>

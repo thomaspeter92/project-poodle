@@ -35,60 +35,67 @@ function countDownDateMobile(eventTime, unique) {
 }
 
 
-let notificationDropdownDesktop = document.querySelector(".notificationsDropdownDesktop");
-notificationDropdownDesktop.addEventListener('click', event => {
-    event.stopPropagation();
-    desktopContents = document.querySelector(".notificationsDropdownContentDesktop");
-    desktopContents.classList.toggle("show");
-    notificationNumberSpan = document.querySelector('#notificationNumber')
-    notificationNumberNotTrimmed = notificationNumberSpan.textContent
-    nNtrimmed = notificationNumberNotTrimmed.trim();
-    console.log(nNtrimmed);
+var notificationDropdownDesktop = document.querySelector(".notificationsDropdownDesktop");
+//Franco
+if(notificationDropdownDesktop){
+    notificationDropdownDesktop.addEventListener('click', (event) => {
+        event.stopPropagation();
+        desktopContents = document.querySelector(".notificationsDropdownContentDesktop");
+        desktopContents.classList.toggle("show");
+        notificationNumberSpan = document.querySelector('#notificationNumber')
+        notificationNumberNotTrimmed = notificationNumberSpan.textContent
+        nNtrimmed = notificationNumberNotTrimmed.trim();
+        console.log(nNtrimmed);
 
 
-    if (nNtrimmed > 0) {
-        console.log("worked")
+        if (nNtrimmed > 0) {
+            console.log("worked")
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'index.php?action=readNotifications');
+            xhr.onload = function () {
+                if(xhr.status == 200){
+                    notificationNumberSpan.innerHTML = '';
+                } else {
+                    return null;
+                }
+            }
+            xhr.send(null);
+        }
+    });
+}
+
+// Remove Dropdown on click inside window
+window.addEventListener("click", event => {
+    contents = document.querySelector(".notificationsDropdownContentDesktop")    ;
+    if (contents){
+        contents.classList.remove("show");
+    }
+});
+
+let mobileDropdownNotifications = document.querySelector(".notificationsDropdownMobile");
+if(mobileDropdownNotifications){
+    mobileDropdownNotifications.addEventListener('click', event => {
+        console.log("clicked");
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'index.php?action=readNotifications');
+        xhr.open('GET', 'index.php?action=notificationsView');
         xhr.onload = function () {
             if(xhr.status == 200){
-                notificationNumberSpan.innerHTML = '';
+                let notificationsView = new Modal(xhr.responseText);
+                notificationsView.generate();
+                let countDownSpans = document.querySelectorAll(".countDownSpan");
+                for (n=0; n<countDownSpans.length; n++) {
+                let unixEvent = countDownSpans[n].getAttribute("data-unixevent")
+                let unique = countDownSpans[n].getAttribute("data-unique")
+                // console.log(unixEvent);
+                // console.log(unique);
+                countDownDateMobile(unixEvent, unique)
+                // console.log('i ran')
+                }
             } else {
                 return null;
             }
         }
+        
         xhr.send(null);
-    }
-});
-
-// Remove Dropdown on click inside window
-window.addEventListener("click", event => {
-contents = document.querySelector(".notificationsDropdownContentDesktop")    ;
-contents.classList.remove("show");
-});
-
-let mobileDropdownNotifications = document.querySelector(".notificationsDropdownMobile");
-mobileDropdownNotifications.addEventListener('click', event => {
-    console.log("clicked");
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'index.php?action=notificationsView');
-    xhr.onload = function () {
-        if(xhr.status == 200){
-            let notificationsView = new Modal(xhr.responseText);
-            notificationsView.generate();
-            let countDownSpans = document.querySelectorAll(".countDownSpan");
-            for (n=0; n<countDownSpans.length; n++) {
-            let unixEvent = countDownSpans[n].getAttribute("data-unixevent")
-            let unique = countDownSpans[n].getAttribute("data-unique")
-            // console.log(unixEvent);
-            // console.log(unique);
-            countDownDateMobile(unixEvent, unique)
-            // console.log('i ran')
-            }
-        } else {
-            return null;
-        }
-    }
-    
-    xhr.send(null);
-});
+    });
+}
