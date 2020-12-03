@@ -343,4 +343,89 @@ require_once("Manager.php");
             $req->execute();
             $req->closeCursor();
         }
+
+        //adding ratings to DB and updating the event's median rating and host's median rating :)
+        public function addStars($params){
+            $db = $this->dbConnect();
+            $eventId = $params['eventId'];
+            $rating = $params['rating'];
+            if(!empty($eventId) && !empty($rating)){
+                //insert rating into `eventRating` table
+                $query = ("INSERT INTO eventRating (eventId, userId, rating) 
+                        VALUES (:eventId, :userId, :rating)");
+                $response = $db->prepare($query);
+                $response->bindValue(":eventId", $eventId, PDO::PARAM_INT);
+                $response->bindValue(":userId", $_SESSION['id'], PDO::PARAM_INT);
+                $response->bindValue(":rating", $rating, PDO::PARAM_INT);
+                $response->execute();
+                $response->closeCursor();
+
+                //select all ratings for the event from `eventRating` table
+                $db = $this->dbConnect();
+                $req = $db->prepare("SELECT rating FROM eventRating WHERE eventId = :eventId ORDER BY rating DESC");
+                $req->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+                $req->execute();
+                $eventRatings = $req->fetchAll(PDO::FETCH_ASSOC);
+                $req->closeCursor();
+
+                //getting median of the event's rating
+                $medianPosition = ceil(count($eventRatings)/2);
+                if(count($eventRatings)>1){
+                    $getEventsMedianRating = $eventRatings[$medianPosition];
+                    $eventsMedianRating = $getEventsMedianRating['rating'];
+                }else{
+                    $getEventsMedianRating = $eventRatings[0];
+                    $eventsMedianRating = $getEventsMedianRating['rating'];
+                }
+               
+                //inserting median rating into `event` table
+                $db = $this->dbConnect();
+                $query = ("UPDATE event SET rating = :eventsMedianRating WHERE id = :eventId");
+                $response = $db->prepare($query);
+                $response->bindValue(':eventsMedianRating', $eventsMedianRating, PDO::PARAM_INT);
+                $response->bindValue(':eventId', $eventId, PDO::PARAM_INT);
+                $response->execute();
+                $response->closeCursor();
+
+                //select hostId from `event` table 
+                $db = $this->dbConnect();
+                $response = $db->prepare("SELECT hostId FROM event WHERE id = :eventId");
+                $response->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+                $response->execute();
+                $assocHostId = $response->fetch(PDO::FETCH_ASSOC);
+                $response->closeCursor();
+
+                $hostId= $assocHostId['hostId'];
+                
+
+                //getting all `event` ratings related to that hostId 
+                $db = $this->dbConnect();
+                $req = $db->prepare("SELECT rating FROM event WHERE hostId = :hostId ORDER BY rating DESC");
+                $req->bindParam(':hostId', $hostId, PDO::PARAM_INT);
+                $req->execute();
+                $hostsEventRatings = $req->fetchAll(PDO::FETCH_ASSOC); 
+                $req->closeCursor();
+                
+                //calculating the median of the event ratings that belongs to that host
+                $hostMedianPosition = ceil(count($hostsEventRatings)/2);
+                if($hostMedianPosition>1){
+                    $getHostsMedianRating = $hostsEventRatings[$hostMedianPosition]; 
+                    $hostsMedianRating = $getHostsMedianRating['rating'];
+                }else{
+                    $getHostsMedianRating = $hostsEventRatings[0]; 
+                    $hostsMedianRating = $getHostsMedianRating['rating'];
+                }
+
+
+                //inserting user's median rating into `member` table
+                $db = $this->dbConnect();
+                $query = ("UPDATE member SET rating = :hostsMedianRating WHERE id = :hostId");
+                $response = $db->prepare($query);
+                $response->bindValue(':hostsMedianRating', $hostsMedianRating, PDO::PARAM_INT);
+                $response->bindValue(':hostId', $assocHostId, PDO::PARAM_INT);
+                $response->execute();
+                $response->closeCursor();
+            }
+        }
+    
     }

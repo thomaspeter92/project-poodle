@@ -103,12 +103,13 @@ function time_elapsed_string($datetime, $full = false) {
                     <div class="userImageWrapper">
                         <div><img class="userImage" src="<?=$sessionImageURL;?>" alt="default"></div>
                         <!-- <div><i class="fas fa-star"></i></div> -->
-                        <div class="stars">
+                        <div class="starsDesktop">
+                            <input type="hidden" class="starValue" value=<?= $_SESSION['rating']; ?>> </input>
+                            <!-- <img class="" src="./public/images/star.png" alt="default">
                             <img class="" src="./public/images/star.png" alt="default">
                             <img class="" src="./public/images/star.png" alt="default">
                             <img class="" src="./public/images/star.png" alt="default">
-                            <img class="" src="./public/images/star.png" alt="default">
-                            <img class="" src="./public/images/star.png" alt="default">
+                            <img class="" src="./public/images/star.png" alt="default"> -->
                         </div>
                     </div>
                     <div class="profileLink">
@@ -218,12 +219,13 @@ function time_elapsed_string($datetime, $full = false) {
                     <div class="mobileLoggedIn">
                         <div class="userImageWrapper">
                             <img class="userImage" src="<?=$sessionImageURL;?>" alt="default">
-                            <div class="stars">
+                            <div class="starsMobile">
+                                <input type="hidden" class="starValue" value=<?= $_SESSION['rating']; ?>> </input>
+                                <!-- <img class="" src="./public/images/star.png" alt="default">
                                 <img class="" src="./public/images/star.png" alt="default">
                                 <img class="" src="./public/images/star.png" alt="default">
                                 <img class="" src="./public/images/star.png" alt="default">
-                                <img class="" src="./public/images/star.png" alt="default">
-                                <img class="" src="./public/images/star.png" alt="default">
+                                <img class="" src="./public/images/star.png" alt="default"> -->
                             </div>
                         </div>
                         <div class="profileLink">
@@ -357,6 +359,27 @@ function time_elapsed_string($datetime, $full = false) {
                 showMenu = false; 
             } 
         } 
+
+       
+        var starsDivDesktop = document.querySelector(".starsDesktop");
+        var starsDivMobile = document.querySelector(".starsMobile");
+        var starValueInput = document.querySelector(".starValue");
+        var starValue = starValueInput.value;
+   
+        for(var i=0; i<starValue; i++){
+            starElement = document.createElement('img');
+            starElement.src = "./public/images/star.png";
+            starElement.alt = "star";   
+            starsDivDesktop.appendChild(starElement);
+
+        }
+        for(var i=0; i<starValue; i++){
+            starElement = document.createElement('img');
+            starElement.src = "./public/images/star.png";
+            starElement.alt = "star";  
+            starsDivMobile.appendChild(starElement);
+        }
+
     }
     </script> 
     <script src="./public/js/notifications.js"></script>

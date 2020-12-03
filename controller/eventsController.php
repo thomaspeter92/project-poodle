@@ -95,6 +95,11 @@ function getGuestProfileImagesOfEvent($eventId, $limit=NULL) {
     return $guests; 
 }
 
+function addStars($params) {
+    $addStars = new EventManager();
+    $addStars->addStars($params);
+}
+
 
 function displayAddEditEvent($eventId){
     if(!empty($eventId)){

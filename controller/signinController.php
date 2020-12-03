@@ -13,10 +13,11 @@ function logout() {
     header("Location: index.php");
 }
 
-function createSession($id, $name, $imageURL) {
+function createSession($id, $name, $imageURL, $rating) {
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
     $_SESSION['imageURL'] = $imageURL;
+    $_SESSION['rating'] = $rating;
 }
 
 function checkLogin($params) {
@@ -116,9 +117,10 @@ function createSessionByMemberDB($memberDataFromDB) {
     $sessionID = $memberDataFromDB["id"];
     $sessionName = $memberDataFromDB["name"];
     $sessionImageURL = NULL;
+    $sessionRating = $memberDataFromDB["rating"];
     if (isset($memberDataFromDB["profileImage"])) {
         $sessionImageURL = $profileImageDir.$memberDataFromDB["profileImage"];
     }
-    createSession($sessionID, $sessionName, $sessionImageURL);
+    createSession($sessionID, $sessionName, $sessionImageURL, $sessionRating);
 }
 

@@ -269,6 +269,9 @@ try {
             deleteEvent($_REQUEST['eventId']);
             showUpcomingEventsList($sessionID);
             break;
+        case "addStars":
+            addStars($_REQUEST);
+            break;
         case "loadGuests" :
             loadGuests($_REQUEST);
             break;                  
@@ -290,9 +293,6 @@ try {
         case "pleaseLogIn":
             pleaseLogIn();
             break;
-        case "stars":
-            stars($starValue, $_REQUEST['eventId']);
-            break; 
         default:
             landing();
             break;

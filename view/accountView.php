@@ -64,24 +64,19 @@
     }
 
     .customFileUpload {
-    /* border: 1px solid #ccc;
-    cursor: pointer;
-    width:100px;
-    font-family: monsterRatRegular; */
-    /* font-size: 14px; */
     margin: 0;
     width: auto;
-    /* height: 50px; */
     margin-bottom: 0;
     background-color: #72ddf7;
     border-radius: 42px;
     cursor: pointer;
     color: #ffffff;
+    font-style: Arial;
     font-size: 17px;
-    /* padding: 13px 76px; */
     border-style: none;
     box-shadow: 5px 10px 18px #acacac;
     text-align: center;
+    padding: 0px 5px;
     }
 
     .customFileUpload:hover {
@@ -102,10 +97,10 @@
 
     
     .dropdownContent {
-        /* position: absolute; */
-        /* transform: translate(-50%, -50%);
+        position: absolute;
+        transform: translate(-50%, -50%);
         left: 50%;
-        top: 70%; */
+        top: 67%;
         /* background-color: #f1f1f1; */
         /* min-width: 160px; */
         /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */

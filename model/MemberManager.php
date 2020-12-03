@@ -30,7 +30,7 @@ class MemberManager extends Manager{
     public function getMemberDataByEmail($email) {
         $email = htmlspecialchars($email);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, kakao, google, profileImage, points FROM member WHERE email=:email";
+        $query = "SELECT id, name, kakao, google, profileImage, rating FROM member WHERE email=:email";
         $response = $db->prepare($query);
         $response->bindParam('email', $email, PDO::PARAM_STR);
         $response->execute();
@@ -42,7 +42,7 @@ class MemberManager extends Manager{
     public function getMemberDataByID($id) {
         $id = htmlspecialchars($id);
         $db = $this->dbConnect();
-        $query = "SELECT id, name, password, email, kakao, google, profileImage FROM member WHERE id=:id";
+        $query = "SELECT id, name, password, email, kakao, google, profileImage, rating FROM member WHERE id=:id";
         $response = $db->prepare($query);
         $response->bindParam('id', $id, PDO::PARAM_STR);
         $response->execute();
@@ -181,7 +181,6 @@ class MemberManager extends Manager{
             $response->execute();
             $response->closeCursor();
     }
-
     function deleteAccount($userID) {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM member WHERE id = $userID");
