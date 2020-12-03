@@ -60,7 +60,7 @@ function time_elapsed_string($datetime, $full = false) {
     <?= isset($style) ? $style : ""; ?>
     
     <!-- COUNTDOWN SCRIPT -->
-    <script src="./public/js/countdown.js"></script>;
+    <script src="./public/js/countdown.js"></script>
     <!-- TODO: Change to a variable -->
     <title>Project Poodle</title>
 

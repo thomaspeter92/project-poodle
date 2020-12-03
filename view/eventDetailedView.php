@@ -573,7 +573,7 @@ if($event) {
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
-                <img class="eventImage" src="./private/event/<?=!empty($event['picture']) ? $event['picture'] : 'default.png' ?>" />
+                <img class="eventImage" src="<?=!empty($event['picture']) ? './private/event/$event'.$event['picture'] : './public/images/event/default.png' ?>" />
                 <p id="descriptionArea"><?= nl2br($event['description']); ?></p>
 
                 <form action="index.php" method="POST" id="commentForm">
