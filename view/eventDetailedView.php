@@ -624,6 +624,13 @@ $isGuest = (isset($_SESSION['id']) and ($event['hostId'] !== $_SESSION['id']));
 // echo "<br>";
 // echo $eventPassed;
 // echo "<br>";
+// echo "--------";
+// echo "<br>";
+// echo "isRated: ";
+// echo $isRated;
+// echo "<br>";
+// echo "--------";
+
 
 if($event) {
 ?>
@@ -655,6 +662,9 @@ if($event) {
                 } else {
                     if (($eventPassed == true and $isGuest) and $attending == true): ?>
                         <div id="ratingSection">
+                    <?php if ($isRated): ?>
+                            <p style="color:#72ddf7"><strong>Thank you for rating</strong></p>
+                    <?php else: ?>
                             <p><em>This event has now expired.<br>Please rate the event </em></p>
                             <form method="POST" action="index.php" id="ratingForm">
                                 <div id="full-stars">
@@ -681,6 +691,7 @@ if($event) {
                                 </div>
                                 <div><button style="text-align: center" type="submit" class="submitRating">Submit</button></div>
                             </form>
+                    <?php endif; ?>
                         </div>
                     <?php 
                     else: 
