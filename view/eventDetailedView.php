@@ -622,7 +622,7 @@ if($event) {
                     echo '<em>This event has now expired.</em>';
                 }
 
-                // if($eventPassed == true && isset($_SESSION['id'])){ ?> 
+                if($eventPassed == true && isset($_SESSION['id']) && $attending == true){ ?> 
                     <div id="ratingSection">
                         <p>rate the event: </p>
                             <form method="POST" action="index.php" id="ratingForm">
@@ -653,7 +653,7 @@ if($event) {
                     </div>
                 
                 <?php
-                // }
+                }
 
                 ?>
                 </div>
@@ -938,12 +938,10 @@ if($event) {
     editComments();
 
 //FUNCTION TO DETERMINE WHETHER OR NOT TO SHOW THE STARS
-window.addEventListener('load', function(){
-    var xhr = new XMLHttpRequest();
-    xhr.open(`POST`, `index.php?action=isEventOverCheck`);
-    xhr.responseText
-})
+
 //check to see if event is over 
+
+
 //check to see if user was an attendee
 //check to see if the user has already rated 
 

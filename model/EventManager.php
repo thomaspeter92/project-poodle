@@ -454,7 +454,7 @@ require_once("Manager.php");
             $isEventOverCheck = $req->fetch(PDO::FETCH_ASSOC);
             $req->closeCursor();
 
-            if($isEventOverCheck){
+            if($isEventOverCheck < now()){
                 echo true;
             }else{
                 echo false;
