@@ -25,7 +25,7 @@
     }
 
     .modalSubDiv {
-        height: 500px;
+        height: 530px;
         width: 300px;
     }
 
