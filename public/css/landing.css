@@ -679,6 +679,18 @@ a {
 
 }
 
+@media (max-width: 600px) {
+    .content5div h5 {
+        font-size: 1.5em;
+    }
+    .content4article h5 {
+        font-size: .6em;
+    }
+    .content4article p {
+        font-size: .4em;
+    }
+}
+
 @media (max-width: 450px) {
 
     #mobileCarousel  {

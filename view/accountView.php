@@ -29,6 +29,12 @@
         width: 300px;
     }
 
+    @media (max-width: 900px) {
+        .modalSubDiv{
+            margin: auto;
+        }
+    }
+
     .modalDivContent {
         margin-top:25px;
         margin-left: 0px;

@@ -694,6 +694,12 @@ background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIH
     }
 } */
 
+@media screen and (max-width: 600px){
+    .menuItems>p {
+        padding-top: 0;
+        padding-bottom: 2.0em;
+    }    
+}
 @media screen and (max-height: 653px){
     .contactPageEmail, .contactPageNumber,.contactPageFax {
         margin-top: 3%;
