@@ -137,7 +137,7 @@ function showMapDetail(){
 
 function postNotification($params) {
     $commentNotification = new NotificationManager();
-    $notification = array("eventId"=>$params['eventId'], "author"=>$params['authorName'], "eventName"=>$params['eventName'], "hostId"=>$params['hostId']);
+    $notification = array("eventId"=>$params['eventId'], "authorId"=>$params['author'], "authorName"=>$params['authorName'], "eventName"=>$params['eventName'], "hostId"=>$params['hostId']);
     $commentNotification->commentPostNotification($notification);
 }
 

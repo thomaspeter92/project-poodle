@@ -430,20 +430,21 @@ require_once("Manager.php");
         }
 
         //checks to see if the user has rated that event
-        function ratingCheck($params){
+        function ratingCheck($eventId, $sessionID){
             $db = $this->dbConnect();
             $req = $db->prepare("SELECT userId, eventId FROM eventRating WHERE userId = ? AND eventId = ?");
-            $req->bindParam(1, $params['eventId'], PDO::PARAM_INT);
-            $req->bindParam(2, $_SESSION['id'], PDO::PARAM_INT);
+            $req->bindParam(1, $sessionID, PDO::PARAM_INT);
+            $req->bindParam(2, $eventId, PDO::PARAM_INT);
             $req->execute();
             $ratingCheck = $req->fetch(PDO::FETCH_ASSOC);
             $req->closeCursor();
 
-            if($ratingCheck){
-                echo true;
-            }else{
-                echo false;
+            print_r($ratingCheck);
+
+            if(!empty($ratingCheck)) {
+                return TRUE;
             }
+            return FALSE;
         }
        
         

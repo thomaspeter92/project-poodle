@@ -61,36 +61,55 @@ class NotificationManager extends Manager{
     
     public function commentPostNotification($params) {
 
+        $hostId = $params['hostId'];
         $eventId = $params['eventId'];
-        $author = $params['author'];
+        $authorId = $params['authorId'];
+        $authorName = $params['authorName'];
         $eventName = $params['eventName'];
 
         $href = "index.php?action=showEventDetail&eventId={$eventId}";
+        $message = "#".$authorName."| commented in #".$eventName."|";
+        
+        //Send all guests of the event except me.
+        $db = $this->dbConnect();
+        $req = $db->prepare("SELECT guestId FROM eventAttend WHERE eventId = :eventId");
+        $req->bindParam(':eventId',$eventId,PDO::PARAM_INT);
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        
+        if (!empty($datas)) {
+            foreach($datas as $data) {
+                $guestId = $data["guestId"];
+                if ($guestId != $authorId) {
+                    $req = $db->prepare("INSERT INTO notification (userID, message, href, viewed, eventDate) VALUES (:userID, :message, :href, :viewed, :eventDate)");
+                    $req->bindParam(':userID',$guestId,PDO::PARAM_INT);
+                    $req->bindParam(':message',$message,PDO::PARAM_STR);
+                    $req->bindParam(':href',$href,PDO::PARAM_STR);
+                    $req->bindValue(":viewed", NULL , PDO::PARAM_STR);
+                    $req->bindValue(":eventDate", NULL, PDO::PARAM_STR);
+                    $req->execute();
+                    $req->closeCursor();
+                }
+            }
+        }
+    }
 
-        $message = "#".$params['author']."| commented in #".$params['eventName']."|";
-        // $message = "{$author} || commented in {$eventName}";
-        $userID = $params['hostId'];
-
+    public function attendNotification($params){
+        $hostId = $params['hostId'];
+        $eventId = $params['eventId'];
+        $eventName = $params['eventName'];
+        $guestName = $params['guestName'];
+        $href = "index.php?action=showEventDetail&eventId={$eventId}";
+        $message ="#".$guestName."|"." has signed up for #".$eventName."|";
+        
         $db = $this->dbConnect();
         $req = $db->prepare("INSERT INTO notification (userID, message, href, viewed, eventDate) VALUES (:userID, :message, :href, :viewed, :eventDate)");
-        $req->bindParam(':userID',$userID,PDO::PARAM_INT);
+        $req->bindParam(':userID',$hostId,PDO::PARAM_INT);
         $req->bindParam(':message',$message,PDO::PARAM_STR);
         $req->bindParam(':href',$href,PDO::PARAM_STR);
         $req->bindValue(":viewed", NULL , PDO::PARAM_STR);
         $req->bindValue(":eventDate", NULL, PDO::PARAM_STR);
-
-
-        $req->execute();
-        $req->closeCursor();
-    }
-
-    public function guestNotification(){
-        $db = $this->dbConnect();
-        $req = $db->prepare("INSERT INTO notification (userID, message) VALUES (:userID, :message)");
-        $userID = $params['guestId'];
-        $message ="#".$userID."|"."has signed up for your event";
-        $req->bindParam(':userID',$userID, PDO::PARAM_INT);
-        $req->bindParam(':message',$message, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }

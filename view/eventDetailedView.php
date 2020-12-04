@@ -647,7 +647,7 @@ if($event) {
                             if ($event['guestLimit'] != 0 && $guestCount >= $event['guestLimit'] && $attending == false) { ?>
                                     <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php 
                             } else { ?>
-                                <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
+                                <button id="attendButton" class="submit <?= $attending == true ? 'attending' : ''?>" data-eventId="<?=$event['eventId']; ?>" data-eventName="<?= $event['name']; ?>" data-hostId="<?=$event['hostId']; ?>" data-guestId="<?=$_SESSION['id']; ?>" data-guestName="<?=$_SESSION['name']; ?>"><?= $attending == true ? 'ATTENDING' : 'ATTEND'?> </button>
                         <?php }
                     } else {
                         echo '<em>Sign in to Attend</em>';
@@ -842,12 +842,16 @@ if($event) {
     if (attendButton) {
         attendButton.addEventListener('click', function() {
             let eventId = attendButton.getAttribute("data-eventId");
+            let eventName = attendButton.getAttribute("data-eventName");
             let hostId = attendButton.getAttribute("data-hostId");
             let guestId = attendButton.getAttribute("data-guestId");
+            let guestName = attendButton.getAttribute("data-guestName");
             let params = new FormData();
             params.append("eventId",eventId);
+            params.append("eventName",eventName);
             params.append("hostId",hostId);
             params.append("guestId",guestId);
+            params.append("guestName",guestName);
             if(attendButton.classList.contains('attending') && confirm('Confirm: unattend event!')) {
                 params.append("action",'unattendEvent');
                 this.textContent = "ATTEND";
@@ -862,7 +866,6 @@ if($event) {
             xhr.onload = function() {
                 console.log(xhr.responseText);
                 if (xhr.responseText.trim() == 'success') {
-       
                     location.reload();
                 } else {
                     alert('Oops, something went wrong. Please try again.')

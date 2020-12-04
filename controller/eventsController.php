@@ -42,6 +42,8 @@ function showEventDetail($params) {
     $guestIdList = $showEvent->getGuestId($params['eventId']);
     $commentsCount = $showEvent->countComments($params['eventId']);
     isset($_SESSION['id']) ? $profilePic = $showEvent->getProfilePic($_SESSION['id']) : null;
+
+    $isRated = ratingCheck($params['eventId'], $_SESSION['id']);
     require("./view/eventDetailedView.php");
 }
 
@@ -75,9 +77,13 @@ function attendEvent($params) {
     $success = $eventAttend->attendEventSend($params);
 
     //Franco
+    $notificationManager = new NotificationManager();
     if($params['action']=='attendEvent'){
-        $notificationManager = new NotificationManager();
         $notificationManager->setEventTimerNotification($params['eventId'],$params['guestId']);
+
+        if ($params['hostId'] != $params['guestId']) {
+            $notificationManager->attendNotification($params);
+        }
     }
 }
 
@@ -100,9 +106,9 @@ function addStars($params) {
     $addStars->addStars($params);
 }
 
-function ratingCheck($params){
+function ratingCheck($eventId, $sessionID){
     $ratingCheck = new EventManager();
-    $ratingCheck->ratingCheck($params);
+    return $ratingCheck->ratingCheck($eventId, $sessionID);
 }
 
 function displayAddEditEvent($eventId){
