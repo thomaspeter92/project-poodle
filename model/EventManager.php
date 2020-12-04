@@ -439,8 +439,6 @@ require_once("Manager.php");
             $ratingCheck = $req->fetch(PDO::FETCH_ASSOC);
             $req->closeCursor();
 
-            print_r($ratingCheck);
-
             if(!empty($ratingCheck)) {
                 return TRUE;
             }
