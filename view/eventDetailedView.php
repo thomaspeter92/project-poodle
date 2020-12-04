@@ -590,11 +590,40 @@ if (isset($_SESSION['id'])) {
     }
 }
 
+date_default_timezone_set('Asia/Seoul');
+
 //CHECKING FOR OLD EVENTS TO DISABLE ATTEND FUNCTION
 $eventDateForRating = strtotime($event['eventDateForRating']);
+$eventExpiry = strtotime($event['expiry']);
 $currentTime = time();
+$eventExpired = $eventExpiry < $currentTime ? true : false;
 $eventPassed = $eventDateForRating < $currentTime ? true : false;
 $isGuest = (isset($_SESSION['id']) and ($event['hostId'] !== $_SESSION['id']));
+
+//NOTICE: Codes for debugging time
+// echo "<br><br><br><br>";
+// echo $event['eventDateForRating'];
+// echo ": event['eventDateForRating']";
+// echo "<br>";
+// echo $eventDateForRating;
+// echo ": eventDateForRating";
+// echo "<br>";
+// echo $event['expiry'];
+// echo ": event['expiry']";
+// echo "<br>";
+// echo $eventExpiry;
+// echo ": eventExpiry";
+// echo "<br>";
+// echo date("Y-m-d H:i:s");
+// echo "<br>";
+// echo date("Y-m-d H:i:s", $currentTime);
+// echo ": currentTime";
+// echo "<br>";
+// echo $currentTime;
+// echo ": currentTime";
+// echo "<br>";
+// echo $eventPassed;
+// echo "<br>";
 
 if($event) {
 ?>
@@ -613,7 +642,7 @@ if($event) {
                     <p><img class="hostPhoto" src="./private/profile/<?= !empty($event['image']) ?$event['image'] : 'defaultProfile.png' ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
-                if ($eventPassed == false) {
+                if ($eventExpired == false) {
                     if (isset($_SESSION['id'])) {
                             if ($event['guestLimit'] != 0 && $guestCount >= $event['guestLimit'] && $attending == false) { ?>
                                     <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php 
@@ -658,13 +687,6 @@ if($event) {
                         echo '<em>This event has now expired.</em>';
                     endif;
                 }
-
-                if (($eventPassed == true and $isGuest) and $attending == true) { ?> 
-                    
-                
-                <?php
-                }
-
                 ?>
                 </div>
             </div>
