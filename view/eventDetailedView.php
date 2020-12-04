@@ -53,7 +53,13 @@
   color: #ddd;
 }
 
-
+#ratingForm>div:last-child {
+    text-align: center;
+    margin-top: 10px;
+}
+#ratingForm>div:last-child>button {
+    padding: 10px;
+}   
 
 
 
@@ -109,9 +115,9 @@
 
     #headerContentExtra {
         display: flex;
-        flex-direction: column;
-        align-items: flex-end
-        /* justify-content: space-between; */
+        /* flex-direction: column; */
+        align-items: center;
+        justify-content: space-between;
     }
 
     #headerContentExtra p:first-child {
@@ -585,12 +591,11 @@ if (isset($_SESSION['id'])) {
 }
 
 //CHECKING FOR OLD EVENTS TO DISABLE ATTEND FUNCTION
-$eventExpiry = strtotime($event['expiry']);
+$eventDateForRating = strtotime($event['eventDateForRating']);
 $currentTime = time();
-$eventPassed = $eventExpiry < $currentTime ? true : false;
+$eventPassed = $eventDateForRating < $currentTime ? true : false;
+$isGuest = (isset($_SESSION['id']) and ($event['hostId'] !== $_SESSION['id']));
 
-
-//IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
 if($event) {
 ?>
 
@@ -619,12 +624,9 @@ if($event) {
                         echo '<em>Sign in to Attend</em>';
                     }
                 } else {
-                    echo '<em>This event has now expired.</em>';
-                }
-
-                if($eventPassed == true && isset($_SESSION['id']) && $attending == true){ ?> 
-                    <div id="ratingSection">
-                        <p>rate the event: </p>
+                    if (($eventPassed == true and $isGuest) and $attending == true): ?>
+                        <div id="ratingSection">
+                            <p><em>This event has now expired.<br>Please rate the event </em></p>
                             <form method="POST" action="index.php" id="ratingForm">
                                 <div id="full-stars">
                                     <div class="rating-group">
@@ -648,9 +650,17 @@ if($event) {
                                     <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
                                     <input type="hidden" name="action" value="addStars">
                                 </div>
-                                <button style="text-align: center" type="submit" class="submitRating">Submit</button> 
+                                <div><button style="text-align: center" type="submit" class="submitRating">Submit</button></div>
                             </form>
-                    </div>
+                        </div>
+                    <?php 
+                    else: 
+                        echo '<em>This event has now expired.</em>';
+                    endif;
+                }
+
+                if (($eventPassed == true and $isGuest) and $attending == true) { ?> 
+                    
                 
                 <?php
                 }
@@ -726,8 +736,6 @@ if($event) {
                 <?php } ?>
             </aside>
         </div>
-
-</div>
         <h5>More Events Like This One:</h5>
         <div id="eventPreviews">
         <?php foreach($eventList as $list): ?>
