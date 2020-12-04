@@ -84,6 +84,17 @@ class NotificationManager extends Manager{
         $req->closeCursor();
     }
 
+    public function guestNotification(){
+        $db = $this->dbConnect();
+        $req = $db->prepare("INSERT INTO notification (userID, message) VALUES (:userID, :message)");
+        $userID = $params['guestId'];
+        $message ="#".$userID."|"."has signed up for your event";
+        $req->bindParam(':userID',$userID, PDO::PARAM_INT);
+        $req->bindParam(':message',$message, PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
+
     public function setEventTimerNotification($eventId, $userId=''){
         $db = $this->dbConnect();
         date_default_timezone_set('Asia/Seoul'); // Add timezone to Seoul
