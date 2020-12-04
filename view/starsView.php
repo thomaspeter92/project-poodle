@@ -81,7 +81,8 @@
 </div>
 
 <script>
-var starValue;
+// var starValue;
+// var stars = document.querySelectorAll('input');
 // const getStarValue = (starValue) =>{
     // for(var i=1;i<stars.length;i++){
 //     // console.log(stars[i].value);
@@ -93,7 +94,6 @@ var starValue;
 //    
 // }
 // }
-var stars = document.querySelectorAll('input');
 
 var starValue;
 

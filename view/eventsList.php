@@ -3,7 +3,7 @@ if (isset($events) and !empty($events)):
     foreach ($events as $event): ?>
         <div class="item">
             <div class="imgContainer">
-                <img src="./private/event/<?=$event->imageName;?>" alt="event image">
+                <img src="./private/event/<?=empty($event->imageName) ? "default.png" : $event->imageName;?>" alt="event image">
             </div>
             <div class="content">
                 <div class="date"><?= $event->eventDate; ?></div>

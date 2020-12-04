@@ -5,7 +5,7 @@ if (isset($events) and !empty($events)):
             <div class="title"><?= $event->name; ?></div>
             <div class="content">
                 <div class="imgContainer">
-                    <img src="./private/event/<?=$event->imageName;?>" alt="event image">
+                    <img src="./private/event/<?=empty($event->imageName) ? "default.png" : $event->imageName;?>" alt="event image">
                 </div>
                 <div class="rightContainer">
                     <div class="date"><?= $event->eventDate; ?></div>

@@ -2,6 +2,68 @@
 
 <style>
 
+
+/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+.rating-group {
+    /* padding-top: 5em; */
+    display: flex;
+    align-items: middle;
+}
+
+/* make hover effect work properly in IE */
+.rating__icon {
+  pointer-events: none;
+}
+
+/* hide radio inputs */
+.rating__input {
+ position: absolute !important;
+ left: -9999px !important;
+}
+
+/* hide 'none' input from screenreaders */
+.rating__input--none {
+  display: none
+}
+
+/* set icon padding and size */
+.rating__label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 2rem;
+}
+
+/* set default star color */
+.rating__icon--star {
+  color: orange;
+}
+
+/* if any input is checked, make its following siblings grey */
+.rating__input:checked ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+/* make all stars orange on rating group hover */
+.rating-group:hover .rating__label .rating__icon--star {
+  color: orange;
+}
+
+/* make hovered input's following siblings grey on hover */
+.rating__input:hover ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
+#ratingForm>div:last-child {
+    text-align: center;
+    margin-top: 10px;
+}
+#ratingForm>div:last-child>button {
+    padding: 10px;
+}   
+
+
+
+
     #wrapper {
         background-color: rgb(245, 245, 245);
         width: 100vw;
@@ -53,6 +115,7 @@
 
     #headerContentExtra {
         display: flex;
+        /* flex-direction: column; */
         align-items: center;
         justify-content: space-between;
     }
@@ -527,13 +590,41 @@ if (isset($_SESSION['id'])) {
     }
 }
 
+date_default_timezone_set('Asia/Seoul');
+
 //CHECKING FOR OLD EVENTS TO DISABLE ATTEND FUNCTION
+$eventDateForRating = strtotime($event['eventDateForRating']);
 $eventExpiry = strtotime($event['expiry']);
 $currentTime = time();
-$eventPassed = $eventExpiry < $currentTime ? true : false;
+$eventExpired = $eventExpiry < $currentTime ? true : false;
+$eventPassed = $eventDateForRating < $currentTime ? true : false;
+$isGuest = (isset($_SESSION['id']) and ($event['hostId'] !== $_SESSION['id']));
 
+//NOTICE: Codes for debugging time
+// echo "<br><br><br><br>";
+// echo $event['eventDateForRating'];
+// echo ": event['eventDateForRating']";
+// echo "<br>";
+// echo $eventDateForRating;
+// echo ": eventDateForRating";
+// echo "<br>";
+// echo $event['expiry'];
+// echo ": event['expiry']";
+// echo "<br>";
+// echo $eventExpiry;
+// echo ": eventExpiry";
+// echo "<br>";
+// echo date("Y-m-d H:i:s");
+// echo "<br>";
+// echo date("Y-m-d H:i:s", $currentTime);
+// echo ": currentTime";
+// echo "<br>";
+// echo $currentTime;
+// echo ": currentTime";
+// echo "<br>";
+// echo $eventPassed;
+// echo "<br>";
 
-//IF THERE IS A CORRECT EVENT ID, WE DISPLAY THE EVENT.
 if($event) {
 ?>
 
@@ -551,7 +642,7 @@ if($event) {
                     <p><img class="hostPhoto" src="./private/profile/<?= !empty($event['image']) ?$event['image'] : 'defaultProfile.png' ?>"></img> <span>Hosted by: <strong><?= $event['hostName']; ?></strong></span></p>
                 <?php 
                 //CHECK IF GUEST LIST IS FULL AND DISABLE ATTEND FUNCTIONS (UNLESS USER IS ATTENDING ALREADY)
-                if ($eventPassed == false) {
+                if ($eventExpired == false) {
                     if (isset($_SESSION['id'])) {
                             if ($event['guestLimit'] != 0 && $guestCount >= $event['guestLimit'] && $attending == false) { ?>
                                     <button id="eventFullButton" class="submit">SORRY, EVENT FULL</button><?php 
@@ -562,9 +653,40 @@ if($event) {
                         echo '<em>Sign in to Attend</em>';
                     }
                 } else {
-                    echo '<em>This event has now expired.</em>';
-                }
+                    if (($eventPassed == true and $isGuest) and $attending == true): ?>
+                        <div id="ratingSection">
+                            <p><em>This event has now expired.<br>Please rate the event </em></p>
+                            <form method="POST" action="index.php" id="ratingForm">
+                                <div id="full-stars">
+                                    <div class="rating-group">
+                                        <input disabled checked class="rating__input rating__input--none" name="rating" id="rating3-none" value="0" type="radio">
 
+                                        <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star1" name="rating" id="rating3-1" value="1" type="radio">
+
+                                        <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star2" name="rating" id="rating3-2" value="2" type="radio">
+
+                                        <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star3" name="rating" id="rating3-3" value="3" type="radio">
+
+                                        <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star4" name="rating" id="rating3-4" value="4" type="radio">
+
+                                        <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                        <input class="rating__input star5" name="rating" id="rating3-5" value="5" type="radio">
+                                    </div>
+                                    <input type="hidden" name="eventId" id="eventId" value="<?=$event['eventId']; ?>">
+                                    <input type="hidden" name="action" value="addStars">
+                                </div>
+                                <div><button style="text-align: center" type="submit" class="submitRating">Submit</button></div>
+                            </form>
+                        </div>
+                    <?php 
+                    else: 
+                        echo '<em>This event has now expired.</em>';
+                    endif;
+                }
                 ?>
                 </div>
             </div>
@@ -636,7 +758,6 @@ if($event) {
                 <?php } ?>
             </aside>
         </div>
-
         <h5>More Events Like This One:</h5>
         <div id="eventPreviews">
         <?php foreach($eventList as $list): ?>
@@ -846,6 +967,40 @@ if($event) {
     }}
     editComments();
 
+//FUNCTION TO DETERMINE WHETHER OR NOT TO SHOW THE STARS
+
+//check to see if event is over 
+
+
+//check to see if user was an attendee
+//check to see if the user has already rated 
+
+
+//FUNCTION TO ADD STAR RATING TO DB
+    var ratingForm = document.querySelector('#ratingForm');
+    if(ratingForm){
+        ratingForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            var rates = document.querySelectorAll('.rating__input');
+            for(var i=1; i<rates.length; i++){
+                if(rates[i].checked){
+                    var checked = rates[i];
+                    var rateValue = rates[i].value;
+                    var xhr = new XMLHttpRequest();
+                    var params = new FormData(ratingForm);
+                    xhr.open("POST", "index.php?action=addStars");
+                    xhr.send(params);
+                }
+            } 
+            var ratingSection = document.querySelector('#ratingSection');
+            var rateTheEvent = document.querySelector('#ratingSection>p');
+            rateTheEvent.remove();
+            var rated = document.createElement('p');
+            rated.textContent = "thank you for rating";
+            rated.style.color = "#72ddf7";
+            ratingSection.replaceChild(rated, ratingForm);
+        });
+    }
 // ************* MAP FUNCTIONS ************
     var itin;
     itin = '<?= isset($event["itinerary"]) ? $event["itinerary"] : ""; ?>';
@@ -914,6 +1069,8 @@ if($event) {
         });
     }
 
+
+</script>
 </script>
 
 <?php
