@@ -445,36 +445,7 @@ require_once("Manager.php");
                 echo false;
             }
         }
-        //checks to see if the event has been over
-        function isEventOverCheck($params){
-            $db = $this->dbConnect();
-            $req = $db->prepare("SELECT eventDate FROM event WHERE eventId = ?");
-            $req->bindParam(1, $params['eventId'], PDO::PARAM_INT);
-            $req->execute();
-            $isEventOverCheck = $req->fetch(PDO::FETCH_ASSOC);
-            $req->closeCursor();
-
-            if($isEventOverCheck < now()){
-                echo true;
-            }else{
-                echo false;
-            }
-        }
-        //checks to see if the user attended the event 
-        function attendeeCheck($params){
-            $db = $this->dbConnect();
-            $req = $db->prepare("SELECT eventId, guestId FROM event WHERE eventId = ? AND guestId = ?");
-            $req->bindParam(1, $params['eventId'], PDO::PARAM_INT);
-            $req->bindParam(2, $_SESSION['id'], PDO::PARAM_INT);
-            $req->execute();
-            $attendeeCheck = $req->fetch(PDO::FETCH_ASSOC);
-            $req->closeCursor();
-
-            if($attendeeCheck){
-                echo true;
-            }else{
-                echo false;
-            }
-        }
+       
+        
     
     }

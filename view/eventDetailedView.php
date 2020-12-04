@@ -948,28 +948,29 @@ if($event) {
 
 //FUNCTION TO ADD STAR RATING TO DB
     var ratingForm = document.querySelector('#ratingForm');
-    ratingForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        var rates = document.querySelectorAll('.rating__input');
-        for(var i=1; i<rates.length; i++){
-            if(rates[i].checked){
-                var checked = rates[i];
-                var rateValue = rates[i].value;
-                var xhr = new XMLHttpRequest();
-                var params = new FormData(ratingForm);
-                xhr.open("POST", "index.php?action=addStars");
-                xhr.send(params);
-            }
-        } 
-        var ratingSection = document.querySelector('#ratingSection');
-        var rateTheEvent = document.querySelector('#ratingSection>p');
-        rateTheEvent.remove();
-        var rated = document.createElement('p');
-        rated.textContent = "thank you for rating";
-        rated.style.color = "#72ddf7";
-        ratingSection.replaceChild(rated, ratingForm);
-    });
-
+    if(ratingForm){
+        ratingForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            var rates = document.querySelectorAll('.rating__input');
+            for(var i=1; i<rates.length; i++){
+                if(rates[i].checked){
+                    var checked = rates[i];
+                    var rateValue = rates[i].value;
+                    var xhr = new XMLHttpRequest();
+                    var params = new FormData(ratingForm);
+                    xhr.open("POST", "index.php?action=addStars");
+                    xhr.send(params);
+                }
+            } 
+            var ratingSection = document.querySelector('#ratingSection');
+            var rateTheEvent = document.querySelector('#ratingSection>p');
+            rateTheEvent.remove();
+            var rated = document.createElement('p');
+            rated.textContent = "thank you for rating";
+            rated.style.color = "#72ddf7";
+            ratingSection.replaceChild(rated, ratingForm);
+        });
+    }
 // ************* MAP FUNCTIONS ************
     var itin;
     itin = '<?= isset($event["itinerary"]) ? $event["itinerary"] : ""; ?>';
