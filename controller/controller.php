@@ -141,7 +141,3 @@ function postNotification($params) {
     $commentNotification->commentPostNotification($notification);
 }
 
-
-function stars(){
-    require('./view/starsView.php');
-}

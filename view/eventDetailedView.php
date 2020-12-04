@@ -432,7 +432,7 @@
     background-image: none;
     background-color: rgb(245, 245, 245);
     width: 50%;
-    height: auto;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -456,7 +456,7 @@
     margin: 0;
     width: auto;
     height: 50px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     background-color: #72ddf7;
 	border-radius:42px;
 	cursor:pointer;
@@ -622,7 +622,7 @@ if($event) {
                     echo '<em>This event has now expired.</em>';
                 }
 
-                // if($eventPassed == true && isset($_SESSION['id'])){ ?> 
+                if($eventPassed == true && isset($_SESSION['id']) && $attending == true){ ?> 
                     <div id="ratingSection">
                         <p>rate the event: </p>
                             <form method="POST" action="index.php" id="ratingForm">
@@ -653,7 +653,7 @@ if($event) {
                     </div>
                 
                 <?php
-                // }
+                }
 
                 ?>
                 </div>
@@ -663,7 +663,7 @@ if($event) {
         <div class="eventDetailMainContent">
             <section class="eventDetailDescription">
                 <h4 id="aboutEvent">About this Event: </h4>
-                <img class="eventImage" src="<?=!empty($event['picture']) ? './private/event/$event'.$event['picture'] : './public/images/event/default.png' ?>" />
+                <img class="eventImage" src="<?=!empty($event['picture']) ? './private/event/'.$event['picture'] : './public/images/event/default.png' ?>" />
                 <p id="descriptionArea"><?= nl2br($event['description']); ?></p>
 
                 <form action="index.php" method="POST" id="commentForm">
@@ -937,31 +937,40 @@ if($event) {
     }}
     editComments();
 
+//FUNCTION TO DETERMINE WHETHER OR NOT TO SHOW THE STARS
+
+//check to see if event is over 
+
+
+//check to see if user was an attendee
+//check to see if the user has already rated 
+
+
 //FUNCTION TO ADD STAR RATING TO DB
     var ratingForm = document.querySelector('#ratingForm');
-    ratingForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        var rates = document.querySelectorAll('.rating__input');
-        for(var i=1; i<rates.length; i++){
-            if(rates[i].checked){
-                var checked = rates[i];
-                var rateValue = rates[i].value;
-                var xhr = new XMLHttpRequest();
-                var params = new FormData(ratingForm);
-                xhr.open("POST", "index.php?action=addStars");
-                xhr.send(params);
-            }
-        } 
-        var ratingSection = document.querySelector('#ratingSection');
-        var rateTheEvent = document.querySelector('#ratingSection>p');
-        rateTheEvent.remove();
-        var rated = document.createElement('p');
-        rated.textContent = "thank you for rating";
-        rated.style.color = "#72ddf7";
-        ratingSection.replaceChild(rated, ratingForm);
-
-    });
-
+    if(ratingForm){
+        ratingForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            var rates = document.querySelectorAll('.rating__input');
+            for(var i=1; i<rates.length; i++){
+                if(rates[i].checked){
+                    var checked = rates[i];
+                    var rateValue = rates[i].value;
+                    var xhr = new XMLHttpRequest();
+                    var params = new FormData(ratingForm);
+                    xhr.open("POST", "index.php?action=addStars");
+                    xhr.send(params);
+                }
+            } 
+            var ratingSection = document.querySelector('#ratingSection');
+            var rateTheEvent = document.querySelector('#ratingSection>p');
+            rateTheEvent.remove();
+            var rated = document.createElement('p');
+            rated.textContent = "thank you for rating";
+            rated.style.color = "#72ddf7";
+            ratingSection.replaceChild(rated, ratingForm);
+        });
+    }
 // ************* MAP FUNCTIONS ************
     var itin;
     itin = '<?= isset($event["itinerary"]) ? $event["itinerary"] : ""; ?>';
@@ -1029,13 +1038,6 @@ if($event) {
             createAddEditEventModal(eventId);
         });
     }
-
-
-
-
-
-
-
 
 
 </script>

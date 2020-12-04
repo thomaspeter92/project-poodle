@@ -18,16 +18,16 @@ if (isset($_GET['account'])) {
 
 <div id="carousel">
     <img src="./public/images/dogCarousel4.jpg" alt="" class="carouselImg">
-    <img src="./public/images/dogCarousel2.jpg" alt="" class="carouselImg">
+    <img src="./public/images/dogCarouselCat.jpg" alt="" class="carouselImg">
     <img src="./public/images/dogCarousel3.jpg" alt="" class="carouselImg">
     <div id="carouselTextBox">
-            <p>I LOVE DOGS! WOOF!</p>
-            <div id="carouselButton" class="button"><p>LEARN MORE</p></div>
+            <p>LOVE PETS? SO DO WE!</p>
+            <div id="carouselButton" class="button"><p><a href="#content1">LEARN MORE</a></p></div>
     </div>
     <div id="mobileCarouselContent">
         <h2>Tomorrow Starts Here.</h2>
         <h4>Where Will Pet Venture Take You?</h4>
-        <i class="fas fa-chevron-down"></i>
+        <a href="#content1"><i class="fas fa-chevron-down"></i></a>
     </div>
 </div>
 
@@ -44,25 +44,25 @@ if (isset($_GET['account'])) {
             <div class="imageBall"></div>
             <span class="bar"></span>
             <h3>Meet Friends</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>Meet new friends and fellow pet owners in your city.</p>
         </div>
 
         <div class="contentBox">
             <div class="imageBall ball2"></div>
             <span class="bar"></span>
             <h3>Make Memories</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>Form friendships and memories at unique events with your pet-owning friends.</p>
         </div>
 
         <div class="contentBox">
             <div class="imageBall ball3"></div>
             <span class="bar"></span>
             <h3>Create Events</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>With our groundbreaking event creation feature, you're in the drivers seat!</p>
         </div>
     </div>
 
-    <div class="button2 button"><p>LEARN MORE</p></div>
+    <div class="button2 button"><p><a href="index.php?action=aboutUs">LEARN MORE</a></p></div>
 </div>
 
 
@@ -70,9 +70,9 @@ if (isset($_GET['account'])) {
 <div id="content2" class="content">
     <div class="contentBox boxAppearBefore">
         <h3>Awesome Location Features</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam unde, nisi soluta ea quibusdam debitis suscipit, quis nemo mollitia possimus commodi. Laboriosam ab rem eos assumenda, quo molestias quae voluptas.</p>
+        <p>Our platform uses the latest mapping technology to create your own custom itinerary to share with fellow users. You can pin multiple locations and stop-off points!</p>
     </div>
-    <img id="mapImg" src="./public/images/googleMapPreview.png" alt="">
+    <img id="mapImg" src="./public/images/mapPreview.png" alt="">
 </div>
 
 
@@ -99,11 +99,11 @@ if (isset($_GET['account'])) {
     <section id="content4section">
         <article class="content4article">
             <h5>About Us</h5>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente alias ab, mollitia natus est ea maxime doloremque iusto tempore fugiat accusamus id tempora! Quam sunt, voluptatibus aperiam incidunt soluta sit!</p>
+            <p>Founded by a group of bored expats and Koreans, we came up with the original idea of creating a social media platform for pet owners. Our ambition got the best of us, with many big ideas for this project. However, we soon discovered coding isn't as easy as it seems. A humbling experience.</p>
         </article>
         <article class="content4article">
             <h5>Manage Your Pets Seamlessly</h5>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente alias ab, mollitia natus est ea maxime doloremque iusto tempore fugiat accusamus id tempora! Quam sunt, voluptatibus aperiam incidunt soluta sit!</p>
+            <p>You can easily add and modify an unlimited number of pets with the click of a button. If your pet loses weight, just adjust it. If your pet changes gender, you can change that too. You can even delete your beloved pet if you so please.</p>
         </article>
 </section>
 </div>
@@ -113,25 +113,28 @@ if (isset($_GET['account'])) {
             <div class="insideContainer inside1">
                 <h3>AR Features</h3><i class="fas fa-arrow-circle-down downArrow"></i>
                 <div class="insideContent">
+                    <img src="./public/images/ARexample.png" alt="" style="width: 300px; height: 200px"> 
                     <article>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur doloremque temporibus porro dolorum minima id quo aliquam aspernatur molestiae cupiditate repellendus, similique laborum ab, dolore iure quaerat inventore mollitia!</p>
+                        <p>With our amazing AR features you can explore a range of exciting posibilities! Just locate the unique QR code and you're on your way to collecting a free reward from one of our many partner vendors! You also get to see cute animations!</p>
                     </article>
                 </div>
 
 
             </div>
             <div class="insideContainer inside2">
-                <h3>Create Events</h3><i class="fas fa-arrow-circle-down downArrow"></i>
+                <h3>Stay Notified</h3><i class="fas fa-arrow-circle-down downArrow"></i>
                 <div class="insideContent">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis dolorem architecto iure modi nobis, aliquid ex. Exercitationem quo quos laudantium nihil ullam cumque? At dolores voluptates quod laborum. Omnis, maxime? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex. Explicabo eaque provident odit doloremque consequatur deserunt error mollitia cumque debitis eius dolor ullam suscipit perferendis porro expedita, quasi amet! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, pariatur! Sapiente vero delectus quas optio officiis iusto!</p>
+                        <img src="./public/images/notificationExample.png" alt="" style="width: 300px; height: auto"> 
+                        <p>Stay in the know with our high-tech notifcation system designed by our in-house notifcation expert. Never worry about missing an event, or a message from your friend. By using our unique notification system, you're connected 24 hours a day!</p>
                 </div>
 
             </div>
             <div class="insideContainer inside3">
-                <h3>Meet Other Owners</h3><i class="fas fa-arrow-circle-down downArrow"></i>
+                <h3>Rate Peers & Pets</h3><i class="fas fa-arrow-circle-down downArrow"></i>
                 <div class="insideContent">
                     <div class="insideContentText">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet repudiandae consequatur cumque sequi nulla aliquam maiores tempora labore ipsa fugit exercitationem, culpa possimus pariatur dicta a iusto molestiae delectus dolorem.</p>
+                        <img src="./public/images/ratingExample.png" alt="" style="width: 300px; height: auto"> 
+                        <p>Let your friends and pets know what you think of them with our amazing rating system. You can have piece of mind letting others know exactly what you think of them, their pets, and the events that they host. </p>
                     </div>
                 </div>
             </div>
@@ -165,13 +168,16 @@ if (isset($_GET['account'])) {
     </div>
     <div class="content5div">
     </div>
-    <div class="content5div">
+    <div class="content5div theCard">
         <div class="theFront">
             <h5>Interact with Other Owners</h5>
-            <p>With our unique pet tracking system, you can check your pets wellbeing 24/7!</p>
+            <p>Stay in contact with others and share your thoughts on events you attend.</p>
             <i class="fas fa-arrow-circle-right arrowBall"></i>
         </div>
-        <div class="theBack">Back of the card</div>
+        <div class="theBack">
+            <p>You can edit and delete your comments with ease.</p>
+            <img src="./public/images/commentExample.png" alt="">
+        </div>
     </div>
     <div class="content5div theCard">
         <div class="theFront">

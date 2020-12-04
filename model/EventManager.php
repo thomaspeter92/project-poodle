@@ -343,6 +343,7 @@ require_once("Manager.php");
             $req->execute();
             $req->closeCursor();
         }
+        
 
         //adding ratings to DB and updating the event's median rating and host's median rating :)
         public function addStars($params){
@@ -427,5 +428,24 @@ require_once("Manager.php");
                 $response->closeCursor();
             }
         }
+
+        //checks to see if the user has rated that event
+        function ratingCheck($params){
+            $db = $this->dbConnect();
+            $req = $db->prepare("SELECT userId, eventId FROM eventRating WHERE userId = ? AND eventId = ?");
+            $req->bindParam(1, $params['eventId'], PDO::PARAM_INT);
+            $req->bindParam(2, $_SESSION['id'], PDO::PARAM_INT);
+            $req->execute();
+            $ratingCheck = $req->fetch(PDO::FETCH_ASSOC);
+            $req->closeCursor();
+
+            if($ratingCheck){
+                echo true;
+            }else{
+                echo false;
+            }
+        }
+       
+        
     
     }

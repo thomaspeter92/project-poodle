@@ -191,14 +191,16 @@ div .rating-group {
 @media (max-width: 500px) {
     .modalSubDiv {
         width: 80%;
-        height: 70%;
-        justify-content: space-around;
+    }
+
+    .modalDivContent {
         overflow-y: scroll;
     }
 
     #formInner {
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
     }
     #formInner div {
         width: 100%;

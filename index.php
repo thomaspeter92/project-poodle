@@ -272,6 +272,15 @@ try {
         case "addStars":
             addStars($_REQUEST);
             break;
+        case "ratingCheck":
+            ratingCheck($_REQUEST);
+            break;
+        case "isEventOverCheck":
+            isEventOverCheck($_REQUEST);
+            break;
+        case "attendeeCheck":
+            attendeeCheck($_REQUEST);
+            break;
         case "loadGuests" :
             loadGuests($_REQUEST);
             break;                  
