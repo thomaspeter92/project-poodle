@@ -191,14 +191,16 @@ div .rating-group {
 @media (max-width: 500px) {
     .modalSubDiv {
         width: 80%;
-        height: 70%;
-        justify-content: space-around;
+    }
+
+    .modalDivContent {
         overflow-y: scroll;
     }
 
     #formInner {
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
     }
     #formInner div {
         width: 100%;
@@ -246,37 +248,37 @@ div .rating-group {
                 <span>Friendliness:</span>
                 <div class="rating-group">
                     <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star1" name="friendliness" id="rating3-1" value="1" type="radio" <?= $petProfile['friendliness'] == 1 ? 'checked' : '' ?>>
+                    <input class="rating__input star1" name="friendliness" id="rating3-1" value="1" type="radio" <?php if(isset($petProfile['friendliness']) && $petProfile['friendliness'] == 1) { echo 'checked'; } ?>>
 
                     <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star2" name="friendliness" id="rating3-2" value="2" type="radio" <?= $petProfile['friendliness'] == 2 ? 'checked' : '' ?>>
+                    <input class="rating__input star2" name="friendliness" id="rating3-2" value="2" type="radio" <?php if(isset($petProfile['friendliness']) && $petProfile['friendliness'] == 2) { echo 'checked'; } ?>>
 
                     <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star3" name="friendliness" id="rating3-3" value="3" type="radio" <?= $petProfile['friendliness'] == 3 ? 'checked' : '' ?>>
+                    <input class="rating__input star3" name="friendliness" id="rating3-3" value="3" type="radio" <?php if(isset($petProfile['friendliness']) && $petProfile['friendliness'] == 3) { echo 'checked'; } ?>>
 
                     <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star4" name="friendliness" id="rating3-4" value="4" type="radio" <?= $petProfile['friendliness'] == 4 ? 'checked' : '' ?>>
+                    <input class="rating__input star4" name="friendliness" id="rating3-4" value="4" type="radio" <?php if(isset($petProfile['friendliness']) && $petProfile['friendliness'] == 4) { echo 'checked'; } ?>>
 
                     <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star5" name="friendliness" id="rating3-5" value="5" type="radio" <?= $petProfile['friendliness'] == 5 ? 'checked' : '' ?>>
+                    <input class="rating__input star5" name="friendliness" id="rating3-5" value="5" type="radio" <?php if(isset($petProfile['friendliness']) && $petProfile['friendliness'] == 5) { echo 'checked'; } ?>>
                 </div>
             <p></p>
                 <span>Activity Level:</span>
                 <div class="rating-group">
                     <label aria-label="1 star" class="rating__label" for="rating3-12"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star1" name="activityLevel" id="rating3-12" value="1" type="radio" <?= $petProfile['activityLevel'] == 1 ? 'checked' : '' ?>>
+                    <input class="rating__input star1" name="activityLevel" id="rating3-12" value="1" type="radio" <?php if(isset($petProfile['activityLevel']) && $petProfile['activityLevel'] == 1) { echo 'checked'; } ?>>
 
                     <label aria-label="2 stars" class="rating__label" for="rating3-22"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star2" name="activityLevel" id="rating3-22" value="2" type="radio" <?= $petProfile['activityLevel'] == 2 ? 'checked' : '' ?>>
+                    <input class="rating__input star2" name="activityLevel" id="rating3-22" value="2" type="radio" <?php if(isset($petProfile['activityLevel']) && $petProfile['activityLevel'] == 2) { echo 'checked'; } ?>>
 
                     <label aria-label="3 stars" class="rating__label" for="rating3-32"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star3" name="activityLevel" id="rating3-32" value="3" type="radio" <?= $petProfile['activityLevel'] == 3 ? 'checked' : '' ?>>
+                    <input class="rating__input star3" name="activityLevel" id="rating3-32" value="3" type="radio" <?php if(isset($petProfile['activityLevel']) && $petProfile['activityLevel'] == 3) { echo 'checked'; } ?>>
 
                     <label aria-label="4 stars" class="rating__label" for="rating3-42"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star4" name="activityLevel" id="rating3-42" value="4" type="radio" <?= $petProfile['activityLevel'] == 4 ? 'checked' : '' ?>>
+                    <input class="rating__input star4" name="activityLevel" id="rating3-42" value="4" type="radio" <?php if(isset($petProfile['activityLevel']) && $petProfile['activityLevel'] == 4) { echo 'checked'; } ?>>
 
                     <label aria-label="5 stars" class="rating__label" for="rating3-52"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                    <input class="rating__input star5" name="activityLevel" id="rating3-52" value="5" type="radio" <?= $petProfile['activityLevel'] == 5 ? 'checked' : '' ?>>
+                    <input class="rating__input star5" name="activityLevel" id="rating3-52" value="5" type="radio" <?php if(isset($petProfile['activityLevel']) && $petProfile['activityLevel'] == 5) { echo 'checked'; } ?>>
                 </div>
             <p>
                 <img src="./private/pet/<?=!empty($petProfile['photo']) ? $petProfile['photo'] : 'default.png' ?>" id="imagePreview"></img>

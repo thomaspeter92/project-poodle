@@ -7,6 +7,7 @@ $sessionImageURL = isset($_SESSION['imageURL']) ? $_SESSION['imageURL'] : DEFAUL
 // this code pulls notifications from database
 if(isset($_SESSION['id'])) {
     $notifications = checkNotifications($_SESSION['id']);
+
 };
 // echo "<pre>";
 // print_r($notifications);
@@ -119,55 +120,74 @@ function time_elapsed_string($datetime, $full = false) {
                         <span id="notificationNumber">
                             <?php 
                                 $notificationNumber = 0; 
-                                for ($i=0;  $i<count($notifications); $i++) {
-                                    if ($notifications[$i]['viewed'] == NULL) {
-                                        if (isset($notifications[$i]['eventDate'])) {
-                                            date_default_timezone_set('Asia/Seoul');
-                                            $unixEvent = strtotime($notifications[$i]['eventDate']);
-                                            $timeToEvent = $unixEvent-time();
-                                            if ($timeToEvent<7200 AND $timeToEvent>0) {
-                                                $notificationNumber++;
+                                //Franco
+                                if(is_array($notifications)){
+                                    for ($i=0;  $i<count($notifications); $i++) {
+                                        if ($notifications[$i]['viewed'] == NULL) {
+                                            if (isset($notifications[$i]['eventDate'])) {
+                                                date_default_timezone_set('Asia/Seoul');
+                                                $unixEvent = strtotime($notifications[$i]['eventDate']);
+                                                $timeToEvent = $unixEvent-time();
+                                                if ($timeToEvent<7200 AND $timeToEvent>0) {
+                                                    $notificationNumber++;
+                                                } else {
+                                                    continue;
+                                                }
                                             } else {
-                                                continue;
-                                            }
-                                        } else {
-                                            $notificationNumber++;
-                                        }                                    
-                                    }
-                                } 
+                                                $notificationNumber++;
+                                            }                                    
+                                        }
+                                    } 
+                                }
                                 echo $notificationNumber;
                             ?>
                         </span>
                         <div class="notificationsDropdownContentDesktop">
                             <?php
-                            for ($i=0;  $i<count($notifications); $i++) {
-                                // notification for countdown
-                                // && $notifications[$i]['eventDate'] - time() > 0 && $notifications[$i]['eventDate' - time() < ]
-                                if (isset($notifications[$i]['eventDate'])) {
-                                    date_default_timezone_set('Asia/Seoul');
-                                    $unixEvent = strtotime($notifications[$i]['eventDate']);
-                                    $timeToEvent = $unixEvent-time();
-                                    if ($timeToEvent<7200 AND $timeToEvent>0) {
-                                    echo '<a href="'.$notifications[$i]['href'].'">';
-                                        echo '<div id="notificationDesktop">';
-                                            echo '<div class="countdown" id="notificationMessageDesktop">';
-                                            $message = $notifications[$i]['message'];
-                                            $strongMessage = str_replace('#', '<strong>', $message);
-                                            $endStrongMessage = str_replace('|', '</strong>', $strongMessage);
-                                            $countdownStrongMessage = str_replace('*', '<span class="urgent" id="countdown'.$i.'"></span>',  $endStrongMessage);
-                                            echo $countdownStrongMessage;
-                                            echo '</div>';
-                                        echo '</div>';
-                                    echo '</a>';
-                                    ?>
-                                    <script>countDownDate(<?=$unixEvent;?>, <?=$i;?>)</script>
-                                    <?php
-                                    } else {
-                                        continue;
-                                    }
-                                } else if (isset($notifications[$i]['href']) && !isset($notifications[$i]['eventDate'])) {
-                                    // notification for attending or comment on an event
-                                        echo '<a href="'.$notifications[$i]['href'].'">';
+                                if(is_array($notifications)){
+                                    for ($i=0;  $i<count($notifications); $i++) {
+                                        // notification for countdown
+                                        // && $notifications[$i]['eventDate'] - time() > 0 && $notifications[$i]['eventDate' - time() < ]
+                                        if (isset($notifications[$i]['eventDate'])) {
+                                            date_default_timezone_set('Asia/Seoul');
+                                            $unixEvent = strtotime($notifications[$i]['eventDate']);
+                                            $timeToEvent = $unixEvent-time();
+                                            if ($timeToEvent<7200 AND $timeToEvent>0) {
+                                            echo '<a href="'.$notifications[$i]['href'].'">';
+                                                echo '<div id="notificationDesktop">';
+                                                    echo '<div class="countdown" id="notificationMessageDesktop">';
+                                                    $message = $notifications[$i]['message'];
+                                                    $strongMessage = str_replace('#', '<strong>', $message);
+                                                    $endStrongMessage = str_replace('|', '</strong>', $strongMessage);
+                                                    $countdownStrongMessage = str_replace('*', '<span class="urgent" id="countdown'.$i.'"></span>',  $endStrongMessage);
+                                                    echo $countdownStrongMessage;
+                                                    echo '</div>';
+                                                echo '</div>';
+                                            echo '</a>';
+                                            ?>
+                                            <script>countDownDate(<?=$unixEvent;?>, <?=$i;?>)</script>
+                                            <?php
+                                            } else {
+                                                continue;
+                                            }
+                                        } else if (isset($notifications[$i]['href']) && !isset($notifications[$i]['eventDate'])) {
+                                            // notification for attending or comment on an event
+                                                echo '<a href="'.$notifications[$i]['href'].'">';
+                                                    echo '<div id="notificationDesktop">';
+                                                        echo '<div id="notificationMessageDesktop">';
+                                                        $message = $notifications[$i]['message'];
+                                                        $strongMessage = str_replace('#', '<strong>', $message);
+                                                        $endStrongMessage = str_replace('|', '</strong>', $strongMessage);
+                                                        echo $endStrongMessage;
+                                                        echo '</div>';
+                                                        echo '<div id="notificationTimeDesktop">';
+                                                        $notificationDate = $notifications[$i]['notificationDate'];
+                                                        echo time_elapsed_string($notificationDate, true);
+                                                        echo '</div>';
+                                                    echo '</div>';
+                                                echo '</a>';
+                                        } else {
+                                            // notification for cancel
                                             echo '<div id="notificationDesktop">';
                                                 echo '<div id="notificationMessageDesktop">';
                                                 $message = $notifications[$i]['message'];
@@ -180,25 +200,12 @@ function time_elapsed_string($datetime, $full = false) {
                                                 echo time_elapsed_string($notificationDate, true);
                                                 echo '</div>';
                                             echo '</div>';
-                                        echo '</a>';
-                                } else {
-                                    // notification for cancel
-                                    echo '<div id="notificationDesktop">';
-                                        echo '<div id="notificationMessageDesktop">';
-                                        $message = $notifications[$i]['message'];
-                                        $strongMessage = str_replace('#', '<strong>', $message);
-                                        $endStrongMessage = str_replace('|', '</strong>', $strongMessage);
-                                        echo $endStrongMessage;
-                                        echo '</div>';
-                                        echo '<div id="notificationTimeDesktop">';
-                                        $notificationDate = $notifications[$i]['notificationDate'];
-                                        echo time_elapsed_string($notificationDate, true);
-                                        echo '</div>';
-                                    echo '</div>';
-                                }
-                            };
+                                        }
+                                    };
+                                } 
                             ?>
                         </div>
+                        
                     </div>
                     <div class="signOutWrapper">
                         <a href="#" class="signOut" onclick="signAllOut()">Sign Out</a>
@@ -233,11 +240,13 @@ function time_elapsed_string($datetime, $full = false) {
                             <span id="notificationNumber">
                                 <?php 
                                     $notificationNumber = 0; 
-                                    for ($i=0;  $i<count($notifications); $i++) {
-                                        if ($notifications[$i]['viewed'] == NULL) {
-                                            $notificationNumber++;
-                                        }
-                                    } 
+                                    if(is_array($notifications)){
+                                        for ($i=0;  $i<count($notifications); $i++) {
+                                            if ($notifications[$i]['viewed'] == NULL) {
+                                                $notificationNumber++;
+                                            }
+                                        } 
+                                    }
                                     echo $notificationNumber;
                                 ?>
                             </span>

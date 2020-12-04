@@ -1,4 +1,4 @@
-body {
+html {
     scroll-behavior: smooth;
 }
 #wrapper {
@@ -37,9 +37,8 @@ body {
     z-index: -1;
 }
 
-#mobileCarousel {
+#mobileCarouselContent {
     display: none;
-    position: relative;
 }
 
 #carouselTextBox {
@@ -57,6 +56,13 @@ body {
     font-weight: bold;
 }
 
+#carouselTextBox p{
+    text-shadow: 10px 10px 18px #979797;
+}
+
+a {
+    color: white;
+}
 
 #carouselButton {
     background-color: #72ddf7;
@@ -309,6 +315,8 @@ body {
 .insideContentAfterClick {
     opacity: 1;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .insideContent p {
@@ -327,11 +335,6 @@ body {
 
 .arrowClick {
     transform: rotate(180deg);
-}
-
-.insideContent img {
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
 }
 
 #content4section {
@@ -459,13 +462,61 @@ body {
 /* ******************MEDIA QUERY*************************************** */
 @media (max-width: 900px) {
 
-    #carousel {
+    #wrapper {
+        position: relative;
+    }
+
+    #carousel > * {
         display: none;
     }
 
+    #carousel {
+        width: 100vw;
+        height: 100vh;
+        background-image: linear-gradient(360deg, rgba(0, 0, 0,.5) 10%, rgba(255,255,255,0) 100%), url(../images/portraitCarousel.jpg);        
+        background-size: cover;
+        display: flex;
+        background-position-y: bottom;
+    }
+
+    #mobileCarouselContent {
+        display: unset;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        justify-content: flex-end;
+    }
+
+    #mobileCarouselContent h2 {
+        justify-self: start;
+        margin: auto;
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    #mobileCarouselContent h4 {
+        font-weight: 600;
+        margin: 15% 0 5% 0;
+        width: 70%;
+        text-align: center;
+        font-size: 2em;
+    }
+
+    #mobileCarouselContent a {
+        margin-bottom: 5%;
+        font-size: 2em;
+        animation: bounce 1s infinite ease-in-out;
+        color: white;
+    }
+
+   
+    
+
     #mobileCarousel {
-        display: initial;
-        /* width: 100vw; */
+        display: unset;
         height: 100vh;
     }
 
@@ -473,7 +524,6 @@ body {
         width: 100%;
         text-align: center;
         filter: blur(2px);
-        /* position: relative; */
     }
 
 
@@ -631,7 +681,10 @@ body {
 
 @media (max-width: 450px) {
 
-    
+    #mobileCarousel  {
+        height: 100vh;
+        width: 100vw;
+    }  
 
     #content1 {
         height: auto;
@@ -650,5 +703,16 @@ body {
 
     .content5div p {
         font-size: 1em;
+    }
+}
+
+@keyframes bounce{
+    
+    50%{
+        transform: translateY(5px);
+    }
+
+    100%{
+        transform: translateY(-5px);
     }
 }
