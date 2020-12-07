@@ -42,8 +42,8 @@ function showEventDetail($params) {
     $guestIdList = $showEvent->getGuestId($params['eventId']);
     $commentsCount = $showEvent->countComments($params['eventId']);
     isset($_SESSION['id']) ? $profilePic = $showEvent->getProfilePic($_SESSION['id']) : null;
-
-    $isRated = ratingCheck($params['eventId'], $_SESSION['id']);
+    $isRated = isset($_SESSION['id']) ? ratingCheck($params['eventId'], $_SESSION['id']) : NULL;
+    
     require("./view/eventDetailedView.php");
 }
 
