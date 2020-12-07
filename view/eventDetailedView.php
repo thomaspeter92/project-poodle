@@ -1010,7 +1010,7 @@ if($event) {
             var rateTheEvent = document.querySelector('#ratingSection>p');
             rateTheEvent.remove();
             var rated = document.createElement('p');
-            rated.textContent = "thank you for rating";
+            rated.innerHTML = "<strong>Thank you for rating</strong>";
             rated.style.color = "#72ddf7";
             ratingSection.replaceChild(rated, ratingForm);
         });
