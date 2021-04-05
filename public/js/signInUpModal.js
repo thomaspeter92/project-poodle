@@ -96,7 +96,7 @@ const initGoogle = () => {
     loadScript(GOOGLE_SCRIPT_ID, GOOGLE_URL, () => {
         gapi.load('auth2', function(){
             auth2 = gapi.auth2.init({
-            client_id: '659257235288-dmc48l918ev0pi5073mmg5st88bsesvl.apps.googleusercontent.com',
+            client_id: '956689917884-80dmo07t4qrgk5iara2gtcff7dgmqm3k.apps.googleusercontent.com',
             cookiepolicy: 'single_host_origin'
             // Request scopes in addition to 'profile' and 'email'
             //scope: 'additional_scope'
