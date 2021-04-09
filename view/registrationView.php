@@ -201,6 +201,10 @@
                 <div class='subSection'>
                     <label for="username" class="form_col">Name :</label>
                     <input type="text" name="username" id="username" class="loginInput required" required>
+                </div>
+                <div class='subSection emailSection'>
+                    <label for="email" class="form_col">Email :</label>
+                    <input type="text" name="email" id="email" class="loginInput email" required><br/>
                 </div>  
                 <div class='subSection'>
                     <label for="password" class="form_col">Password :</label>
@@ -210,12 +214,8 @@
                     <label for="confirmpass" class="form_col">Confirm password :</label>
                     <input type="password" name="confirmpass" class="loginInput confirmPassword" id="confirmpass" required>
                 </div>
-                <div class='subSection emailSection'>
-                    <label for="email" class="form_col">Email :</label>
-                    <input type="text" name="email" id="email" class="loginInput email" required><br/>
-                </div>
                 <div class='subSection'>
-                <input type="submit" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
+                    <input type="submit" name="subscribe" id="subscribe" value="Sign Up" class="loginButton">
                 </div>
             </form>
             <div class="thirdParty">
