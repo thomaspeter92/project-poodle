@@ -199,6 +199,11 @@ if (isset($_GET['account'])) {
 </div>
 
 <script src="./public/js/carousel.js"></script>
+<script>
+{
+    alert("NOTICE: This is a website prototype.\n\nPlease do not enter your private information!");
+}
+</script>
 <?php
 $content = ob_get_clean();
 require("template.php");
