@@ -161,7 +161,7 @@ class RegistrationCheck{
                             alert("Thank you for joining us!!!");
                             window.location.href = "index.php?action=petPreview";
                         }
-                        else if (result.alreaySignedUp) {
+                        else if (result.alreadySignedUp) {
                             if(email.value.trim().length != 0){
                                 var oldEmailError = document.querySelector('.emailError');
                                 if(oldEmailError){
