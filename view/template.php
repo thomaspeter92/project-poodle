@@ -368,22 +368,24 @@ function time_elapsed_string($datetime, $full = false) {
         var starsDivDesktop = document.querySelector(".starsDesktop");
         var starsDivMobile = document.querySelector(".starsMobile");
         var starValueInput = document.querySelector(".starValue");
-        var starValue = starValueInput.value;
-   
-        for(var i=0; i<starValue; i++){
-            starElement = document.createElement('img');
-            starElement.src = "./public/images/star.png";
-            starElement.alt = "star";   
-            starsDivDesktop.appendChild(starElement);
+        
+        if (starValueInput) {
+            var starValue = starValueInput.value;
 
-        }
-        for(var i=0; i<starValue; i++){
-            starElement = document.createElement('img');
-            starElement.src = "./public/images/star.png";
-            starElement.alt = "star";  
-            starsDivMobile.appendChild(starElement);
-        }
+            for(var i=0; i<starValue; i++){
+                starElement = document.createElement('img');
+                starElement.src = "./public/images/star.png";
+                starElement.alt = "star";   
+                starsDivDesktop.appendChild(starElement);
 
+            }
+            for(var i=0; i<starValue; i++){
+                starElement = document.createElement('img');
+                starElement.src = "./public/images/star.png";
+                starElement.alt = "star";  
+                starsDivMobile.appendChild(starElement);
+            }
+        }
     }
     </script> 
     <script src="./public/js/notifications.js"></script>
