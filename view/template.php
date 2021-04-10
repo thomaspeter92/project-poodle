@@ -63,7 +63,7 @@ function time_elapsed_string($datetime, $full = false) {
     <!-- COUNTDOWN SCRIPT -->
     <script src="./public/js/countdown.js"></script>
     <!-- TODO: Change to a variable -->
-    <title>Project Poodle</title>
+    <title>Pet Venture</title>
 
     <style>
         #desktopSignUpLink:hover{
