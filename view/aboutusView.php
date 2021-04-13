@@ -1,4 +1,4 @@
-<?php $title= "About Us"?>
+<?php $title= "About Us";?>
 <?php ob_start();?>
 
 <style>
