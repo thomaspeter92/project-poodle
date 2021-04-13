@@ -89,7 +89,7 @@ function deletePet($petId) {
 }
 
 function aboutUs(){
-    require('./view/aboutUsView.php');
+    require('./view/aboutusView.php');
 }
 
 function showPartnersPage() {
