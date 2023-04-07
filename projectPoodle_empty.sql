@@ -64,7 +64,7 @@ CREATE TABLE `eventComment` (
   `id` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `eventId` int(11) DEFAULT NULL,
-  `dateCreation` datetime NOT NULL DEFAULT current_timestamp(),
+  `dateCreation` timestamp NOT NULL DEFAULT current_timestamp(),
   `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -92,7 +92,7 @@ CREATE TABLE `member` (
   `name` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `date_subscription` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_subscription` timestamp NOT NULL DEFAULT current_timestamp(),
   `kakao` tinyint(1) DEFAULT 0,
   `google` tinyint(1) DEFAULT 0,
   `profileImage` varchar(255) DEFAULT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE `notification` (
   `userID` int(11) NOT NULL,
   `message` varchar(255) NOT NULL,
   `viewed` varchar(3) DEFAULT NULL,
-  `notificationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `notificationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `href` varchar(255) DEFAULT NULL,
   `eventDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
