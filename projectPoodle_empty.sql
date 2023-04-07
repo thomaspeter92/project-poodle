@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `projectPoodle`
@@ -32,7 +32,7 @@ CREATE TABLE `event` (
   `name` varchar(255) NOT NULL,
   `eventDate` datetime NOT NULL,
   `location` varchar(255) NOT NULL,
-  `itinerary` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `itinerary` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `description` text DEFAULT NULL,
   `hostId` int(11) NOT NULL,
   `expiryDate` datetime NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `event` (
   `guestLimit` int(11) NOT NULL,
   `imageName` varchar(255) DEFAULT NULL,
   `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ CREATE TABLE `eventAttend` (
   `id` int(11) NOT NULL,
   `eventId` int(11) DEFAULT NULL,
   `guestId` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `eventComment` (
   `eventId` int(11) DEFAULT NULL,
   `dateCreation` datetime NOT NULL DEFAULT current_timestamp(),
   `comment` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -79,7 +79,7 @@ CREATE TABLE `eventRating` (
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `rating` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE `member` (
   `profileImage` varchar(255) DEFAULT NULL,
   `points` int(11) DEFAULT NULL,
   `rating` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `notification` (
   `notificationDate` datetime NOT NULL DEFAULT current_timestamp(),
   `href` varchar(255) DEFAULT NULL,
   `eventDate` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,7 @@ CREATE TABLE `petProfile` (
   `ownerId` int(11) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `description` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
