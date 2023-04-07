@@ -39,7 +39,7 @@ CREATE TABLE `event` (
   `rating` int(11) NOT NULL,
   `guestLimit` int(11) NOT NULL,
   `imageName` varchar(255) DEFAULT NULL,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `dateCreated` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
